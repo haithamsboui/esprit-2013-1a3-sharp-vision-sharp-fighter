@@ -1,0 +1,67 @@
+# depslib dependency file v1.0
+1364910210 source:/home/ibicha/Desktop/SharpFighters/src/AudioPlayer.c
+	"includes.h"
+
+1364412303 /home/ibicha/Desktop/SharpFighters/include/includes.h
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<allegro.h>
+	<alleggl.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<loadpng.h>
+	"AudioPlayer.h"
+	"Calcul.h"
+	"Texture.h"
+	"Graphics.h"
+	"Input.h"
+	"Install.h"
+	"VideoPlayer.h"
+	"apeg.h"
+
+1364401043 /home/ibicha/Desktop/SharpFighters/include/AudioPlayer.h
+	"includes.h"
+
+1364399992 /home/ibicha/Desktop/SharpFighters/include/Calcul.h
+	"includes.h"
+
+1364471860 /home/ibicha/Desktop/SharpFighters/include/Texture.h
+	"includes.h"
+
+1364463669 /home/ibicha/Desktop/SharpFighters/include/Graphics.h
+	"includes.h"
+
+1364401043 /home/ibicha/Desktop/SharpFighters/include/Input.h
+	"includes.h"
+
+1364401043 /home/ibicha/Desktop/SharpFighters/include/Install.h
+	"includes.h"
+
+1364399992 /home/ibicha/Desktop/SharpFighters/include/VideoPlayer.h
+	"includes.h"
+
+1145558373 /home/ibicha/Desktop/SharpFighters/include/apeg.h
+	<allegro.h>
+
+1364400059 source:/home/ibicha/Desktop/SharpFighters/src/Calcul.c
+	"includes.h"
+
+1364471916 source:/home/ibicha/Desktop/SharpFighters/src/Graphics.c
+	"includes.h"
+
+1364401043 source:/home/ibicha/Desktop/SharpFighters/src/Input.c
+	"includes.h"
+
+1364471860 source:/home/ibicha/Desktop/SharpFighters/src/Install.c
+	"includes.h"
+
+1364473375 source:/home/ibicha/Desktop/SharpFighters/src/Texture.c
+	"includes.h"
+
+1364765929 source:/home/ibicha/Desktop/SharpFighters/src/VideoPlayer.c
+	"includes.h"
+
+1364910483 source:/home/ibicha/Desktop/SharpFighters/src/main.c
+	"includes.h"
+
