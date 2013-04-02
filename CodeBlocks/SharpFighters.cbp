@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="SharpFighters" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../SharpFighters" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../" />
+				<Option object_output="../obj" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="../include" />
+				</Compiler>
+				<Linker>
+					<Add option="`allegro-config --libs`" />
+					<Add library="apeg" />
+					<Add library="ogg" />
+					<Add library="theora" />
+					<Add library="vorbis" />
+					<Add library="alleggl" />
+					<Add library="loadpng" />
+					<Add library="alleg" />
+					<Add directory="../lib" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="../SharpFighters" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../" />
+				<Option object_output="../obj" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="../include/AudioPlayer.h" />
+		<Unit filename="../include/Calcul.h" />
+		<Unit filename="../include/Graphics.h" />
+		<Unit filename="../include/Input.h" />
+		<Unit filename="../include/Install.h" />
+		<Unit filename="../include/Texture.h" />
+		<Unit filename="../include/VideoPlayer.h" />
+		<Unit filename="../include/apeg.h" />
+		<Unit filename="../include/includes.h" />
+		<Unit filename="../src/AudioPlayer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/Calcul.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/Graphics.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/Input.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/Install.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/Texture.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/VideoPlayer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
