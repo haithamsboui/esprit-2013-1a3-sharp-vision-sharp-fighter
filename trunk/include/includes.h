@@ -18,6 +18,7 @@
 #include "Install.h"
 #include "VideoPlayer.h"
 #include "apeg.h"
+#include "Menus.h"
 
 
 #endif // INCLUDES_H_INCLUDED

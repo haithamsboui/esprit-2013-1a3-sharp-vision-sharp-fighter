@@ -1,16 +1,9 @@
 #include "includes.h"
 
-volatile int ticks = 0;
-void ticker()
-{
-    ticks++;
-}
-END_OF_FUNCTION(ticker);
-const int updates_per_second = 30;
 
 void mainmenu(int *choix)
 {
-    IMAGE Firstmenu[5],Background,Select,mokh;
+    IMAGE *Firstmenu[5],*Background,*Select,*mokh;
     int Button,i,press_buton=0,Pos_cadre[3]= {-10,15,45};
     float taille_x,taille_y,scale;
     char direction[100];
@@ -20,7 +13,6 @@ void mainmenu(int *choix)
 // loading
 
     install_timer();
-    install_int(ticker, 1);
     Button=AddVoice("./Ressources/button3.wav");
     Background=load_image("./Ressources/Background.png");
     mokh=load_image("./Ressources/mokhtar.png");
@@ -30,8 +22,8 @@ void mainmenu(int *choix)
         sprintf (direction,"./Ressources/%d.png",i);
         Firstmenu[i]=load_image(direction);
     }
-    taille_x=(((float)Firstmenu[0].w)/1366)*100;
-    taille_y=(((float)Firstmenu[0].h)/1366)*100;
+    taille_x=(((float)Firstmenu[0]->w)/1366)*100;
+    taille_y=(((float)Firstmenu[0]->h)/1366)*100;
 
 
     // drawing
@@ -91,12 +83,10 @@ press_buton++;
 void setting (int Voice,GFX_MODE_LIST * gfxlist)
 {
     //Loading;
-    IMAGE Background,cadre,sound,volume,control;
+    IMAGE *Background,*cadre,*sound,*volume,*control;
     int distance_change,Position=0,pos_cadre[]= {25,38,51},press_buton=0;
 
 
-    install_timer();
-    install_int(ticker, 1);
     Background=load_image("./Ressources/Setting.png");
     cadre =load_image("./Ressources/setting_cadre.png");
     sound=load_image("./Ressources/sound_bar.png");
@@ -207,7 +197,7 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist)
 }
 void credit ()
 {
-    IMAGE logo,credit;
+    IMAGE *logo,*credit;
     int intro;
     float i=0;
     intro=AddVoice("./Ressources/Credit.wav");
@@ -215,9 +205,9 @@ void credit ()
     logo=load_image("./Ressources/logo.png");
     voice_start(intro);
     while (!key[KEY_ESC] && i!=100)
-    {printf ("**** credit %d",credit.h);
+    {printf ("**** credit %d",credit->h);
         draw_image_ex(credit,0,100-i,100,100,NONE,100);//draw background
-        draw_image_ex(logo,45,190+(credit.h/1366)*100-i,20,20,NONE,100);
+        draw_image_ex(logo,45,190+(credit->h/1366)*100-i,20,20,NONE,100);
         i+=0.1;
         next_frame();
 
@@ -228,12 +218,10 @@ void credit ()
 
 void versus ()
 {
-    IMAGE Background ,personne[2],select;
+    IMAGE *Background ,*personne[2],*select;
     int i,Pos_select=19,Position=0,Pers=0;
     int StartTime,press_buton=0;
 
-    install_timer();
-    install_int(ticker, 1);
     Background=load_image("./Ressources/Versus.png");
     personne[0]=load_image("./Ressources/mokhtar.png");
     personne[1]=load_image("./Ressources/haitham.png");
@@ -246,7 +234,7 @@ void versus ()
 
     while (!key[KEY_ESC])
     {
-                StartTime=ticks;
+
 
         if ((key[KEY_DOWN] && press_buton>5) && Position <4 && Pers<5)
         {
@@ -293,11 +281,6 @@ Position--;
 
         }
         press_buton++;
-        StartTime=ticks-StartTime;
-        StartTime=(1000/updates_per_second)-StartTime;
-        if(StartTime>0)
-        {
-            rest(StartTime);
-        }
+
     }
 }
