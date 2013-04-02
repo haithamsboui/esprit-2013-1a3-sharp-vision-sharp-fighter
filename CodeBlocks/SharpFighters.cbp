@@ -50,6 +50,7 @@
 		<Unit filename="../include/Graphics.h" />
 		<Unit filename="../include/Input.h" />
 		<Unit filename="../include/Install.h" />
+		<Unit filename="../include/Menus.h" />
 		<Unit filename="../include/Texture.h" />
 		<Unit filename="../include/VideoPlayer.h" />
 		<Unit filename="../include/apeg.h" />
@@ -67,6 +68,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../src/Install.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/Menus.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../src/Texture.c">
