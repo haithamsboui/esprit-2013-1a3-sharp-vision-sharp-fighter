@@ -14,9 +14,6 @@ typedef struct{
 IMAGE **GlobalTextures; //All Textures stored for cleaning later
 int TextureCount; //Number of textures
 
-//contains printscreen in black and white
-IMAGE *screenimage;
-
 //Load Image from file
 IMAGE* load_image(char *filename);
 
@@ -32,5 +29,10 @@ void KillTextures();
 //reload images to opengl memory
 void RefreshGLTextures();
 
+//contains printscreen in black and white
+IMAGE *screenimage;
+//updates the screenimage variable with image from current screen.
+//colors take true for colored image, and false for black and white.
+void PrintScreen(int colors);
 
 #endif // TEXTURE_H_INCLUDED

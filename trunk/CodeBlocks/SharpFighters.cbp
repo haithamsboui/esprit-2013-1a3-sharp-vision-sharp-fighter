@@ -47,6 +47,7 @@
 		</Compiler>
 		<Unit filename="../include/AudioPlayer.h" />
 		<Unit filename="../include/Calcul.h" />
+		<Unit filename="../include/Earth.h" />
 		<Unit filename="../include/Graphics.h" />
 		<Unit filename="../include/Input.h" />
 		<Unit filename="../include/Install.h" />
@@ -59,6 +60,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../src/Calcul.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/Earth.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../src/Graphics.c">

@@ -105,3 +105,34 @@ void PrintScreen(int colors){
     screenimage->w=SCREEN_W;
     screenimage->h=SCREEN_H;
 }
+
+/*
+TODO : Implimenting blur function.
+
+This technique is used to blur the image. it consist of drawing
+the image multiple times with different offsets and transparencies.
+
+
+
+ float blur=0.05;
+    i=j=FrameCount;
+    while(!key[KEY_BACKSPACE] )
+    {
+        if(j%5==0 && j-i<700)
+        {
+            draw_image_ex(screenimage,-blur,-blur,100,100,NONE,100);
+            draw_image_ex(screenimage,blur,-blur,100,100,NONE,80);
+            draw_image_ex(screenimage,-blur,blur,100,100,NONE,60);
+            draw_image_ex(screenimage,blur,blur,100,100,NONE,40);
+            PrintScreen(FALSE);
+
+            blur-=0.0005;
+        }
+        else
+        {
+            draw_image_ex(screenimage,0,0,100,100,NONE,100);
+
+        }
+        j=next_frame();
+    }
+*/
