@@ -7,7 +7,6 @@ void mainmenu(int *choix)
     int Button,i,press_buton=0,Pos_cadre[3]= {-10,15,45};
     float taille_x,taille_y,scale;
     char direction[100];
-    int StartTime;
     int ind_1,ind_2,ind_3;
 
 // loading
@@ -220,7 +219,7 @@ void versus ()
 {
     IMAGE *Background ,*personne[2],*select;
     int i,Pos_select=19,Position=0,Pers=0;
-    int StartTime,press_buton=0;
+    int press_buton=0;
 
     Background=load_image("./Ressources/Versus.png");
     personne[0]=load_image("./Ressources/mokhtar.png");

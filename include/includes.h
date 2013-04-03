@@ -11,7 +11,6 @@
 #include <loadpng.h>
 
 #include "AudioPlayer.h"
-#include "Calcul.h"
 #include "Texture.h"
 #include "Graphics.h"
 #include "Input.h"
@@ -19,6 +18,8 @@
 #include "VideoPlayer.h"
 #include "apeg.h"
 #include "Menus.h"
+#include "Earth.h"
+#include "Calcul.h"
 
 
 #endif // INCLUDES_H_INCLUDED
