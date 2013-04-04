@@ -1,4 +1,3 @@
-#include <FTGL/ftgl.h>
 #include "includes.h"
 
 const char * const FontFiles[]= {"SharpCurve.ttf"};
@@ -15,7 +14,7 @@ int install_fonts()
     for(i=0; i<n; i++)
     {
         sprintf(buffer,"Resources/Fonts/%s",FontFiles[i]);
-        fontlist[i]=ftglCreatePixmapFont(buffer);
+        fontlist[i]=ftglCreatePixmapFont(buffer); //TODO : must use polygon font.
         fail = fail | (fontlist[i]==0);
     }
     return fail;
@@ -25,8 +24,11 @@ void draw_text(FONTS font,const char* text,int size,float x, float y)
 {
     if(fontlist[font]==NULL)
         return;
+    //glPushMatrix();
     ftglSetFontFaceSize(fontlist[font],size,72);
     ftglRenderFont(fontlist[font], text, FTGL_RENDER_ALL);
+    //glTranslatef(x,y,0.0f); //TRANSLATION WITH PIXMAP FONTS DO NOT WORK!!!
+    //glPopMatrix();
 }
 
 void uninstall_fonts()

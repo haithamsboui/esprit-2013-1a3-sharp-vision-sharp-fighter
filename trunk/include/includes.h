@@ -1,7 +1,7 @@
 #ifndef INCLUDES_H_INCLUDED
 #define INCLUDES_H_INCLUDED
 
-#include <FTGL/ftgl.h>
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -10,6 +10,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <loadpng.h>
+#include <FTGL/ftgl.h>
 
 
 #include "AudioPlayer.h"
