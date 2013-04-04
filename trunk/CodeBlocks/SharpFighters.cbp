@@ -14,6 +14,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="`freetype-config --cflags`" />
 					<Add directory="../include" />
 				</Compiler>
 				<Linker>
@@ -25,6 +26,7 @@
 					<Add library="alleggl" />
 					<Add library="loadpng" />
 					<Add library="alleg" />
+					<Add library="ftgl" />
 					<Add directory="../lib" />
 				</Linker>
 			</Target>
@@ -52,6 +54,7 @@
 		<Unit filename="../include/Input.h" />
 		<Unit filename="../include/Install.h" />
 		<Unit filename="../include/Menus.h" />
+		<Unit filename="../include/Textout.h" />
 		<Unit filename="../include/Texture.h" />
 		<Unit filename="../include/VideoPlayer.h" />
 		<Unit filename="../include/apeg.h" />
@@ -75,6 +78,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../src/Menus.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/Textout.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../src/Texture.c">
