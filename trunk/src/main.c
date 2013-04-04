@@ -2,6 +2,7 @@
 
 int main()
 {
+
     int i,w=1366/2, h=768/2, fullscreen=0, depth=32;
     IMAGE *img,*bg,*mokh;
     int sound1,volume;
@@ -58,7 +59,7 @@ int main()
         draw_image_ex(bg,0,0,100,100,NONE,100);//draw background
         draw_image_ex(img,0,12,50,75,NONE,(float)volume/255.0f*100.0f);//draw arcade
         draw_image_ex(mokh,60,0,50,200,NONE,(float)volume/255.0f*100.0f);//draw mokhtar
-
+        draw_text(SharpCurve,"Bijour",72,0,0);
 
         next_frame();
     }

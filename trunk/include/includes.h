@@ -1,6 +1,7 @@
 #ifndef INCLUDES_H_INCLUDED
 #define INCLUDES_H_INCLUDED
 
+#include <FTGL/ftgl.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -9,6 +10,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <loadpng.h>
+
 
 #include "AudioPlayer.h"
 #include "Texture.h"
@@ -20,6 +22,7 @@
 #include "Menus.h"
 #include "Earth.h"
 #include "Calcul.h"
+#include "Textout.h"
 
 
 #endif // INCLUDES_H_INCLUDED
