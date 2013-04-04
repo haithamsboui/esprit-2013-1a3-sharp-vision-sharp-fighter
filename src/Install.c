@@ -29,6 +29,9 @@ int install(int fullscreen, int w, int h, int depth)
 
     JoyStickEnabled=(install_joystick(JOY_TYPE_AUTODETECT)==0);
 
+    if(install_fonts())
+        printf("One or more font files were not loaded.\n");
+
     allegro_gl_set(AGL_COLOR_DEPTH, depth);
     allegro_gl_set(AGL_RENDERMETHOD, 1);
     allegro_gl_set(AGL_DOUBLEBUFFER, 1);
@@ -120,6 +123,8 @@ void uninstall()
     TextureCount=0;
 
     DisposeVoices();
+
+    uninstall_fonts();
     IsInstalled=0; //Allegro will dispose on exit
 }
 
