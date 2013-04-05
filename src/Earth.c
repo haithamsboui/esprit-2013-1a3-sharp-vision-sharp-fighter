@@ -22,7 +22,7 @@ void DoEarth(Location start, Location end){
 
     Location Current;
     float perc=0.0f;
-    glEnable(GL_DEPTH_TEST);
+    glDisable(GL_DEPTH_TEST);
     glFrontFace(GL_CCW); //or GL_CW for clockwise front face
     glEnable(GL_CULL_FACE); //which you already have
     quadratic=gluNewQuadric();
@@ -44,12 +44,13 @@ void DoEarth(Location start, Location end){
         glRotatef(Current.yRot, 0.0f, 1.0f, 0.0f);
         glRotatef(Current.zRot, 0.0f, 0.0f, 1.0f);
 
-        glCullFace(GL_BACK);
-        glBindTexture(GL_TEXTURE_2D, world->ID);
-        gluSphere(quadratic,0.7f,50,50);
         glCullFace(GL_FRONT);
         glBindTexture(GL_TEXTURE_2D, stars->ID);
         gluSphere2(quadratic,6.0f,20,20,8.0f);
+
+        glCullFace(GL_BACK);
+        glBindTexture(GL_TEXTURE_2D, world->ID);
+        gluSphere(quadratic,0.7f,50,50);
 
         next_frame();
     }
