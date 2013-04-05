@@ -21,13 +21,13 @@ int main()
     }
 
     printf("\nVideo : Press ESC to skip...\n");
-    PlayVideo("Resources/Videos/SharpIntro.ogv");
+    //PlayVideo("Resources/Videos/SharpIntro.ogv");
 
-    fullscreen=!fullscreen; //change screen mode :D
-    change_resolution(fullscreen, w, h, depth);
+    //fullscreen=!fullscreen; //change screen mode :D
+    //change_resolution(fullscreen, w, h, depth);
 
 
-    DoEarth(TUNISIA,NEWYORK);
+    //DoEarth(TUNISIA,NEWYORK);
 
     img=load_image("Resources/Images/Arcade.png");
     bg=load_image("Resources/Images/Background.png");
@@ -55,16 +55,13 @@ int main()
             }
         }
 
-
         draw_image_ex(bg,0,0,100,100,NONE,100);//draw background
         draw_image_ex(img,0,12,50,75,NONE,(float)volume/255.0f*100.0f);//draw arcade
         draw_image_ex(mokh,60,0,50,200,NONE,(float)volume/255.0f*100.0f);//draw mokhtar
-        draw_text(SharpCurve,"Bijour",300,0,0);
+        draw_text(SharpCurve,"Sharp Fighters",36,50.0f,5.0f,CENTER_X);
 
         next_frame();
     }
-
-
 
     voice_stop(sound1);
 
