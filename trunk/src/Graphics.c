@@ -41,7 +41,8 @@ int next_frame()
     Counter=(1000.0/FPS)-(TickCount-Counter);
     if(Counter>0)
         rest(Counter);
-    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //we don't need to clear GL_DEPTH_BUFFER_BIT
+    glClear (GL_COLOR_BUFFER_BIT);
     Counter=TickCount=0;
     FrameCount++;
     return FrameCount;

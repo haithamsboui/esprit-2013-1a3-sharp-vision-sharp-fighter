@@ -21,13 +21,13 @@ int main()
     }
 
     printf("\nVideo : Press ESC to skip...\n");
-    //PlayVideo("Resources/Videos/SharpIntro.ogv");
+    PlayVideo("Resources/Videos/SharpIntro.ogv");
 
-    //fullscreen=!fullscreen; //change screen mode :D
-    //change_resolution(fullscreen, w, h, depth);
+    fullscreen=!fullscreen; //change screen mode :D
+    change_resolution(fullscreen, w, h, depth);
 
 
-    //DoEarth(TUNISIA,NEWYORK);
+    DoEarth(TUNISIA,NEWYORK);
 
     img=load_image("Resources/Images/Arcade.png");
     bg=load_image("Resources/Images/Background.png");

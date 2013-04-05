@@ -4,7 +4,7 @@
 	<File name="../include/Calcul.h" open="0" top="0" tabpos="7">
 		<Cursor position="88" topLine="0" />
 	</File>
-	<File name="../include/Earth.h" open="1" top="0" tabpos="4">
+	<File name="../include/Earth.h" open="0" top="0" tabpos="4">
 		<Cursor position="459" topLine="13" />
 	</File>
 	<File name="../include/Graphics.h" open="0" top="0" tabpos="4">
@@ -25,25 +25,28 @@
 	<File name="../src/Calcul.c" open="0" top="0" tabpos="6">
 		<Cursor position="587" topLine="0" />
 	</File>
-	<File name="../src/Earth.c" open="0" top="0" tabpos="5">
-		<Cursor position="964" topLine="15" />
+	<File name="../src/Earth.c" open="1" top="0" tabpos="4">
+		<Cursor position="920" topLine="6" />
 	</File>
-	<File name="../src/Graphics.c" open="0" top="0" tabpos="5">
-		<Cursor position="266" topLine="0" />
+	<File name="../src/Graphics.c" open="1" top="1" tabpos="7">
+		<Cursor position="927" topLine="15" />
 	</File>
-	<File name="../src/Install.c" open="0" top="0" tabpos="4">
-		<Cursor position="2101" topLine="86" />
+	<File name="../src/Input.c" open="1" top="0" tabpos="5">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="../src/Install.c" open="1" top="0" tabpos="6">
+		<Cursor position="2501" topLine="95" />
 	</File>
 	<File name="../src/Menus.c" open="0" top="0" tabpos="0">
 		<Cursor position="6922" topLine="19" />
 	</File>
-	<File name="../src/Textout.c" open="1" top="1" tabpos="2">
-		<Cursor position="54" topLine="45" />
+	<File name="../src/Textout.c" open="1" top="0" tabpos="2">
+		<Cursor position="1410" topLine="51" />
 	</File>
 	<File name="../src/Texture.c" open="0" top="0" tabpos="4">
 		<Cursor position="2599" topLine="81" />
 	</File>
 	<File name="../src/main.c" open="1" top="0" tabpos="1">
-		<Cursor position="1436" topLine="33" />
+		<Cursor position="22" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>
