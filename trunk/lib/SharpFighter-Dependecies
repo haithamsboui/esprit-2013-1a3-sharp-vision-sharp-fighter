@@ -1,0 +1,15 @@
+libloadpng4.4
+libloadpng4-dev
+liballegro4.4
+liballegro4.2-dev
+liballeggl4.4
+liballeggl4-dev
+liballegro4.4-plugin-alsa
+libglu1-mesa-dev
+libogg-dev
+libvorbis-dev
+libtheora-dev
+libftgl2
+libftgl-dev
+libfreetype6
+libfreetype6-dev

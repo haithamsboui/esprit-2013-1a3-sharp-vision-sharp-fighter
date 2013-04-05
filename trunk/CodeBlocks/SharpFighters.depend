@@ -68,7 +68,7 @@
 1364912984 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/AudioPlayer.c
 	"includes.h"
 
-1364923639 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/includes.h
+1365165258 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/includes.h
 	<stdlib.h>
 	<stdio.h>
 	<math.h>
@@ -77,8 +77,8 @@
 	<GL/gl.h>
 	<GL/glu.h>
 	<loadpng.h>
+	<FTGL/ftgl.h>
 	"AudioPlayer.h"
-	"Calcul.h"
 	"Texture.h"
 	"Graphics.h"
 	"Input.h"
@@ -86,14 +86,17 @@
 	"VideoPlayer.h"
 	"apeg.h"
 	"Menus.h"
+	"Earth.h"
+	"Calcul.h"
+	"Textout.h"
 
 1364913053 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/AudioPlayer.h
 	"includes.h"
 
-1364913053 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Calcul.h
+1365165258 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Calcul.h
 	"includes.h"
 
-1364913053 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Texture.h
+1365165258 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Texture.h
 	"includes.h"
 
 1364913053 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Graphics.h
@@ -114,7 +117,7 @@
 1364923594 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Menus.h
 	"includes.h"
 
-1364912984 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Calcul.c
+1365165258 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Calcul.c
 	"includes.h"
 
 1364912984 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Graphics.c
@@ -123,19 +126,19 @@
 1364912984 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Input.c
 	"includes.h"
 
-1364912984 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Install.c
+1365165258 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Install.c
 	"includes.h"
 
-1364923897 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Menus.c
+1365165258 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Menus.c
 	"includes.h"
 
-1364912984 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Texture.c
+1365165258 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Texture.c
 	"includes.h"
 
 1364912984 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/VideoPlayer.c
 	"includes.h"
 
-1364912984 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/main.c
+1365166301 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/main.c
 	"includes.h"
 
 1364910210 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/AudioPlayer.c
@@ -224,5 +227,17 @@
 	"includes.h"
 
 1365161411 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Textout.c
+	"includes.h"
+
+1365165258 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Earth.h
+	"includes.h"
+
+1365165258 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Textout.h
+	"includes.h"
+
+1365165258 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Earth.c
+	"includes.h"
+
+1365165258 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Textout.c
 	"includes.h"
 

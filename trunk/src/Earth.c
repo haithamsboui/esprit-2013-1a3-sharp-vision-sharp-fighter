@@ -24,7 +24,7 @@ void DoEarth(Location start, Location end){
     float perc=0.0f;
     glDisable(GL_DEPTH_TEST);
     glFrontFace(GL_CCW); //or GL_CW for clockwise front face
-    glEnable(GL_CULL_FACE); //which you already have
+  glEnable(GL_CULL_FACE); //which you already have
     quadratic=gluNewQuadric();
     gluQuadricNormals(quadratic, GLU_SMOOTH);					// Create Smooth Normals
     gluQuadricTexture(quadratic, GL_TRUE);
