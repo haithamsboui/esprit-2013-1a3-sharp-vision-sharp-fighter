@@ -11,7 +11,7 @@
 		<Cursor position="400" topLine="0" />
 	</File>
 	<File name="../include/Textout.h" open="1" top="0" tabpos="3">
-		<Cursor position="514" topLine="0" />
+		<Cursor position="230" topLine="0" />
 	</File>
 	<File name="../include/Texture.h" open="0" top="0" tabpos="3">
 		<Cursor position="155" topLine="3" />
@@ -38,12 +38,12 @@
 		<Cursor position="6922" topLine="19" />
 	</File>
 	<File name="../src/Textout.c" open="1" top="1" tabpos="2">
-		<Cursor position="384" topLine="0" />
+		<Cursor position="54" topLine="45" />
 	</File>
 	<File name="../src/Texture.c" open="0" top="0" tabpos="4">
 		<Cursor position="2599" topLine="81" />
 	</File>
 	<File name="../src/main.c" open="1" top="0" tabpos="1">
-		<Cursor position="1822" topLine="36" />
+		<Cursor position="1436" topLine="33" />
 	</File>
 </CodeBlocks_layout_file>

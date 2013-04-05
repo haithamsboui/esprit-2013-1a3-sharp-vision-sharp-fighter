@@ -3,11 +3,16 @@
 
 #include "includes.h"
 
-typedef enum {SharpCurve} FONTS;
 typedef enum {NORMAL,CENTER_X,CENTER_Y,CENTER} FONTSTYLE;
-const char * const FontFiles[sizeof(FONTS)/sizeof(int)];
-FTGLfont **fontlist;
+typedef enum {SharpCurve,Verdana} FONTS;
+//#define FONTSCOUNT sizeof(FONTS)/sizeof(int)
 
+
+
+//TODO : fix warning "FontFiles assumed to have one element"
+const char* FontFiles[];
+FTGLfont **fontlist;
+FTGLfont **fontlist2;
 //Load .ttf files
 int install_fonts();
 //draw text, using specific font,size, location and style.
