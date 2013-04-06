@@ -7,17 +7,17 @@ void mainmenu(int *choix)
     int Button,i,press_buton=0,Pos_cadre[3]= {-10,15,45},fade=0;
     float taille_x,taille_y,scale;
     char direction[100];
-    int ind_1,ind_2,ind_3;
+    int ind_1,ind_2,ind_3,fade_start=100;
 // loading
     install_timer();
-    Button=AddVoice("./Ressources/button3.wav");
-    Background=load_image("./Ressources/Origin.png");
-    back_bar=load_image("./Ressources/Origin_bar.png");
-    mokh=load_image("./Ressources/mokhtar.png");
-    Select=load_image("./Ressources/Select.png");
+    Button=AddVoice("Resources/Sounds/button3.wav");
+    Background=load_image("Resources/Images/Origin.png");
+    back_bar=load_image("Resources/Images/Origin_bar.png");
+    mokh=load_image("Resources/Images/mokhtar.png");
+    Select=load_image("Resources/Images/Select.png");
     for (i=0; i<5; i++)
     {
-        sprintf (direction,"./Ressources/%d.png",i);
+        sprintf (direction,"Resources/Images/%d.png",i);
         Firstmenu[i]=load_image(direction);
     }
     taille_x=(((float)Firstmenu[0]->w)/1366)*100;
@@ -48,17 +48,19 @@ void mainmenu(int *choix)
             ind_3=(ind_2-1+5)%5;
         }
         scale=scale/1.1;
+        fade_start=fade_start/1.1;
         draw_image_ex(Background,0,0,100,100,NONE,100);
-        draw_image_ex(back_bar,0,2,100,100,NONE,100);
-        draw_image_ex(Firstmenu[ind_1],Pos_cadre[0]-scale,35,taille_x,taille_y+10,NONE,100);
-        draw_image_ex(Firstmenu[ind_2],Pos_cadre[1]-scale,30,taille_x+5,taille_y+20,NONE,100);
-        draw_image_ex(Firstmenu[ind_3],Pos_cadre[2]-scale,35,taille_x,taille_y+10,NONE,100);
-        draw_image_ex(Select,16,32,27,40,NONE,50);
-        draw_image_ex(mokh,60,0,50,200,NONE,100); // draw mokhtar
+        draw_image_ex(back_bar,0,2,100,100,NONE,100-fade_start);
+        draw_image_ex(Firstmenu[ind_1],Pos_cadre[0]-scale,35,taille_x,taille_y+10,NONE,100-fade_start);
+        draw_image_ex(Firstmenu[ind_2],Pos_cadre[1]-scale,30,taille_x+5,taille_y+20,NONE,100-fade_start);
+        draw_image_ex(Firstmenu[ind_3],Pos_cadre[2]-scale,35,taille_x,taille_y+10,NONE,100-fade_start);
+        draw_image_ex(Select,16,32,27,40,NONE,100-fade_start);
+        draw_image_ex(mokh,60,0,50,200,NONE,100-fade_start); // draw mokhtar
         next_frame();
         press_buton++;
     }
     *choix=ind_2;
+
     switch (*choix)
     {
 
@@ -69,7 +71,7 @@ void mainmenu(int *choix)
             rest(10);
             fade++;
             draw_image_ex(Background,0,0,100,100,NONE,100);
-            draw_image_ex(back_bar,0,2,100,100,NONE,100);
+            draw_image_ex(back_bar,0,2,100,100,NONE,100-2*fade);
             draw_image_ex(Firstmenu[ind_1],Pos_cadre[0]-scale-fade,35,taille_x,taille_y+10,NONE,100-2*fade);
             draw_image_ex(Firstmenu[ind_2],Pos_cadre[1]-scale-fade,30,taille_x+5,taille_y+20,NONE,100-2*fade);
             draw_image_ex(Firstmenu[ind_3],Pos_cadre[2]-scale-fade,35,taille_x,taille_y+10,NONE,100-2*fade);
@@ -92,13 +94,13 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist)
     int ind1=0,ind2=1,ind3=2,pos_x[]= {5,35,65},button_press=0,trans,second_menu=0;
     //Loading;
     install_timer();
-
-    Background=load_image("./Ressources/Origin.png");
-    back_cadre=load_image("./Ressources/Origin_bar.png");
-    icon[0]=load_image("./Ressources/graphics.png");
-    icon[1]=load_image("./Ressources/sound.png");
-    icon[2]=load_image("./Ressources/controll.png");
-    select=load_image("./Ressources/Select.png");
+    install_fonts();
+    Background=load_image("Resources/Images/Origin.png");
+    back_cadre=load_image("Resources/Images/Origin_bar.png");
+    icon[0]=load_image("Resources/Images/graphics.png");
+    icon[1]=load_image("Resources/Images/sound.png");
+    icon[2]=load_image("Resources/Images/controll.png");
+    select=load_image("Resources/Images/Select.png");
     //Drawing
     while (distance_change>0.1)
     {
@@ -160,7 +162,6 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist)
             entre=entre*1.05;
         if( fade>0 )
             fade=fade/1.1;
-
         draw_image_ex(Background,0,0,100,100,NONE,100);
         draw_image_ex(back_cadre,0,2,100,100,NONE,100);
         draw_image_ex(select,pos_x[0]+31-entre/5,30-entre/3,27+entre/2,40+1.9*entre,NONE,100-3*distance_change);
@@ -170,7 +171,18 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist)
         next_frame();
 
     }
-
+fade=1;
+while (fade<100)
+{
+    fade=fade*1.1;
+     draw_image_ex(Background,0,0,100,100,NONE,100);
+        draw_image_ex(back_cadre,0,2,100,100,NONE,100-fade);
+        draw_image_ex(select,pos_x[0]+31-entre/5,30-entre/3,27+entre/2,40+1.9*entre,NONE,100-fade);
+        draw_image_ex(icon[ind1],distance_change+pos_x[0],30 ,30,40,NONE,100-fade);
+        draw_image_ex(icon[ind2],distance_change+pos_x[1],30 ,30,40,NONE,100-fade);
+        draw_image_ex(icon[ind3],distance_change+pos_x[2],30 ,30,40,NONE,100-fade);
+        next_frame();
+}
 
 }
 void credit ()
@@ -178,8 +190,8 @@ void credit ()
     IMAGE *credit;
     int intro;
     float i=0;
-    intro=AddVoice("./Ressources/Credit.wav");
-    credit=load_image("./Ressources/credit.png");
+    intro=AddVoice("Resources/Sounds/Credit.wav");
+    credit=load_image("Resources/Images/credit.png");
     voice_start(intro);
     while (!key[KEY_ESC] && i!=100)
     {
@@ -196,14 +208,14 @@ void versus ()
     IMAGE *Background ,*Background_bar,*personne[5],*select,*Player1,*Player2;
     int i,Pos_select=19,Position=0,Pers=0,Pos_player1=4,pos_player2=76;//distance=18
     int press_buton=0,press_buton2=0;
-
-    Background=load_image("./Ressources/Origin.png");
-    Background_bar=load_image("./Ressources/Origin_bar.png");
-    personne[0]=load_image("./Ressources/mokhtar.png");
-    personne[1]=load_image("./Ressources/haitham.png");
-    select=load_image("./Ressources/Select.png");
-    Player1=load_image("./Ressources/player1.png");
-    Player2=load_image("./Ressources/player2.png");
+ float distance_change1=0,distance_change2=0,fade=1;
+    Background=load_image("Resources/Images/Origin.png");
+    Background_bar=load_image("Resources/Images/Origin_bar.png");
+    personne[0]=load_image("Resources/Images/mokhtar.png");
+    personne[1]=load_image("Resources/Images/haitham.png");
+    select=load_image("Resources/Images/Select.png");
+    Player1=load_image("Resources/Images/player1.png");
+    Player2=load_image("Resources/Images/player2.png");
 
 
     while (!key[KEY_ESC])
@@ -213,18 +225,22 @@ void versus ()
         {
             press_buton=0;
             Pos_player1 =(Pos_player1+18)%90;
+                   distance_change1=-18;
+
         }
 
         if (key[KEY_LEFT] && press_buton>10)
         {
             press_buton=0;
             Pos_player1 =(Pos_player1-18+90)%90;
+             distance_change1=18;
 
         }
         if (key[KEY_D] && press_buton2>10)
         {
             press_buton2=0;
             pos_player2 =(pos_player2+18)%90;
+             distance_change2=-18;
 
         }
 
@@ -232,21 +248,36 @@ void versus ()
         {
             press_buton2=0;
             pos_player2 =(pos_player2-18+90)%90;
+            distance_change2=18;
 
         }
-
+ distance_change2=distance_change2/1.1;
+ distance_change1=distance_change1/1.1;
         draw_image_ex(Background,0,0,100,100,NONE,100);
         draw_image_ex(Background_bar,0,-27,100,150,NONE,100);
-for (i=4;i<90;i=i+18)
-    draw_image_ex(select,i,17.5,19,60,NONE,100);
+        for (i=4; i<90; i=i+18)
+            draw_image_ex(select,i,17.5,19,60,NONE,100);
         draw_image_ex(personne[0],6,21,15,50,NONE,100);
         draw_image_ex(personne[1],24,21,15,50,NONE,100);
-        draw_image_ex(Player1,Pos_player1,17.5,19,60,NONE,100);
-        draw_image_ex(Player2,pos_player2,17.5,19,60,NONE,100);
-
-        next_frame();
+        draw_image_ex(Player1,Pos_player1+distance_change1,17.5,19,60,NONE,100);
+        draw_image_ex(Player2,pos_player2+distance_change2,17.5,19,60,NONE,100);
+         next_frame();
         press_buton++;
         press_buton2++;
+    }
+
+    while (fade<100)
+    {
+        fade=fade*1.1;
+         draw_image_ex(Background,0,0,100,100,NONE,100);
+        draw_image_ex(Background_bar,0,-27,100,150,NONE,100-fade);
+        for (i=4; i<90; i=i+18)
+            draw_image_ex(select,i,17.5,19,60,NONE,100-fade);
+        draw_image_ex(personne[0],6,21,15,50,NONE,100-fade);
+        draw_image_ex(personne[1],24,21,15,50,NONE,100-fade);
+        draw_image_ex(Player1,Pos_player1+distance_change1,17.5,19,60,NONE,100-fade);
+        draw_image_ex(Player2,pos_player2+distance_change2,17.5,19,60,NONE,100-fade);
+         next_frame();
     }
 }
 
