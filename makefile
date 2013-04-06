@@ -1,4 +1,4 @@
-#Sharp Fighters makefile.
+#Sharp Fighters makefile.    
 NAME=SharpFighters
 CFILES := $(wildcard src/*.c)
 OFILES := $(addprefix obj/,$(notdir $(CFILES:.c=.o)))
