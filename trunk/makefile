@@ -32,13 +32,13 @@ $(NAME):
 	fi
 
 install-dep:
-	sudo apt-get install libloadpng4.4
-	sudo apt-get install libloadpng4-dev
 	sudo apt-get install liballegro4.4
 	sudo apt-get install liballegro4.2-dev
+	sudo apt-get install libloadpng4.4
+	sudo apt-get install libloadpng4-dev
+	sudo apt-get install libglu1-mesa-dev
 	sudo apt-get install liballeggl4.4
 	sudo apt-get install liballeggl4-dev
-	sudo apt-get install libglu1-mesa-dev
 	sudo apt-get install libogg-dev
 	sudo apt-get install libvorbis-dev
 	sudo apt-get install libtheora-dev
