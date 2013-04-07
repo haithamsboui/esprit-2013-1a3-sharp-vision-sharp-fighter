@@ -45,12 +45,14 @@ int PlayVideo(const char *filename)
     h=(float)stream->h/ratio;
     x=(float)SCREEN_W/2.0f - (float)w/2.0f;
     y=(float)SCREEN_H/2.0f - (float)h/2.0f;
+
+    printf("Ratio : %f\nx:%f\ny:%f\nw:%f\nh:%f\n",ratio,x,y,w,h);
     //to gl coords
     w=(w/SCREEN_W)*2;
     h=(h/SCREEN_H)*2;
     x=(x/SCREEN_W)*2 -1;
     y=(y/SCREEN_H)*2 -1;
-    //printf("Ratio : %f\nx:%f\ny:%f\nw:%f\nh:%f\n",ratio,x,y,w,h);
+    //;
 
     //Reset the video timer (it has been running since we opened the mpeg).
     stream->timer = -1;

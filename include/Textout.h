@@ -5,11 +5,9 @@
 
 typedef enum {NORMAL,CENTER_X,CENTER_Y,CENTER} FONTSTYLE;
 typedef enum {SharpCurve,Verdana} FONTS;
+
+//TODO : Fix variable size according to FONTS size"
 //#define FONTSCOUNT sizeof(FONTS)/sizeof(int)
-
-
-
-//TODO : fix warning "FontFiles assumed to have one element"
 const char* FontFiles[];
 FTGLfont **fontlist;
 FTGLfont **fontlist2;

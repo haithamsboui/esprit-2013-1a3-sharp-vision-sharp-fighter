@@ -4,7 +4,6 @@ const char* FontFiles[]= {"SharpCurve.ttf","verdana.ttf"};
 FTGLfont **fontlist;
 FTGLfont **fontlist2;
 
-
 int install_fonts()
 {
     int i,n,fail=0;
@@ -80,27 +79,6 @@ void uninstall_fonts()
         ftglDestroyFont(fontlist2[i]);
     }
     free(fontlist);
+    free(fontlist2);
 }
 
-
-
-
-/*
-  FTGLfont *font = ftglCreatePixmapFont("RemachineScript_PERSONAL_USE_ONLY.ttf");
-
-    //If something went wrong, bail out.
-    if(!font)
-        printf("You are fucked");
-    else
-        printf("Fuck yea");
-
-    ftglSetFontFaceSize(font,300,72);
-    while(!key[KEY_ENTER]){
-        ftglRenderFont(font, "Hello World!", FTGL_RENDER_ALL);
-        next_frame();
-    }
-
-    readkey();
-    //Destroy the font object.
-    ftglDestroyFont(font);
-*/
