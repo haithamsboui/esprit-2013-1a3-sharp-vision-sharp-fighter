@@ -7,22 +7,6 @@ COMPILER = gcc
 OPTIONS = -c -Wall
 CFLAGS = $(shell freetype-config --cflags) $(shell allegro-config --cflags) -Iinclude
 
-verif:
-	sudo apt-get install libloadpng4.4
-	sudo apt-get install libloadpng4-dev
-	sudo apt-get install liballegro4.4
-	sudo apt-get install liballegro4.2-dev
-	sudo apt-get install liballeggl4.4
-	sudo apt-get install liballeggl4-dev
-	sudo apt-get install liballegro4.4-plugin-alsa
-	sudo apt-get install libglu1-mesa-dev
-	sudo apt-get install libogg-dev
-	sudo apt-get install libvorbis-dev
-	sudo apt-get install libtheora-dev
-	sudo apt-get install libftgl2
-	sudo apt-get install libftgl-dev
-	sudo apt-get install libfreetype6
-	sudo apt-get install libfreetype6-dev
 build: obj $(OFILES)
 	$(COMPILER) -o $(NAME) $(OFILES) $(LIBS)
 
@@ -46,3 +30,30 @@ $(NAME):
 		echo "$(NAME) not found. Rebuilding..."; \
 		$(MAKE) build; \
 	fi
+
+install-dep:
+	sudo apt-get install libloadpng4.4
+	sudo apt-get install libloadpng4-dev
+	sudo apt-get install liballegro4.4
+	sudo apt-get install liballegro4.2-dev
+	sudo apt-get install liballeggl4.4
+	sudo apt-get install liballeggl4-dev
+	sudo apt-get install libglu1-mesa-dev
+	sudo apt-get install libogg-dev
+	sudo apt-get install libvorbis-dev
+	sudo apt-get install libtheora-dev
+	sudo apt-get install libftgl2
+	sudo apt-get install libftgl-dev
+	sudo apt-get install libfreetype6
+	sudo apt-get install libfreetype6-dev
+#	sudo apt-get install liballegro4.4-plugin-alsa
+
+help:
+	@echo "Commands :"
+	@echo "	build : Builds the excutable."
+	@echo "	clean : Cleans binary files."
+	@echo "	run : Runs the excutable, and build if not built yet."
+	@echo "	install-dep : Installs dependencies if not already installed."
+
+
+	
