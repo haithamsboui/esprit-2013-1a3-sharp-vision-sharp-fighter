@@ -10,14 +10,14 @@
 	<File name="../include/Graphics.h" open="0" top="0" tabpos="4">
 		<Cursor position="400" topLine="0" />
 	</File>
-	<File name="../include/Textout.h" open="1" top="0" tabpos="15">
-		<Cursor position="230" topLine="0" />
+	<File name="../include/Textout.h" open="1" top="0" tabpos="3">
+		<Cursor position="180" topLine="0" />
 	</File>
 	<File name="../include/Texture.h" open="0" top="0" tabpos="3">
 		<Cursor position="155" topLine="3" />
 	</File>
-	<File name="../include/includes.h" open="1" top="0" tabpos="20">
-		<Cursor position="227" topLine="2" />
+	<File name="../include/includes.h" open="1" top="0" tabpos="8">
+		<Cursor position="227" topLine="0" />
 	</File>
 	<File name="../src/AudioPlayer.c" open="0" top="0" tabpos="0">
 		<Cursor position="487" topLine="0" />
@@ -25,28 +25,28 @@
 	<File name="../src/Calcul.c" open="0" top="0" tabpos="6">
 		<Cursor position="587" topLine="0" />
 	</File>
-	<File name="../src/Earth.c" open="1" top="0" tabpos="16">
-		<Cursor position="920" topLine="6" />
+	<File name="../src/Earth.c" open="1" top="1" tabpos="4">
+		<Cursor position="1854" topLine="9" />
 	</File>
-	<File name="../src/Graphics.c" open="1" top="0" tabpos="19">
+	<File name="../src/Graphics.c" open="1" top="0" tabpos="7">
 		<Cursor position="927" topLine="15" />
 	</File>
-	<File name="../src/Input.c" open="1" top="0" tabpos="17">
+	<File name="../src/Input.c" open="1" top="0" tabpos="5">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../src/Install.c" open="1" top="0" tabpos="18">
-		<Cursor position="2501" topLine="95" />
+	<File name="../src/Install.c" open="1" top="0" tabpos="6">
+		<Cursor position="1972" topLine="80" />
 	</File>
 	<File name="../src/Menus.c" open="0" top="0" tabpos="0">
 		<Cursor position="6922" topLine="19" />
 	</File>
-	<File name="../src/Textout.c" open="1" top="0" tabpos="14">
-		<Cursor position="1410" topLine="51" />
+	<File name="../src/Textout.c" open="1" top="0" tabpos="2">
+		<Cursor position="1638" topLine="48" />
 	</File>
-	<File name="../src/Texture.c" open="0" top="0" tabpos="4">
-		<Cursor position="2599" topLine="81" />
+	<File name="../src/Texture.c" open="1" top="0" tabpos="9">
+		<Cursor position="1303" topLine="0" />
 	</File>
-	<File name="../src/main.c" open="1" top="0" tabpos="13">
-		<Cursor position="1780" topLine="39" />
+	<File name="../src/main.c" open="1" top="0" tabpos="1">
+		<Cursor position="1505" topLine="32" />
 	</File>
 </CodeBlocks_layout_file>

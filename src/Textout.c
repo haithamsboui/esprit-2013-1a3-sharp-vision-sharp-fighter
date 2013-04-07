@@ -60,12 +60,11 @@ void draw_text(FONTS font,const char* text,float size,float x, float y, FONTSTYL
     glColor4f(0.0f,0.0f,0.0f,0.75f);
     ftglRenderFont(fontlist[font], text, FTGL_RENDER_ALL);
 
-    //glLineWidth(1.5f);
+    glLineWidth(size/30);
     glColor3f(1.0f,1.0f,1.0f);
     ftglRenderFont(fontlist2[font], text, FTGL_RENDER_ALL);
 
     glPopMatrix();
-
 }
 
 void uninstall_fonts()
