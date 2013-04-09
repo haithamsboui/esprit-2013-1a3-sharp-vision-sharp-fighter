@@ -9,9 +9,8 @@ int main()
 {
     int i,w=1366/2, h=768/2, fullscreen=0, depth=32;
 int intro ;
-int state=1;
+int state=1,choix=0;
     GFX_MODE_LIST * gfxlist;
-int choix=0;
 int control[]={KEY_UP,KEY_DOWN,KEY_RIGHT,KEY_LEFT,KEY_A,KEY_Z,KEY_E};
 
 
@@ -31,11 +30,13 @@ int control[]={KEY_UP,KEY_DOWN,KEY_RIGHT,KEY_LEFT,KEY_A,KEY_Z,KEY_E};
 intro=AddVoice("Resources/Sounds/Credit.wav");
 PlayVideo("Resources/Videos/SharpIntro.ogv");
 voice_start(intro);
+    setting (intro,gfxlist);
 
-readkey();
+
 while (state)
 {
    mainmenu(&choix);
+
     switch (choix)
     {
         case 0 :
