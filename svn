@@ -1,10 +1,11 @@
-echo -e '\033[1;34mplease press (1) to upload a file , (2) to update your revesion , (3) to quit   and (4) to delete a file\033[0m'
+echo -e '\033[1;34mplease press (1) to upload a file , (2) to update your revesion ,(3) to delete a file and (4) to quit.\033[0m'
 read key
 while [ "$key" != 3 ]
 do 
 	if [ "$key" = 1 ];then
+		echo -e '\033[0;31mpossible file to be uploded\033[0m'
+		ls -1
 		echo -e '\033[0;31mplease give me the name of your target:\033[0m'
-		ls
 		read file
 		svn add --force "$file"
 		svn update
@@ -12,9 +13,9 @@ do
 	elif [ "$key" = 2 ];then
 		echo -e '\033[0;31m loading...\033[0m'
 		svn update
-        elif [ "$key" = 3 ];then
+        elif [ "$key" = 4 ];then
 		exit 100;
-	elif [ "$key" = 4 ];then
+	elif [ "$key" = 3 ];then
 		svn --force delete "$file"
 		svn commit
 	else
@@ -23,7 +24,7 @@ do
 	echo -e 'do you want another operation in the svn ? (Y/N)'
 	read dem
 	if [ "$dem" = "Y" ] || [ "$dem" = "y" ]; then
-		echo -e '\033[1;34mdo you want to upload a file(1) or update your version(2) and (3) to quit.\033[0m'
+		echo -e '\033[1;34mdo you want to upload a file(1) , update your version(2) or delete a file (3) ?\033[0m'
 		read key
 	elif [ "$dem" = "N" ] || [ "$dem" = "n" ]; then
 		echo "Ok, bye! "
