@@ -31,22 +31,6 @@ $(NAME):
 		$(MAKE) build; \
 	fi
 
-install-dep:
-	sudo apt-get install liballegro4.4
-	sudo apt-get install liballegro4.2-dev
-	sudo apt-get install libloadpng4.4
-	sudo apt-get install libloadpng4-dev
-	sudo apt-get install libglu1-mesa-dev
-	sudo apt-get install liballeggl4.4
-	sudo apt-get install liballeggl4-dev
-	sudo apt-get install libogg-dev
-	sudo apt-get install libvorbis-dev
-	sudo apt-get install libtheora-dev
-	sudo apt-get install libftgl2
-	sudo apt-get install libftgl-dev
-	sudo apt-get install libfreetype6
-	sudo apt-get install libfreetype6-dev
-#	sudo apt-get install liballegro4.4-plugin-alsa
 
 help:
 	@echo "Commands :"
