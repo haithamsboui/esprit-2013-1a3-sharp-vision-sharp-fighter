@@ -87,17 +87,20 @@ void mainmenu(int *choix)
 
 }
 
-void setting (int Voice,GFX_MODE_LIST * gfxlist)
+void setting (int Voice,GFX_MODE_LIST * gfxlist,int fullscreen)
 {
-    IMAGE *Volumes[2],*Background,*back_cadre,*icon[3],*select,*volume_bar,*volume_point;
-    float distance_change=100,entre=0,fade=1,volume_fade=100;
-    int ind1=0,ind2=1,ind3=2,pos_x[]= {5,35,65},button_press=0,trans,second_menu=0,Nb_point_volume_music;
-    int volume=voice_get_volume(Voice),i,point_pos=0;
+    IMAGE *Volumes[2],*Background,*back_cadre,*icon[3],*select,*volume_bar,*volume_point,*display[2],*display_cadre;
+    float distance_change=100,entre=0,fade=1,volume_fade=100,display_fade=100;
+    int ind1=0,ind2=1,ind3=2,pos_x[]= {5,35,65},button_press=0,trans,second_menu=0,Nb_point_volume_music,w=1366/2, h=768/2,depth=32;
+    int volume=voice_get_volume(Voice),i,point_pos=0,display_ind=0,cadre_display_pos;
     //Loading;
     install_timer();
     install_fonts();
+    display[0]=load_image("Resources/Images/Fullscreen.png");
+    display[1]=load_image("Resources/Images/Windowed.png");
     Background=load_image("Resources/Images/Origin.png");
     back_cadre=load_image("Resources/Images/Origin_bar.png");
+    display_cadre=load_image("Resources/Images/display.png");
     icon[0]=load_image("Resources/Images/graphics.png");
     icon[1]=load_image("Resources/Images/sound.png");
     icon[2]=load_image("Resources/Images/controll.png");
@@ -107,6 +110,10 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist)
     volume_bar=load_image("Resources/Images/Volume_bar.png");
     volume_point=load_image("Resources/Images/sound_point.png");
     Nb_point_volume_music=voice_get_volume(Voice)/19;
+    if (fullscreen==1)
+    cadre_display_pos=36.6;
+    else
+    cadre_display_pos=69.6;
     //Drawing
     while (distance_change>0.1)
     {
@@ -167,18 +174,42 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist)
             }
             switch(ind2)
             {
+            case 0 :
+            {
+                if (key[KEY_DOWN] && button_press>10)
+                {
+                    button_press=0;
+                    display_ind=1;
+                    cadre_display_pos=69.6;
+if (fullscreen==1  ){
+fullscreen=0;
+change_resolution(fullscreen,w,h,depth);
+                }
+}
+                if(key[KEY_UP] && button_press>10)
+                {
+                    button_press=0;
+                    display_ind=0;
+                    cadre_display_pos=39.6;
+
+if ( fullscreen==0){
+fullscreen=1;
+change_resolution(fullscreen,w,h,depth);
+                }
+            }
+            }
             case 1 :
             {
 
                 if (key[KEY_LEFT] && voice_get_volume(Voice)>0 )
                 {
-                    volume--;
+                    volume-=5;
                     voice_set_volume(Voice,volume);
                     Nb_point_volume_music=voice_get_volume(Voice)/19;
                 }
                 if (key[KEY_RIGHT]  && voice_get_volume(Voice)<255)
                 {
-                    volume++;
+                    volume+=5;
                     voice_set_volume(Voice,volume);
                     Nb_point_volume_music=voice_get_volume(Voice)/19;
                 }
@@ -189,7 +220,6 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist)
         button_press++;
         distance_change=distance_change/1.1;
         volume_fade=volume_fade/1.02;
-        printf ("%f\n",volume_fade);
         if(entre<20 )
             entre=entre*1.05;
         if( fade>0 )
@@ -206,8 +236,20 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist)
             draw_image_ex(Volumes[1],33.5,65.6,35,25-volume_fade,NONE,100-volume_fade);
 
             for (i=0; i<Nb_point_volume_music; i++)
-                draw_image_ex(volume_point,41.3+i*1.5,54.3,1.5,3-volume_fade/7,NONE,100-volume_fade);
+            {
+                draw_image_ex(volume_point,41.3+i*1.5,54.3,1.5,3-volume_fade/4,NONE,100-volume_fade);
+                draw_image_ex(volume_point,41.3+i*1.5,80.3,1.5,3-volume_fade/4,NONE,100-volume_fade);
+
+            }
         }
+
+        if (second_menu==1 && ind2==0)
+        {
+            draw_image_ex(display[0],33.5,38.6,35,25-volume_fade,NONE,100-volume_fade);
+            draw_image_ex(display[1],33.5,68.6,35,25-volume_fade,NONE,100-volume_fade);
+            draw_image_ex(display_cadre,33.5,cadre_display_pos,35,25-volume_fade,NONE,100-volume_fade);
+        }
+
         next_frame();
     }
     fade=1;
