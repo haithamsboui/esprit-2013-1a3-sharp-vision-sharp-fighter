@@ -27,12 +27,10 @@ int control[]={KEY_UP,KEY_DOWN,KEY_RIGHT,KEY_LEFT,KEY_A,KEY_Z,KEY_E};
         printf("%dx%dx%d\n",gfxlist->mode[i].width,gfxlist->mode[i].height,gfxlist->mode[i].bpp);
     }
 
-intro=AddVoice("Resources/Sounds/Credit.wav");
+intro=AddVoice("Resources/Sounds/intro.wav");
 PlayVideo("Resources/Videos/SharpIntro.ogv");
 voice_start(intro);
-    setting (intro,gfxlist);
-
-
+ voice_set_playmode(intro, PLAYMODE_LOOP);
 while (state)
 {
    mainmenu(&choix);
@@ -45,10 +43,14 @@ while (state)
     versus();
     break;
     case 2 :
-    setting (intro,gfxlist);
+    setting (intro,gfxlist,fullscreen);
     break;
-        case 3 :
+        case 3 :{
+     voice_stop(intro);
          credit();
+         voice_start(intro);
+
+         }
          break;
          case 4 :
          state=0;
@@ -56,7 +58,7 @@ while (state)
     }
 
 }
-printf ("END");
+
      voice_stop(intro);
     uninstall();//liberation de memoire
     return 0;
