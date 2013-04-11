@@ -38,7 +38,7 @@
 		<Cursor position="1972" topLine="80" />
 	</File>
 	<File name="../src/Menus.c" open="1" top="1" tabpos="10">
-		<Cursor position="6922" topLine="187" />
+		<Cursor position="7058" topLine="187" />
 	</File>
 	<File name="../src/Textout.c" open="1" top="0" tabpos="2">
 		<Cursor position="1638" topLine="48" />
@@ -47,6 +47,6 @@
 		<Cursor position="1303" topLine="0" />
 	</File>
 	<File name="../src/main.c" open="1" top="0" tabpos="1">
-		<Cursor position="1225" topLine="32" />
+		<Cursor position="1225" topLine="31" />
 	</File>
 </CodeBlocks_layout_file>

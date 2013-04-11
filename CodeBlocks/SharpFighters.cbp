@@ -19,7 +19,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="`allegro-config --libs`" />
-					<Add library="apeg" />
+					<Add option="-lapeg`getconf LONG_BIT`" />
 					<Add library="ogg" />
 					<Add library="theora" />
 					<Add library="vorbis" />
