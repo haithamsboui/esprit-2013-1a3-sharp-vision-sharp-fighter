@@ -11,12 +11,12 @@ IMAGE *world,*stars;
 
 void DoEarth(Location start, Location end){
     if(world==NULL){
-            world=load_image("Resources/Images/world.png");
+            world=load_image("Resources/Images/Earth/world.png");
             if(world==NULL) return;
     }
 
     if(stars==NULL){
-            stars=load_image("Resources/Images/stars.png");
+            stars=load_image("Resources/Images/Earth/stars.png");
             if(stars==NULL) return;
     }
 

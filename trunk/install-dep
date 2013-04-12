@@ -1,4 +1,4 @@
-echo "vref and install loading ..."
+echo "installing dependencies ..."
 sudo apt-get install liballegro4.4
 sudo apt-get install liballegro4.2-dev
 sudo apt-get install libloadpng4.4

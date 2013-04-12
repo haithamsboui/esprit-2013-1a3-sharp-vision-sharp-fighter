@@ -29,6 +29,7 @@ int control[]={KEY_UP,KEY_DOWN,KEY_RIGHT,KEY_LEFT,KEY_A,KEY_Z,KEY_E};
 
 intro=AddVoice("Resources/Sounds/intro.wav");
 PlayVideo("Resources/Videos/SharpIntro.ogv");
+DoEarth(TUNISIA,EGYPT);
 voice_start(intro);
  voice_set_playmode(intro, PLAYMODE_LOOP);
 while (state)
