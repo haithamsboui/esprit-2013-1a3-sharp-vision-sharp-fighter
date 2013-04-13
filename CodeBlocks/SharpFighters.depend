@@ -144,7 +144,7 @@
 1365536742 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/AudioPlayer.c
 	"includes.h"
 
-1365536742 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/includes.h
+1365866289 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/includes.h
 	<stdlib.h>
 	<stdio.h>
 	<math.h>
@@ -165,6 +165,9 @@
 	"Earth.h"
 	"Calcul.h"
 	"Textout.h"
+	"Collision.h"
+	"Salah.h"
+	"Haitham.h"
 
 1365536742 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/AudioPlayer.h
 	"includes.h"
@@ -178,7 +181,7 @@
 1365536742 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Graphics.h
 	"includes.h"
 
-1365536742 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Input.h
+1365864903 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Input.h
 	"includes.h"
 
 1365536742 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Install.h
@@ -199,7 +202,7 @@
 1365536742 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Graphics.c
 	"includes.h"
 
-1365536742 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Input.c
+1365863221 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Input.c
 	"includes.h"
 
 1365536742 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Install.c
@@ -214,13 +217,13 @@
 1365536742 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/VideoPlayer.c
 	"includes.h"
 
-1365546317 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/main.c
+1365860375 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/main.c
 	"includes.h"
 
 1365536742 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Earth.h
 	"includes.h"
 
-1365536742 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Earth.c
+1365759066 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Earth.c
 	"includes.h"
 
 1365536742 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Textout.h
@@ -239,5 +242,26 @@
 	"includes.h"
 
 1365466389 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Textout.c
+	"includes.h"
+
+1365860374 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Collision.h
+	"includes.h"
+
+1365860282 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Collision.c
+	"includes.h"
+
+1365872073 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Salah.h
+	"includes.h"
+
+1365872079 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Haitham.h
+	"includes.h"
+
+1365866296 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Haitham.c
+	"includes.h"
+
+1365872066 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Salah.c
+	"includes.h"
+
+1365536742 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Setting.c
 	"includes.h"
 

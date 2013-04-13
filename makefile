@@ -38,7 +38,3 @@ help:
 	@echo "	build : Builds the excutable."
 	@echo "	clean : Cleans binary files."
 	@echo "	run : Runs the excutable, and build if not built yet."
-	@echo "	install-dep : Installs dependencies if not already installed."
-
-
-	
