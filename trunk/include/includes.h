@@ -24,6 +24,8 @@
 #include "Earth.h"
 #include "Calcul.h"
 #include "Textout.h"
-
+#include "Collision.h"
+#include "Salah.h"
+#include "Haitham.h"
 
 #endif // INCLUDES_H_INCLUDED
