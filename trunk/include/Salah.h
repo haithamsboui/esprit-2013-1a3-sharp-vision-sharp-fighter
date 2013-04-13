@@ -14,8 +14,11 @@ float w,h;
 int direction;
 int Player;
 EtatSalah etat;
+int Index;
 
 void LoadSalah(int player);
+
+void Draw_Salah();
 
 
 
