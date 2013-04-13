@@ -8,8 +8,8 @@
 int main()
 {
     int i,w=1366/2, h=768/2, fullscreen=1, depth=32;
-int intro ;
-int state=1,choix=0;
+    int intro ;
+    int state=1,choix=0;
     GFX_MODE_LIST * gfxlist;
 
 
@@ -28,9 +28,17 @@ int state=1,choix=0;
 
 intro=AddVoice("Resources/Sounds/intro.wav");
 PlayVideo("Resources/Videos/SharpIntro.ogv");
-DoEarth(TUNISIA,EGYPT);
+
 voice_start(intro);
- voice_set_playmode(intro, PLAYMODE_LOOP);
+voice_set_playmode(intro, PLAYMODE_LOOP);
+
+LoadSalah(2);
+while(!key[KEY_ESC]){
+Draw_Salah();
+draw_text(Verdana,"Les fleches, espace et maj pour controler",3,50,20,CENTER_X);
+next_frame();
+
+}
 while (state)
 {
    mainmenu(&choix);
