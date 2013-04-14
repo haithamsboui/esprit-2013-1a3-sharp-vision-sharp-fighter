@@ -3,8 +3,8 @@
 
 void mainmenu(int *choix)
 {
-    IMAGE *Firstmenu[5],*Background,*back_bar,*Select,*mokh;
-    int Button,i,press_buton=0,Pos_cadre[4]= {-10,15,45,70};
+    IMAGE *Firstmenu[5],*Background,*back_bar,*Select,*Pers_main[5];
+    int Button,i,press_buton=0,Pos_cadre[4]= {-10,15,45,70},select_pers=0;
     float taille_x,taille_y,scale,fade=1,back_fade,fade_start=100;
     char direction[100];
     int ind_1,ind_2,ind_3,ind_4;
@@ -13,12 +13,17 @@ void mainmenu(int *choix)
     Button=AddVoice("Resources/Sounds/button3.wav");
     Background=load_image("Resources/Images/Origin.png");
     back_bar=load_image("Resources/Images/Origin_bar.png");
-    mokh=load_image("Resources/Images/mokhtar.png");
     Select=load_image("Resources/Images/Select.png");
     for (i=0; i<5; i++)
     {
         sprintf (direction,"Resources/Images/%d.png",i);
         Firstmenu[i]=load_image(direction);
+    }
+
+    for (i=0; i<5; i++)
+    {
+        sprintf (direction,"Resources/Images/main menu/%d.png",i);
+        Pers_main[i]=load_image(direction);
     }
     taille_x=(((float)Firstmenu[0]->w)/1366)*100;
     taille_y=(((float)Firstmenu[0]->h)/1366)*100;
@@ -39,6 +44,7 @@ void mainmenu(int *choix)
             ind_2=(ind_1-1+5)%5;
             ind_3=(ind_2-1+5)%5;
             ind_4=(ind_3-1+5)%5;
+            select_pers=(select_pers+1)%5;
         }
         if (IsKeyPressed(3,LEFT) && press_buton>10)
         {
@@ -49,6 +55,7 @@ void mainmenu(int *choix)
             ind_2=(ind_1-1+5)%5;
             ind_3=(ind_2-1+5)%5;
             ind_4=(ind_3-1+5)%5;
+                        select_pers=(select_pers-1+5)%5;
         }
         scale=scale/1.1;
         fade_start=fade_start/1.1;
@@ -60,7 +67,7 @@ void mainmenu(int *choix)
         draw_image_ex(Firstmenu[ind_4],Pos_cadre[3]-scale,35,taille_x,taille_y+10,NONE,100-fade_start);
 
         draw_image_ex(Select,16,32,27,40,NONE,100-fade_start);
-        draw_image_ex(mokh,60,0,50,200,NONE,100-fade_start); // draw mokhtar
+        draw_image_ex(Pers_main[select_pers],60,0,50,200,NONE,100-fade_start-abs(2*scale)); // draw mokhtar
         next_frame();
         press_buton++;
     }
@@ -80,7 +87,7 @@ void mainmenu(int *choix)
         draw_image_ex(Firstmenu[ind_2],Pos_cadre[1],30,taille_x+5,taille_y+20,NONE,100-fade);
         draw_image_ex(Firstmenu[ind_3],Pos_cadre[2],35,taille_x,taille_y+10,NONE,100-fade);
         draw_image_ex(Select,16,32,27,40,NONE,100-fade);
-        draw_image_ex(mokh,60,0,50,200,NONE,100-fade); // draw mokhtar
+        draw_image_ex(Pers_main[select_pers],60,0,50,200,NONE,100-fade ); // draw mokhtar
 
         next_frame();
     }
@@ -609,14 +616,18 @@ void versus ()
 void GamePlay(int Player1,int Player2,IMAGE* Map){
     int time =60;
     char texttime[10];
+    LoadSalah(1);
+    LoadHaitham(2);
+
+
+    DoEarth(TUNISIA,MALAYSIA);
 
     sprintf(texttime,"%d",time);
-    LoadSalah(1);
 
-     while(!IsKeyPressed(3,RETURN)){
+    while(!IsKeyPressed(3,RETURN)){
         draw_image_ex(Map,-1.5,-2,103,104,NONE,100);
         Draw_Salah();
-        //DRAW_HAITHAM();
+        Draw_Haitham();
 
 
         //Mtar

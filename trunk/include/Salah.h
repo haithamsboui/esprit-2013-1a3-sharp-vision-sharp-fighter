@@ -3,9 +3,8 @@
 
 #include "includes.h"
 
-#define Salah(file) "Resources/Images/Salah/" #file
 
-typedef enum {Stable, Forward, Backward,Punch,Kick} EtatSalah;
+typedef enum {Stable, Forward, Backward,Punch,Kick} EtatPlayer;
 
 IMAGE *SalahPics[51];
 
@@ -13,7 +12,7 @@ float x,y;
 float w,h;
 int direction;
 int Player;
-EtatSalah etat;
+EtatPlayer etat;
 int Index;
 
 void LoadSalah(int player);

@@ -1,16 +1,16 @@
 #include "includes.h"
 
-#define StableStart 0
-#define StableCount 3
+#define StableStartS 0
+#define StableCountS 3
 
-#define WalkStart 9
-#define WalkCount 4
+#define WalkStartS 9
+#define WalkCountS 4
 
-#define KickStart 19
-#define KickCount 4
+#define KickStartS 19
+#define KickCountS 4
 
-#define PunchStart 14
-#define PunchCount 5
+#define PunchStartS 14
+#define PunchCountS 5
 
 IMAGE *SalahPics[51];
 
@@ -18,7 +18,7 @@ float x,y;
 float w,h;
 int direction;
 int Player=0;
-EtatSalah etat;
+EtatPlayer etat;
 int Index;
 float screen_ratio;
 
@@ -98,50 +98,50 @@ void Draw_Salah()
         {
             if(Index==0)
                 i=1;
-            if(Index>=StableCount-1)
+            if(Index>=StableCountS-1)
                 i=-1;
 
             Index=Index+i;
         }
-        Index = Min(Index,StableCount-1);
-        w=(h/((float)SalahPics[Index+StableStart]->h/(float)SalahPics[Index+StableStart]->w))/screen_ratio;
+        Index = Min(Index,StableCountS-1);
+        w=(h/((float)SalahPics[Index+StableStartS]->h/(float)SalahPics[Index+StableStartS]->w))/screen_ratio;
         if(Player==2) x-=w;
-        draw_image_ex(SalahPics[Index+StableStart],x,y,w,h,vflip,100);
+        draw_image_ex(SalahPics[Index+StableStartS],x,y,w,h,vflip,100);
         if(Player==2) x+=w;
         break;
     case Forward:
         if(FrameCount%10==0)
         {
-            Index=((Index-1+WalkCount)%WalkCount);
+            Index=((Index-1+WalkCountS)%WalkCountS);
         }
-        Index = Min(Index,WalkCount-1);
-        w=(h/((float)SalahPics[Index+WalkStart]->h/(float)SalahPics[Index+WalkStart]->w))/screen_ratio;
+        Index = Min(Index,WalkCountS-1);
+        w=(h/((float)SalahPics[Index+WalkStartS]->h/(float)SalahPics[Index+WalkStartS]->w))/screen_ratio;
         if(Player==2) x-=w;
-        draw_image_ex(SalahPics[Index+WalkStart],x,y,w,h,vflip,100);
+        draw_image_ex(SalahPics[Index+WalkStartS],x,y,w,h,vflip,100);
         if(Player==2) x+=w;
         break;
 
     case Backward:
         if(FrameCount%10==0)
         {
-            Index=((Index+1)%WalkCount);
+            Index=((Index+1)%WalkCountS);
         }
-        Index = Min(Index,WalkCount-1);
-        w=(h/((float)SalahPics[Index+WalkStart]->h/(float)SalahPics[Index+WalkStart]->w))/screen_ratio;
+        Index = Min(Index,WalkCountS-1);
+        w=(h/((float)SalahPics[Index+WalkStartS]->h/(float)SalahPics[Index+WalkStartS]->w))/screen_ratio;
         if(Player==2) x-=w;
-        draw_image_ex(SalahPics[Index+WalkStart],x,y,w,h,vflip,100);
+        draw_image_ex(SalahPics[Index+WalkStartS],x,y,w,h,vflip,100);
         if(Player==2) x+=w;
         break;
 
     case Kick:
-        w=(h/((float)SalahPics[Index+KickStart]->h/(float)SalahPics[Index+KickStart]->w))/screen_ratio;
+        w=(h/((float)SalahPics[Index+KickStartS]->h/(float)SalahPics[Index+KickStartS]->w))/screen_ratio;
         if(Player==2) x-=w;
-        draw_image_ex(SalahPics[Index+KickStart],x,y,w,h,vflip,100);
+        draw_image_ex(SalahPics[Index+KickStartS],x,y,w,h,vflip,100);
         if(Player==2) x+=w;
         if(FrameCount%10==0)
         {
             Index++;
-            if(Index==KickCount)
+            if(Index==KickCountS)
             {
                 etat=Stable;
             }
@@ -150,14 +150,14 @@ void Draw_Salah()
         break;
 
     case Punch:
-        w=(h/((float)SalahPics[Index+PunchStart]->h/(float)SalahPics[Index+PunchStart]->w))/screen_ratio;
+        w=(h/((float)SalahPics[Index+PunchStartS]->h/(float)SalahPics[Index+PunchStartS]->w))/screen_ratio;
         if(Player==2) x-=w;
-        draw_image_ex(SalahPics[Index+PunchStart],x,y,w,h,vflip,100);
+        draw_image_ex(SalahPics[Index+PunchStartS],x,y,w,h,vflip,100);
         if(Player==2) x+=w;
         if(FrameCount%10==0)
         {
             Index++;
-            if(Index==PunchCount)
+            if(Index==PunchCountS)
             {
                 etat=Stable;
             }
