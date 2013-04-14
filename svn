@@ -1,4 +1,8 @@
-echo -e '\033[1;34mplease press (1) to download the whole project ,(2) to upload a file , (3) to update your revesion ,(4) to delete a file and (5) to quit.\033[0m'
+echo -e '\033[1;34m		press (1) to download the whole project\033[0m'
+echo -e '\033[1;34m		press (2) to upload a file.\033[0m'
+echo -e '\033[1;34m		press (3) to update your revesion.\033[0m'
+echo -e '\033[1;34m		press (4) to delete a file.\033[0m'
+echo -e '\033[1;34m		press (5) to quit.\033[0m'
 read key
 while [ "$key" != 5 ]
 do 
@@ -32,7 +36,9 @@ do
 	echo -e 'do you want another operation in the svn ? (Y/N)'
 	read dem
 	if [ "$dem" = "Y" ] || [ "$dem" = "y" ]; then
-		echo -e '\033[1;34mdo you want to upload a file(2) , update your reversion(3) or delete a file (4) ?\033[0m'
+		echo -e '\033[1;34m		do you want to upload a file(2)?\033[0m'
+		echo -e '\033[1;34m		update your reversion(3)?\033[0m'
+		echo -e '\033[1;34m		delete a file (4)?\033[0m'
 		read key
 	elif [ "$dem" = "N" ] || [ "$dem" = "n" ]; then
 		echo "Ok, bye! "
