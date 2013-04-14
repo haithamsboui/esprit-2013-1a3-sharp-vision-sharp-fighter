@@ -35,7 +35,7 @@ void LoadSalah(int player)
     Player=player;
     etat=Stable;
     Index=0;
-    y=50;
+    y=55;
     w=10;
     h=40;
 
@@ -44,11 +44,11 @@ void LoadSalah(int player)
     {
     case 1:
         direction=1;
-        x=25;
+        x=10;
         break;
     case 2:
         direction=0;
-        x=75;
+        x=70;
         break;
     }
     screen_ratio=(float)SCREEN_W/(float)SCREEN_H;

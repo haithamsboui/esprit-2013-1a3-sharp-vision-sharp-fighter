@@ -10,6 +10,8 @@ void Ticks()
     TickCount++;
 }
 
+
+
 int install(int fullscreen, int w, int h, int depth)
 {
     int screen_mode;
@@ -26,6 +28,8 @@ int install(int fullscreen, int w, int h, int depth)
     if(install_allegro_gl())
         return 1;
     if(install_int(Ticks,1))
+        return 1;
+    if(install_int(ProcessKeys,25))
         return 1;
 
     JoyStickEnabled=(install_joystick(JOY_TYPE_AUTODETECT)==0);
@@ -120,6 +124,7 @@ void uninstall()
 {
     int i;
     remove_int(Ticks);
+    remove_int(ProcessKeys);
 
     KillTextures();
     for(i=0; i<TextureCount; i++)

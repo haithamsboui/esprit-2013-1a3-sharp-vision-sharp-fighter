@@ -28,9 +28,9 @@ void mainmenu(int *choix)
     ind_2=(ind_1-1+5)%5;
     ind_3=(ind_2-1+5)%5;
     ind_4=(ind_3-1+5)%5;
-    while (!key[KEY_ENTER])
+    while (!IsKeyPressed(3,ENTER))
     {
-        if (key[KEY_RIGHT] && press_buton>10)
+        if (IsKeyPressed(3,RIGHT) && press_buton>10)
         {
             voice_start(Button);
             scale=-25,press_buton=0;
@@ -40,7 +40,7 @@ void mainmenu(int *choix)
             ind_3=(ind_2-1+5)%5;
             ind_4=(ind_3-1+5)%5;
         }
-        if (key[KEY_LEFT]&&press_buton>10)
+        if (IsKeyPressed(3,LEFT) && press_buton>10)
         {
             voice_start(Button);
             scale=25,press_buton=0;
@@ -127,11 +127,11 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist,int fullscreen)
         next_frame();
     }
 
-    while (!key[KEY_ESC] || second_menu==1)
+    while (!IsKeyPressed(3,RETURN) || second_menu==1)
     {
         if (second_menu==0)
         {
-            if (key[KEY_RIGHT] && button_press>10 )
+            if (IsKeyPressed(3,RIGHT) && button_press>10 )
             {
                 button_press=0;
                 distance_change=30;
@@ -141,7 +141,7 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist,int fullscreen)
                 entre=0;
                 fade=0;
             }
-            if (key[KEY_LEFT] && button_press>10)
+            if (IsKeyPressed(3,LEFT) && button_press>10)
             {
                 button_press=0;
                 distance_change=-30;
@@ -151,7 +151,7 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist,int fullscreen)
                 entre=0;
                 fade=0;
             }
-            if (key[KEY_ENTER] && button_press>10 )
+            if (IsKeyPressed(3,ENTER) && button_press>10 )
             {
                 distance_change=0;
                 entre=5;
@@ -162,7 +162,7 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist,int fullscreen)
         }
         if (second_menu==1)
         {
-            if (key[KEY_BACKSPACE] && button_press>10 )
+            if (IsKeyPressed(3,RETURN) && button_press>10 )
             {
                 distance_change=0;
                 entre=0;
@@ -171,11 +171,15 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist,int fullscreen)
                 fade=5;
                 volume_fade=100;
             }
+            while(IsKeyPressed(3,RETURN))
+            {
+                rest(1);
+            }
             switch(ind2)
             {
             case 0 :
             {
-                if (key[KEY_DOWN] && button_press>10)
+                if (IsKeyPressed(3,DOWN) && button_press>10)
                 {
                     button_press=0;
                     display_ind=1;
@@ -186,7 +190,7 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist,int fullscreen)
                         change_resolution(fullscreen,w,h,depth);
                     }
                 }
-                if(key[KEY_UP] && button_press>10)
+                if(IsKeyPressed(3,UP) && button_press>10)
                 {
                     button_press=0;
                     display_ind=0;
@@ -203,13 +207,13 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist,int fullscreen)
             case 1 :
             {
 
-                if (key[KEY_LEFT] && voice_get_volume(Voice)>0 )
+                if (IsKeyPressed(3,LEFT) && voice_get_volume(Voice)>0 )
                 {
                     volume-=5;
                     voice_set_volume(Voice,volume);
                     Nb_point_volume_music=voice_get_volume(Voice)/19;
                 }
-                if (key[KEY_RIGHT]  && voice_get_volume(Voice)<255)
+                if (IsKeyPressed(3,RIGHT) && voice_get_volume(Voice)<255)
                 {
                     volume+=5;
                     voice_set_volume(Voice,volume);
@@ -276,7 +280,7 @@ void credit ()
     intro=AddVoice("Resources/Sounds/Credit.wav");
     credit=load_image("Resources/Images/credit.png");
     voice_start(intro);
-    while (!key[KEY_ESC] && i!=100)
+    while (!IsKeyPressed(3,RETURN) && i!=100)
     {
         draw_image_ex(credit,0,100-i,100,100,NONE,100);//draw background
         i+=0.1;
@@ -321,7 +325,7 @@ void versus ()
     {
         sprintf(direction,"Resources/Images/maps/%d.png",i);
         maps[i]=load_image(direction);
-        printf ("iD %d \n",maps[i]->ID);
+        //printf ("iD %d \n",maps[i]->ID);
     }
     Background=load_image("Resources/Images/Origin.png");
     Background_bar=load_image("Resources/Images/Origin_bar.png");
@@ -330,18 +334,18 @@ void versus ()
     Player2=load_image("Resources/Images/player2.png");
 
 
-    while (!key[KEY_ESC] )
+    while (!IsKeyPressed(3,RETURN))
     {
 
-        if (choix1+choix2!=2)
+        if(choix1+choix2!=2)
         {
 
-            if (key[KEY_ENTER])
+            if (IsKeyPressed(1,ENTER))
                 choix1=1;
-            if (key[KEY_ENTER_PAD])
+            if (IsKeyPressed(2,ENTER))
                 choix2=1;
-
-            if (key[KEY_RIGHT] && press_buton>10 && choix1!=1)
+            //printf ("Choix1 %d choi %d \n",choix1,choix2);
+            if (IsKeyPressed(1,RIGHT) && press_buton>10 && choix1!=1)
             {
                 press_buton=0;
                 select1 =(select1+1)%5;
@@ -352,7 +356,7 @@ void versus ()
                     selectedPers[select2]=1;
             }
 
-            if (key[KEY_LEFT] && press_buton>10 &&choix1!=1)
+            if (IsKeyPressed(1,LEFT) && press_buton>10 &&choix1!=1)
             {
                 press_buton=0;
                 select1 =(select1-1+5)%5;
@@ -362,7 +366,7 @@ void versus ()
                 if ((select1+1)%5==select2)
                     selectedPers[select2]=1;
             }
-            if (key[KEY_D] && press_buton2>10 && choix2!=2)
+            if (IsKeyPressed(2,RIGHT) && press_buton2>10 && choix2!=1)
             {
                 press_buton2=0;
                 select2 =(select2+1)%5;
@@ -373,7 +377,7 @@ void versus ()
                     selectedPers[select1]=1;
 
             }
-            if (key[KEY_Q] && press_buton2>10 && choix2!=2)
+            if (IsKeyPressed(2,LEFT) && press_buton2>10 && choix2!=1)
             {
                 press_buton2=0;
                 select2 =(select2-1+5)%5;
@@ -521,43 +525,57 @@ void versus ()
                 w=(50.0f/((float)wassim[wassim_turn]->h/(float)wassim[wassim_turn]->w))/ratioo;
                 draw_image_ex(wassim[wassim_turn],pos_player[4]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[4],100-fade);
             }
+            if (choix1)
+                draw_text(Verdana,"PLAYER 1 Ready",10,20,10,CENTER,100);
+            if (choix2)
+                draw_text(Verdana,"PLAYER 2 Ready",10,20,10,CENTER,100);
             next_frame();
 
         }
+        if(choix1+choix2==2){
+            while(IsKeyPressed(3,ENTER))
+            {
+                rest(1);
+            }
+        }
 
-        if (choix1+choix2==2)
+        while(choix1+choix2==2)
         {
-            if (key[KEY_BACKSPACE])
+            if (IsKeyPressed(3,RETURN))
             {
                 choix1=0;
                 choix2=0;
-            }
 
-
-            if (key[KEY_ENTER] && press_buton>10)
-
+            while(IsKeyPressed(3,RETURN))
             {
-             press_buton=0;
-             choix1=2;
+                rest(1);
+            }
             }
 
-            if (key[KEY_RIGHT] && press_buton >10)
-             {
-             press_buton=0;
-             select_map=(select_map-1+5)%5;
-             distance_change_map=50;
-             }
 
-             if (key[KEY_LEFT] && press_buton> 10)
 
-             {
-             press_buton=0;
-                          select_map=(select_map+1)%5;
+            if (IsKeyPressed(3,ENTER) && press_buton>10)
+            {
+                press_buton=0;
+                GamePlay(3,1,maps[select_map]);
+            }
 
-             distance_change_map=-50;
-             }
-distance_change_map=distance_change_map/1.1;
-                         draw_image_ex(Background,0,0,100,100,NONE,100);
+            if (IsKeyPressed(3,RIGHT) && press_buton >10)
+            {
+                press_buton=0;
+                select_map=(select_map-1+5)%5;
+                distance_change_map=50;
+            }
+
+            if (IsKeyPressed(3,LEFT) && press_buton> 10)
+            {
+                press_buton=0;
+                select_map=(select_map+1)%5;
+
+                distance_change_map=-50;
+            }
+            distance_change_map=distance_change_map/1.1;
+            draw_image_ex(Background,0,0,100,100,NONE,100);
             draw_image_ex(Background_bar,0,-27,100,150,NONE,100);
             draw_image_ex(maps[(select_map+1)%5],-25+distance_change_map,27,50,40,NONE,30+distance_change_map);
             draw_image_ex(maps[select_map],25+distance_change_map,27,50,40,NONE,100);
@@ -566,8 +584,8 @@ distance_change_map=distance_change_map/1.1;
             press_buton++;
             next_frame();
 
-        }
 
+        }
     }
 
     while (fade<100)
@@ -588,3 +606,26 @@ distance_change_map=distance_change_map/1.1;
     }
 }
 
+void GamePlay(int Player1,int Player2,IMAGE* Map){
+    int time =60;
+    char texttime[10];
+
+    sprintf(texttime,"%d",time);
+    LoadSalah(1);
+
+     while(!IsKeyPressed(3,RETURN)){
+        draw_image_ex(Map,-1.5,-2,103,104,NONE,100);
+        Draw_Salah();
+        //DRAW_HAITHAM();
+
+
+        //Mtar
+
+        if(FrameCount%60==0){
+            sprintf(texttime,"%d",time);
+            time--;
+        }
+        draw_text(Arista,texttime,10,50,5,CENTER_X,95);
+        next_frame();
+    }
+}

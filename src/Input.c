@@ -9,7 +9,8 @@ JoyButton Player2Joystick[12];
 JoyAxe Player1JoyAxes[12];
 JoyAxe Player2JoyAxes[12];
 
-void LoadInput(){
+void LoadInput()
+{
     Player1Keyboard[UP]=KEY_UP;
     Player1Keyboard[DOWN]=KEY_DOWN;
     Player1Keyboard[LEFT]=KEY_LEFT;
@@ -54,41 +55,49 @@ void LoadInput(){
 
 int IsKeyPressed(int player, ACTIONS action)
 {
-
-    switch(player)
+    int ispressed=0;
+    if(player & 1)
     {
-    case 1:
-        return key[Player1Keyboard[action]] ||
-                (JoyStickEnabled &&(
-                (Player1Joystick[action].InUse && joy[Player1Joystick[action].JoyNumber].button[Player1Joystick[action].ButtonNumber].b) ||
-                (Player1JoyAxes[action].InUse && JoyAxeMoved(Player1JoyAxes[action].JoyNumber,Player1JoyAxes[action].StickNumber,Player1JoyAxes[action].direction))
-                 ));
-               break;
 
-    case 2:
-        return key[Player2Keyboard[action]] ||
-                (JoyStickEnabled &&(
-                (Player2Joystick[action].InUse && joy[Player2Joystick[action].JoyNumber].button[Player2Joystick[action].ButtonNumber].b) ||
-                (Player2JoyAxes[action].InUse && JoyAxeMoved(Player2JoyAxes[action].JoyNumber,Player2JoyAxes[action].StickNumber,Player2JoyAxes[action].direction))
-                 ));
-               break;
+        ispressed = key[Player1Keyboard[action]] ||
+                    (JoyStickEnabled &&(
+                         (Player1Joystick[action].InUse && joy[Player1Joystick[action].JoyNumber].button[Player1Joystick[action].ButtonNumber].b) ||
+                         (Player1JoyAxes[action].InUse && JoyAxeMoved(Player1JoyAxes[action].JoyNumber,Player1JoyAxes[action].StickNumber,Player1JoyAxes[action].direction))
+                     ));
     }
-    return 0;
+
+    if(player & 2)
+    {
+        ispressed =  ispressed || (key[Player2Keyboard[action]] ||
+                                   (JoyStickEnabled &&(
+                                        (Player2Joystick[action].InUse && joy[Player2Joystick[action].JoyNumber].button[Player2Joystick[action].ButtonNumber].b) ||
+                                        (Player2JoyAxes[action].InUse && JoyAxeMoved(Player2JoyAxes[action].JoyNumber,Player2JoyAxes[action].StickNumber,Player2JoyAxes[action].direction))
+                                    )));
+
+
+    }
+
+    return ispressed;
 }
 
-int JoyAxeMoved(int joyNumber,int stick, ACTIONS direction){
+int JoyAxeMoved(int joyNumber,int stick, ACTIONS direction)
+{
 
-    if(direction== LEFT){
+    if(direction== LEFT)
+    {
         return joy[joyNumber].stick[stick].axis[0].d1;
     }
-    if(direction== RIGHT){
+    if(direction== RIGHT)
+    {
         return joy[joyNumber].stick[stick].axis[0].d2;
     }
-    if(direction== UP){
-      return joy[joyNumber].stick[stick].axis[1].d1;
+    if(direction== UP)
+    {
+        return joy[joyNumber].stick[stick].axis[1].d1;
     }
-    if(direction== DOWN){
-       return joy[joyNumber].stick[stick].axis[1].d2;
+    if(direction== DOWN)
+    {
+        return joy[joyNumber].stick[stick].axis[1].d2;
     }
     return 0;
 }
@@ -99,7 +108,8 @@ void ProcessKeys()
     {
         poll_keyboard();
     }
-    if(JoyStickEnabled){
+    if(JoyStickEnabled)
+    {
         poll_joystick();
     }
 }
@@ -148,20 +158,25 @@ int ReadJoystick(int player, ACTIONS action)
             for(j=0; j<joy[i].num_sticks && (!JoyPressed) && (!StickMoved); j++)
             {
                 axe.direction=0;
-                if (joy[i].stick[j].axis[0].d1) {
+                if (joy[i].stick[j].axis[0].d1)
+                {
                     axe.direction =  LEFT;
                 }
-                if (joy[i].stick[j].axis[0].d2) {
+                if (joy[i].stick[j].axis[0].d2)
+                {
                     axe.direction =  RIGHT;
                 }
-                if (joy[i].stick[j].axis[1].d1) {
+                if (joy[i].stick[j].axis[1].d1)
+                {
                     axe.direction =  UP;
                 }
-                if (joy[i].stick[j].axis[1].d2) {
+                if (joy[i].stick[j].axis[1].d2)
+                {
                     axe.direction =  DOWN;
                 }
 
-                if(axe.direction){
+                if(axe.direction)
+                {
                     StickMoved=1;
                     axe.JoyNumber=i;
                     axe.StickNumber=j;
