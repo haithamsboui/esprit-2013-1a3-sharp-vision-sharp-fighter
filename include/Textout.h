@@ -4,7 +4,7 @@
 #include "includes.h"
 
 typedef enum {NORMAL,CENTER_X,CENTER_Y,CENTER} FONTSTYLE;
-typedef enum {SharpCurve,Verdana} FONTS;
+typedef enum {SharpCurve,Verdana,Arista,Arista2} FONTS;
 
 //TODO : Fix variable size according to FONTS size"
 //#define FONTSCOUNT sizeof(FONTS)/sizeof(int)
@@ -14,7 +14,7 @@ FTGLfont **fontlist2;
 //Load .ttf files
 int install_fonts();
 //draw text, using specific font,size, location and style.
-void draw_text(FONTS font,const char* text,float size,float x, float y, FONTSTYLE style);
+void draw_text(FONTS font,const char* text,float size,float x, float y, FONTSTYLE style, float Transparency);
 //free font memory
 void uninstall_fonts();
 

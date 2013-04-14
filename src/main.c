@@ -32,13 +32,7 @@ PlayVideo("Resources/Videos/SharpIntro.ogv");
 voice_start(intro);
 voice_set_playmode(intro, PLAYMODE_LOOP);
 
-LoadSalah(2);
-while(!key[KEY_ESC]){
-Draw_Salah();
-draw_text(Verdana,"Les fleches, espace et maj pour controler",3,50,20,CENTER_X);
-next_frame();
 
-}
 while (state)
 {
    mainmenu(&choix);

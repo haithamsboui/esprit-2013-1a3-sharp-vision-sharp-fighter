@@ -1,6 +1,6 @@
 #include "includes.h"
 
-const char* FontFiles[]= {"SharpCurve.ttf","verdana.ttf"};
+const char* FontFiles[]= {"SharpCurve.ttf","verdana.ttf", "Arista.ttf","Arista2.ttf"};
 FTGLfont **fontlist;
 FTGLfont **fontlist2;
 
@@ -24,12 +24,13 @@ int install_fonts()
     return fail;
 }
 
-void draw_text(FONTS font,const char* text,float size,float x, float y, FONTSTYLE style)
+void draw_text(FONTS font,const char* text,float size,float x, float y, FONTSTYLE style, float Transparency)
 {
     float bbox[6];
     if(fontlist[font]==NULL)
         return;
     glPushMatrix();
+    glLoadIdentity();
 
     ftglSetFontFaceSize(fontlist[font],1,72);
     ftglSetFontFaceSize(fontlist2[font],1,72);
@@ -57,11 +58,13 @@ void draw_text(FONTS font,const char* text,float size,float x, float y, FONTSTYL
 
     glScalef(size/100.0f,size/100  * ((float)SCREEN_W/(float)SCREEN_H),1.0f);
 
-    glColor4f(0.0f,0.0f,0.0f,0.75f);
+    glColor4f(1.0f,1.0f,1.0f,Transparency/100.0f);
+    glBindTexture(GL_TEXTURE_2D,0);
     ftglRenderFont(fontlist[font], text, FTGL_RENDER_ALL);
 
     glLineWidth(size/30);
-    glColor3f(1.0f,1.0f,1.0f);
+    glColor4f(0.0f,0.0f,0.0f,Transparency/100.0f);
+
     ftglRenderFont(fontlist2[font], text, FTGL_RENDER_ALL);
 
     glPopMatrix();

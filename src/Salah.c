@@ -66,22 +66,22 @@ void Draw_Salah()
 
     if(etat!=Kick && etat!=Punch)
     {
-        if(key[KEY_SPACE])
+        if(IsKeyPressed(Player,KICK))
         {
             etat=Kick;
             Index=0;
         }
-        else if(key[KEY_CAPSLOCK])
+        else if(IsKeyPressed(Player,PUNCH))
         {
             etat=Punch;
             Index=0;
         }
-        else if(key[KEY_RIGHT])
+        else if(IsKeyPressed(Player,RIGHT))
         {
             etat=Forward;
             x+=0.2;
         }
-        else if (key[KEY_LEFT])
+        else if (IsKeyPressed(Player,LEFT))
         {
             etat=Backward;
             x-=0.2;
@@ -89,9 +89,6 @@ void Draw_Salah()
         else
             etat=Stable;
     }
-
-
-
 
 
     switch(etat)
@@ -144,7 +141,8 @@ void Draw_Salah()
         if(FrameCount%10==0)
         {
             Index++;
-            if(Index==KickCount){
+            if(Index==KickCount)
+            {
                 etat=Stable;
             }
         }
@@ -159,7 +157,8 @@ void Draw_Salah()
         if(FrameCount%10==0)
         {
             Index++;
-            if(Index==PunchCount){
+            if(Index==PunchCount)
+            {
                 etat=Stable;
             }
         }
