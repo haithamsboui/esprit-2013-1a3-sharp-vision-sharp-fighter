@@ -193,7 +193,7 @@
 1365536742 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/apeg.h
 	<allegro.h>
 
-1365546382 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Menus.h
+1365974583 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Menus.h
 	"includes.h"
 
 1365536742 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Calcul.c
@@ -202,13 +202,13 @@
 1365536742 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Graphics.c
 	"includes.h"
 
-1365955666 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Input.c
+1365963710 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Input.c
 	"includes.h"
 
-1365955451 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Install.c
+1365963710 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Install.c
 	"includes.h"
 
-1365957227 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Menus.c
+1365975158 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Menus.c
 	"includes.h"
 
 1365536742 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Texture.c
@@ -217,7 +217,7 @@
 1365536742 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/VideoPlayer.c
 	"includes.h"
 
-1365957634 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/main.c
+1365974549 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/main.c
 	"includes.h"
 
 1365956211 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Earth.h
@@ -259,7 +259,7 @@
 1365866296 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Haitham.c
 	"includes.h"
 
-1365955285 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Salah.c
+1365975284 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Salah.c
 	"includes.h"
 
 1365536742 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Setting.c

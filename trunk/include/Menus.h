@@ -11,4 +11,6 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist,int fullscreen);
 
 void versus ();
 
+void GamePlay(int Player1,int Player2,IMAGE* Map);
+
 #endif // MENUS_H_INCLUDED
