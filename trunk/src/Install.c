@@ -1,12 +1,13 @@
 #include "includes.h"
 
- int IsInstalled=0;
- int FPS=60;
- int TickCount=0;
- int FrameCount=0;
+int IsInstalled=0;
+int FPS=60;
+int TickCount=0;
+int FrameCount=0;
 
-void Ticks(){
- TickCount++;
+void Ticks()
+{
+    TickCount++;
 }
 
 int install(int fullscreen, int w, int h, int depth)
@@ -28,6 +29,9 @@ int install(int fullscreen, int w, int h, int depth)
         return 1;
 
     JoyStickEnabled=(install_joystick(JOY_TYPE_AUTODETECT)==0);
+    JoyStickEnabled=JoyStickEnabled && num_joysticks;
+
+    LoadInput();
 
     if(install_fonts())
         printf("One or more font files were not loaded.\n");
@@ -82,7 +86,8 @@ int change_resolution(int fullscreen, int w, int h, int depth)
     return 0;
 }
 
-void SetOpenGL2D(){
+void SetOpenGL2D()
+{
     glDisable(GL_DEPTH_TEST);
 
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
@@ -117,8 +122,9 @@ void uninstall()
     remove_int(Ticks);
 
     KillTextures();
-    for(i=0;i<TextureCount;i++){
-       free(GlobalTextures[i]);
+    for(i=0; i<TextureCount; i++)
+    {
+        free(GlobalTextures[i]);
     }
     free(GlobalTextures);
     TextureCount=0;
