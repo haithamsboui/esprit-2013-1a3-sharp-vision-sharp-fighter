@@ -94,8 +94,7 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist,int fullscreen)
     int ind1=0,ind2=1,ind3=2,pos_x[]= {5,35,65},button_press=0,trans,second_menu=0,Nb_point_volume_music,w=1366/2, h=768/2,depth=32;
     int volume=voice_get_volume(Voice),i,point_pos=0,display_ind=0,cadre_display_pos;
     //Loading;
-    install_timer();
-    install_fonts();
+
     display[0]=load_image("Resources/Images/Fullscreen.png");
     display[1]=load_image("Resources/Images/Windowed.png");
     Background=load_image("Resources/Images/Origin.png");
@@ -111,9 +110,9 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist,int fullscreen)
     volume_point=load_image("Resources/Images/sound_point.png");
     Nb_point_volume_music=voice_get_volume(Voice)/19;
     if (fullscreen==1)
-    cadre_display_pos=36.6;
+        cadre_display_pos=36.6;
     else
-    cadre_display_pos=69.6;
+        cadre_display_pos=69.6;
     //Drawing
     while (distance_change>0.1)
     {
@@ -181,23 +180,26 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist,int fullscreen)
                     button_press=0;
                     display_ind=1;
                     cadre_display_pos=69.6;
-if (fullscreen==1  ){
-fullscreen=0;
-change_resolution(fullscreen,w,h,depth);
+                    if (fullscreen==1  )
+                    {
+                        fullscreen=0;
+                        change_resolution(fullscreen,w,h,depth);
+                    }
                 }
-}
                 if(key[KEY_UP] && button_press>10)
                 {
                     button_press=0;
                     display_ind=0;
                     cadre_display_pos=39.6;
 
-if ( fullscreen==0){
-fullscreen=1;
-change_resolution(fullscreen,w,h,depth);
+                    if ( fullscreen==0)
+                    {
+                        fullscreen=1;
+                        change_resolution(fullscreen,w,h,depth);
+                    }
                 }
             }
-            }
+            break;
             case 1 :
             {
 
@@ -265,6 +267,7 @@ change_resolution(fullscreen,w,h,depth);
         next_frame();
     }
 }
+
 void credit ()
 {
     IMAGE *credit;
@@ -281,68 +284,290 @@ void credit ()
     }
     voice_stop(intro);
 }
+
 void versus ()
 {
-    IMAGE *Background ,*Background_bar,*personne[5],*select,*Player1,*Player2;
-    int i,Pos_select=19,Position=0,Pers=0,Pos_player1=4,pos_player2=76;//distance=18
-    int press_buton=0,press_buton2=0;
+    IMAGE *Background ,*Background_bar,*select,*Player1,*Player2,*haitham[7],*mokhtar[7],*brahim[7],*wassim[6],*salah[4],*maps[5];
+    int i,pos_player[]= {4,22,40,58,76},select1=0,select2=4; //distance=18
+    int press_buton=0,press_buton2=0,ind_turn_mokhtar=0,ind_turn_haitham=0,ind_turn_brahim=0,ind_turn_salah=0,ind_turn_wassim=0;
+    flip Turn[]= {NONE,NONE,NONE,NONE,NONE};
+    int selectedPers[5]= {1,0,0,0,1},brahim_turn=0,haitham_turn=0,salah_turn=0,mokhtar_turn=0,wassim_turn=0,select_map=0;
     float distance_change1=0,distance_change2=0,fade=1,fade_start=100;
+    char direction[100];
+    int choix1=0,choix2=0,select_ind=0,select_pos[]= {4,22,22+18,22+18*2,22+18*3},/*map_pos[]= {6,24,42,60,78}*/distance_change_map=20;
+    float ratioo,w;
+    // Loading caracteres
+    ratioo=(float)SCREEN_W/((float)SCREEN_H);
+    for (i=0; i<7; i++)
+    {
+        sprintf(direction,"Resources/Images/Haitham/%d copy.png",i);
+        haitham[i]=load_image(direction);
+        sprintf(direction,"Resources/Images/Brahim/%d copy.png",i);
+        brahim[i]=load_image(direction);
+        sprintf(direction,"Resources/Images/Mokhtar/%d copy.png",i);
+        mokhtar[i]=load_image(direction);
+        if (i!=6)
+        {
+            sprintf(direction,"Resources/Images/Wassim/%d copy.png",i);
+            wassim[i]=load_image(direction);
+        }
+        if (i!=6 && i!=5 && i!=4)
+        {
+            sprintf(direction,"Resources/Images/Salah/%d copy.png",i);
+            salah[i]=load_image(direction);
+        }
+    }
+    for (i=0; i<5; i++)
+    {
+        sprintf(direction,"Resources/Images/maps/%d.png",i);
+        maps[i]=load_image(direction);
+        printf ("iD %d \n",maps[i]->ID);
+    }
     Background=load_image("Resources/Images/Origin.png");
     Background_bar=load_image("Resources/Images/Origin_bar.png");
-    personne[0]=load_image("Resources/Images/mokhtar.png");
-    personne[1]=load_image("Resources/Images/haitham.png");
     select=load_image("Resources/Images/Select.png");
     Player1=load_image("Resources/Images/player1.png");
     Player2=load_image("Resources/Images/player2.png");
 
 
-    while (!key[KEY_ESC])
+    while (!key[KEY_ESC] )
     {
 
-        if (key[KEY_RIGHT] && press_buton>10)
+        if (choix1+choix2!=2)
         {
-            press_buton=0;
-            Pos_player1 =(Pos_player1+18)%90;
-            distance_change1=-18;
+
+            if (key[KEY_ENTER])
+                choix1=1;
+            if (key[KEY_ENTER_PAD])
+                choix2=1;
+
+            if (key[KEY_RIGHT] && press_buton>10 && choix1!=1)
+            {
+                press_buton=0;
+                select1 =(select1+1)%5;
+                distance_change1=-18;
+                selectedPers[select1]=1;
+                selectedPers[(select1-1+5)%5]=0;
+                if ((select1-1+5)%5==select2)
+                    selectedPers[select2]=1;
+            }
+
+            if (key[KEY_LEFT] && press_buton>10 &&choix1!=1)
+            {
+                press_buton=0;
+                select1 =(select1-1+5)%5;
+                selectedPers[(select1+1)%5]=0;
+                selectedPers[select1]=1;
+                distance_change1=18;
+                if ((select1+1)%5==select2)
+                    selectedPers[select2]=1;
+            }
+            if (key[KEY_D] && press_buton2>10 && choix2!=2)
+            {
+                press_buton2=0;
+                select2 =(select2+1)%5;
+                selectedPers[(select2-1+5)%5]=0;
+                selectedPers[select2]=1;
+                distance_change2=-18;
+                if ((select2-1+5)%5==select1)
+                    selectedPers[select1]=1;
+
+            }
+            if (key[KEY_Q] && press_buton2>10 && choix2!=2)
+            {
+                press_buton2=0;
+                select2 =(select2-1+5)%5;
+                selectedPers[select2]=1;
+                selectedPers[(select2+1)%5]=0;
+                if ((select2+1)%5==select1)
+                    selectedPers[select1]=1;
+                distance_change2=18;
+            }
+
+            //LOGIC
+            distance_change2=distance_change2/1.1;
+            distance_change1=distance_change1/1.1;
+            fade_start=fade_start/1.1;
+            press_buton++;
+            press_buton2++;
+// Drawing
+
+            draw_image_ex(Background,0,0,100,100,NONE,100);
+            draw_image_ex(Background_bar,0,-27,100,150,NONE,100-fade_start);
+            for (i=4; i<90; i=i+18)
+                draw_image_ex(select,i,17.5,19,60,NONE,100-fade_start);
+            draw_image_ex(Player1,pos_player[select1]+distance_change1,17.5,19,60,NONE,100-fade_start);
+            draw_image_ex(Player2,pos_player[select2]+distance_change2,17.5,19,60,NONE,100-fade_start);
+// Draw and turn Mokhtar
+            if (selectedPers[0]==0 )
+            {
+                w=(50.0f/((float)mokhtar[mokhtar_turn]->h/(float)mokhtar[mokhtar_turn]->w))/ratioo;
+                draw_image_ex(mokhtar[0],pos_player[0]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[0],100-fade);
+            }
+            else
+            {
+                if (mokhtar_turn==0)
+                {
+                    ind_turn_mokhtar=1;
+                    Turn[0]=NONE;
+                }
+                if (mokhtar_turn==6)
+                {
+                    ind_turn_mokhtar=-1;
+                    Turn[0]=VERTICAL;
+                }
+                if(FrameCount%10==0)
+                    mokhtar_turn=(mokhtar_turn+ind_turn_mokhtar)%7;
+                w=(50.0f/((float)mokhtar[mokhtar_turn]->h/(float)mokhtar[mokhtar_turn]->w))/ratioo;
+                draw_image_ex(mokhtar[mokhtar_turn],pos_player[0]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[0],100-fade);
+            }
+
+// Draw and turn haitham
+            if (selectedPers[1]==0)
+            {
+
+                w=(50.0f/((float)haitham[0]->h/(float)haitham[0]->w))/ratioo;
+                draw_image_ex(haitham[0],pos_player[1]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[1],100-fade);
+            }
+            else
+            {
+                if (haitham_turn==0)
+                {
+                    ind_turn_haitham=1;
+                    Turn[1]=NONE;
+                }
+                if (haitham_turn==6)
+                {
+                    ind_turn_haitham=-1;
+                    Turn[1]=VERTICAL;
+                }
+                if(FrameCount%10==0)
+                    haitham_turn=(haitham_turn+ind_turn_haitham)%7;
+                w=(50.0f/((float)haitham[haitham_turn]->h/(float)haitham[haitham_turn]->w))/ratioo;
+                draw_image_ex(haitham[haitham_turn],pos_player[1]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[1],100-fade);
+            }
+
+// Draw and turn brahim
+
+            if (selectedPers[2]==0)
+            {
+                w=(50.0f/((float)brahim[0]->h/(float)brahim[0]->w))/ratioo;
+
+                draw_image_ex(brahim[0],pos_player[2]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[2],100-fade);
+            }
+            else
+            {
+                if (brahim_turn==0)
+                {
+                    ind_turn_brahim=1;
+                    Turn[2]=NONE;
+                }
+                if (brahim_turn==6)
+                {
+                    ind_turn_brahim=-1;
+                    Turn[2]=VERTICAL;
+                }
+                if(FrameCount%10==0)
+                    brahim_turn=(brahim_turn+ind_turn_brahim)%7;
+                w=(50.0f/((float)brahim[brahim_turn]->h/(float)brahim[brahim_turn]->w))/ratioo;
+
+                draw_image_ex(brahim[brahim_turn],pos_player[2]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[2],100-fade);
+            }
+
+// Draw and turn salah
+            if (selectedPers[3]==0)
+            {
+                w=(50.0f/((float)salah[0]->h/(float)salah[0]->w))/ratioo;
+                draw_image_ex(salah[0],pos_player[3]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[3],100-fade);
+            }
+            else
+            {
+                if (salah_turn==0)
+                {
+                    ind_turn_salah=1;
+                    Turn[3]=NONE;
+                }
+                if (salah_turn==3)
+                {
+                    ind_turn_salah=-1;
+                    Turn[3]=VERTICAL;
+                }
+                if(FrameCount%10==0)
+                    salah_turn=(salah_turn+ind_turn_salah)%4;
+                w=(50.0f/((float)salah[salah_turn]->h/(float)salah[salah_turn]->w))/ratioo;
+                draw_image_ex(salah[salah_turn],pos_player[3]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[3],100-fade);
+            }
+            // Draw and turn Wassim
+            if (selectedPers[4]==0)
+            {
+                w=(50.0f/((float)wassim[0]->h/(float)wassim[0]->w))/ratioo;
+                draw_image_ex(wassim[0],pos_player[4]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[4],100-fade);
+            }
+            else
+
+            {
+                if (wassim_turn==0)
+                {
+                    ind_turn_wassim=1;
+                    Turn[4]=NONE;
+                }
+                if (wassim_turn==5)
+                {
+                    ind_turn_wassim=-1;
+                    Turn[4]=VERTICAL;
+                }
+                if(FrameCount%10==0)
+                    wassim_turn=(wassim_turn+ind_turn_wassim)%6;
+                w=(50.0f/((float)wassim[wassim_turn]->h/(float)wassim[wassim_turn]->w))/ratioo;
+                draw_image_ex(wassim[wassim_turn],pos_player[4]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[4],100-fade);
+            }
+            next_frame();
 
         }
 
-        if (key[KEY_LEFT] && press_buton>10)
+        if (choix1+choix2==2)
         {
-            press_buton=0;
-            Pos_player1 =(Pos_player1-18+90)%90;
-            distance_change1=18;
+            if (key[KEY_BACKSPACE])
+            {
+                choix1=0;
+                choix2=0;
+            }
+
+
+            if (key[KEY_ENTER] && press_buton>10)
+
+            {
+             press_buton=0;
+             choix1=2;
+            }
+
+            if (key[KEY_RIGHT] && press_buton >10)
+             {
+             press_buton=0;
+             select_map=(select_map-1+5)%5;
+             distance_change_map=50;
+             }
+
+             if (key[KEY_LEFT] && press_buton> 10)
+
+             {
+             press_buton=0;
+                          select_map=(select_map+1)%5;
+
+             distance_change_map=-50;
+             }
+distance_change_map=distance_change_map/1.1;
+                         draw_image_ex(Background,0,0,100,100,NONE,100);
+            draw_image_ex(Background_bar,0,-27,100,150,NONE,100);
+            draw_image_ex(maps[(select_map+1)%5],-25+distance_change_map,27,50,40,NONE,30+distance_change_map);
+            draw_image_ex(maps[select_map],25+distance_change_map,27,50,40,NONE,100);
+            draw_image_ex(maps[(select_map-1+5)%5],75+distance_change_map,27,50,40,NONE,30-distance_change_map);
+            draw_image_ex(select,20,23,60,48,NONE,100);
+            press_buton++;
+            next_frame();
 
         }
-        if (key[KEY_D] && press_buton2>10)
-        {
-            press_buton2=0;
-            pos_player2 =(pos_player2+18)%90;
-            distance_change2=-18;
 
-        }
-
-        if (key[KEY_Q] && press_buton2>10)
-        {
-            press_buton2=0;
-            pos_player2 =(pos_player2-18+90)%90;
-            distance_change2=18;
-
-        }
-        distance_change2=distance_change2/1.1;
-        distance_change1=distance_change1/1.1;
-        fade_start=fade_start/1.1;
-        draw_image_ex(Background,0,0,100,100,NONE,100);
-        draw_image_ex(Background_bar,0,-27,100,150,NONE,100-fade_start);
-        for (i=4; i<90; i=i+18)
-            draw_image_ex(select,i,17.5,19,60,NONE,100-fade_start);
-        draw_image_ex(personne[0],6,21,15,50,NONE,100-fade_start);
-        draw_image_ex(personne[1],24,21,15,50,NONE,100-fade_start);
-        draw_image_ex(Player1,Pos_player1+distance_change1,17.5,19,60,NONE,100-fade_start);
-        draw_image_ex(Player2,pos_player2+distance_change2,17.5,19,60,NONE,100-fade_start);
-        next_frame();
-        press_buton++;
-        press_buton2++;
     }
 
     while (fade<100)
@@ -350,12 +575,15 @@ void versus ()
         fade=fade*1.1;
         draw_image_ex(Background,0,0,100,100,NONE,100);
         draw_image_ex(Background_bar,0,-27,100,150,NONE,100-fade);
-        for (i=4; i<90; i=i+18)
+        /*for (i=4; i<90; i=i+18)
             draw_image_ex(select,i,17.5,19,60,NONE,100-fade);
-        draw_image_ex(personne[0],6,21,15,50,NONE,100-fade);
-        draw_image_ex(personne[1],24,21,15,50,NONE,100-fade);
-        draw_image_ex(Player1,Pos_player1+distance_change1,17.5,19,60,NONE,100-fade);
-        draw_image_ex(Player2,pos_player2+distance_change2,17.5,19,60,NONE,100-fade);
+        draw_image_ex(mokhtar[0],pos_player[0]+2,21,15,50,NONE,100-fade);
+        draw_image_ex(haitham[0],pos_player[1]+2,21,15,50,NONE,100-fade);
+        draw_image_ex(brahim[0],pos_player[2]+2,21,15,50,NONE,100-fade);
+        draw_image_ex(salah[0],pos_player[3]+2,21,15,50,NONE,100-fade);
+        draw_image_ex(wassim[0],pos_player[4]+2,21,15,50,NONE,100-fade);
+        draw_image_ex(Player1,pos_player[select1]+distance_change1,17.5,19,60,NONE,100-fade);
+        draw_image_ex(Player2,pos_player[select2]+distance_change2,17.5,19,60,NONE,100-fade);*/
         next_frame();
     }
 }
