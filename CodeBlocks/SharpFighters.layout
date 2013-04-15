@@ -20,7 +20,7 @@
 		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="../include/Menus.h" open="1" top="0" tabpos="12">
-		<Cursor position="280" topLine="0" />
+		<Cursor position="192" topLine="0" />
 	</File>
 	<File name="../include/Salah.h" open="1" top="0" tabpos="3">
 		<Cursor position="77" topLine="0" />
@@ -47,7 +47,7 @@
 		<Cursor position="587" topLine="0" />
 	</File>
 	<File name="../src/Earth.c" open="1" top="0" tabpos="4">
-		<Cursor position="2110" topLine="39" />
+		<Cursor position="2526" topLine="54" />
 	</File>
 	<File name="../src/Graphics.c" open="1" top="0" tabpos="13">
 		<Cursor position="116" topLine="0" />
@@ -62,7 +62,7 @@
 		<Cursor position="2801" topLine="90" />
 	</File>
 	<File name="../src/Menus.c" open="1" top="1" tabpos="11">
-		<Cursor position="2262" topLine="59" />
+		<Cursor position="24502" topLine="648" />
 	</File>
 	<File name="../src/Salah.c" open="1" top="0" tabpos="2">
 		<Cursor position="353" topLine="79" />
@@ -77,6 +77,6 @@
 		<Cursor position="1428" topLine="0" />
 	</File>
 	<File name="../src/main.c" open="1" top="0" tabpos="1">
-		<Cursor position="831" topLine="28" />
+		<Cursor position="276" topLine="28" />
 	</File>
 </CodeBlocks_layout_file>
