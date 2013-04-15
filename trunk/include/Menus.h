@@ -9,7 +9,9 @@ void credit();
 
 void setting (int Voice,GFX_MODE_LIST * gfxlist,int fullscreen);
 
-void versus ();
+void versus (int intro);
+
+void ChargerEffetNaturel(IMAGE *effet[100], char chemin[200], int nombreFrame);
 
 void GamePlay(int Player1,int Player2,IMAGE* Map);
 

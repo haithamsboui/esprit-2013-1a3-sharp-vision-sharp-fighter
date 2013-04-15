@@ -36,7 +36,7 @@ int main()
         case 0 :
             break;
         case 1:
-            versus();
+            versus(intro);
 
             break;
         case 2 :

@@ -296,7 +296,7 @@ void credit ()
     voice_stop(intro);
 }
 
-void versus ()
+void versus (int intro)
 {
     IMAGE *Background ,*Background_bar,*select,*Player1,*Player2,*haitham[7],*mokhtar[7],*brahim[7],*wassim[6],*salah[4],*maps[5];
     int i,pos_player[]= {4,22,40,58,76},select1=0,select2=4; //distance=18
@@ -535,7 +535,7 @@ void versus ()
             if (choix1)
                 draw_text(Verdana,"PLAYER 1 Ready",10,20,10,CENTER,100);
             if (choix2)
-                draw_text(Verdana,"PLAYER 2 Ready",10,20,10,CENTER,100);
+                draw_text(Verdana,"PLAYER 2 Ready",10,75,10,CENTER,100);
             next_frame();
 
         }
@@ -564,7 +564,9 @@ void versus ()
             if (IsKeyPressed(3,ENTER) && press_buton>10)
             {
                 press_buton=0;
+                voice_stop(intro);
                 GamePlay(3,1,maps[select_map]);
+                voice_start(intro);
             }
 
             if (IsKeyPressed(3,RIGHT) && press_buton >10)
@@ -613,30 +615,109 @@ void versus ()
     }
 }
 
+void ChargerEffetNaturel(IMAGE *effet[100], char chemin[200], int nombreFrame)
+{
+    int i; char tmp[200];
+
+    for(i=0;i<nombreFrame;i++)
+    {
+        sprintf(tmp,"%s%.2d.png", chemin, i);
+        effet[i]=load_image(tmp);
+    }
+
+}
+int indice_rain=0;
 void GamePlay(int Player1,int Player2,IMAGE* Map){
-    int time =60;
+    int time =30;
     char texttime[10];
+    IMAGE*rain[100],*flies[100],*Map2;
+    int thunder, rainsound,gameplaysound,sarsour,fight,lotfi;
+
+    next_frame();
+    draw_text(SharpCurve,"Loading...",20,50,50,CENTER,100);
+    next_frame();
+
+    Map2=load_image("Resources/Images/maps/0.png");
+    ChargerEffetNaturel(rain,"Resources/Images/Rain/rain00",100);
+    ChargerEffetNaturel(flies,"Resources/Images/nightFilies/nightFlies00",100);
     LoadSalah(1);
     LoadHaitham(2);
 
-
-    DoEarth(TUNISIA,MALAYSIA);
+    thunder=AddVoice("Resources/Sounds/Thunder.wav");
+    rainsound=AddVoice("Resources/Sounds/Rain.wav");
+    gameplaysound=AddVoice("Resources/Sounds/Gameplay.wav");
+    sarsour=AddVoice("Resources/Sounds/Sarsour.wav");
+    fight=AddVoice("Resources/Sounds/Fight.wav");
+    lotfi=AddVoice("Resources/Sounds/Lotfi.wav");
+    DoEarth(FRANCE,MALAYSIA);
 
     sprintf(texttime,"%d",time);
 
+    voice_set_playmode(thunder, PLAYMODE_LOOP);
+    voice_set_playmode(rainsound, PLAYMODE_LOOP);
+    voice_set_playmode(gameplaysound, PLAYMODE_LOOP);
+    voice_set_playmode(sarsour, PLAYMODE_LOOP);
+    voice_set_playmode(lotfi, PLAYMODE_LOOP);
+
+    voice_set_volume(rainsound,255);
+    voice_set_volume(thunder,100);
+    voice_set_volume(gameplaysound,128);
+    voice_set_volume(lotfi,80);
+
+    voice_start(thunder);
+    voice_start(rainsound);
+    voice_start(gameplaysound);
+
+    voice_start(fight);
     while(!IsKeyPressed(3,RETURN)){
         draw_image_ex(Map,-1.5,-2,103,104,NONE,100);
         Draw_Salah();
         Draw_Haitham();
 
+        if(FrameCount%60==0){
+            sprintf(texttime,"%d",time);
+            time--;
+        }
+        if(time<0){
+            break;
+        }
 
-        //Mtar
+        draw_image_ex(rain[indice_rain],0,0,100,100,NONE,100);
+        if(FrameCount%3==0)
+        indice_rain=(indice_rain+1)%100;
+
+        draw_text(Arista,texttime,10,50,5,CENTER_X,95);
+        next_frame();
+    }
+    voice_stop(thunder);
+    voice_stop(rainsound);
+    voice_stop(gameplaysound);
+
+    time=30;
+    DoEarth(MALAYSIA,TUNISIA);
+    voice_start(sarsour);
+    voice_start(lotfi);
+    voice_start(fight);
+    while(!IsKeyPressed(3,RETURN)){
+        draw_image_ex(Map2,-1.5,-2,103,104,NONE,100);
+        Draw_Salah();
+        Draw_Haitham();
 
         if(FrameCount%60==0){
             sprintf(texttime,"%d",time);
             time--;
         }
+        if(time<0){
+            break;
+        }
+
+        draw_image_ex(flies[indice_rain],0,0,100,100,NONE,100);
+        if(FrameCount%3==0)
+        indice_rain=(indice_rain+1)%100;
+
         draw_text(Arista,texttime,10,50,5,CENTER_X,95);
         next_frame();
     }
+    voice_stop(sarsour);
+    voice_stop(lotfi);
 }
