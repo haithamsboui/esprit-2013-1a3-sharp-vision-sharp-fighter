@@ -5,10 +5,17 @@ int TextureCount=0; //Number of textures
 
 IMAGE* load_image(char *filename)
 {
-    int ID;
+    int ID,i;
     IMAGE *img;
-    BITMAP *bmp=load_png(filename,NULL);
+    BITMAP *bmp;
 
+    for(i=0;i<TextureCount;i++){
+        if(strcmp(filename,GlobalTextures[i]->filename)==0){
+            return GlobalTextures[i];
+        }
+    }
+
+    bmp=load_png(filename,NULL);
     if (bmp!=NULL)
     {
         ID=allegro_gl_make_texture_ex(AGL_TEXTURE_HAS_ALPHA | AGL_TEXTURE_FLIP,bmp,-1);
@@ -18,7 +25,8 @@ IMAGE* load_image(char *filename)
             img->ID=ID;
             img->w=bmp->w;
             img->h=bmp->h;
-            img->filename=filename;
+            img->filename=(char*)malloc(strlen(filename)+1);
+            sprintf(img->filename,"%s",filename);
             AddImageToList(img);
 
         }
@@ -47,6 +55,7 @@ void RemoveImageFromList(IMAGE* img)
     if(index!=-1)
     {
         glDeleteTextures(1,&img->ID);
+        free(img->filename);
         free(img);
         for(i=index; i<TextureCount-1; i++)
         {
