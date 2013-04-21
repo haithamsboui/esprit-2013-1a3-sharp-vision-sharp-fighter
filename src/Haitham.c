@@ -20,7 +20,7 @@ int directionH;
 int PlayerH=0;
 EtatPlayer etatH;
 int IndexH;
-float screen_ratioH;
+
 
 void LoadHaitham(int player)
 {
@@ -51,7 +51,7 @@ void LoadHaitham(int player)
         xH=90;
         break;
     }
-    screen_ratioH=(float)SCREEN_W/(float)SCREEN_H;
+
 }
 
 int iH=1;
@@ -104,7 +104,7 @@ void Draw_Haitham()
             IndexH=IndexH+iH;
         }
         IndexH = Min(IndexH,StableCountH-1);
-        wH=(hH/((float)HaithamPics[IndexH+StableStartH]->h/(float)HaithamPics[IndexH+StableStartH]->w))/screen_ratioH;
+        wH=(hH/((float)HaithamPics[IndexH+StableStartH]->h/(float)HaithamPics[IndexH+StableStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+StableStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
@@ -115,7 +115,7 @@ void Draw_Haitham()
             IndexH=((IndexH-1+WalkCountH)%WalkCountH);
         }
         IndexH = Min(IndexH,WalkCountH-1);
-        wH=(hH/((float)HaithamPics[IndexH+WalkStartH]->h/(float)HaithamPics[IndexH+WalkStartH]->w))/screen_ratioH;
+        wH=(hH/((float)HaithamPics[IndexH+WalkStartH]->h/(float)HaithamPics[IndexH+WalkStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+WalkStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
@@ -127,14 +127,14 @@ void Draw_Haitham()
             IndexH=((IndexH+1)%WalkCountH);
         }
         IndexH = Min(IndexH,WalkCountH-1);
-        wH=(hH/((float)HaithamPics[IndexH+WalkStartH]->h/(float)HaithamPics[IndexH+WalkStartH]->w))/screen_ratioH;
+        wH=(hH/((float)HaithamPics[IndexH+WalkStartH]->h/(float)HaithamPics[IndexH+WalkStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+WalkStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
         break;
 
     case Kick:
-        wH=(hH/((float)HaithamPics[IndexH+KickStartH]->h/(float)HaithamPics[IndexH+KickStartH]->w))/screen_ratioH;
+        wH=(hH/((float)HaithamPics[IndexH+KickStartH]->h/(float)HaithamPics[IndexH+KickStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+KickStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
@@ -150,7 +150,7 @@ void Draw_Haitham()
         break;
 
     case Punch:
-        wH=(hH/((float)HaithamPics[IndexH+PunchStartH]->h/(float)HaithamPics[IndexH+PunchStartH]->w))/screen_ratioH;
+        wH=(hH/((float)HaithamPics[IndexH+PunchStartH]->h/(float)HaithamPics[IndexH+PunchStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+PunchStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;

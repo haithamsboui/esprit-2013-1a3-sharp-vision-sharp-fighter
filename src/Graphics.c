@@ -2,9 +2,19 @@
 
 void draw_image_ex(IMAGE *image, float x, float y, float w, float h,flip flips, float trans)
 {
-    if (image->ID==0) return;
-
     int hflip,vflip;
+
+    if ((image->ID==0) || (w==0 && h==0)) return;
+
+
+    if(w==0 && h!=0){
+        w=(h/((float)image->h/(float)image->w))/AspectRatio;
+    }
+    if(w!=0 && h==0){
+        h=(w/((float)image->w/(float)image->h))*AspectRatio;
+    }
+
+
     vflip = (flips & 1)==1;
     hflip = (flips & 2)==2;
     trans=Percentage(trans)/100.0f;
@@ -34,7 +44,7 @@ void draw_image_ex(IMAGE *image, float x, float y, float w, float h,flip flips, 
 
 
 int Counter;
-int next_frame()
+void next_frame()
 {
     glFlush();
     allegro_gl_flip();
@@ -45,6 +55,5 @@ int next_frame()
     glClear (GL_COLOR_BUFFER_BIT);
     Counter=TickCount=0;
     FrameCount++;
-    return FrameCount;
 }
 

@@ -14,6 +14,9 @@
 //Contains number of frames drawn since game started
  int FrameCount;
 
+//Ratio of SCREEN_W/SCREEN_H
+ float AspectRatio;
+
 //Called every 1 millisecond
 void Ticks();
 

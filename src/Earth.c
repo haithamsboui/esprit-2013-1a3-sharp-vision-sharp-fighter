@@ -73,6 +73,15 @@ void DoEarth(Location start, Location end)
         case Tunisia:
             sprintf(text,"Tunis - Tunisia");
         break;
+        case Egypt:
+            sprintf(text,"Cairo - Egypt");
+        break;
+        case France:
+            sprintf(text,"Paris - France");
+        break;
+        case NewYork:
+            sprintf(text,"New York - United States");
+        break;
 
     }
     while(perc<200)
