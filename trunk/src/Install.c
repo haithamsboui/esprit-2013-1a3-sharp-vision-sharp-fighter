@@ -4,6 +4,7 @@ int IsInstalled=0;
 int FPS=60;
 int TickCount=0;
 int FrameCount=0;
+float AspectRatio;
 
 void Ticks()
 {
@@ -60,6 +61,7 @@ int install(int fullscreen, int w, int h, int depth)
     SetOpenGL2D();
     screenimage=(IMAGE*)malloc(sizeof(IMAGE));
     screenimage->ID=0;
+    AspectRatio=(float)SCREEN_W/(float)SCREEN_H;
     IsInstalled=1;
     return 0;
 }
@@ -87,6 +89,7 @@ int change_resolution(int fullscreen, int w, int h, int depth)
 
     SetOpenGL2D();
     RefreshGLTextures();
+    AspectRatio=(float)SCREEN_W/(float)SCREEN_H;
     return 0;
 }
 

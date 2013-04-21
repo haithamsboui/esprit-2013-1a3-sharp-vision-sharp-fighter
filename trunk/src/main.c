@@ -26,7 +26,6 @@ int main()
     voice_start(intro);
     voice_set_playmode(intro, PLAYMODE_LOOP);
 
-
     while (state)
     {
         mainmenu(&choix);

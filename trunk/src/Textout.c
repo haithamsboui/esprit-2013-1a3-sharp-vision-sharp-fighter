@@ -37,7 +37,7 @@ void draw_text(FONTS font,const char* text,float size,float x, float y, FONTSTYL
 
     ftglGetFontBBox(fontlist[font],text,-1,bbox);
 
-    glScalef(size/100.0f,size/100 * ((float)SCREEN_W/(float)SCREEN_H),1.0f);
+    glScalef(size/100.0f,size/100 * AspectRatio,1.0f);
     if((style & CENTER_X) == CENTER_X)
     {
         glTranslatef(-fabs(bbox[3]-bbox[0])/2.0f,0.0f,0.0f);
@@ -49,14 +49,14 @@ void draw_text(FONTS font,const char* text,float size,float x, float y, FONTSTYL
 
     glTranslatef(bbox[0],-bbox[1]-fabs(bbox[4]-bbox[1]),0.0f);
 
-    glScalef(100.0f/size,100.0f/size / ((float)SCREEN_W/(float)SCREEN_H),1.0f);
+    glScalef(100.0f/size,100.0f/size / AspectRatio,1.0f);
 
     x=x/50 -1;
     y=-(y/50 -1);
 
     glTranslatef(x,y,0.0f);
 
-    glScalef(size/100.0f,size/100  * ((float)SCREEN_W/(float)SCREEN_H),1.0f);
+    glScalef(size/100.0f,size/100  * AspectRatio,1.0f);
 
     glColor4f(1.0f,1.0f,1.0f,Transparency/100.0f);
     glBindTexture(GL_TEXTURE_2D,0);

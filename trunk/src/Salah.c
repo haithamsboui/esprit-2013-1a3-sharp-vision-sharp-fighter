@@ -20,7 +20,6 @@ int direction;
 int Player=0;
 EtatPlayer etat;
 int Index;
-float screen_ratio;
 
 void LoadSalah(int player)
 {
@@ -51,7 +50,7 @@ void LoadSalah(int player)
         x=70;
         break;
     }
-    screen_ratio=(float)SCREEN_W/(float)SCREEN_H;
+
 }
 
 int i=1;
@@ -104,7 +103,7 @@ void Draw_Salah()
             Index=Index+i;
         }
         Index = Min(Index,StableCountS-1);
-        w=(h/((float)SalahPics[Index+StableStartS]->h/(float)SalahPics[Index+StableStartS]->w))/screen_ratio;
+        w=(h/((float)SalahPics[Index+StableStartS]->h/(float)SalahPics[Index+StableStartS]->w))/AspectRatio;
         if(Player==2) x-=w;
         draw_image_ex(SalahPics[Index+StableStartS],x,y,w,h,vflip,100);
         if(Player==2) x+=w;
@@ -115,7 +114,7 @@ void Draw_Salah()
             Index=((Index-1+WalkCountS)%WalkCountS);
         }
         Index = Min(Index,WalkCountS-1);
-        w=(h/((float)SalahPics[Index+WalkStartS]->h/(float)SalahPics[Index+WalkStartS]->w))/screen_ratio;
+        w=(h/((float)SalahPics[Index+WalkStartS]->h/(float)SalahPics[Index+WalkStartS]->w))/AspectRatio;
         if(Player==2) x-=w;
         draw_image_ex(SalahPics[Index+WalkStartS],x,y,w,h,vflip,100);
         if(Player==2) x+=w;
@@ -127,14 +126,14 @@ void Draw_Salah()
             Index=((Index+1)%WalkCountS);
         }
         Index = Min(Index,WalkCountS-1);
-        w=(h/((float)SalahPics[Index+WalkStartS]->h/(float)SalahPics[Index+WalkStartS]->w))/screen_ratio;
+        w=(h/((float)SalahPics[Index+WalkStartS]->h/(float)SalahPics[Index+WalkStartS]->w))/AspectRatio;
         if(Player==2) x-=w;
         draw_image_ex(SalahPics[Index+WalkStartS],x,y,w,h,vflip,100);
         if(Player==2) x+=w;
         break;
 
     case Kick:
-        w=(h/((float)SalahPics[Index+KickStartS]->h/(float)SalahPics[Index+KickStartS]->w))/screen_ratio;
+        w=(h/((float)SalahPics[Index+KickStartS]->h/(float)SalahPics[Index+KickStartS]->w))/AspectRatio;
         if(Player==2) x-=w;
         draw_image_ex(SalahPics[Index+KickStartS],x,y,w,h,vflip,100);
         if(Player==2) x+=w;
@@ -150,7 +149,7 @@ void Draw_Salah()
         break;
 
     case Punch:
-        w=(h/((float)SalahPics[Index+PunchStartS]->h/(float)SalahPics[Index+PunchStartS]->w))/screen_ratio;
+        w=(h/((float)SalahPics[Index+PunchStartS]->h/(float)SalahPics[Index+PunchStartS]->w))/AspectRatio;
         if(Player==2) x-=w;
         draw_image_ex(SalahPics[Index+PunchStartS],x,y,w,h,vflip,100);
         if(Player==2) x+=w;
