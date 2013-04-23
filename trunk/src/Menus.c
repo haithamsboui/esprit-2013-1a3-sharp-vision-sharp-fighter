@@ -94,12 +94,12 @@ void mainmenu(int *choix)
 
 }
 
-void setting (int Voice,GFX_MODE_LIST * gfxlist,int fullscreen)
+void setting (GFX_MODE_LIST * gfxlist,int fullscreen)
 {
     IMAGE *Volumes[2],*Background,*back_cadre,*icon[3],*select,*volume_bar,*volume_point,*display[2],*display_cadre;
     float distance_change=100,entre=0,fade=1,volume_fade=100,display_fade=100;
     int ind1=0,ind2=1,ind3=2,pos_x[]= {5,35,65},button_press=0,trans,second_menu=0,Nb_point_volume_music,w=1366/2, h=768/2,depth=32;
-    int volume=voice_get_volume(Voice),i,point_pos=0,display_ind=0,cadre_display_pos;
+    int i,point_pos=0,display_ind=0,cadre_display_pos;
     //Loading;
 
     display[0]=load_image("Resources/Images/Fullscreen.png");
@@ -115,7 +115,7 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist,int fullscreen)
     Volumes[1]=load_image("Resources/Images/Volume_bar1.png");
     volume_bar=load_image("Resources/Images/Volume_bar.png");
     volume_point=load_image("Resources/Images/sound_point.png");
-    Nb_point_volume_music=voice_get_volume(Voice)/19;
+    Nb_point_volume_music=Music_volume/19;
     if (fullscreen==1)
         cadre_display_pos=36.6;
     else
@@ -214,17 +214,17 @@ void setting (int Voice,GFX_MODE_LIST * gfxlist,int fullscreen)
             case 1 :
             {
 
-                if (IsKeyPressed(3,LEFT) && voice_get_volume(Voice)>0 )
+                if (IsKeyPressed(3,LEFT) && Music_volume>0 )
                 {
-                    volume-=5;
-                    voice_set_volume(Voice,volume);
-                    Nb_point_volume_music=voice_get_volume(Voice)/19;
+                    Music_volume-=5;
+                    SetMusicVolume(Music_volume);
+                    Nb_point_volume_music=Music_volume/19;
                 }
-                if (IsKeyPressed(3,RIGHT) && voice_get_volume(Voice)<255)
+                if (IsKeyPressed(3,RIGHT) && Music_volume<255)
                 {
-                    volume+=5;
-                    voice_set_volume(Voice,volume);
-                    Nb_point_volume_music=voice_get_volume(Voice)/19;
+                    Music_volume+=5;
+                    SetMusicVolume(Music_volume);
+                    Nb_point_volume_music=Music_volume/19;
                 }
             }
             break;

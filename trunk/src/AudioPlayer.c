@@ -23,16 +23,37 @@ int AddVoice(const char *filename, int sfx)
         voice_len_sfx++;
         VoicesSfx=(int*)realloc(VoicesSfx,voice_len_sfx*sizeof(int));
         VoicesSfx[voice_len_sfx-1]=v;
+        voice_set_volume(v,Effect_volume);
     }
     else
     {
         voice_len_music++;
         VoicesMusic=(int*)realloc(VoicesMusic,voice_len_music*sizeof(int));
         VoicesMusic[voice_len_music-1]=v;
+        voice_set_volume(v,Music_volume);
     }
 
     return v;
 }
+
+void SetMusicVolume(int volume)
+{
+    int i;
+    for(i=0; i<voice_len_music; i++)
+    {
+        voice_set_volume(VoicesMusic[i], Music_volume);
+    }
+}
+
+void SetEffectsVolume(int volume)
+{
+    int i;
+    for(i=0; i<voice_len_sfx; i++)
+    {
+        voice_set_volume(VoicesSfx[i], Effect_volume);
+    }
+}
+
 //Get Time of sound in seconds
 float GetVoiceLength(int voice)
 {
@@ -69,7 +90,7 @@ void DisposeVoices()
     free(VoicesMusic);
     VoicesMusic=NULL;
     voice_len_music=0;
-     free(VoicesSfx);
+    free(VoicesSfx);
     VoicesSfx=NULL;
     voice_len_sfx=0;
 }
