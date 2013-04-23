@@ -3,13 +3,13 @@
 
 int main()
 {
-    int i,w=1366/1.5, h=768/1.5, fullscreen=0, depth=32;
+    int i;
     int intro ;
     int state=1,choix=0;
     GFX_MODE_LIST * gfxlist;
 
     //intialization
-    if(install(fullscreen,w,h,depth))
+    if(install())
         return 1;//ERROR
 
     //Get possible resolutions
@@ -40,7 +40,7 @@ int main()
 
             break;
         case 2 :
-            setting (gfxlist,fullscreen);
+            setting (gfxlist,Fullscreen);
             break;
         case 3 :
         {
