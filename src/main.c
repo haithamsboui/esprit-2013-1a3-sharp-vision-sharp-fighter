@@ -40,7 +40,7 @@ int main()
 
             break;
         case 2 :
-            setting (intro,gfxlist,fullscreen);
+            setting (gfxlist,fullscreen);
             break;
         case 3 :
         {

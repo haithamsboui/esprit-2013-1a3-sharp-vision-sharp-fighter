@@ -11,6 +11,9 @@ int voice_len_sfx; //Number of sfx
 
 //Load Sound .wav to memory
 int AddVoice(const char *filename, int sfx);
+//change volume (0-255)
+void SetMusicVolume(int volume);
+void SetEffectsVolume(int volume);
 //Get Time of sound in seconds
 float GetVoiceLength(int voice);
 //Unload sounds from memory
