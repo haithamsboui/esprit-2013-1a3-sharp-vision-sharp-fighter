@@ -13,13 +13,18 @@ void Ticks()
 
 
 
-int install(int fullscreen, int w, int h, int depth)
+int install()
 {
     int screen_mode;
+
+
     if(IsInstalled)
         return 0;
     if(allegro_init())
         return 1;
+
+    LoadSettings();
+
     if(install_keyboard())
         return 1;
     if(install_timer())
@@ -46,12 +51,12 @@ int install(int fullscreen, int w, int h, int depth)
     allegro_gl_set(AGL_DOUBLEBUFFER, 1);
     allegro_gl_set(AGL_SUGGEST, AGL_COLOR_DEPTH | AGL_DOUBLEBUFFER | AGL_RENDERMETHOD);
 
-    if(fullscreen)
+    if(Fullscreen)
         screen_mode=GFX_OPENGL_FULLSCREEN;
     else
         screen_mode=GFX_OPENGL_WINDOWED;
 
-    if (set_gfx_mode(screen_mode, w,h, 0, 0))
+    if (set_gfx_mode(screen_mode, Width,Height, 0, 0))
     {
         set_gfx_mode(GFX_TEXT, 0, 0, 0, 0);
         allegro_message("Unable to set graphic mode\n%s\n", allegro_error);
@@ -62,19 +67,20 @@ int install(int fullscreen, int w, int h, int depth)
     screenimage=(IMAGE*)malloc(sizeof(IMAGE));
     screenimage->ID=0;
     AspectRatio=(float)SCREEN_W/(float)SCREEN_H;
+
     IsInstalled=1;
     return 0;
 }
-int change_resolution(int fullscreen, int w, int h, int depth)
+int change_resolution(int fullscreen, int w, int h, int d)
 {
     int screen_mode;
     if(!IsInstalled)
     {
-        return install(fullscreen,w,h,depth);
+        return install(fullscreen,w,h,d);
     }
 
     KillTextures();
-    allegro_gl_set(AGL_COLOR_DEPTH, depth);
+    allegro_gl_set(AGL_COLOR_DEPTH, d);
     if(fullscreen)
         screen_mode=GFX_OPENGL_FULLSCREEN;
     else
@@ -90,6 +96,15 @@ int change_resolution(int fullscreen, int w, int h, int depth)
     SetOpenGL2D();
     RefreshGLTextures();
     AspectRatio=(float)SCREEN_W/(float)SCREEN_H;
+    Fullscreen=fullscreen;
+    Width=w;
+    Height=h;
+    depth=d;
+    set_config_int("graphics","Fullscreen",Fullscreen);
+    set_config_int("graphics","Width",Width);
+    set_config_int("graphics","Height",Height);
+    set_config_int("graphics","depth",depth);
+
     return 0;
 }
 
@@ -140,6 +155,7 @@ void uninstall()
     DisposeVoices();
 
     uninstall_fonts();
+    flush_config_file();
     IsInstalled=0; //Allegro will dispose on exit
 }
 

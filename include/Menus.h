@@ -7,7 +7,7 @@ void mainmenu(int *choix);
 
 void credit();
 
-void setting (GFX_MODE_LIST * gfxlist,int fullscreen);
+void setting ();
 
 void versus (int intro);
 

@@ -21,7 +21,7 @@
 void Ticks();
 
 //Initialize allegro and all libs, and create window
-int install(int fullscreen, int w, int h, int depth);
+int install();
 
 //change graphics mode
 int change_resolution(int fullscreen, int w, int h, int depth);

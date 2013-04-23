@@ -94,11 +94,11 @@ void mainmenu(int *choix)
 
 }
 
-void setting (GFX_MODE_LIST * gfxlist,int fullscreen)
+void setting ()
 {
     IMAGE *Volumes[2],*Background,*back_cadre,*icon[3],*select,*volume_bar,*volume_point,*display[2],*display_cadre;
     float distance_change=100,entre=0,fade=1,volume_fade=100,display_fade=100;
-    int ind1=0,ind2=1,ind3=2,pos_x[]= {5,35,65},button_press=0,trans,second_menu=0,Nb_point_volume_music,w=1366/2, h=768/2,depth=32;
+    int ind1=0,ind2=1,ind3=2,pos_x[]= {5,35,65},button_press=0,trans,second_menu=0,Nb_point_volume_music;
     int i,point_pos=0,display_ind=0,cadre_display_pos;
     //Loading;
 
@@ -116,7 +116,7 @@ void setting (GFX_MODE_LIST * gfxlist,int fullscreen)
     volume_bar=load_image("Resources/Images/Volume_bar.png");
     volume_point=load_image("Resources/Images/sound_point.png");
     Nb_point_volume_music=Music_volume/19;
-    if (fullscreen==1)
+    if (Fullscreen==1)
         cadre_display_pos=36.6;
     else
         cadre_display_pos=69.6;
@@ -191,10 +191,10 @@ void setting (GFX_MODE_LIST * gfxlist,int fullscreen)
                     button_press=0;
                     display_ind=1;
                     cadre_display_pos=69.6;
-                    if (fullscreen==1  )
+                    if (Fullscreen==1  )
                     {
-                        fullscreen=0;
-                        change_resolution(fullscreen,w,h,depth);
+                        Fullscreen=0;
+                        change_resolution(Fullscreen,Width,Height,depth);
                     }
                 }
                 if(IsKeyPressed(3,UP) && button_press>10)
@@ -203,10 +203,10 @@ void setting (GFX_MODE_LIST * gfxlist,int fullscreen)
                     display_ind=0;
                     cadre_display_pos=39.6;
 
-                    if ( fullscreen==0)
+                    if ( Fullscreen==0)
                     {
-                        fullscreen=1;
-                        change_resolution(fullscreen,w,h,depth);
+                        Fullscreen=1;
+                        change_resolution(Fullscreen,Width,Height,depth);
                     }
                 }
             }
@@ -308,7 +308,7 @@ void versus (int intro)
     int choix1=0,choix2=0,select_ind=0,select_pos[]= {4,22,22+18,22+18*2,22+18*3},/*map_pos[]= {6,24,42,60,78}*/distance_change_map=20;
     float ratioo,w;
     // Loading caracteres
-    ratioo=(float)SCREEN_W/((float)SCREEN_H);
+
     for (i=0; i<7; i++)
     {
         sprintf(direction,"Resources/Images/Haitham/%d copy.png",i);
