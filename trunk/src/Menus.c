@@ -10,7 +10,7 @@ void mainmenu(int *choix)
     int ind_1,ind_2,ind_3,ind_4;
 // loading
     install_timer();
-    Button=AddVoice("Resources/Sounds/button3.wav");
+    Button=AddVoice("Resources/Sounds/button3.wav",1);
     Background=load_image("Resources/Images/Origin.png");
     back_bar=load_image("Resources/Images/Origin_bar.png");
     Select=load_image("Resources/Images/Select.png");
@@ -284,7 +284,7 @@ void credit ()
     IMAGE *credit;
     int intro;
     float i=0;
-    intro=AddVoice("Resources/Sounds/Credit.wav");
+    intro=AddVoice("Resources/Sounds/Credit.wav",0);
     credit=load_image("Resources/Images/credit.png");
     voice_start(intro);
     while (!IsKeyPressed(3,RETURN) && i!=100)
@@ -643,12 +643,12 @@ void GamePlay(int Player1,int Player2,IMAGE* Map){
     LoadSalah(1);
     LoadHaitham(2);
 
-    thunder=AddVoice("Resources/Sounds/Thunder.wav");
-    rainsound=AddVoice("Resources/Sounds/Rain.wav");
-    gameplaysound=AddVoice("Resources/Sounds/Gameplay.wav");
-    sarsour=AddVoice("Resources/Sounds/Sarsour.wav");
-    fight=AddVoice("Resources/Sounds/Fight.wav");
-    lotfi=AddVoice("Resources/Sounds/Lotfi.wav");
+    thunder=AddVoice("Resources/Sounds/Thunder.wav",1);
+    rainsound=AddVoice("Resources/Sounds/Rain.wav",1);
+    gameplaysound=AddVoice("Resources/Sounds/Gameplay.wav",0);
+    sarsour=AddVoice("Resources/Sounds/Sarsour.wav",1);
+    fight=AddVoice("Resources/Sounds/Fight.wav",1);
+    lotfi=AddVoice("Resources/Sounds/Lotfi.wav",0);
     DoEarth(FRANCE,MALAYSIA);
 
     sprintf(texttime,"%d",time);

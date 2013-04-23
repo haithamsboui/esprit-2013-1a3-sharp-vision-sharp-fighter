@@ -3,11 +3,14 @@
 
 #include "includes.h"
 
- int *Voices; //List of allocated sounds
- int voice_len; //Number of sounds
+int *VoicesMusic; //List of allocated music
+int *VoicesSfx;
+int voice_len_music; //Number of music
+int voice_len_sfx; //Number of sfx
+
 
 //Load Sound .wav to memory
-int AddVoice(const char *filename);
+int AddVoice(const char *filename, int sfx);
 //Get Time of sound in seconds
 float GetVoiceLength(int voice);
 //Unload sounds from memory

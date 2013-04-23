@@ -1,31 +1,46 @@
 #include "includes.h"
 
- int *Voices; //List of allocated sounds
- int voice_len=0; //Number of sounds
+int *VoicesMusic; //List of allocated music
+int *VoicesSfx;
+int voice_len_music=0; //Number of music
+int voice_len_sfx=0; //Number of sfx
 
 //Load Sound .wav to memory
-int AddVoice(const char *filename)
+int AddVoice(const char *filename, int sfx)
 {
     SAMPLE *samp;
     int v;
     samp=load_sample(filename);
     if(!samp)
         return 0;
-    if((v=allocate_voice(samp))==-1){
+    if((v=allocate_voice(samp))==-1)
+    {
         destroy_sample(samp);
         return 0;
     }
-    voice_len++;
-    Voices=(int*)realloc(Voices,voice_len*sizeof(int));
-    Voices[voice_len-1]=v;
+    if(sfx)
+    {
+        voice_len_sfx++;
+        VoicesSfx=(int*)realloc(VoicesSfx,voice_len_sfx*sizeof(int));
+        VoicesSfx[voice_len_sfx-1]=v;
+    }
+    else
+    {
+        voice_len_music++;
+        VoicesMusic=(int*)realloc(VoicesMusic,voice_len_music*sizeof(int));
+        VoicesMusic[voice_len_music-1]=v;
+    }
+
     return v;
 }
 //Get Time of sound in seconds
-float GetVoiceLength(int voice){
+float GetVoiceLength(int voice)
+{
     SAMPLE *samp;
     float len=0.0f;
-    if((samp=voice_check(voice))!=NULL){ //Addionnal check
-            len=(float)samp->len/(float)samp->freq;
+    if((samp=voice_check(voice))!=NULL)  //Addionnal check
+    {
+        len=(float)samp->len/(float)samp->freq;
     }
     return len;
 }
@@ -35,14 +50,26 @@ void DisposeVoices()
 {
     int i;
     SAMPLE* samp;
-    for(i=0; i<voice_len; i++)
+    for(i=0; i<voice_len_music; i++)
     {
-        if((samp=voice_check(Voices[i]))!=NULL){ //Addionnal check
+        if((samp=voice_check(VoicesMusic[i]))!=NULL)  //Addionnal check
+        {
             destroy_sample(samp);
         }
-        deallocate_voice(Voices[i]);
+        deallocate_voice(VoicesMusic[i]);
     }
-    free(Voices);
-    Voices=NULL;
-    voice_len=0;
+    for(i=0; i<voice_len_sfx; i++)
+    {
+        if((samp=voice_check(VoicesSfx[i]))!=NULL)  //Addionnal check
+        {
+            destroy_sample(samp);
+        }
+        deallocate_voice(VoicesSfx[i]);
+    }
+    free(VoicesMusic);
+    VoicesMusic=NULL;
+    voice_len_music=0;
+     free(VoicesSfx);
+    VoicesSfx=NULL;
+    voice_len_sfx=0;
 }
