@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
+	<File name="../include/AudioPlayer.h" open="1" top="0" tabpos="20">
+		<Cursor position="223" topLine="0" />
+	</File>
 	<File name="../include/Calcul.h" open="0" top="0" tabpos="7">
 		<Cursor position="88" topLine="0" />
 	</File>
@@ -25,8 +28,8 @@
 	<File name="../include/Salah.h" open="1" top="0" tabpos="3">
 		<Cursor position="77" topLine="0" />
 	</File>
-	<File name="../include/Setting.h" open="0" top="0" tabpos="0">
-		<Cursor position="151" topLine="0" />
+	<File name="../include/Setting.h" open="1" top="0" tabpos="22">
+		<Cursor position="55" topLine="0" />
 	</File>
 	<File name="../include/Textout.h" open="1" top="0" tabpos="10">
 		<Cursor position="646" topLine="0" />
@@ -40,14 +43,14 @@
 	<File name="../include/includes.h" open="0" top="0" tabpos="5">
 		<Cursor position="365" topLine="0" />
 	</File>
-	<File name="../src/AudioPlayer.c" open="0" top="0" tabpos="0">
-		<Cursor position="487" topLine="0" />
+	<File name="../src/AudioPlayer.c" open="1" top="0" tabpos="21">
+		<Cursor position="23" topLine="0" />
 	</File>
 	<File name="../src/Calcul.c" open="0" top="0" tabpos="6">
 		<Cursor position="587" topLine="0" />
 	</File>
 	<File name="../src/Earth.c" open="1" top="0" tabpos="4">
-		<Cursor position="2526" topLine="54" />
+		<Cursor position="4635" topLine="128" />
 	</File>
 	<File name="../src/Graphics.c" open="1" top="0" tabpos="13">
 		<Cursor position="351" topLine="0" />
@@ -62,13 +65,16 @@
 		<Cursor position="2070" topLine="67" />
 	</File>
 	<File name="../src/Menus.c" open="1" top="0" tabpos="11">
-		<Cursor position="24415" topLine="642" />
+		<Cursor position="23945" topLine="627" />
 	</File>
 	<File name="../src/Salah.c" open="1" top="0" tabpos="2">
 		<Cursor position="3423" topLine="122" />
 	</File>
-	<File name="../src/Textout.c" open="1" top="1" tabpos="9">
-		<Cursor position="495" topLine="0" />
+	<File name="../src/Setting.c" open="1" top="1" tabpos="23">
+		<Cursor position="86" topLine="0" />
+	</File>
+	<File name="../src/Textout.c" open="1" top="0" tabpos="9">
+		<Cursor position="1513" topLine="33" />
 	</File>
 	<File name="../src/Texture.c" open="1" top="0" tabpos="17">
 		<Cursor position="246" topLine="0" />
@@ -77,6 +83,6 @@
 		<Cursor position="1428" topLine="0" />
 	</File>
 	<File name="../src/main.c" open="1" top="0" tabpos="1">
-		<Cursor position="329" topLine="0" />
+		<Cursor position="184" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

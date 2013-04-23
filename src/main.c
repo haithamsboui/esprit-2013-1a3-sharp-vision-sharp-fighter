@@ -3,7 +3,7 @@
 
 int main()
 {
-    int i,w=1366/2, h=768/2, fullscreen=0, depth=32;
+    int i,w=1366/1.5, h=768/1.5, fullscreen=0, depth=32;
     int intro ;
     int state=1,choix=0;
     GFX_MODE_LIST * gfxlist;
@@ -20,8 +20,9 @@ int main()
         printf("%dx%dx%d\n",gfxlist->mode[i].width,gfxlist->mode[i].height,gfxlist->mode[i].bpp);
     }
 
-    intro=AddVoice("Resources/Sounds/intro.wav");
+    intro=AddVoice("Resources/Sounds/intro.wav",0);
     PlayVideo("Resources/Videos/SharpIntro.ogv");
+
 
     voice_start(intro);
     voice_set_playmode(intro, PLAYMODE_LOOP);
