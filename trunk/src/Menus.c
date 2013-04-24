@@ -306,7 +306,8 @@ void versus (int intro)
     float distance_change1=0,distance_change2=0,fade=1,fade_start=100;
     char direction[100];
     int choix1=0,choix2=0,select_ind=0,select_pos[]= {4,22,22+18,22+18*2,22+18*3},/*map_pos[]= {6,24,42,60,78}*/distance_change_map=20;
-    float ratioo,w;
+    float w;
+
     // Loading caracteres
 
     for (i=0; i<7; i++)
@@ -412,7 +413,7 @@ void versus (int intro)
 // Draw and turn Mokhtar
             if (selectedPers[0]==0 )
             {
-                w=(50.0f/((float)mokhtar[mokhtar_turn]->h/(float)mokhtar[mokhtar_turn]->w))/ratioo;
+                w=(50.0f/((float)mokhtar[mokhtar_turn]->h/(float)mokhtar[mokhtar_turn]->w))/AspectRatio;
                 draw_image_ex(mokhtar[0],pos_player[0]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[0],100-fade);
             }
             else
@@ -429,7 +430,7 @@ void versus (int intro)
                 }
                 if(FrameCount%10==0)
                     mokhtar_turn=(mokhtar_turn+ind_turn_mokhtar)%7;
-                w=(50.0f/((float)mokhtar[mokhtar_turn]->h/(float)mokhtar[mokhtar_turn]->w))/ratioo;
+                w=(50.0f/((float)mokhtar[mokhtar_turn]->h/(float)mokhtar[mokhtar_turn]->w))/AspectRatio;
                 draw_image_ex(mokhtar[mokhtar_turn],pos_player[0]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[0],100-fade);
             }
 
@@ -437,7 +438,7 @@ void versus (int intro)
             if (selectedPers[1]==0)
             {
 
-                w=(50.0f/((float)haitham[0]->h/(float)haitham[0]->w))/ratioo;
+                w=(50.0f/((float)haitham[0]->h/(float)haitham[0]->w))/AspectRatio;
                 draw_image_ex(haitham[0],pos_player[1]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[1],100-fade);
             }
             else
@@ -454,7 +455,7 @@ void versus (int intro)
                 }
                 if(FrameCount%10==0)
                     haitham_turn=(haitham_turn+ind_turn_haitham)%7;
-                w=(50.0f/((float)haitham[haitham_turn]->h/(float)haitham[haitham_turn]->w))/ratioo;
+                w=(50.0f/((float)haitham[haitham_turn]->h/(float)haitham[haitham_turn]->w))/AspectRatio;
                 draw_image_ex(haitham[haitham_turn],pos_player[1]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[1],100-fade);
             }
 
@@ -462,7 +463,7 @@ void versus (int intro)
 
             if (selectedPers[2]==0)
             {
-                w=(50.0f/((float)brahim[0]->h/(float)brahim[0]->w))/ratioo;
+                w=(50.0f/((float)brahim[0]->h/(float)brahim[0]->w))/AspectRatio;
 
                 draw_image_ex(brahim[0],pos_player[2]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[2],100-fade);
             }
@@ -480,7 +481,7 @@ void versus (int intro)
                 }
                 if(FrameCount%10==0)
                     brahim_turn=(brahim_turn+ind_turn_brahim)%7;
-                w=(50.0f/((float)brahim[brahim_turn]->h/(float)brahim[brahim_turn]->w))/ratioo;
+                w=(50.0f/((float)brahim[brahim_turn]->h/(float)brahim[brahim_turn]->w))/AspectRatio;
 
                 draw_image_ex(brahim[brahim_turn],pos_player[2]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[2],100-fade);
             }
@@ -488,7 +489,7 @@ void versus (int intro)
 // Draw and turn salah
             if (selectedPers[3]==0)
             {
-                w=(50.0f/((float)salah[0]->h/(float)salah[0]->w))/ratioo;
+                w=(50.0f/((float)salah[0]->h/(float)salah[0]->w))/AspectRatio;
                 draw_image_ex(salah[0],pos_player[3]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[3],100-fade);
             }
             else
@@ -505,13 +506,13 @@ void versus (int intro)
                 }
                 if(FrameCount%10==0)
                     salah_turn=(salah_turn+ind_turn_salah)%4;
-                w=(50.0f/((float)salah[salah_turn]->h/(float)salah[salah_turn]->w))/ratioo;
+                w=(50.0f/((float)salah[salah_turn]->h/(float)salah[salah_turn]->w))/AspectRatio;
                 draw_image_ex(salah[salah_turn],pos_player[3]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[3],100-fade);
             }
             // Draw and turn Wassim
             if (selectedPers[4]==0)
             {
-                w=(50.0f/((float)wassim[0]->h/(float)wassim[0]->w))/ratioo;
+                w=(50.0f/((float)wassim[0]->h/(float)wassim[0]->w))/AspectRatio;
                 draw_image_ex(wassim[0],pos_player[4]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[4],100-fade);
             }
             else
@@ -529,7 +530,7 @@ void versus (int intro)
                 }
                 if(FrameCount%10==0)
                     wassim_turn=(wassim_turn+ind_turn_wassim)%6;
-                w=(50.0f/((float)wassim[wassim_turn]->h/(float)wassim[wassim_turn]->w))/ratioo;
+                w=(50.0f/((float)wassim[wassim_turn]->h/(float)wassim[wassim_turn]->w))/AspectRatio;
                 draw_image_ex(wassim[wassim_turn],pos_player[4]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[4],100-fade);
             }
             if (choix1)
