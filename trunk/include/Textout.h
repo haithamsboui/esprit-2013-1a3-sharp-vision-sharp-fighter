@@ -8,7 +8,7 @@ typedef enum {SharpCurve,Verdana,Arista,Arista2} FONTS;
 
 //TODO : Fix variable size according to FONTS size"
 //#define FONTSCOUNT sizeof(FONTS)/sizeof(int)
-const char* FontFiles[];
+const char *FontFiles[];
 FTGLfont **fontlist;
 FTGLfont **fontlist2;
 //Load .ttf files

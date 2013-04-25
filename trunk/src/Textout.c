@@ -1,6 +1,7 @@
 #include "includes.h"
 
-const char* FontFiles[]= {"SharpCurve.ttf","verdana.ttf", "Arista.ttf","Arista2.ttf"};
+const char *FontFiles[]= {"SharpCurve.ttf","verdana.ttf", "Arista.ttf","Arista2.ttf"};
+
 FTGLfont **fontlist;
 FTGLfont **fontlist2;
 
@@ -8,8 +9,7 @@ int install_fonts()
 {
     int i,n,fail=0;
     char filename[255];
-
-    n=sizeof(FontFiles)/sizeof(const char *);
+    n=sizeof(FontFiles) / sizeof ( const char * );
     fontlist=malloc(n*sizeof(FTGLfont*));
     fontlist2=malloc(n*sizeof(FTGLfont*));
 
