@@ -55,7 +55,7 @@ void mainmenu(int *choix)
             ind_2=(ind_1-1+5)%5;
             ind_3=(ind_2-1+5)%5;
             ind_4=(ind_3-1+5)%5;
-                        select_pers=(select_pers-1+5)%5;
+            select_pers=(select_pers-1+5)%5;
         }
         scale=scale/1.1;
         fade_start=fade_start/1.1;
@@ -96,30 +96,38 @@ void mainmenu(int *choix)
 
 void setting ()
 {
-    IMAGE *Volumes[2],*Background,*back_cadre,*icon[3],*select,*volume_bar,*volume_point,*display[2],*display_cadre;
-    float distance_change=100,entre=0,fade=1,volume_fade=100,display_fade=100;
+    IMAGE *Volumes[2],*Background,*back_cadre,*icon[3],*select,*volume_point,*display_cadre,*screen,* resolution,*joystick,*keybord,*cadre_control;
+    float distance_change=100,cadre_display_pos[]= {49.6,76.6},entre=0,fade=1,volume_fade=100,display_fade=100,controlpos[]= {38.6,55.6},control_distance=5,keybord_fade=0,joystick_fade=0;
     int ind1=0,ind2=1,ind3=2,pos_x[]= {5,35,65},button_press=0,trans,second_menu=0,Nb_point_volume_music;
-    int i,point_pos=0,display_ind=0,cadre_display_pos;
-    //Loading;
+    int i,point_pos=0;
+    char screen_mod[15],res[10];
+    GFX_MODE_LIST Resolution=GetResolution();
+    int ind_res=0,cadre_ind=0,control_ind=0,control_in=0;
 
-    display[0]=load_image("Resources/Images/Fullscreen.png");
-    display[1]=load_image("Resources/Images/Windowed.png");
+    //Loading;
+    cadre_control=load_image("Resources/Images/setting/cadre_control.png");
+    screen=load_image("Resources/Images/setting/screen.png");
+    resolution=load_image("Resources/Images/setting/resolution.png");
+    joystick=load_image("Resources/Images/setting/joystick.png");
+    keybord=load_image("Resources/Images/setting/keybord.png");
     Background=load_image("Resources/Images/Origin.png");
     back_cadre=load_image("Resources/Images/Origin_bar.png");
-    display_cadre=load_image("Resources/Images/display.png");
-    icon[0]=load_image("Resources/Images/graphics.png");
-    icon[1]=load_image("Resources/Images/sound.png");
-    icon[2]=load_image("Resources/Images/controll.png");
-    select=load_image("Resources/Images/Select.png");
-    Volumes[0]=load_image("Resources/Images/Volume_bar.png");
-    Volumes[1]=load_image("Resources/Images/Volume_bar1.png");
-    volume_bar=load_image("Resources/Images/Volume_bar.png");
-    volume_point=load_image("Resources/Images/sound_point.png");
+    display_cadre=load_image("Resources/Images/setting/display.png");
+    icon[0]=load_image("Resources/Images/setting/graphics.png");
+    icon[1]=load_image("Resources/Images/setting/sound.png");
+    icon[2]=load_image("Resources/Images/setting/controll.png");
+    select=load_image("Resources/Images/setting/Select.png");
+    Volumes[0]=load_image("Resources/Images/setting/Volume_bar.png");
+    Volumes[1]=load_image("Resources/Images/setting/Volume_bar1.png");
+    volume_point=load_image("Resources/Images/setting/sound_point.png");
     Nb_point_volume_music=Music_volume/19;
     if (Fullscreen==1)
-        cadre_display_pos=36.6;
+        sprintf (screen_mod,"Fullscreen");
     else
-        cadre_display_pos=69.6;
+        sprintf (screen_mod,"Windowed");
+
+    Width=Resolution.mode[ind_res].width;
+    Height=Resolution.mode[ind_res].height;
     //Drawing
     while (distance_change>0.1)
     {
@@ -167,9 +175,10 @@ void setting ()
                 fade=0;
             }
         }
-        if (second_menu==1)
+
+        if (second_menu==1 )
         {
-            if (IsKeyPressed(3,RETURN) && button_press>10 )
+            if (IsKeyPressed(3,RETURN) && button_press>10 && control_in ==0)
             {
                 distance_change=0;
                 entre=0;
@@ -177,6 +186,7 @@ void setting ()
                 second_menu=0;
                 fade=5;
                 volume_fade=100;
+
             }
             while(IsKeyPressed(3,RETURN))
             {
@@ -188,24 +198,61 @@ void setting ()
             {
                 if (IsKeyPressed(3,DOWN) && button_press>10)
                 {
+                    cadre_ind=(cadre_ind+1)%2;//;
                     button_press=0;
-                    display_ind=1;
-                    cadre_display_pos=69.6;
-                    if (Fullscreen==1  )
+                }
+
+                if (IsKeyPressed(3,UP) && button_press>10)
+                {
+                    cadre_ind=(cadre_ind-1+2)%2;//49.6;
+                    button_press=0;
+                }
+
+                if (IsKeyPressed(3,LEFT) && button_press>10)
+                {
+                    button_press=0;
+
+                    if (cadre_ind==0 )
                     {
-                        Fullscreen=0;
+                        Fullscreen=(Fullscreen-1+2)%2;
+                        if (Fullscreen)
+                            sprintf(screen_mod,"Fullscreen");
+                        else
+                            sprintf(screen_mod,"Windowed");
+                        change_resolution(Fullscreen,Width,Height,depth);
+                    }
+                    if (cadre_ind ==1)
+
+                    {
+                        ind_res=(ind_res-1+(Resolution.num_modes))%(Resolution.num_modes);
+                        if (Resolution.mode[ind_res].width==Resolution.mode[ind_res-1].width && Resolution.mode[ind_res].height==Resolution.mode[ind_res-1].height)
+                            ind_res=(ind_res-1+(Resolution.num_modes))%(Resolution.num_modes);
+                        Width=Resolution.mode[ind_res].width;
+                        Height=Resolution.mode[ind_res].height;
                         change_resolution(Fullscreen,Width,Height,depth);
                     }
                 }
-                if(IsKeyPressed(3,UP) && button_press>10)
+
+                if(IsKeyPressed(3,RIGHT) && button_press>10)
                 {
                     button_press=0;
-                    display_ind=0;
-                    cadre_display_pos=39.6;
-
-                    if ( Fullscreen==0)
+                    if (cadre_ind==0 )
                     {
-                        Fullscreen=1;
+                        Fullscreen=(Fullscreen+1)%2;
+                        if (Fullscreen)
+                            sprintf(screen_mod,"Fullscreen");
+                        else
+                            sprintf(screen_mod,"Windowed");
+
+                        change_resolution(Fullscreen,Width,Height,depth);
+                    }
+                    if (cadre_ind ==1)
+                    {
+                        ind_res=(ind_res+1)%Resolution.num_modes;
+                        if (Resolution.mode[ind_res].width==Resolution.mode[ind_res-1].width && Resolution.mode[ind_res].height==Resolution.mode[ind_res-1].height)
+                            ind_res=(ind_res+1)%(Resolution.num_modes);
+                        Width=Resolution.mode[ind_res].width;
+                        Height=Resolution.mode[ind_res].height;
                         change_resolution(Fullscreen,Width,Height,depth);
                     }
                 }
@@ -228,8 +275,53 @@ void setting ()
                 }
             }
             break;
+            case 2 :
+            {
+                if (control_in==0)
+                {
+                    if (IsKeyPressed(3,DOWN) && button_press>10)
+                    {
+                        button_press=0;
+                        control_ind=(control_ind+1)%2;
+                    }
+
+                    if (IsKeyPressed(3,UP) && button_press>10)
+                    {
+                        button_press=0;
+                        control_ind=(control_ind+1)%2;
+                    }
+
+                    if (IsKeyPressed(3,ENTER) && button_press>10 && control_in == 0)
+                    {
+                        button_press=0;
+                        control_in=1;
+                        if (control_ind==0)
+                            joystick_fade=1;
+                        else
+                            keybord_fade=1;
+                    }
+                }
+
+                if (control_in==1)
+                {
+
+                    if (IsKeyPressed(3,PUNCH) && button_press>10 )
+                    {
+                        control_in=0;
+                        button_press=0;
+                        keybord_fade=0;
+                        joystick_fade=0;
+                    }
+                }
+            }
+            break;
             }
         }
+        if (joystick_fade<100)
+        joystick_fade=joystick_fade*1.1;;
+        if (keybord_fade<100)
+        keybord_fade=keybord_fade*1.1;
+        control_distance=control_distance/1.05;
         button_press++;
         distance_change=distance_change/1.1;
         volume_fade=volume_fade/1.02;
@@ -243,10 +335,24 @@ void setting ()
         draw_image_ex(icon[ind1],distance_change+pos_x[0],30 ,30,40,NONE,100);
         draw_image_ex(icon[ind2],distance_change+pos_x[1]+entre/4+fade/4,30-1.5*entre-1.5*fade ,30-entre/2-fade/2,40-entre/2-fade/2,NONE,100);
         draw_image_ex(icon[ind3],distance_change+pos_x[2],30 ,30,40,NONE,100);
+
+        if (second_menu==1 && ind2==0)
+        {
+            draw_image_ex(screen,30,35.6-volume_fade/3,40,25,NONE,100-volume_fade);
+            draw_image_ex(resolution,30,62.6-volume_fade/3,40,25,NONE,100-volume_fade);
+            draw_text(Verdana,screen_mod,5,50,53-volume_fade/3,CENTER,100);
+            sprintf(res,"%dx%d",Width,Height);
+            draw_text(Verdana,res,5,50,80-volume_fade/3,CENTER,100);
+            draw_image_ex(display_cadre,33,cadre_display_pos[cadre_ind]-3-volume_fade/3,35,12.5,NONE,100-volume_fade);
+
+
+        }
+
+
         if (second_menu==1 && ind2==1)
         {
-            draw_image_ex(Volumes[0],33.5,39.6,35,25-volume_fade,NONE,100-volume_fade);
-            draw_image_ex(Volumes[1],33.5,65.6,35,25-volume_fade,NONE,100-volume_fade);
+            draw_image_ex(Volumes[0],33.5,39.6-volume_fade/3,35,25,NONE,100-volume_fade);
+            draw_image_ex(Volumes[1],33.5,65.6-volume_fade/3,35,25,NONE,100-volume_fade);
 
             for (i=0; i<Nb_point_volume_music; i++)
             {
@@ -256,13 +362,29 @@ void setting ()
             }
         }
 
-        if (second_menu==1 && ind2==0)
-        {
-            draw_image_ex(display[0],33.5,38.6,35,25-volume_fade,NONE,100-volume_fade);
-            draw_image_ex(display[1],33.5,68.6,35,25-volume_fade,NONE,100-volume_fade);
-            draw_image_ex(display_cadre,33.5,cadre_display_pos,35,25-volume_fade,NONE,100-volume_fade);
-        }
 
+        if (second_menu==1 && ind2==2)
+        {
+            if (control_in==0)
+            {
+                draw_image_ex(keybord,33,38.6-volume_fade/3,35,10,NONE,100-volume_fade);
+                draw_image_ex(joystick,33,55.6-volume_fade/3,35,10,NONE,100-volume_fade);
+                draw_image_ex(cadre_control,33,controlpos[control_ind]-volume_fade/3,35,10,NONE,100-volume_fade);
+            }
+            if (control_in==1)
+            {
+
+                draw_image_ex(keybord,33,38.6-volume_fade/3-joystick_fade/10,35,10,NONE,100-volume_fade-keybord_fade);
+                draw_image_ex(joystick,33,55.6-volume_fade/3-keybord_fade/3.8,35,10,NONE,100-volume_fade-joystick_fade);
+                draw_image_ex(cadre_control,33,controlpos[control_ind]-volume_fade/3-keybord_fade/3.8-joystick_fade/10,35,10,NONE,100-volume_fade);
+
+            }
+
+            //draw_image_ex(display_cadre,33,cadre_display_pos[cadre_ind]-volume_fade/3,34,12.5,NONE,100-volume_fade);
+            //draw_image_ex(display[0],36.5,38.6,13,7-volume_fade,NONE,100-volume_fade);
+            //draw_image_ex(display[1],51.5,38.6,13,7-volume_fade,NONE,100-volume_fade);
+
+        }
         next_frame();
     }
     fade=1;
@@ -540,7 +662,8 @@ void versus (int intro)
             next_frame();
 
         }
-        if(choix1+choix2==2){
+        if(choix1+choix2==2)
+        {
             while(IsKeyPressed(3,ENTER))
             {
                 rest(1);
@@ -554,10 +677,10 @@ void versus (int intro)
                 choix1=0;
                 choix2=0;
 
-            while(IsKeyPressed(3,RETURN))
-            {
-                rest(1);
-            }
+                while(IsKeyPressed(3,RETURN))
+                {
+                    rest(1);
+                }
             }
 
 
@@ -618,17 +741,21 @@ void versus (int intro)
 
 void ChargerEffetNaturel(IMAGE *effet[100], char chemin[200], int nombreFrame)
 {
-    int i; char tmp[200];
+    int i;
+    char tmp[200];
 
-    for(i=0;i<nombreFrame;i++)
+    for(i=0; i<nombreFrame; i++)
     {
         sprintf(tmp,"%s%.2d.png", chemin, i);
         effet[i]=load_image(tmp);
     }
 
 }
+
 int indice_rain=0;
-void GamePlay(int Player1,int Player2,IMAGE* Map){
+
+void GamePlay(int Player1,int Player2,IMAGE* Map)
+{
     int time =30;
     char texttime[10];
     IMAGE*rain[100],*flies[100],*Map2;
@@ -670,22 +797,25 @@ void GamePlay(int Player1,int Player2,IMAGE* Map){
     voice_start(gameplaysound);
 
     voice_start(fight);
-    while(!IsKeyPressed(3,RETURN)){
+    while(!IsKeyPressed(3,RETURN))
+    {
         draw_image_ex(Map,-1.5,-2,103,104,NONE,100);
         Draw_Salah();
         Draw_Haitham();
 
-        if(FrameCount%60==0){
+        if(FrameCount%60==0)
+        {
             sprintf(texttime,"%d",time);
             time--;
         }
-        if(time<0){
+        if(time<0)
+        {
             break;
         }
 
         draw_image_ex(rain[indice_rain],0,0,100,100,NONE,100);
         if(FrameCount%3==0)
-        indice_rain=(indice_rain+1)%100;
+            indice_rain=(indice_rain+1)%100;
 
         draw_text(Arista,texttime,10,50,5,CENTER_X,95);
         next_frame();
@@ -699,22 +829,25 @@ void GamePlay(int Player1,int Player2,IMAGE* Map){
     voice_start(sarsour);
     voice_start(lotfi);
     voice_start(fight);
-    while(!IsKeyPressed(3,RETURN)){
+    while(!IsKeyPressed(3,RETURN))
+    {
         draw_image_ex(Map2,-1.5,-2,103,104,NONE,100);
         Draw_Salah();
         Draw_Haitham();
 
-        if(FrameCount%60==0){
+        if(FrameCount%60==0)
+        {
             sprintf(texttime,"%d",time);
             time--;
         }
-        if(time<0){
+        if(time<0)
+        {
             break;
         }
 
         draw_image_ex(flies[indice_rain],0,0,100,100,NONE,100);
         if(FrameCount%3==0)
-        indice_rain=(indice_rain+1)%100;
+            indice_rain=(indice_rain+1)%100;
 
         draw_text(Arista,texttime,10,50,5,CENTER_X,95);
         next_frame();

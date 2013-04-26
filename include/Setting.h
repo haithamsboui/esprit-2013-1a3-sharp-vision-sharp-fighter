@@ -10,5 +10,5 @@ int Height;
 int depth;
 
 void LoadSettings();
-
+GFX_MODE_LIST GetResolution();
 #endif // SETTING_H_INCLUDED
