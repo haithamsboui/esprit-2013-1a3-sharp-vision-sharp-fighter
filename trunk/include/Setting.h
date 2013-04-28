@@ -9,6 +9,9 @@ int Width;
 int Height;
 int depth;
 
-void LoadSettings();
+GFX_MODE_LIST * Resolutions;
+int ResolutionIndex;
+
+int LoadSettings();
 GFX_MODE_LIST GetResolution();
 #endif // SETTING_H_INCLUDED

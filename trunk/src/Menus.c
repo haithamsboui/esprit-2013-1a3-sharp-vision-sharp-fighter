@@ -101,8 +101,7 @@ void setting ()
     int ind1=0,ind2=1,ind3=2,pos_x[]= {5,35,65},button_press=0,trans,second_menu=0,Nb_point_volume_music,Nb_point_volume_effect;
     int i,point_pos=0,Button;
     char screen_mod[15],res[10],buttons[50];
-    GFX_MODE_LIST Resolution=GetResolution();
-    int ind_res=0,cadre_ind=0,control_in=0;
+    int cadre_ind=0,control_in=0;
     char *keybord_control[]= {"UP","DOWN","LEFT","RIGHT","ENTRE","RETURN","PUNCH","KICK","FIREBALL","WIND","THUNDER","FREEZE"},*joystick_control[]= {"ENTRE","RETURN","PUNCH","KICK","FIREBALL","WIND","THUNDER","FREEZE"};
     IMAGE *BUTTONS[14];
     Button=AddVoice("Resources/Sounds/button3.wav",1);
@@ -137,8 +136,6 @@ void setting ()
     else
         sprintf (screen_mod,"Windowed");
 
-    Width=Resolution.mode[ind_res].width;
-    Height=Resolution.mode[ind_res].height;
     //Drawing
     while (distance_change>0.1)
     {
@@ -245,17 +242,16 @@ void setting ()
                             sprintf(screen_mod,"Fullscreen");
                         else
                             sprintf(screen_mod,"Windowed");
-                        change_resolution(Fullscreen,Width,Height,depth);
+                        change_resolution(Fullscreen,ResolutionIndex);
                     }
                     if (cadre_ind ==1)
 
                     {
-                        ind_res=(ind_res-1+(Resolution.num_modes))%(Resolution.num_modes);
-                        if (Resolution.mode[ind_res].width==Resolution.mode[ind_res-1].width && Resolution.mode[ind_res].height==Resolution.mode[ind_res-1].height)
-                            ind_res=(ind_res-1+(Resolution.num_modes))%(Resolution.num_modes);
-                        Width=Resolution.mode[ind_res].width;
-                        Height=Resolution.mode[ind_res].height;
-                        change_resolution(Fullscreen,Width,Height,depth);
+                        ResolutionIndex=(ResolutionIndex-1+(Resolutions->num_modes))%(Resolutions->num_modes);
+                        //TODO l'indice peut etre 0, donc indice-1 va etre -1.
+                        //if (Resolutions->mode[ResolutionIndex].width==Resolution.mode[ind_res-1].width && Resolution.mode[ind_res].height==Resolution.mode[ind_res-1].height)
+                        //    ind_res=(ind_res-1+(Resolution.num_modes))%(Resolution.num_modes);
+                        change_resolution(Fullscreen,ResolutionIndex);
                     }
                 }
 
@@ -272,16 +268,15 @@ void setting ()
                         else
                             sprintf(screen_mod,"Windowed");
 
-                        change_resolution(Fullscreen,Width,Height,depth);
+                        change_resolution(Fullscreen,ResolutionIndex);
                     }
                     if (cadre_ind ==1)
                     {
-                        ind_res=(ind_res+1)%Resolution.num_modes;
-                        if (Resolution.mode[ind_res].width==Resolution.mode[ind_res-1].width && Resolution.mode[ind_res].height==Resolution.mode[ind_res-1].height)
-                            ind_res=(ind_res+1)%(Resolution.num_modes);
-                        Width=Resolution.mode[ind_res].width;
-                        Height=Resolution.mode[ind_res].height;
-                        change_resolution(Fullscreen,Width,Height,depth);
+                        ResolutionIndex=(ResolutionIndex+1)%Resolutions->num_modes;
+                        //TODO l'indice peut etre 0, donc indice-1 va etre -1.
+                        //if (Resolution.mode[ind_res].width==Resolution.mode[ind_res-1].width && Resolution.mode[ind_res].height==Resolution.mode[ind_res-1].height)
+                        //    ind_res=(ind_res+1)%(Resolution.num_modes);
+                        change_resolution(Fullscreen,ResolutionIndex);
                     }
                 }
             }

@@ -44,6 +44,7 @@ void SetMusicVolume(int volume)
         voice_set_volume(VoicesMusic[i], Music_volume);
     }
     set_config_int("sound","Music_volume",Music_volume);
+    flush_config_file();
 }
 
 void SetEffectsVolume(int volume)
@@ -54,6 +55,7 @@ void SetEffectsVolume(int volume)
         voice_set_volume(VoicesSfx[i], Effect_volume);
     }
     set_config_int("sound","Effect_volume",Effect_volume);
+    flush_config_file();
 }
 
 //Get Time of sound in seconds
