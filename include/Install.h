@@ -24,7 +24,7 @@ void Ticks();
 int install();
 
 //change graphics mode
-int change_resolution(int fullscreen, int w, int h, int depth);
+int change_resolution(int fullscreen, int ResIndex);
 
 //prepare OpenGL to draw in 2D mode.
 //this should be called after playing a video, drawing in 3D, ect.
