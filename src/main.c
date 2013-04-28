@@ -21,7 +21,6 @@ int main()
 
     voice_start(intro);
     voice_set_playmode(intro, PLAYMODE_LOOP);
-for (i=0;i<50;i++)
 
 
     while (state)
