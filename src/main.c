@@ -6,26 +6,23 @@ int main()
     int i;
     int intro ;
     int state=1,choix=0;
-    GFX_MODE_LIST * gfxlist;
 
-    //intialization
+    GFX_MODE_LIST * gfxlist;
+  //intialization
     if(install())
         return 1;//ERROR
 
-    //Get possible resolutions
-    gfxlist=get_gfx_mode_list(GFX_OPENGL_FULLSCREEN);
-    printf("\nGraphics modes : %d\n",gfxlist->num_modes);
-    for(i=0; i<gfxlist->num_modes; i++)
-    {
-        printf("%dx%dx%d\n",gfxlist->mode[i].width,gfxlist->mode[i].height,gfxlist->mode[i].bpp);
-    }
 
-    intro=AddVoice("Resources/Sounds/intro.wav",0);
+    //Get possible resolutions
+    //setting();
+        intro=AddVoice("Resources/Sounds/intro.wav",0);
     PlayVideo("Resources/Videos/SharpIntro.ogv");
 
 
     voice_start(intro);
     voice_set_playmode(intro, PLAYMODE_LOOP);
+for (i=0;i<50;i++)
+
 
     while (state)
     {
@@ -40,7 +37,7 @@ int main()
 
             break;
         case 2 :
-            setting (gfxlist,Fullscreen);
+            setting ();
             break;
         case 3 :
         {

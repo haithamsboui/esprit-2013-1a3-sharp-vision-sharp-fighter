@@ -1,88 +1,139 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="../include/AudioPlayer.h" open="1" top="0" tabpos="20">
-		<Cursor position="264" topLine="0" />
+	<File name="../include/Setting.h" open="0" top="0" tabpos="23" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../include/Calcul.h" open="0" top="0" tabpos="7">
-		<Cursor position="88" topLine="0" />
+	<File name="../include/includes.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../include/Earth.h" open="1" top="0" tabpos="5">
-		<Cursor position="78" topLine="0" />
+	<File name="../src/Haitham.c" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../include/Graphics.h" open="1" top="0" tabpos="19">
-		<Cursor position="401" topLine="0" />
+	<File name="../src/Graphics.c" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../include/Haitham.h" open="1" top="0" tabpos="15">
-		<Cursor position="208" topLine="0" />
+	<File name="../include/AudioPlayer.h" open="0" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../include/Input.h" open="1" top="0" tabpos="8">
-		<Cursor position="417" topLine="10" />
+	<File name="../src/Setting.c" open="0" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../include/Install.h" open="1" top="0" tabpos="18">
-		<Cursor position="471" topLine="0" />
+	<File name="../src/Calcul.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../include/Menus.h" open="1" top="0" tabpos="12">
-		<Cursor position="143" topLine="0" />
+	<File name="../include/Input.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../include/Salah.h" open="1" top="0" tabpos="3">
-		<Cursor position="77" topLine="0" />
+	<File name="../include/Texture.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../include/Setting.h" open="1" top="0" tabpos="23">
-		<Cursor position="110" topLine="0" />
+	<File name="../include/Textout.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../include/Textout.h" open="1" top="0" tabpos="10">
-		<Cursor position="307" topLine="0" />
+	<File name="../src/Earth.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../include/Texture.h" open="0" top="0" tabpos="3">
-		<Cursor position="155" topLine="0" />
+	<File name="../src/Salah.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../include/apeg.h" open="0" top="0" tabpos="0">
-		<Cursor position="651" topLine="18" />
+	<File name="../src/Textout.c" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../include/includes.h" open="0" top="0" tabpos="5">
-		<Cursor position="249" topLine="0" />
+	<File name="../src/Menus.c" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../src/AudioPlayer.c" open="1" top="1" tabpos="21">
-		<Cursor position="1513" topLine="49" />
+	<File name="../include/Haitham.h" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../src/Calcul.c" open="0" top="0" tabpos="6">
-		<Cursor position="587" topLine="0" />
+	<File name="../include/Menus.h" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../src/Earth.c" open="1" top="0" tabpos="4">
-		<Cursor position="4635" topLine="128" />
+	<File name="../include/Install.h" open="0" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../src/Graphics.c" open="1" top="0" tabpos="13">
-		<Cursor position="351" topLine="0" />
+	<File name="../src/Texture.c" open="0" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../src/Haitham.c" open="1" top="0" tabpos="14">
-		<Cursor position="3415" topLine="132" />
+	<File name="../src/Install.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../src/Input.c" open="1" top="0" tabpos="7">
-		<Cursor position="2543" topLine="108" />
+	<File name="../include/Salah.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../src/Install.c" open="1" top="0" tabpos="6">
-		<Cursor position="144" topLine="0" />
+	<File name="../src/Input.c" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../src/Menus.c" open="1" top="0" tabpos="11">
-		<Cursor position="7257" topLine="180" />
+	<File name="../src/main.c" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../src/Salah.c" open="1" top="0" tabpos="2">
-		<Cursor position="237" topLine="0" />
+	<File name="../include/Earth.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../src/Setting.c" open="1" top="0" tabpos="22">
-		<Cursor position="374" topLine="0" />
+	<File name="../include/Graphics.h" open="0" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../src/Textout.c" open="1" top="0" tabpos="9">
-		<Cursor position="150" topLine="0" />
+	<File name="../src/AudioPlayer.c" open="0" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="380" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../src/Texture.c" open="1" top="0" tabpos="17">
-		<Cursor position="246" topLine="0" />
+	<File name="../include/Calcul.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
-	<File name="../src/VideoPlayer.c" open="1" top="0" tabpos="16">
-		<Cursor position="1428" topLine="0" />
-	</File>
-	<File name="../src/main.c" open="1" top="0" tabpos="1">
-		<Cursor position="489" topLine="9" />
+	<File name="../src/VideoPlayer.c" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
