@@ -148,7 +148,7 @@
 1367181893 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/AudioPlayer.c
 	"includes.h"
 
-1367020540 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/includes.h
+1367194621 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/includes.h
 	<stdlib.h>
 	<stdio.h>
 	<math.h>
@@ -158,6 +158,7 @@
 	<GL/glu.h>
 	<loadpng.h>
 	<FTGL/ftgl.h>
+	"icon.h"
 	"Setting.h"
 	"AudioPlayer.h"
 	"Texture.h"
@@ -294,4 +295,7 @@
 
 1366918417 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Setting.c
 	"includes.h"
+
+1367197635 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/icon.h
+	<allegro.h>
 
