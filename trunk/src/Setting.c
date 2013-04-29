@@ -20,6 +20,7 @@ int LoadSettings(){
     Height=get_config_int("graphics","Height",Height);
     depth=get_config_int("graphics","depth",depth);
     ResolutionIndex=(get_config_int("graphics","ResolutionIndex",ResolutionIndex)%Resolutions->num_modes);
+    return 0;
 }
 
 

@@ -1,27 +1,30 @@
 #include "includes.h"
 
-
 int main()
 {
-    int i;
     int intro ;
     int state=1,choix=0;
 
-    GFX_MODE_LIST * gfxlist;
-  //intialization
+    //intialization
     if(install())
         return 1;//ERROR
+/*
+    int k;
 
+    do{
+    k=readkey();
 
-    //Get possible resolutions
-    //setting();
-        intro=AddVoice("Resources/Sounds/intro.wav",0);
+    printf("%d - %c- %s\n", k>>8, k & 0xFF,scancode_to_name(k>>8));
+
+    fflush(stdout);
+    }
+    while(k!=KEY_ESC);
+*/
     PlayVideo("Resources/Videos/SharpIntro.ogv");
 
-
+    intro=AddVoice("Resources/Sounds/intro.wav",0);
     voice_start(intro);
     voice_set_playmode(intro, PLAYMODE_LOOP);
-
 
     while (state)
     {
@@ -31,21 +34,21 @@ int main()
         {
         case 0 :
             break;
+
         case 1:
             versus(intro);
-
             break;
+
         case 2 :
             setting ();
             break;
+
         case 3 :
-        {
             voice_stop(intro);
             credit();
             voice_start(intro);
+            break;
 
-        }
-        break;
         case 4 :
             state=0;
             break;
@@ -58,3 +61,4 @@ int main()
     return 0;
 }
 END_OF_MAIN()
+

@@ -97,9 +97,9 @@ void mainmenu(int *choix)
 void setting ()
 {
     IMAGE *Volumes[2],*Background,*back_cadre,*icon[3],*select,*volume_point,*display_cadre,*screen,* resolution,*joystick,*keybord,*cadre_control,*cadre_modif,*volume_cadre;
-    float distance_change=100,cadre_display_pos[]= {49.6,76.6},cadre_volume_pos[]= {49.3,75.6},entre=0,fade=1,volume_fade=100,display_fade=100,controlpos[]= {38.6,55.6},control_distance=5,keybord_fade=0,joystick_fade=0,modif_fade=0.1;
+    float distance_change=100,cadre_display_pos[]= {49.6,76.6},cadre_volume_pos[]= {49.3,75.6},entre=0,fade=1,volume_fade=100,controlpos[]= {38.6,55.6},control_distance=5,keybord_fade=0,joystick_fade=0,modif_fade=0.1;
     int ind1=0,ind2=1,ind3=2,pos_x[]= {5,35,65},button_press=0,trans,second_menu=0,Nb_point_volume_music,Nb_point_volume_effect;
-    int i,point_pos=0,Button;
+    int i,Button;
     char screen_mod[15],res[10],buttons[50];
     int cadre_ind=0,control_in=0;
     char *keybord_control[]= {"UP","DOWN","LEFT","RIGHT","ENTRE","RETURN","PUNCH","KICK","FIREBALL","WIND","THUNDER","FREEZE"},*joystick_control[]= {"ENTRE","RETURN","PUNCH","KICK","FIREBALL","WIND","THUNDER","FREEZE"};
@@ -204,11 +204,12 @@ void setting ()
                 volume_fade=100;
                 modif_fade=0.1;
                 cadre_ind=0;
+                while(IsKeyPressed(3,RETURN))
+                {
+                    rest(1);
+                }
             }
-            while(IsKeyPressed(3,RETURN))
-            {
-                rest(1);
-            }
+
             switch(ind2)
             {
             case 0 :
@@ -318,7 +319,7 @@ void setting ()
                     voice_start(Button);
 
                     button_press=0;
-                  if (cadre_ind==0 && Music_volume<255)
+                    if (cadre_ind==0 && Music_volume<255)
                     {
                         Music_volume+=5;
                         SetMusicVolume(Music_volume);
@@ -338,6 +339,23 @@ void setting ()
             break;
             case 2 :
             {
+                if (control_in==1)
+                {
+                    if (IsKeyPressed(3,RETURN) && button_press>10 )
+                    {
+                        voice_start(Button);
+                        control_in=0;
+                        button_press=0;
+                        keybord_fade=0;
+                        joystick_fade=0;
+                        modif_fade=0.1;
+                        while(IsKeyPressed(3,RETURN))
+                        {
+                            rest(1);
+                        }
+                    }
+
+                }
                 if (control_in==0)
                 {
                     if (IsKeyPressed(3,DOWN) && button_press>10)
@@ -366,21 +384,6 @@ void setting ()
                             joystick_fade=10;
                         else
                             keybord_fade=10;
-                    }
-                }
-
-                if (control_in==1)
-                {
-
-                    if (IsKeyPressed(3,PUNCH) && button_press>10 )
-                    {
-                        voice_start(Button);
-
-                        control_in=0;
-                        button_press=0;
-                        keybord_fade=0;
-                        joystick_fade=0;
-                        modif_fade=0.1;
                     }
                 }
             }
@@ -434,8 +437,6 @@ void setting ()
                 draw_image_ex(volume_point,41.3+i*1.5,54.3,1.5,3-volume_fade/4,NONE,100-volume_fade);
             for (i=0; i<Nb_point_volume_effect; i++)
                 draw_image_ex(volume_point,41.3+i*1.5,80.3,1.5,3-volume_fade/4,NONE,100-volume_fade);
-
-
         }
 
 
@@ -522,7 +523,7 @@ void versus (int intro)
     int selectedPers[5]= {1,0,0,0,1},brahim_turn=0,haitham_turn=0,salah_turn=0,mokhtar_turn=0,wassim_turn=0,select_map=0;
     float distance_change1=0,distance_change2=0,fade=1,fade_start=100;
     char direction[100];
-    int choix1=0,choix2=0,select_ind=0,select_pos[]= {4,22,22+18,22+18*2,22+18*3},/*map_pos[]= {6,24,42,60,78}*/distance_change_map=20;
+    int choix1=0,choix2=0,/*map_pos[]= {6,24,42,60,78}*/distance_change_map=20;
     float w;
 
     // Loading caracteres
@@ -950,3 +951,4 @@ void GamePlay(int Player1,int Player2,IMAGE* Map)
     voice_stop(sarsour);
     voice_stop(lotfi);
 }
+
