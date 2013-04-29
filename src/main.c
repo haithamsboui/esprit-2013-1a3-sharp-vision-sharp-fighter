@@ -6,20 +6,10 @@ int main()
     int state=1,choix=0;
 
     //intialization
+
     if(install())
         return 1;//ERROR
-/*
-    int k;
 
-    do{
-    k=readkey();
-
-    printf("%d - %c- %s\n", k>>8, k & 0xFF,scancode_to_name(k>>8));
-
-    fflush(stdout);
-    }
-    while(k!=KEY_ESC);
-*/
     PlayVideo("Resources/Videos/SharpIntro.ogv");
 
     intro=AddVoice("Resources/Sounds/intro.wav",0);
