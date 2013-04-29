@@ -99,11 +99,11 @@ void setting ()
     IMAGE *Volumes[2],*Background,*back_cadre,*icon[3],*select,*volume_point,*display_cadre,*screen,* resolution,*joystick,*keybord,*cadre_control,*cadre_modif,*volume_cadre;
     float distance_change=100,cadre_display_pos[]= {49.6,76.6},cadre_volume_pos[]= {49.3,75.6},entre=0,fade=1,volume_fade=100,controlpos[]= {38.6,55.6},control_distance=5,keybord_fade=0,joystick_fade=0,modif_fade=0.1;
     int ind1=0,ind2=1,ind3=2,pos_x[]= {5,35,65},button_press=0,trans,second_menu=0,Nb_point_volume_music,Nb_point_volume_effect;
-    int i,Button;
+    int i,Button,TempKeyRead=0,KeyExist=0;
     char screen_mod[15],res[10],buttons[50];
-    int cadre_ind=0,control_in=0;
+    int cadre_ind=0,control_in=0,key_modif=0,keys[]= {UP,DOWN,LEFT,RIGHT,ENTER,RETURN,PUNCH,KICK,UP,UP,UP,UP};
     char *keybord_control[]= {"UP","DOWN","LEFT","RIGHT","ENTRE","RETURN","PUNCH","KICK","FIREBALL","WIND","THUNDER","FREEZE"},*joystick_control[]= {"ENTRE","RETURN","PUNCH","KICK","FIREBALL","WIND","THUNDER","FREEZE"};
-    IMAGE *BUTTONS[14];
+    IMAGE *BUTTONS[14],*keybord_modif;
     Button=AddVoice("Resources/Sounds/button3.wav",1);
 
     //Loading;
@@ -112,6 +112,8 @@ void setting ()
         sprintf(buttons,"Resources/Images/Buttons/%d.png",i);
         BUTTONS[i]=load_image(buttons);
     }
+    keybord_modif=load_image("Resources/Images/setting/select_modif_control.png");
+
     volume_cadre=load_image("Resources/Images/setting/Volume_cadre.png");
     cadre_control=load_image("Resources/Images/setting/cadre_control.png");
     screen=load_image("Resources/Images/setting/screen.png");
@@ -187,6 +189,7 @@ void setting ()
                 button_press=0;
                 second_menu=1;
                 fade=0;
+
             }
         }
 
@@ -250,8 +253,9 @@ void setting ()
                     {
                         ResolutionIndex=(ResolutionIndex-1+(Resolutions->num_modes))%(Resolutions->num_modes);
                         //TODO l'indice peut etre 0, donc indice-1 va etre -1.
-                        //if (Resolutions->mode[ResolutionIndex].width==Resolution.mode[ind_res-1].width && Resolution.mode[ind_res].height==Resolution.mode[ind_res-1].height)
-                        //    ind_res=(ind_res-1+(Resolution.num_modes))%(Resolution.num_modes);
+                        if (Resolutions->mode[ResolutionIndex].width == Resolutions->mode[(ResolutionIndex+1)%Resolutions->num_modes].width && Resolutions->mode[ResolutionIndex].height==Resolutions->mode[(ResolutionIndex+1)%Resolutions->num_modes].height)
+                            ResolutionIndex=(ResolutionIndex-1+Resolutions->num_modes)%(Resolutions->num_modes);
+
                         change_resolution(Fullscreen,ResolutionIndex);
                     }
                 }
@@ -274,9 +278,8 @@ void setting ()
                     if (cadre_ind ==1)
                     {
                         ResolutionIndex=(ResolutionIndex+1)%Resolutions->num_modes;
-                        //TODO l'indice peut etre 0, donc indice-1 va etre -1.
-                        //if (Resolution.mode[ind_res].width==Resolution.mode[ind_res-1].width && Resolution.mode[ind_res].height==Resolution.mode[ind_res-1].height)
-                        //    ind_res=(ind_res+1)%(Resolution.num_modes);
+                        if (Resolutions->mode[ResolutionIndex].width == Resolutions->mode[(ResolutionIndex-1+Resolutions->num_modes)%Resolutions->num_modes].width && Resolutions->mode[ResolutionIndex].height==Resolutions->mode[(ResolutionIndex-1+Resolutions->num_modes)%Resolutions->num_modes].height)
+                            ResolutionIndex=(ResolutionIndex+1)%(Resolutions->num_modes);
                         change_resolution(Fullscreen,ResolutionIndex);
                     }
                 }
@@ -349,151 +352,185 @@ void setting ()
                         keybord_fade=0;
                         joystick_fade=0;
                         modif_fade=0.1;
+                        key_modif=0;
                         while(IsKeyPressed(3,RETURN))
                         {
                             rest(1);
                         }
                     }
 
+                    if (IsKeyPressed(1,ENTER) && button_press>10 && cadre_ind==0)
+                    {
+                        clear_keybuf();
+                        Player1Keyboard[keys[key_modif]]=readkey()>>8;
+                        //Todo Key existance verification
+                        /*TempKeyRead=readkey()>>8;
+                        for (i=0;i<12;i++)
+                        {
+                            if (TempKeyRead==Player1Keyboard[keys[i]])
+                        {
+                             KeyExist=1;
+                        break;
+                        }
+                    }
+                    if (!KeyExist)
+                        Player1Keyboard[keys[key_modif]]=TempKeyRead;
+                    KeyExist=0;
+                    */button_press=0;
                 }
-                if (control_in==0)
+
+                if (IsKeyPressed(1,UP) && button_press>10 && cadre_ind==0)
                 {
-                    if (IsKeyPressed(3,DOWN) && button_press>10)
-                    {
-                        voice_start(Button);
-
-                        button_press=0;
-                        cadre_ind=(cadre_ind+1)%2;
-                    }
-
-                    if (IsKeyPressed(3,UP) && button_press>10)
-                    {
-                        voice_start(Button);
-
-                        button_press=0;
-                        cadre_ind=(cadre_ind+1)%2;
-                    }
-
-                    if (IsKeyPressed(3,ENTER) && button_press>10 && control_in == 0)
-                    {
-                        voice_start(Button);
-
-                        button_press=0;
-                        control_in=1;
-                        if (cadre_ind==0)
-                            joystick_fade=10;
-                        else
-                            keybord_fade=10;
-                    }
+                    button_press=0;
+                    key_modif=(key_modif-1+12)%12;
                 }
+
+                if (IsKeyPressed(1,DOWN) && button_press>10 && cadre_ind==0)
+                {
+                    button_press=0;
+                    key_modif=(key_modif+1)%12;
+                }
+
+
             }
-            break;
-            }
-        }
-        if (modif_fade<100)
-            modif_fade=modif_fade*1.05;
-
-        if (joystick_fade<100)
-            joystick_fade=joystick_fade*1.1;
-
-        if (keybord_fade<100)
-            keybord_fade=keybord_fade*1.1;
-
-        control_distance=control_distance/1.05;
-        button_press++;
-        distance_change=distance_change/1.1;
-        volume_fade=volume_fade/1.02;
-
-        if(entre<20 )
-            entre=entre*1.05;
-        if( fade>0 )
-            fade=fade/1.1;
-
-        draw_image_ex(Background,0,0,100,100,NONE,100);
-        draw_image_ex(back_cadre,0,2,100,100,NONE,100);
-        draw_image_ex(select,pos_x[0]+31-entre/5,30-entre/3,27+entre/2,40+1.9*entre,NONE,100-3*distance_change);
-        draw_image_ex(icon[ind1],distance_change+pos_x[0],30 ,30,40,NONE,100);
-        draw_image_ex(icon[ind2],distance_change+pos_x[1]+entre/4+fade/4,30-1.5*entre-1.5*fade ,30-entre/2-fade/2,40-entre/2-fade/2,NONE,100);
-        draw_image_ex(icon[ind3],distance_change+pos_x[2],30 ,30,40,NONE,100);
-
-        if (second_menu==1 && ind2==0)
-        {
-            draw_image_ex(screen,30,35.6-volume_fade/3,40,25,NONE,100-volume_fade);
-            draw_image_ex(resolution,30,62.6-volume_fade/3,40,25,NONE,100-volume_fade);
-            draw_text(Verdana,screen_mod,5,50,53-volume_fade/3,CENTER,100);
-            sprintf(res,"%dx%d",Width,Height);
-            draw_text(Verdana,res,5,50,80-volume_fade/3,CENTER,100);
-            draw_image_ex(display_cadre,33,cadre_display_pos[cadre_ind]-3-volume_fade/3,35,12.5,NONE,100-volume_fade);
-        }
-
-        if (second_menu==1 && ind2==1)
-        {
-            draw_image_ex(Volumes[0],33.5,39.6-volume_fade/3,35,25,NONE,100-volume_fade);
-            draw_image_ex(Volumes[1],33.5,65.6-volume_fade/3,35,25,NONE,100-volume_fade);
-            draw_image_ex(volume_cadre,35.3,cadre_volume_pos[cadre_ind]-0.3-volume_fade/3,31.7,13.5,NONE,100-volume_fade);
-
-            for (i=0; i<Nb_point_volume_music; i++)
-
-                draw_image_ex(volume_point,41.3+i*1.5,54.3,1.5,3-volume_fade/4,NONE,100-volume_fade);
-            for (i=0; i<Nb_point_volume_effect; i++)
-                draw_image_ex(volume_point,41.3+i*1.5,80.3,1.5,3-volume_fade/4,NONE,100-volume_fade);
-        }
-
-
-        if (second_menu==1 && ind2==2)
-        {
             if (control_in==0)
             {
-                draw_image_ex(keybord,33,38.6-volume_fade/3,35,10,NONE,100-volume_fade);
-                draw_image_ex(joystick,33,55.6-volume_fade/3,35,10,NONE,100-volume_fade);
-                draw_image_ex(cadre_control,33,controlpos[cadre_ind]-volume_fade/3,35,10,NONE,100-volume_fade);
-            }
-            if (control_in==1)
-            {
-
-                draw_image_ex(keybord,33,38.6-volume_fade/3-joystick_fade/10,35,10,NONE,100-volume_fade-keybord_fade);
-                draw_image_ex(joystick,33,55.6-volume_fade/3-keybord_fade/3.8,35,10,NONE,100-volume_fade-joystick_fade);
-                draw_image_ex(cadre_control,33,controlpos[cadre_ind]-volume_fade/3-keybord_fade/3.8-joystick_fade/10,35,10,NONE,100-volume_fade);
-                draw_image_ex(cadre_modif,33,35.5,35,modif_fade/1.57,NONE,modif_fade);
-                switch (cadre_ind)
+                if (IsKeyPressed(3,DOWN) && button_press>10)
                 {
-                case 0:
-                    for (i=0; i<12; i++)
-                        draw_text(Verdana,keybord_control[i],3.5,40,45+4.5*i,CENTER,modif_fade);
-                    draw_text(Verdana,scancode_to_name(Player1Keyboard[UP]),3.5,60,45,CENTER,modif_fade);
-                    draw_text(Verdana,scancode_to_name(Player1Keyboard[DOWN]),3.5,60,49.5,CENTER,modif_fade);
-                    draw_text(Verdana,scancode_to_name(Player1Keyboard[LEFT]),3.5,60,54,CENTER,modif_fade);
-                    draw_text(Verdana,scancode_to_name(Player1Keyboard[RIGHT]),3.5,60,58.5,CENTER,modif_fade);
-                    draw_text(Verdana,scancode_to_name(Player1Keyboard[ENTER]),3.5,60,63,CENTER,modif_fade);
-                    draw_text(Verdana,scancode_to_name(Player1Keyboard[RETURN]),3.5,60,67.5,CENTER,modif_fade);
-                    draw_text(Verdana,scancode_to_name(Player1Keyboard[PUNCH]),3.5,60,72,CENTER,modif_fade);
-                    draw_text(Verdana,scancode_to_name(Player1Keyboard[KICK]),3.5,60,76.5,CENTER,modif_fade);
-                    break;
-                case 1 :
-                    for (i=0; i<8; i++)
-                    {
-                        draw_text(Verdana,joystick_control[i],3.5,40,45+6.5*i,CENTER,modif_fade);
-                        draw_image_ex(BUTTONS[i],60,43+6.5*i,4,4,NONE,modif_fade);
-                    }
-                    break;
+                    voice_start(Button);
+
+                    button_press=0;
+                    cadre_ind=(cadre_ind+1)%2;
+                }
+
+                if (IsKeyPressed(3,UP) && button_press>10)
+                {
+                    voice_start(Button);
+
+                    button_press=0;
+                    cadre_ind=(cadre_ind+1)%2;
+                }
+
+                if (IsKeyPressed(3,ENTER) && button_press>10 && control_in == 0)
+                {
+                    voice_start(Button);
+
+                    button_press=0;
+                    control_in=1;
+                    if (cadre_ind==0)
+                        joystick_fade=10;
+                    else
+                        keybord_fade=10;
                 }
             }
-
+            }
+            break;
         }
-        next_frame();
     }
-    fade=1;
-    while (fade<100)
+    if (modif_fade<100 )
+        modif_fade=modif_fade*1.1;
+
+    if (joystick_fade<100)
+        joystick_fade=joystick_fade*1.4;
+
+    if (keybord_fade<100)
+        keybord_fade=keybord_fade*1.1;
+
+    control_distance=control_distance/1.05;
+    button_press++;
+    distance_change=distance_change/1.1;
+    volume_fade=volume_fade/1.02;
+
+    if(entre<20 )
+        entre=entre*1.05;
+    if( fade>0 )
+        fade=fade/1.1;
+
+    draw_image_ex(Background,0,0,100,100,NONE,100);
+    draw_image_ex(back_cadre,0,2,100,100,NONE,100);
+    draw_image_ex(select,pos_x[0]+31-entre/5,30-entre/3,27+entre/2,40+1.9*entre,NONE,100-3*distance_change);
+    draw_image_ex(icon[ind1],distance_change+pos_x[0],30 ,30,40,NONE,100);
+    draw_image_ex(icon[ind2],distance_change+pos_x[1]+entre/4+fade/4,30-1.5*entre-1.5*fade ,30-entre/2-fade/2,40-entre/2-fade/2,NONE,100);
+    draw_image_ex(icon[ind3],distance_change+pos_x[2],30 ,30,40,NONE,100);
+
+    if (second_menu==1 && ind2==0)
     {
-        fade=fade*1.1;
-        draw_image_ex(Background,0,0,100,100,NONE,100);
-        draw_image_ex(back_cadre,0,2,100,100,NONE,100-fade);
-        draw_image_ex(select,pos_x[0]+31-entre/5,30-entre/3,27+entre/2,40+1.9*entre,NONE,100-fade);
-        draw_image_ex(icon[ind1],distance_change+pos_x[0],30 ,30,40,NONE,100-fade);
-        draw_image_ex(icon[ind2],distance_change+pos_x[1],30 ,30,40,NONE,100-fade);
-        draw_image_ex(icon[ind3],distance_change+pos_x[2],30 ,30,40,NONE,100-fade);
-        next_frame();
+        draw_image_ex(screen,30,35.6-volume_fade/3,40,25,NONE,100-volume_fade);
+        draw_image_ex(resolution,30,62.6-volume_fade/3,40,25,NONE,100-volume_fade);
+        draw_text(Verdana,screen_mod,5,50,53-volume_fade/3,CENTER,100);
+        sprintf(res,"%dx%d",Width,Height);
+        draw_text(Verdana,res,5,50,80-volume_fade/3,CENTER,100);
+        draw_image_ex(display_cadre,33,cadre_display_pos[cadre_ind]-3-volume_fade/3,35,12.5,NONE,100-volume_fade);
     }
+
+    if (second_menu==1 && ind2==1)
+    {
+        draw_image_ex(Volumes[0],33.5,39.6-volume_fade/3,35,25,NONE,100-volume_fade);
+        draw_image_ex(Volumes[1],33.5,65.6-volume_fade/3,35,25,NONE,100-volume_fade);
+        draw_image_ex(volume_cadre,35.3,cadre_volume_pos[cadre_ind]-0.3-volume_fade/3,31.7,13.5,NONE,100-volume_fade);
+
+        for (i=0; i<Nb_point_volume_music; i++)
+
+            draw_image_ex(volume_point,41.3+i*1.5,54.3,1.5,3-volume_fade/4,NONE,100-volume_fade);
+        for (i=0; i<Nb_point_volume_effect; i++)
+            draw_image_ex(volume_point,41.3+i*1.5,80.3,1.5,3-volume_fade/4,NONE,100-volume_fade);
+    }
+
+
+    if (second_menu==1 && ind2==2)
+    {
+        if (control_in==0)
+        {
+            draw_image_ex(keybord,33,38.6-volume_fade/3,35,10,NONE,100-volume_fade);
+            draw_image_ex(joystick,33,55.6-volume_fade/3,35,10,NONE,100-volume_fade);
+            draw_image_ex(cadre_control,33,controlpos[cadre_ind]-volume_fade/3,35,10,NONE,100-volume_fade);
+        }
+        if (control_in==1)
+        {
+
+            draw_image_ex(keybord,33,38.6-volume_fade/3-joystick_fade/10,35,10,NONE,100-volume_fade-keybord_fade);
+            draw_image_ex(joystick,33,55.6-volume_fade/3-keybord_fade/3.8,35,10,NONE,100-volume_fade-joystick_fade);
+            draw_image_ex(cadre_control,33,controlpos[cadre_ind]-volume_fade/3-keybord_fade/3.8-joystick_fade/10,35,10,NONE,100-volume_fade);
+            draw_image_ex(cadre_modif,33,35.5,35,modif_fade/1.57,NONE,modif_fade);
+            switch (cadre_ind)
+            {
+            case 0:
+
+
+                for (i=0; i<12; i++)
+             {
+
+                 draw_text(Verdana,keybord_control[i],3.5,40,45+4.5*i,CENTER,modif_fade);
+                draw_text(Verdana,scancode_to_name(Player1Keyboard[keys[i]]),3.5,60,45+i*4.5,CENTER,modif_fade);
+            }
+                draw_image_ex(keybord_modif,35,42.5+key_modif*4.5,31,5,NONE,modif_fade);
+
+                break;
+            case 1 :
+                for (i=0; i<8; i++)
+                {
+                    draw_text(Verdana,joystick_control[i],3.5,40,45+6.5*i,CENTER,modif_fade);
+                    draw_image_ex(BUTTONS[i],60,43+6.5*i,4,4,NONE,modif_fade);
+                }
+                break;
+            }
+        }
+
+    }
+    next_frame();
+}
+fade=1;
+while (fade<100)
+{
+    fade=fade*1.1;
+    draw_image_ex(Background,0,0,100,100,NONE,100);
+    draw_image_ex(back_cadre,0,2,100,100,NONE,100-fade);
+    draw_image_ex(select,pos_x[0]+31-entre/5,30-entre/3,27+entre/2,40+1.9*entre,NONE,100-fade);
+    draw_image_ex(icon[ind1],distance_change+pos_x[0],30 ,30,40,NONE,100-fade);
+    draw_image_ex(icon[ind2],distance_change+pos_x[1],30 ,30,40,NONE,100-fade);
+    draw_image_ex(icon[ind3],distance_change+pos_x[2],30 ,30,40,NONE,100-fade);
+    next_frame();
+}
 
 }
 
@@ -850,7 +887,7 @@ void ChargerEffetNaturel(IMAGE *effet[100], char chemin[200], int nombreFrame)
 
 int indice_rain=0;
 
-void GamePlay(int Player1,int Player2,IMAGE* Map)
+                void GamePlay(int Player1,int Player2,IMAGE* Map)
 {
     int time =30;
     char texttime[10];

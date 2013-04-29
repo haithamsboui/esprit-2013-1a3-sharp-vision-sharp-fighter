@@ -65,10 +65,10 @@
 1364910483 source:/home/ibicha/Desktop/SharpFighters/src/main.c
 	"includes.h"
 
-1366983580 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/AudioPlayer.c
+1367183801 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/AudioPlayer.c
 	"includes.h"
 
-1366983576 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/includes.h
+1367232180 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/includes.h
 	<stdlib.h>
 	<stdio.h>
 	<math.h>
@@ -78,6 +78,7 @@
 	<GL/glu.h>
 	<loadpng.h>
 	<FTGL/ftgl.h>
+	"icon.h"
 	"Setting.h"
 	"AudioPlayer.h"
 	"Texture.h"
@@ -109,7 +110,7 @@
 1366983576 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Input.h
 	"includes.h"
 
-1366983576 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Install.h
+1367193213 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Install.h
 	"includes.h"
 
 1366983576 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/VideoPlayer.h
@@ -130,10 +131,10 @@
 1366983580 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Input.c
 	"includes.h"
 
-1366983580 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Install.c
+1367183801 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Install.c
 	"includes.h"
 
-1366989419 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Menus.c
+1367277465 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Menus.c
 	"includes.h"
 
 1366983580 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Texture.c
@@ -142,7 +143,7 @@
 1366983580 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/VideoPlayer.c
 	"includes.h"
 
-1366983580 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/main.c
+1367277465 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/main.c
 	"includes.h"
 
 1367181893 source:/home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/AudioPlayer.c
@@ -273,7 +274,7 @@
 
 1367180543 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Setting.h
 
-1366839124 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Setting.h
+1367193213 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Setting.h
 
 1366983576 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Collision.h
 	"includes.h"
@@ -293,9 +294,12 @@
 1366983580 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Salah.c
 	"includes.h"
 
-1366918417 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Setting.c
+1367232180 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Setting.c
 	"includes.h"
 
 1367197635 /home/ibicha/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/icon.h
+	<allegro.h>
+
+1367232180 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/icon.h
 	<allegro.h>
 
