@@ -62,6 +62,7 @@
 		<Unit filename="../include/Texture.h" />
 		<Unit filename="../include/VideoPlayer.h" />
 		<Unit filename="../include/apeg.h" />
+		<Unit filename="../include/icon.h" />
 		<Unit filename="../include/includes.h" />
 		<Unit filename="../src/AudioPlayer.c">
 			<Option compilerVar="CC" />

@@ -12,6 +12,7 @@
 #include <loadpng.h>
 #include <FTGL/ftgl.h>
 
+#include "icon.h"
 #include "Setting.h"
 #include "AudioPlayer.h"
 #include "Texture.h"

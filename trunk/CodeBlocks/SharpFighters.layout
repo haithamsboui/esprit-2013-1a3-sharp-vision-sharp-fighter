@@ -5,7 +5,7 @@
 		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="../include/Calcul.h" open="0" top="0" tabpos="7">
-		<Cursor position="0" topLine="0" />
+		<Cursor position="447" topLine="0" />
 	</File>
 	<File name="../include/Earth.h" open="0" top="0" tabpos="5">
 		<Cursor position="0" topLine="0" />
@@ -19,7 +19,7 @@
 	<File name="../include/Input.h" open="0" top="0" tabpos="8">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../include/Install.h" open="1" top="0" tabpos="4">
+	<File name="../include/Install.h" open="0" top="0" tabpos="4">
 		<Cursor position="521" topLine="0" />
 	</File>
 	<File name="../include/Menus.h" open="0" top="0" tabpos="12">
@@ -28,7 +28,7 @@
 	<File name="../include/Salah.h" open="0" top="0" tabpos="3">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../include/Setting.h" open="1" top="0" tabpos="3">
+	<File name="../include/Setting.h" open="0" top="0" tabpos="3">
 		<Cursor position="191" topLine="0" />
 	</File>
 	<File name="../include/Textout.h" open="0" top="0" tabpos="10">
@@ -37,10 +37,13 @@
 	<File name="../include/Texture.h" open="0" top="0" tabpos="3">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../include/includes.h" open="1" top="0" tabpos="6">
-		<Cursor position="272" topLine="0" />
+	<File name="../include/icon.h" open="0" top="0" tabpos="0">
+		<Cursor position="221406" topLine="6373" />
 	</File>
-	<File name="../src/AudioPlayer.c" open="1" top="0" tabpos="7">
+	<File name="../include/includes.h" open="0" top="0" tabpos="6">
+		<Cursor position="429" topLine="3" />
+	</File>
+	<File name="../src/AudioPlayer.c" open="0" top="0" tabpos="7">
 		<Cursor position="1295" topLine="43" />
 	</File>
 	<File name="../src/Calcul.c" open="0" top="0" tabpos="6">
@@ -58,16 +61,16 @@
 	<File name="../src/Input.c" open="0" top="0" tabpos="7">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../src/Install.c" open="1" top="1" tabpos="5">
-		<Cursor position="1248" topLine="45" />
+	<File name="../src/Install.c" open="0" top="0" tabpos="5">
+		<Cursor position="960" topLine="0" />
 	</File>
-	<File name="../src/Menus.c" open="1" top="0" tabpos="1">
+	<File name="../src/Menus.c" open="0" top="0" tabpos="1">
 		<Cursor position="9138" topLine="136" />
 	</File>
 	<File name="../src/Salah.c" open="0" top="0" tabpos="2">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../src/Setting.c" open="1" top="0" tabpos="2">
+	<File name="../src/Setting.c" open="0" top="0" tabpos="2">
 		<Cursor position="200" topLine="0" />
 	</File>
 	<File name="../src/Textout.c" open="0" top="0" tabpos="9">
