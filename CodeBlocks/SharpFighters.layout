@@ -16,8 +16,8 @@
 	<File name="../include/Haitham.h" open="0" top="0" tabpos="15">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../include/Input.h" open="0" top="0" tabpos="8">
-		<Cursor position="595" topLine="16" />
+	<File name="../include/Input.h" open="1" top="0" tabpos="5">
+		<Cursor position="406" topLine="0" />
 	</File>
 	<File name="../include/Install.h" open="0" top="0" tabpos="4">
 		<Cursor position="521" topLine="0" />
@@ -58,19 +58,19 @@
 	<File name="../src/Haitham.c" open="0" top="0" tabpos="14">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../src/Input.c" open="0" top="0" tabpos="7">
-		<Cursor position="448" topLine="0" />
+	<File name="../src/Input.c" open="1" top="0" tabpos="4">
+		<Cursor position="22" topLine="0" />
 	</File>
-	<File name="../src/Install.c" open="1" top="0" tabpos="1">
+	<File name="../src/Install.c" open="0" top="0" tabpos="1">
 		<Cursor position="989" topLine="30" />
 	</File>
-	<File name="../src/Menus.c" open="1" top="1" tabpos="4">
-		<Cursor position="15876" topLine="419" />
+	<File name="../src/Menus.c" open="1" top="1" tabpos="3">
+		<Cursor position="13767" topLine="424" />
 	</File>
 	<File name="../src/Salah.c" open="0" top="0" tabpos="2">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../src/Setting.c" open="1" top="0" tabpos="2">
+	<File name="../src/Setting.c" open="1" top="0" tabpos="1">
 		<Cursor position="719" topLine="0" />
 	</File>
 	<File name="../src/Textout.c" open="0" top="0" tabpos="9">
@@ -82,7 +82,7 @@
 	<File name="../src/VideoPlayer.c" open="0" top="0" tabpos="16">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../src/main.c" open="1" top="0" tabpos="3">
+	<File name="../src/main.c" open="1" top="0" tabpos="2">
 		<Cursor position="852" topLine="26" />
 	</File>
 </CodeBlocks_layout_file>

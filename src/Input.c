@@ -19,6 +19,10 @@ void LoadInput()
     Player1Keyboard[RETURN]=KEY_ESC;
     Player1Keyboard[PUNCH]=KEY_W;
     Player1Keyboard[KICK]=KEY_X;
+    Player1Keyboard[FIREBALL]=KEY_Q;
+        Player1Keyboard[THUNDER]=KEY_S;
+            Player1Keyboard[WIND]=KEY_D;
+                Player1Keyboard[FREEZE]=KEY_F;
 
 
     Player2Joystick[ENTER].JoyNumber=0;
