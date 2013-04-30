@@ -23,6 +23,9 @@ typedef struct {
 
 int Player1Keyboard[12];
 int Player2Keyboard[12];
+int Player1Joypad[12];
+int Player2Joypad[12];
+
 JoyButton Player1Joystick[12];
 JoyButton Player2Joystick[12];
 JoyAxe Player1JoyAxes[12];

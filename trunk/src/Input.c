@@ -4,6 +4,9 @@ int JoyStickEnabled=0;
 
 int Player1Keyboard[12];
 int Player2Keyboard[12];
+int Player1Joypad[12];
+int Player2Joypad[12];
+
 JoyButton Player1Joystick[12];
 JoyButton Player2Joystick[12];
 JoyAxe Player1JoyAxes[12];
@@ -11,50 +14,58 @@ JoyAxe Player2JoyAxes[12];
 
 void LoadInput()
 {
-    Player1Keyboard[UP]=KEY_UP;
-    Player1Keyboard[DOWN]=KEY_DOWN;
-    Player1Keyboard[LEFT]=KEY_LEFT;
-    Player1Keyboard[RIGHT]=KEY_RIGHT;
-    Player1Keyboard[ENTER]=KEY_ENTER;
-    Player1Keyboard[RETURN]=KEY_ESC;
-    Player1Keyboard[PUNCH]=KEY_W;
-    Player1Keyboard[KICK]=KEY_X;
-    Player1Keyboard[FIREBALL]=KEY_Q;
-        Player1Keyboard[THUNDER]=KEY_S;
-            Player1Keyboard[WIND]=KEY_D;
-                Player1Keyboard[FREEZE]=KEY_F;
+    int i,defaultkeyboardP1[]= {KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT,KEY_W,KEY_X,KEY_Q,KEY_F,KEY_S,KEY_D,KEY_ENTER,KEY_ESC},
+                               defaultjoybuttonP2[]= {0,0,0,0,2,3,4,5,6,7,9,8} ;
+    char buffer[50];
+    for (i=0; i<12; i++)
+    {
+        sprintf(buffer,"Player1Keyboard[%d]",i);
+        Player1Keyboard[i]=get_config_int("input",buffer,defaultkeyboardP1[i]);
 
+        if(JoyStickEnabled)
+        {
+            sprintf(buffer,"Player2Joystick[%d].InUse",i);
+            Player2Joystick[i].InUse=get_config_int("input",buffer,0);
 
-    Player2Joystick[ENTER].JoyNumber=0;
-    Player2Joystick[RETURN].JoyNumber=0;
-    Player2Joystick[PUNCH].JoyNumber=0;
-    Player2Joystick[KICK].JoyNumber=0;
+            sprintf(buffer,"Player2Joystick[%d].JoyNumber",i);
+            Player2Joystick[i].JoyNumber=get_config_int("input",buffer,0);
 
-    Player2Joystick[ENTER].InUse=1;
-    Player2Joystick[RETURN].InUse=1;
-    Player2Joystick[PUNCH].InUse=1;
-    Player2Joystick[KICK].InUse=1;
+            sprintf(buffer,"Player2Joystick[%d].ButtonNumber",i);
+            Player2Joystick[i].ButtonNumber=get_config_int("input",buffer,defaultjoybuttonP2[i]);
 
-    Player2Joystick[ENTER].ButtonNumber=9;
-    Player2Joystick[RETURN].ButtonNumber=8;
-    Player2Joystick[PUNCH].ButtonNumber=2;
-    Player2Joystick[KICK].ButtonNumber=3;
+            sprintf(buffer,"Player2JoyAxes[%d].InUse",i);
+            Player2JoyAxes[i].InUse=get_config_int("input",buffer,0);
 
-    Player2JoyAxes[UP].InUse=1;
-    Player2JoyAxes[DOWN].InUse=1;
-    Player2JoyAxes[LEFT].InUse=1;
-    Player2JoyAxes[RIGHT].InUse=1;
+            sprintf(buffer,"Player2JoyAxes[%d].JoyNumber",i);
+            Player2JoyAxes[i].JoyNumber=get_config_int("input",buffer,0);
 
-    Player2JoyAxes[UP].StickNumber=0;
-    Player2JoyAxes[DOWN].StickNumber=0;
-    Player2JoyAxes[LEFT].StickNumber=0;
-    Player2JoyAxes[RIGHT].StickNumber=0;
+            sprintf(buffer,"Player2JoyAxes[%d].StickNumber",i);
+            Player2JoyAxes[i].StickNumber=get_config_int("input",buffer,0);
 
-    Player2JoyAxes[UP].direction=UP;
-    Player2JoyAxes[DOWN].direction=DOWN;
-    Player2JoyAxes[LEFT].direction=LEFT;
-    Player2JoyAxes[RIGHT].direction=RIGHT;
+            sprintf(buffer,"Player2JoyAxes[%d].direction",i);
+            Player2JoyAxes[i].direction=get_config_int("input",buffer,0);
+        }
+    }
 
+    for(i=0; i<12; i++)
+    {
+        if(Player1Joystick[i].InUse)
+        {
+            Player1Joypad[i]=Player1Joystick[i].ButtonNumber;
+        }
+        if(Player1JoyAxes[i].InUse)
+        {
+            Player1Joypad[i]=10 + Player1JoyAxes[i].direction;
+        }
+        if(Player2Joystick[i].InUse)
+        {
+            Player2Joypad[i]=Player2Joystick[i].ButtonNumber;
+        }
+        if(Player2JoyAxes[i].InUse)
+        {
+            Player2Joypad[i]=10 + Player2JoyAxes[i].direction;
+        }
+    }
 }
 
 int IsKeyPressed(int player, ACTIONS action)
@@ -120,16 +131,22 @@ void ProcessKeys()
 
 int ReadKeyboard(int player, ACTIONS action)
 {
+    char buffer[50];
     switch(player)
     {
     case 1:
-        Player1Keyboard[action]=readkey();
+        Player1Keyboard[action]=readkey()>>8;
+        printf(buffer,"Player1Keyboard[%d]",action);
+        set_config_int("input",buffer,Player1Keyboard[action]);
         break;
 
     case 2:
-        Player2Keyboard[action]=readkey();
+        Player2Keyboard[action]=readkey()>>8;
+        printf(buffer,"Player2Keyboard[%d]",action);
+        set_config_int("input",buffer,Player2Keyboard[action]);
         break;
     }
+    flush_config_file();
     return 1;
 }
 
@@ -138,6 +155,7 @@ int ReadJoystick(int player, ACTIONS action)
     int i,j,JoyPressed=0,StickMoved=0;
     JoyButton button;
     JoyAxe axe;
+    char buffer[50];
 
     if(!JoyStickEnabled)
         return 0;
@@ -194,12 +212,77 @@ int ReadJoystick(int player, ACTIONS action)
     switch(player)
     {
     case 1:
-        Player1Joystick[action]=button;
+        if(JoyPressed)
+        {
+            sprintf(buffer,"Player1Joystick[%d].InUse",action);
+            set_config_int("input",buffer,0);
+
+            Player1Joystick[action]=button;
+            Player1Joypad[action]=button.ButtonNumber;
+
+            sprintf(buffer,"Player1Joystick[%d].InUse",action);
+            set_config_int("input",buffer,Player1Joystick[action].InUse);
+            sprintf(buffer,"Player1Joystick[%d].JoyNumber",action);
+            set_config_int("input",buffer,Player1Joystick[action].JoyNumber);
+            sprintf(buffer,"Player1Joystick[%d].ButtonNumber",action);
+            set_config_int("input",buffer,Player1Joystick[action].ButtonNumber);
+        }
+        if(StickMoved)
+        {
+            sprintf(buffer,"Player1JoyAxes[%d].InUse",action);
+            set_config_int("input",buffer,0);
+
+            Player1JoyAxes[action]=axe;
+            Player1Joypad[action]=10+axe.direction;
+
+            sprintf(buffer,"Player1JoyAxes[%d].InUse",action);
+            set_config_int("input",buffer,Player1JoyAxes[action].InUse);
+            sprintf(buffer,"Player1JoyAxes[%d].JoyNumber",action);
+            set_config_int("input",buffer,Player1JoyAxes[action].JoyNumber);
+            sprintf(buffer,"Player1JoyAxes[%d].StickNumber",action);
+            set_config_int("input",buffer,Player1JoyAxes[action].StickNumber);
+            sprintf(buffer,"Player1JoyAxes[%d].direction",action);
+            set_config_int("input",buffer,Player1JoyAxes[action].direction);
+        }
         break;
 
     case 2:
-        Player2Joystick[action]=button;
+        if(JoyPressed)
+        {
+            sprintf(buffer,"Player2Joystick[%d].InUse",action);
+            set_config_int("input",buffer,0);
+
+            Player2Joystick[action]=button;
+            Player2Joypad[action]=button.ButtonNumber;
+
+            sprintf(buffer,"Player2Joystick[%d].InUse",action);
+            set_config_int("input",buffer,Player2Joystick[action].InUse);
+            sprintf(buffer,"Player2Joystick[%d].JoyNumber",action);
+            set_config_int("input",buffer,Player2Joystick[action].JoyNumber);
+            sprintf(buffer,"Player2Joystick[%d].ButtonNumber",action);
+            set_config_int("input",buffer,Player2Joystick[action].ButtonNumber);
+        }
+        if(StickMoved)
+        {
+            sprintf(buffer,"Player2JoyAxes[%d].InUse",action);
+            set_config_int("input",buffer,0);
+
+            Player2JoyAxes[action]=axe;
+            Player2Joypad[action]=10+axe.direction;
+
+            sprintf(buffer,"Player2JoyAxes[%d].InUse",action);
+            set_config_int("input",buffer,Player2JoyAxes[action].InUse);
+            sprintf(buffer,"Player2JoyAxes[%d].JoyNumber",action);
+            set_config_int("input",buffer,Player2JoyAxes[action].JoyNumber);
+            sprintf(buffer,"Player2JoyAxes[%d].StickNumber",action);
+            set_config_int("input",buffer,Player2JoyAxes[action].StickNumber);
+            sprintf(buffer,"Player2JoyAxes[%d].direction",action);
+            set_config_int("input",buffer,Player2JoyAxes[action].direction);
+        }
+
         break;
     }
+    flush_config_file();
     return 1;
 }
+
