@@ -101,7 +101,7 @@ void setting ()
     int ind1=0,ind2=1,ind3=2,pos_x[]= {5,35,65},button_press=0,trans,second_menu=0,Nb_point_volume_music,Nb_point_volume_effect;
     int i,Button,TempKeyRead=0,KeyExist=0;
     char screen_mod[15],res[10],buttons[50];
-    int cadre_ind=0,control_in=0,key_modif=0,keys[]= {UP,DOWN,LEFT,RIGHT,ENTER,RETURN,PUNCH,KICK,UP,UP,UP,UP};
+    int cadre_ind=0,control_in=0,key_modif=0,keys[]= {UP,DOWN,LEFT,RIGHT,ENTER,RETURN,PUNCH,KICK,FIREBALL,WIND,THUNDER,FREEZE};
     char *keybord_control[]= {"UP","DOWN","LEFT","RIGHT","ENTRE","RETURN","PUNCH","KICK","FIREBALL","WIND","THUNDER","FREEZE"},*joystick_control[]= {"ENTRE","RETURN","PUNCH","KICK","FIREBALL","WIND","THUNDER","FREEZE"};
     IMAGE *BUTTONS[14],*keybord_modif;
     Button=AddVoice("Resources/Sounds/button3.wav",1);
@@ -362,21 +362,21 @@ void setting ()
                     if (IsKeyPressed(1,ENTER) && button_press>10 && cadre_ind==0)
                     {
                         clear_keybuf();
-                        Player1Keyboard[keys[key_modif]]=readkey()>>8;
                         //Todo Key existance verification
-                        /*TempKeyRead=readkey()>>8;
+                        TempKeyRead=readkey()>>8;
                         for (i=0;i<12;i++)
                         {
                             if (TempKeyRead==Player1Keyboard[keys[i]])
                         {
                              KeyExist=1;
-                        break;
                         }
                     }
-                    if (!KeyExist)
+                    if (KeyExist==0){
                         Player1Keyboard[keys[key_modif]]=TempKeyRead;
+                        printf ("exist");
+                        }
                     KeyExist=0;
-                    */button_press=0;
+                    button_press=0;
                 }
 
                 if (IsKeyPressed(1,UP) && button_press>10 && cadre_ind==0)
