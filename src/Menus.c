@@ -101,8 +101,8 @@ void setting ()
     int ind1=0,ind2=1,ind3=2,pos_x[]= {5,35,65},button_press=0,trans,second_menu=0,Nb_point_volume_music,Nb_point_volume_effect;
     int i,Button,TempKeyRead=0,KeyExist=0;
     char screen_mod[15],res[10],buttons[50];
-    int cadre_ind=0,control_in=0,key_modif=0,keys[]= {UP,DOWN,LEFT,RIGHT,ENTER,RETURN,PUNCH,KICK,FIREBALL,WIND,THUNDER,FREEZE};
-    char *keybord_control[]= {"UP","DOWN","LEFT","RIGHT","ENTRE","RETURN","PUNCH","KICK","FIREBALL","WIND","THUNDER","FREEZE"},*joystick_control[]= {"ENTRE","RETURN","PUNCH","KICK","FIREBALL","WIND","THUNDER","FREEZE"};
+    int cadre_ind=0,control_in=0,key_modif=0;
+    char *keybord_control[]= {"UP","DOWN","LEFT","RIGHT","PUNCH","KICK","FIREBALL","FREEZE","THUNDER","WIND","ENTER","RETURN"};
     IMAGE *BUTTONS[14],*keybord_modif;
     Button=AddVoice("Resources/Sounds/button3.wav",1);
 
@@ -366,13 +366,13 @@ void setting ()
                         TempKeyRead=readkey()>>8;
                         for (i=0;i<12;i++)
                         {
-                            if (TempKeyRead==Player1Keyboard[keys[i]])
+                            if (TempKeyRead==Player1Keyboard[i])
                         {
                              KeyExist=1;
                         }
                     }
                     if (KeyExist==0){
-                        Player1Keyboard[keys[key_modif]]=TempKeyRead;
+                        Player1Keyboard[key_modif]=TempKeyRead;
                         printf ("exist");
                         }
                     KeyExist=0;
@@ -501,16 +501,16 @@ void setting ()
              {
 
                  draw_text(Verdana,keybord_control[i],3.5,40,45+4.5*i,CENTER,modif_fade);
-                draw_text(Verdana,scancode_to_name(Player1Keyboard[keys[i]]),3.5,60,45+i*4.5,CENTER,modif_fade);
+                draw_text(Verdana,scancode_to_name(Player1Keyboard[i]),3.5,60,45+i*4.5,CENTER,modif_fade);
             }
                 draw_image_ex(keybord_modif,35,42.5+key_modif*4.5,31,5,NONE,modif_fade);
 
                 break;
             case 1 :
-                for (i=0; i<8; i++)
+                for (i=0; i<12; i++)
                 {
-                    draw_text(Verdana,joystick_control[i],3.5,40,45+6.5*i,CENTER,modif_fade);
-                    draw_image_ex(BUTTONS[i],60,43+6.5*i,4,4,NONE,modif_fade);
+                    draw_text(Verdana,keybord_control[i],3.5,40,45+4.5*i,CENTER,modif_fade);
+                    draw_image_ex(BUTTONS[Player2Joypad[i]],60,43+4.5*i,0,4,NONE,modif_fade);
                 }
                 break;
             }
