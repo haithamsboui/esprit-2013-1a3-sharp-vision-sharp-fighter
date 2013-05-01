@@ -21,6 +21,8 @@ void LoadInput()
     {
         sprintf(buffer,"Player1Keyboard[%d]",i);
         Player1Keyboard[i]=get_config_int("input",buffer,defaultkeyboardP1[i]);
+        sprintf(buffer,"Player2Keyboard[%d]",i);
+        Player2Keyboard[i]=get_config_int("input",buffer,defaultkeyboardP1[i]);
 
         if(JoyStickEnabled)
         {
@@ -132,18 +134,62 @@ void ProcessKeys()
 int ReadKeyboard(int player, ACTIONS action)
 {
     char buffer[50];
+    int TempKeyRead,KeyExist=0,i,temp;
     switch(player)
     {
     case 1:
-        Player1Keyboard[action]=readkey()>>8;
-        printf(buffer,"Player1Keyboard[%d]",action);
-        set_config_int("input",buffer,Player1Keyboard[action]);
+        TempKeyRead=readkey()>>8;
+        for (i=0; i<12; i++)
+        {
+            if (TempKeyRead==Player1Keyboard[i])
+            {
+                KeyExist=1;
+                break;
+            }
+        }
+        if (KeyExist==1)
+        {
+            temp=Player1Keyboard[action];
+            Player1Keyboard[action]=TempKeyRead;
+            Player1Keyboard[i]=temp;
+            sprintf(buffer,"Player1Keyboard[%d]",action);
+            set_config_int("input",buffer,Player1Keyboard[action]);
+            sprintf(buffer,"Player1Keyboard[%d]",i);
+            set_config_int("input",buffer,Player1Keyboard[i]);
+        }
+        else
+        {
+            Player1Keyboard[action]=TempKeyRead;
+            sprintf(buffer,"Player1Keyboard[%d]",action);
+            set_config_int("input",buffer,Player1Keyboard[action]);
+        }
         break;
 
     case 2:
-        Player2Keyboard[action]=readkey()>>8;
-        printf(buffer,"Player2Keyboard[%d]",action);
-        set_config_int("input",buffer,Player2Keyboard[action]);
+        TempKeyRead=readkey()>>8;
+        for (i=0; i<12; i++)
+        {
+            if (TempKeyRead==Player2Keyboard[i])
+            {
+                KeyExist=1;
+            }
+        }
+       if (KeyExist==1)
+        {
+            temp=Player1Keyboard[action];
+            Player2Keyboard[action]=TempKeyRead;
+            Player2Keyboard[i]=temp;
+            sprintf(buffer,"Player2Keyboard[%d]",action);
+            set_config_int("input",buffer,Player2Keyboard[action]);
+            sprintf(buffer,"Player2Keyboard[%d]",i);
+            set_config_int("input",buffer,Player2Keyboard[i]);
+        }
+        else
+        {
+            Player2Keyboard[action]=TempKeyRead;
+            sprintf(buffer,"Player2Keyboard[%d]",action);
+            set_config_int("input",buffer,Player2Keyboard[action]);
+        }
         break;
     }
     flush_config_file();
