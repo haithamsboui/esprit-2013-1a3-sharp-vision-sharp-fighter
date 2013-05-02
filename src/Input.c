@@ -15,14 +15,15 @@ JoyAxe Player2JoyAxes[12];
 void LoadInput()
 {
     int i,defaultkeyboardP1[]= {KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT,KEY_W,KEY_X,KEY_Q,KEY_F,KEY_S,KEY_D,KEY_ENTER,KEY_ESC},
-                               defaultjoybuttonP2[]= {0,0,0,0,2,3,4,5,6,7,9,8} ;
+    defaultkeyboardP2[]= {KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT,KEY_W,KEY_X,KEY_Q,KEY_F,KEY_S,KEY_D,KEY_ENTER,KEY_ESC},
+                               defaultjoybuttonP2[]= {0,0,0,0,2,3,4,5,6,7,9,8},defaultjoybuttonP1[]= {0,0,0,0,2,3,4,5,6,7,9,8} ;
     char buffer[50];
     for (i=0; i<12; i++)
     {
         sprintf(buffer,"Player1Keyboard[%d]",i);
         Player1Keyboard[i]=get_config_int("input",buffer,defaultkeyboardP1[i]);
         sprintf(buffer,"Player2Keyboard[%d]",i);
-        Player2Keyboard[i]=get_config_int("input",buffer,defaultkeyboardP1[i]);
+        Player2Keyboard[i]=get_config_int("input",buffer,defaultkeyboardP2[i]);
 
         if(JoyStickEnabled)
         {
@@ -46,6 +47,29 @@ void LoadInput()
 
             sprintf(buffer,"Player2JoyAxes[%d].direction",i);
             Player2JoyAxes[i].direction=get_config_int("input",buffer,0);
+
+
+            sprintf(buffer,"Player1Joystick[%d].InUse",i);
+            Player1Joystick[i].InUse=get_config_int("input",buffer,0);
+
+            sprintf(buffer,"Player1Joystick[%d].JoyNumber",i);
+            Player1Joystick[i].JoyNumber=get_config_int("input",buffer,0);
+
+            sprintf(buffer,"Player1Joystick[%d].ButtonNumber",i);
+            Player1Joystick[i].ButtonNumber=get_config_int("input",buffer,defaultjoybuttonP1[i]);
+
+            sprintf(buffer,"Player1JoyAxes[%d].InUse",i);
+            Player1JoyAxes[i].InUse=get_config_int("input",buffer,0);
+
+            sprintf(buffer,"Player1JoyAxes[%d].JoyNumber",i);
+            Player1JoyAxes[i].JoyNumber=get_config_int("input",buffer,0);
+
+            sprintf(buffer,"Player1JoyAxes[%d].StickNumber",i);
+            Player1JoyAxes[i].StickNumber=get_config_int("input",buffer,0);
+
+            sprintf(buffer,"Player1JoyAxes[%d].direction",i);
+            Player1JoyAxes[i].direction=get_config_int("input",buffer,0);
+
         }
     }
 

@@ -105,7 +105,7 @@ void setting ()
     char *keybord_control[]= {"UP","DOWN","LEFT","RIGHT","PUNCH","KICK","FIREBALL","FREEZE","THUNDER","WIND","ENTER","RETURN"};
     IMAGE *BUTTONS[14],*keybord_modif;
     Button=AddVoice("Resources/Sounds/button3.wav",1);
-    int ReadingKey=0,PlayerSelection=0,SelectedPlayer=1,PlayerPos[]={45,60};
+    int ReadingKey=0,PlayerSelection=0,SelectedPlayer=1,PlayerPos[]= {45,60};
     //Loading;
     for (i=0; i<14; i++)
     {
@@ -348,17 +348,18 @@ void setting ()
 
                     if (IsKeyPressed(3,RETURN) && button_press>10  )
                     {
-                        if (PlayerSelection==0){
+                        if (PlayerSelection==0)
+                        {
                             voice_start(Button);
-                        control_in=0;
-                        button_press=0;
-                        keybord_fade=0;
-                        joystick_fade=0;
-                        modif_fade=0.1;
-                        key_modif=0;
+                            control_in=0;
+                            button_press=0;
+                            keybord_fade=0;
+                            joystick_fade=0;
+                            modif_fade=0.1;
+                            key_modif=0;
                         }
                         else
-                        PlayerSelection=0;
+                            PlayerSelection=0;
                         SelectedPlayer=1;
                         while(IsKeyPressed(3,RETURN))
                         {
@@ -370,13 +371,13 @@ void setting ()
 
                         if (IsKeyPressed(3,UP) && button_press>10)
                         {
- SelectedPlayer=(SelectedPlayer)%2+1;
-button_press=0;
+                            SelectedPlayer=(SelectedPlayer)%2+1;
+                            button_press=0;
                         }
                         if (IsKeyPressed(3,DOWN) && button_press>10)
                         {
- SelectedPlayer=(SelectedPlayer)%2+1;
- button_press=0;
+                            SelectedPlayer=(SelectedPlayer)%2+1;
+                            button_press=0;
                         }
                         if (IsKeyPressed(3,ENTER) && button_press>10)
                         {
@@ -552,9 +553,9 @@ button_press=0;
             }
             if (control_in==1 && PlayerSelection==0)
             {
-                        draw_text(Verdana,"Player 1",5,50,50,CENTER,100);
-                        draw_text(Verdana,"Player 2",5,50,65,CENTER,100);
-                        draw_image_ex(keybord_modif,40,PlayerPos[SelectedPlayer-1],20,10,NONE,100);
+                draw_text(Verdana,"Player 1",5,50,50,CENTER,100);
+                draw_text(Verdana,"Player 2",5,50,65,CENTER,100);
+                draw_image_ex(keybord_modif,40,PlayerPos[SelectedPlayer-1],20,10,NONE,100);
             }
             if (control_in==1 && PlayerSelection==1)
             {
@@ -573,9 +574,9 @@ button_press=0;
 
                         draw_text(Verdana,keybord_control[i],3.5,40,45+4.5*i,CENTER,modif_fade);
                         if (SelectedPlayer==1)
-                        draw_text(Verdana,scancode_to_name(Player1Keyboard[i]),3.5,60,45+i*4.5,CENTER,modif_fade);
-                    else
-                    draw_text(Verdana,scancode_to_name(Player2Keyboard[i]),3.5,60,45+i*4.5,CENTER,modif_fade);
+                            draw_text(Verdana,scancode_to_name(Player1Keyboard[i]),3.5,60,45+i*4.5,CENTER,modif_fade);
+                        else
+                            draw_text(Verdana,scancode_to_name(Player2Keyboard[i]),3.5,60,45+i*4.5,CENTER,modif_fade);
                     }
                     draw_image_ex(keybord_modif,35,42.5+key_modif*4.5,31,5,NONE,modif_fade);
 
@@ -586,11 +587,11 @@ button_press=0;
                         for (i=0; i<12; i++)
                         {
                             draw_text(Verdana,keybord_control[i],3.5,40,45+4.5*i,CENTER,modif_fade);
-                            if (SelectedPlayer)
-                            draw_image_ex(BUTTONS[Player1Joypad[i]],60,43+4.5*i,0,4,NONE,modif_fade);
-                        else
-                        draw_image_ex(BUTTONS[Player2Joypad[i]],60,43+4.5*i,0,4,NONE,modif_fade);
-                                             }
+                            if (SelectedPlayer==1)
+                                draw_image_ex(BUTTONS[Player1Joypad[i]],60,43+4.5*i,0,4,NONE,modif_fade);
+                            else
+                                draw_image_ex(BUTTONS[Player2Joypad[i]],60,43+4.5*i,0,4,NONE,modif_fade);
+                        }
                         draw_image_ex(keybord_modif,35,42.5+key_modif*4.5,31,5,NONE,modif_fade);
 
                     }
