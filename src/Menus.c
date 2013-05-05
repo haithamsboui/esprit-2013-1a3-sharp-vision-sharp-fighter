@@ -402,27 +402,27 @@ void setting ()
                                 ReadKeyboard(SelectedPlayer,key_modif);
                                 button_press=0;
                             }
-                            if (IsKeyPressed(1,ENTER) && button_press>10)
+                            if (IsKeyPressed(3,ENTER) && button_press>10)
                             {
                                 ReadingKey=1;
                                 button_press=0;
 
                             }
 
-                            if (IsKeyPressed(1,UP) && button_press>10 )
+                            if (IsKeyPressed(3,UP) && button_press>10 )
                             {
                                 button_press=0;
                                 key_modif=(key_modif-1+12)%12;
                             }
 
-                            if (IsKeyPressed(1,DOWN) && button_press>10 )
+                            if (IsKeyPressed(3,DOWN) && button_press>10 )
                             {
                                 button_press=0;
                                 key_modif=(key_modif+1)%12;
                             }
                         }
 
-                        if (cadre_ind==1 && JoyStickEnabled)
+                        if (cadre_ind==1 && JoyStickEnabled && button_press>10)
                         {
                             if(ReadingKey)
                             {
@@ -437,20 +437,20 @@ void setting ()
                                 button_press=0;
                             }
 
-                            if (IsKeyPressed(2,ENTER) && button_press>10 )
+                            if (IsKeyPressed(3,ENTER) && button_press>10 )
                             {
                                 ReadingKey=1;
                                 button_press=0;
 
                             }
 
-                            if (IsKeyPressed(2,UP) && button_press>10 )
+                            if (IsKeyPressed(3,UP) && button_press>10 )
                             {
                                 button_press=0;
                                 key_modif=(key_modif-1+12)%12;
                             }
 
-                            if (IsKeyPressed(2,DOWN) && button_press>10 )
+                            if (IsKeyPressed(3,DOWN) && button_press>10 )
                             {
                                 button_press=0;
                                 key_modif=(key_modif+1)%12;

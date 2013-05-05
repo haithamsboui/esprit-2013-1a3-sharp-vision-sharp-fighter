@@ -13,6 +13,7 @@ GFX_MODE_LIST * Resolutions;
 int ResolutionIndex=0;
 
 int LoadSettings(){
+    set_config_file("Resources/Setting.cfg");
     Music_volume=get_config_int("sound","Music_volume",Music_volume);
     Effect_volume=get_config_int("sound","Effect_volume",Effect_volume);
     Fullscreen=get_config_int("graphics","Fullscreen",Fullscreen);

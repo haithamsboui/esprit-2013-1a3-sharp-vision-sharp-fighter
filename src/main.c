@@ -5,7 +5,8 @@ int main()
     int intro ;
     int state=1,choix=0;
 
-    //intialization
+
+   //intialization
 
     if(install())
         return 1;//ERROR
