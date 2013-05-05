@@ -12,7 +12,7 @@
 #define PunchStartH 22
 #define PunchCountH 5
 
-IMAGE *HaithamPics[27];
+IMAGE *HaithamPics[HaithamImageCount];
 
 float xH,yH;
 float wH,hH;
@@ -26,7 +26,7 @@ void LoadHaitham(int player)
 {
     int i;
     char path[255];
-    for (i=0; i<27; i++)
+    for (i=0; i<HaithamImageCount; i++)
     {
         sprintf(path,"Resources/Images/Haitham/GamePlay/%d.png",i);
         HaithamPics[i]=load_image(path);
