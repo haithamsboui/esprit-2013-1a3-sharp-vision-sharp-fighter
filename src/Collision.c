@@ -1,5 +1,8 @@
 #include "includes.h"
 
+Point **SalahCollision;
+Point **HaithamCollision;
+
 int Intersect(Point pt1,Point pt2,Point pt3,Point pt4)
 {
     float A1, A2, B1, B2, C1, C2, det;
@@ -40,4 +43,76 @@ int Collision(Point Shape1[], int n1,Point Shape2[], int n2)
         }
     }
     return 0;
+}
+
+void LoadCollisionData()
+{
+    char Section[255],buffer[255],*data=NULL;
+    int i,j,count;
+    set_config_file("Resources/Collision.cfg");
+    //Loading Salah Data
+    sprintf(Section,"/Resources/Images/Salah/GamePlay");
+    SalahCollision=malloc(SalahImageCount*sizeof(Point*));
+    for(i=0; i<SalahImageCount; i++)
+    {
+        sprintf(buffer,"%s/%d.png.Count",Section,i);
+        count=get_config_int(Section,buffer,0);
+        sprintf(buffer,"%s/%d.png.Data",Section,i);
+        data=get_config_string(Section,buffer,NULL);
+
+        if(count && data!=NULL)
+        {
+            SalahCollision[i]=malloc((count+1)*sizeof(Point));
+
+            SalahCollision[i][0].X=atoi(strtok(data,","));
+            SalahCollision[i][0].Y=atoi(strtok(NULL,","));
+            for(j=1; j<count; j++)
+            {
+                SalahCollision[i][j].X=atoi(strtok(NULL,","));
+                SalahCollision[i][j].Y=atoi(strtok(NULL,","));
+            }
+            SalahCollision[i][j].X=-1;
+            SalahCollision[i][j].Y=-1;
+        }
+    }
+    //Loading Haitham Data
+    sprintf(Section,"/Resources/Images/Haitham/GamePlay");
+    SalahCollision=malloc(HaithamImageCount*sizeof(Point*));
+    for(i=0; i<HaithamImageCount; i++)
+    {
+        sprintf(buffer,"%s/%d.png.Count",Section,i);
+        count=get_config_int(Section,buffer,0);
+        sprintf(buffer,"%s/%d.png.Data",Section,i);
+        data=get_config_string(Section,buffer,NULL);
+
+        if(count && data!=NULL)
+        {
+            HaithamCollision[i]=malloc((count+1)*sizeof(Point));
+
+            HaithamCollision[i][0].X=atoi(strtok(data,","));
+            HaithamCollision[i][0].Y=atoi(strtok(NULL,","));
+            for(j=1; j<count; j++)
+            {
+                HaithamCollision[i][j].X=atoi(strtok(NULL,","));
+                HaithamCollision[i][j].Y=atoi(strtok(NULL,","));
+            }
+            HaithamCollision[i][j].X=-1;
+            HaithamCollision[i][j].Y=-1;
+        }
+    }
+}
+
+void UnLoadCollisionData()
+{
+    int i;
+    for(i=0; i<SalahImageCount; i++)
+    {
+        free(SalahCollision[i]);
+    }
+    free(SalahCollision);
+    for(i=0; i<HaithamImageCount; i++)
+    {
+        free(HaithamCollision[i]);
+    }
+    free(HaithamCollision);
 }

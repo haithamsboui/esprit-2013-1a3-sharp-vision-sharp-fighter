@@ -12,7 +12,7 @@
 #define PunchStartS 14
 #define PunchCountS 5
 
-IMAGE *SalahPics[51];
+IMAGE *SalahPics[SalahImageCount];
 
 float x,y;
 float w,h;
@@ -25,7 +25,7 @@ void LoadSalah(int player)
 {
     int i;
     char path[255];
-    for (i=0; i<51; i++)
+    for (i=0; i<SalahImageCount; i++)
     {
         sprintf(path,"Resources/Images/Salah/GamePlay/%d.png",i);
         SalahPics[i]=load_image(path);

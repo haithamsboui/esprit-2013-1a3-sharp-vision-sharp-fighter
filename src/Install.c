@@ -157,6 +157,7 @@ void uninstall()
     free(GlobalTextures);
     TextureCount=0;
     free(screenimage);
+    UnLoadCollisionData();
     destroy_gfx_mode_list(Resolutions);
 
     DisposeVoices();

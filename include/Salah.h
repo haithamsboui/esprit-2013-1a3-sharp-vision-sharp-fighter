@@ -1,6 +1,8 @@
 #ifndef SALAH_H_INCLUDED
 #define SALAH_H_INCLUDED
 
+#define SalahImageCount 51
+
 #include "includes.h"
 
 

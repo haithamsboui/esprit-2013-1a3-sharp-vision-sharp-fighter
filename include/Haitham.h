@@ -3,8 +3,9 @@
 
 #include "includes.h"
 
+#define HaithamImageCount 27
 
-IMAGE *HaithamPicsPics[27];
+IMAGE *HaithamPics[HaithamImageCount];
 
 float xH,yH;
 float wH,hH;
