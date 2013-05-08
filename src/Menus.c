@@ -428,11 +428,10 @@ void setting ()
                             {
 
                                 ReadingKey=0;
-                                clear_keybuf();
                                 draw_image_ex(screenimage,0,0 ,100,100,NONE,30);
-
                                 draw_text( SharpCurve,"PRESS KEY ",15,50,45,CENTER_X,100);
                                 next_frame();
+                                rest(100);
                                 ReadJoystick(SelectedPlayer,key_modif);
                                 button_press=0;
                             }
@@ -640,37 +639,44 @@ void credit ()
 
 void versus (int intro)
 {
-    IMAGE *Background ,*Background_bar,*select,*Player1,*Player2,*haitham[7],*mokhtar[7],*brahim[7],*wassim[6],*salah[4],*maps[5];
+    IMAGE *Background ,*Background_bar,*select,*Player1,*Player2,*haitham[8],*mokhtar[9],*brahim[8],*wassim[10],*salah[10],*maps[5];
     int i,pos_player[]= {4,22,40,58,76},select1=0,select2=4; //distance=18
     int press_buton=0,press_buton2=0,ind_turn_mokhtar=0,ind_turn_haitham=0,ind_turn_brahim=0,ind_turn_salah=0,ind_turn_wassim=0;
     flip Turn[]= {NONE,NONE,NONE,NONE,NONE};
     int selectedPers[5]= {1,0,0,0,1},brahim_turn=0,haitham_turn=0,salah_turn=0,mokhtar_turn=0,wassim_turn=0,select_map=0;
     float distance_change1=0,distance_change2=0,fade=1,fade_start=100;
     char direction[100];
-    int choix1=0,choix2=0,/*map_pos[]= {6,24,42,60,78}*/distance_change_map=20;
+    int choix1=0,choix2=0,/*map_pos[]= {6,24,42,60,78}*/distance_change_map=20,GamePause=0;
     float w;
 
     // Loading caracteres
 
-    for (i=0; i<7; i++)
+    for (i=0; i<8; i++)
     {
-        sprintf(direction,"Resources/Images/Haitham/%d copy.png",i);
+        sprintf(direction,"Resources/Images/Haitham/%d.png",i);
         haitham[i]=load_image(direction);
-        sprintf(direction,"Resources/Images/Brahim/%d copy.png",i);
-        brahim[i]=load_image(direction);
-        sprintf(direction,"Resources/Images/Mokhtar/%d copy.png",i);
-        mokhtar[i]=load_image(direction);
-        if (i!=6)
-        {
-            sprintf(direction,"Resources/Images/Wassim/%d copy.png",i);
-            wassim[i]=load_image(direction);
-        }
-        if (i!=6 && i!=5 && i!=4)
-        {
-            sprintf(direction,"Resources/Images/Salah/%d copy.png",i);
-            salah[i]=load_image(direction);
-        }
     }
+         for (i=0; i<8; i++)
+    {
+        sprintf(direction,"Resources/Images/Brahim/%d.png",i);
+        brahim[i]=load_image(direction);
+    }
+          for (i=0; i<9; i++)
+    {
+        sprintf(direction,"Resources/Images/Mokhtar/%d.png",i);
+        mokhtar[i]=load_image(direction);
+    }
+             for (i=0; i<10; i++)
+    {
+            sprintf(direction,"Resources/Images/Wassim/%d.png",i);
+            wassim[i]=load_image(direction);
+    }
+           for (i=0; i<10; i++)
+    {
+            sprintf(direction,"Resources/Images/Salah/%d.png",i);
+            salah[i]=load_image(direction);
+    }
+
     for (i=0; i<5; i++)
     {
         sprintf(direction,"Resources/Images/maps/%d.png",i);
@@ -765,13 +771,16 @@ void versus (int intro)
                     ind_turn_mokhtar=1;
                     Turn[0]=NONE;
                 }
-                if (mokhtar_turn==6)
+
+                    if (mokhtar_turn==8)
                 {
                     ind_turn_mokhtar=-1;
                     Turn[0]=VERTICAL;
                 }
+
                 if(FrameCount%10==0)
-                    mokhtar_turn=(mokhtar_turn+ind_turn_mokhtar)%7;
+                    mokhtar_turn=(mokhtar_turn+ind_turn_mokhtar)%9;
+
                 w=(50.0f/((float)mokhtar[mokhtar_turn]->h/(float)mokhtar[mokhtar_turn]->w))/AspectRatio;
                 draw_image_ex(mokhtar[mokhtar_turn],pos_player[0]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[0],100-fade);
             }
@@ -790,13 +799,13 @@ void versus (int intro)
                     ind_turn_haitham=1;
                     Turn[1]=NONE;
                 }
-                if (haitham_turn==6)
+                if (haitham_turn==7)
                 {
                     ind_turn_haitham=-1;
                     Turn[1]=VERTICAL;
                 }
                 if(FrameCount%10==0)
-                    haitham_turn=(haitham_turn+ind_turn_haitham)%7;
+                    haitham_turn=(haitham_turn+ind_turn_haitham)%8;
                 w=(50.0f/((float)haitham[haitham_turn]->h/(float)haitham[haitham_turn]->w))/AspectRatio;
                 draw_image_ex(haitham[haitham_turn],pos_player[1]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[1],100-fade);
             }
@@ -816,13 +825,13 @@ void versus (int intro)
                     ind_turn_brahim=1;
                     Turn[2]=NONE;
                 }
-                if (brahim_turn==6)
+                if (brahim_turn==7)
                 {
                     ind_turn_brahim=-1;
                     Turn[2]=VERTICAL;
                 }
                 if(FrameCount%10==0)
-                    brahim_turn=(brahim_turn+ind_turn_brahim)%7;
+                    brahim_turn=(brahim_turn+ind_turn_brahim)%8;
                 w=(50.0f/((float)brahim[brahim_turn]->h/(float)brahim[brahim_turn]->w))/AspectRatio;
 
                 draw_image_ex(brahim[brahim_turn],pos_player[2]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[2],100-fade);
@@ -841,13 +850,13 @@ void versus (int intro)
                     ind_turn_salah=1;
                     Turn[3]=NONE;
                 }
-                if (salah_turn==3)
+                if (salah_turn==9)
                 {
                     ind_turn_salah=-1;
                     Turn[3]=VERTICAL;
                 }
                 if(FrameCount%10==0)
-                    salah_turn=(salah_turn+ind_turn_salah)%4;
+                    salah_turn=(salah_turn+ind_turn_salah)%10;
                 w=(50.0f/((float)salah[salah_turn]->h/(float)salah[salah_turn]->w))/AspectRatio;
                 draw_image_ex(salah[salah_turn],pos_player[3]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[3],100-fade);
             }
@@ -865,20 +874,20 @@ void versus (int intro)
                     ind_turn_wassim=1;
                     Turn[4]=NONE;
                 }
-                if (wassim_turn==5)
+                if (wassim_turn==9)
                 {
                     ind_turn_wassim=-1;
                     Turn[4]=VERTICAL;
                 }
                 if(FrameCount%10==0)
-                    wassim_turn=(wassim_turn+ind_turn_wassim)%6;
+                    wassim_turn=(wassim_turn+ind_turn_wassim)%10;
                 w=(50.0f/((float)wassim[wassim_turn]->h/(float)wassim[wassim_turn]->w))/AspectRatio;
                 draw_image_ex(wassim[wassim_turn],pos_player[4]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[4],100-fade);
             }
             if (choix1)
-                draw_text(Verdana,"PLAYER 1 Ready",10,20,10,CENTER,100);
+                draw_text(Verdana,"PLAYER 1 Ready",5,20,10,CENTER,100);
             if (choix2)
-                draw_text(Verdana,"PLAYER 2 Ready",10,75,10,CENTER,100);
+                draw_text(Verdana,"PLAYER 2 Ready",5,75,10,CENTER,100);
             next_frame();
 
         }
@@ -892,8 +901,11 @@ void versus (int intro)
 
         while(choix1+choix2==2)
         {
+
+
             if (IsKeyPressed(3,RETURN))
             {
+
                 choix1=0;
                 choix2=0;
 
@@ -902,14 +914,11 @@ void versus (int intro)
                     rest(1);
                 }
             }
-
-
-
             if (IsKeyPressed(3,ENTER) && press_buton>10)
             {
                 press_buton=0;
                 voice_stop(intro);
-                GamePlay(3,1,maps[select_map]);
+                GamePlay(select1,select2,select_map);
                 voice_start(intro);
             }
 
@@ -924,7 +933,6 @@ void versus (int intro)
             {
                 press_buton=0;
                 select_map=(select_map+1)%5;
-
                 distance_change_map=-50;
             }
             distance_change_map=distance_change_map/1.1;
@@ -936,25 +944,13 @@ void versus (int intro)
             draw_image_ex(select,20,23,60,48,NONE,100);
             press_buton++;
             next_frame();
-
-
         }
     }
-
     while (fade<100)
     {
         fade=fade*1.1;
         draw_image_ex(Background,0,0,100,100,NONE,100);
         draw_image_ex(Background_bar,0,-27,100,150,NONE,100-fade);
-        /*for (i=4; i<90; i=i+18)
-            draw_image_ex(select,i,17.5,19,60,NONE,100-fade);
-        draw_image_ex(mokhtar[0],pos_player[0]+2,21,15,50,NONE,100-fade);
-        draw_image_ex(haitham[0],pos_player[1]+2,21,15,50,NONE,100-fade);
-        draw_image_ex(brahim[0],pos_player[2]+2,21,15,50,NONE,100-fade);
-        draw_image_ex(salah[0],pos_player[3]+2,21,15,50,NONE,100-fade);
-        draw_image_ex(wassim[0],pos_player[4]+2,21,15,50,NONE,100-fade);
-        draw_image_ex(Player1,pos_player[select1]+distance_change1,17.5,19,60,NONE,100-fade);
-        draw_image_ex(Player2,pos_player[select2]+distance_change2,17.5,19,60,NONE,100-fade);*/
         next_frame();
     }
 }
@@ -969,112 +965,231 @@ void ChargerEffetNaturel(IMAGE *effet[100], char chemin[200], int nombreFrame)
         sprintf(tmp,"%s%.2d.png", chemin, i);
         effet[i]=load_image(tmp);
     }
-
 }
 
-int indice_rain=0;
 
-void GamePlay(int Player1,int Player2,IMAGE* Map)
+
+int indice_efx=0;
+
+void GamePlay(int Player1,int Player2,int Map)
 {
-    int time =30;
+    int time =30,round =1,i;
+    char Round[10];
     char texttime[10];
-    IMAGE*rain[100],*flies[100],*Map2;
+    IMAGE *MapLoad,*EFX[100];
     int thunder, rainsound,gameplaysound,sarsour,fight,lotfi;
-
+    char MapDirection[50];
+    Location loc;
     next_frame();
     draw_text(SharpCurve,"Loading...",20,50,50,CENTER,100);
     next_frame();
+    sprintf (MapDirection,"Resources/Images/maps/%d.png",Map);
+    MapLoad=load_image(MapDirection);
+    switch (Map)
+    {
+    case 0 :
+    {
+        loc=TUNISIA;
+        ChargerEffetNaturel(EFX,"Resources/Images/nightFilies/nightFlies00",100);
+        lotfi=AddVoice("Resources/Sounds/Lotfi.wav",0);
+        sarsour=AddVoice("Resources/Sounds/Sarsour.wav",1);
+        voice_set_playmode(sarsour, PLAYMODE_LOOP);
+        voice_set_playmode(lotfi, PLAYMODE_LOOP);
+        voice_set_volume(lotfi,80);
+    }
+    break;
+    case 1 :
+        loc=EGYPT;
+        break;
+    case 2 :
 
-    Map2=load_image("Resources/Images/maps/0.png");
-    ChargerEffetNaturel(rain,"Resources/Images/Rain/rain00",100);
-    ChargerEffetNaturel(flies,"Resources/Images/nightFilies/nightFlies00",100);
-    LoadSalah(1);
-    LoadHaitham(2);
+        break;
+    case 3 :
+        loc=JAPAN;
+        ChargerEffetNaturel(EFX,"Resources/Images/Leaf/leaf00",100);
+        break;
+    case 4 :
+    {
+        loc=MALAYSIA;
+        ChargerEffetNaturel(EFX,"Resources/Images/Rain/rain00",100);
+        thunder=AddVoice("Resources/Sounds/Thunder.wav",1);
+        rainsound=AddVoice("Resources/Sounds/Rain.wav",1);
+        gameplaysound=AddVoice("Resources/Sounds/Gameplay.wav",0);
+        voice_set_playmode(gameplaysound, PLAYMODE_LOOP);
+        voice_set_playmode(thunder, PLAYMODE_LOOP);
+        voice_set_playmode(rainsound, PLAYMODE_LOOP);
+        voice_set_volume(rainsound,255);
+        voice_set_volume(thunder,100);
+        voice_set_volume(gameplaysound,128);
+    }
 
-    thunder=AddVoice("Resources/Sounds/Thunder.wav",1);
-    rainsound=AddVoice("Resources/Sounds/Rain.wav",1);
-    gameplaysound=AddVoice("Resources/Sounds/Gameplay.wav",0);
-    sarsour=AddVoice("Resources/Sounds/Sarsour.wav",1);
+    break;
+
+    }
+
+    switch (Player1)
+    {
+    case 0 :
+        break;
+    case 1 :
+        LoadHaitham(1);
+        break;
+    case 2 :
+        break;
+    case 3 :
+        LoadSalah(1);
+        break;
+    case 4 :
+        break;
+    }
+
+    switch (Player2)
+    {
+    case 0 :
+        break;
+    case 1 :
+        LoadHaitham(2);
+        break;
+    case 2 :
+        break;
+    case 3 :
+        LoadSalah(2);
+        break;
+    case 4 :
+        break;
+    }
+
     fight=AddVoice("Resources/Sounds/Fight.wav",1);
-    lotfi=AddVoice("Resources/Sounds/Lotfi.wav",0);
-    DoEarth(FRANCE,MALAYSIA);
-
+    //DoEarth(TUNISIA,loc);
     sprintf(texttime,"%d",time);
-
-    voice_set_playmode(thunder, PLAYMODE_LOOP);
-    voice_set_playmode(rainsound, PLAYMODE_LOOP);
-    voice_set_playmode(gameplaysound, PLAYMODE_LOOP);
-    voice_set_playmode(sarsour, PLAYMODE_LOOP);
-    voice_set_playmode(lotfi, PLAYMODE_LOOP);
-
-    voice_set_volume(rainsound,255);
-    voice_set_volume(thunder,100);
-    voice_set_volume(gameplaysound,128);
-    voice_set_volume(lotfi,80);
-
-    voice_start(thunder);
-    voice_start(rainsound);
-    voice_start(gameplaysound);
-
     voice_start(fight);
+
     while(!IsKeyPressed(3,RETURN))
     {
-        draw_image_ex(Map,-1.5,-2,103,104,NONE,100);
-        Draw_Salah();
-        Draw_Haitham();
+        if (round<4)
+        {
 
-        if(FrameCount%60==0)
-        {
-            sprintf(texttime,"%d",time);
-            time--;
-        }
-        if(time<0)
-        {
+            switch (Map)
+            {
+            case 0 :
+            {
+                voice_start(sarsour);
+                voice_start(lotfi);
+            }
             break;
+            case 1 :
+            {
+
+            }
+                break;
+            case 2 :
+            {
+
+            }
+                break;
+            case 3 :
+            {
+
+            }
+                break;
+            case 4 :
+            {
+                voice_start(gameplaysound);
+                voice_start(thunder);
+                voice_start(rainsound);
+            }
+            break;
+
+            }
+            draw_image_ex(MapLoad,-1.5,-2,103,104,NONE,100);
+            draw_image_ex(EFX[indice_efx],0,-10,100,100,NONE,100);
+            if(FrameCount%3==0)
+                indice_efx=(indice_efx+1)%100;
+
+            switch (Player1)
+            {
+            case 0 :
+                break;
+            case 1 :
+                Draw_Haitham();
+                break;
+            case 2 :
+                break;
+            case 3 :
+                Draw_Salah();
+                break;
+            case 4 :
+                break;
+            }
+
+            switch (Player2)
+            {
+            case 0 :
+                break;
+            case 1 :
+                Draw_Haitham();
+                break;
+            case 2 :
+                break;
+            case 3 :
+                Draw_Salah();
+                break;
+            case 4 :
+                break;
+            }
+
+
+            if(FrameCount%60==0)
+            {
+                sprintf(texttime,"%d",time);
+                time--;
+            }
+            if(time<0)
+            {
+
+                next_frame();
+                time=30;
+                round++;
+                sprintf(Round,"Round %d",round);
+                for (i=0; i<200; i++)
+                {
+
+                    draw_image_ex(MapLoad,-1.5,-2,103,104,NONE,(float)i/2);
+                    draw_text(Arista,Round,15,50,50,CENTER_X,(float)i/2);
+                    next_frame();
+                }
+                rest(2000);
+            }
+
+            sprintf(Round,"Round %d",round);
+            draw_text(Arista,Round,10,50,5,CENTER_X,100);
+            draw_text(Arista,texttime,7,50,15,CENTER_X,95);
+            next_frame();
         }
-
-        draw_image_ex(rain[indice_rain],0,0,100,100,NONE,100);
-        if(FrameCount%3==0)
-            indice_rain=(indice_rain+1)%100;
-
-        draw_text(Arista,texttime,10,50,5,CENTER_X,95);
-        next_frame();
     }
-    voice_stop(thunder);
-    voice_stop(rainsound);
-    voice_stop(gameplaysound);
-
-    time=30;
-    DoEarth(MALAYSIA,TUNISIA);
-    voice_start(sarsour);
-    voice_start(lotfi);
-    voice_start(fight);
-    while(!IsKeyPressed(3,RETURN))
+  //  voice_stop(fight);
+    switch (Map)
     {
-        draw_image_ex(Map2,-1.5,-2,103,104,NONE,100);
-        Draw_Salah();
-        Draw_Haitham();
-
-        if(FrameCount%60==0)
-        {
-            sprintf(texttime,"%d",time);
-            time--;
-        }
-        if(time<0)
-        {
-            break;
-        }
-
-        draw_image_ex(flies[indice_rain],0,0,100,100,NONE,100);
-        if(FrameCount%3==0)
-            indice_rain=(indice_rain+1)%100;
-
-        draw_text(Arista,texttime,10,50,5,CENTER_X,95);
-        next_frame();
+    case 0 :
+        voice_stop(sarsour);
+        voice_stop(lotfi);
+        break;
+    case 1 :
+        break;
+    case 2 :
+        break;
+    case 3 :
+        break;
+    case 4 :
+        voice_stop(thunder);
+        voice_stop(rainsound);
+        voice_stop(gameplaysound);
+        break;
     }
-    voice_stop(sarsour);
-    voice_stop(lotfi);
+
 }
+
+
 
 
 
