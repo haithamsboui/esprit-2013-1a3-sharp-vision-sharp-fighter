@@ -60,7 +60,6 @@ int install()
         allegro_message("Unable to set graphic mode\n%s\n", allegro_error);
         return 1;
     }
-
     SetOpenGL2D();
     screenimage=(IMAGE*)malloc(sizeof(IMAGE));
     screenimage->ID=0;
@@ -157,7 +156,7 @@ void uninstall()
     free(GlobalTextures);
     TextureCount=0;
     free(screenimage);
-    UnLoadCollisionData();
+   // UnLoadCollisionData();
     destroy_gfx_mode_list(Resolutions);
 
     DisposeVoices();

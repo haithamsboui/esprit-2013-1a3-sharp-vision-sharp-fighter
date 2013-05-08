@@ -11,10 +11,11 @@ int main()
     if(install())
         return 1;//ERROR
 
-    LoadCollisionData();
-    return 0;
-
+    //LoadCollisionData();
+    // return 0;
+    PlayVideo("Resources/Videos/EspritIntro.ogv");
     PlayVideo("Resources/Videos/SharpIntro.ogv");
+
 
     intro=AddVoice("Resources/Sounds/intro.wav",0);
     voice_start(intro);
@@ -27,6 +28,7 @@ int main()
         switch (choix)
         {
         case 0 :
+//        arcade();
             break;
 
         case 1:
