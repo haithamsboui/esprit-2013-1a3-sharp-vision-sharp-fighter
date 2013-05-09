@@ -1,6 +1,52 @@
 #include "includes.h"
 
 
+void intromenu(int intro)
+{
+    int waitframes,keypress=0;
+    float texttrans=0, textmulti=3;
+    IMAGE *background,*logo;
+    background=load_image("Resources/Images/Origin.png");
+    logo=load_image("Resources/Images/logo2.png");
+    PlayVideo("Resources/Videos/EspritIntro.ogv");
+    PlayVideo("Resources/Videos/SharpIntro.ogv");
+    PlayVideo("Resources/Videos/FighterIntro.ogv");
+
+    while(AnyKeyPressed(3)){
+        rest(10);
+    }
+
+    voice_set_playmode(intro, PLAYMODE_LOOP);
+    voice_start(intro);
+
+    waitframes=FrameCount;
+
+    while(!keypress)
+    {
+        if(FrameCount%5==0){
+            keypress=AnyKeyPressed(3);
+        }
+
+        if((FrameCount-waitframes)/(float)FPS>30)
+        {
+            voice_stop(intro);
+            PlayVideo("Resources/Videos/FighterIntro.ogv");
+
+            waitframes=FrameCount;
+            voice_start(intro);
+            voice_set_playmode(intro, PLAYMODE_LOOP);
+        }
+        draw_image_ex(background,0,0,100,100,NONE,100);
+        draw_image_ex(logo,5,20,90,0,NONE,100);
+        if(texttrans>100 || texttrans<0){
+            textmulti=textmulti* (-1);
+        }
+        texttrans+=textmulti;
+        draw_text(Arista,"Press any key to continue...",10,50,75,CENTER,texttrans);
+        next_frame();
+    }
+}
+
 void mainmenu(int *choix)
 {
     IMAGE *Firstmenu[5],*Background,*back_bar,*Select,*Pers_main[5];
@@ -656,25 +702,25 @@ void versus (int intro)
         sprintf(direction,"Resources/Images/Haitham/%d.png",i);
         haitham[i]=load_image(direction);
     }
-         for (i=0; i<8; i++)
+    for (i=0; i<8; i++)
     {
         sprintf(direction,"Resources/Images/Brahim/%d.png",i);
         brahim[i]=load_image(direction);
     }
-          for (i=0; i<9; i++)
+    for (i=0; i<9; i++)
     {
         sprintf(direction,"Resources/Images/Mokhtar/%d.png",i);
         mokhtar[i]=load_image(direction);
     }
-             for (i=0; i<10; i++)
+    for (i=0; i<10; i++)
     {
-            sprintf(direction,"Resources/Images/Wassim/%d.png",i);
-            wassim[i]=load_image(direction);
+        sprintf(direction,"Resources/Images/Wassim/%d.png",i);
+        wassim[i]=load_image(direction);
     }
-           for (i=0; i<10; i++)
+    for (i=0; i<10; i++)
     {
-            sprintf(direction,"Resources/Images/Salah/%d.png",i);
-            salah[i]=load_image(direction);
+        sprintf(direction,"Resources/Images/Salah/%d.png",i);
+        salah[i]=load_image(direction);
     }
 
     for (i=0; i<5; i++)
@@ -772,7 +818,7 @@ void versus (int intro)
                     Turn[0]=NONE;
                 }
 
-                    if (mokhtar_turn==8)
+                if (mokhtar_turn==8)
                 {
                     ind_turn_mokhtar=-1;
                     Turn[0]=VERTICAL;
@@ -1081,17 +1127,17 @@ void GamePlay(int Player1,int Player2,int Map)
             {
 
             }
-                break;
+            break;
             case 2 :
             {
 
             }
-                break;
+            break;
             case 3 :
             {
 
             }
-                break;
+            break;
             case 4 :
             {
                 voice_start(gameplaysound);
@@ -1167,7 +1213,7 @@ void GamePlay(int Player1,int Player2,int Map)
             next_frame();
         }
     }
-  //  voice_stop(fight);
+    //  voice_stop(fight);
     switch (Map)
     {
     case 0 :
@@ -1188,6 +1234,11 @@ void GamePlay(int Player1,int Player2,int Map)
     }
 
 }
+
+
+
+
+
 
 
 

@@ -95,6 +95,18 @@ void LoadInput()
     }
 }
 
+int AnyKeyPressed(int player)
+{
+    int i,pressed=0;
+
+    for(i=0; i<ACTIONSCOUNT && !pressed; i++)
+    {
+        pressed=pressed || IsKeyPressed(player,i);
+    }
+    return pressed;
+
+}
+
 int IsKeyPressed(int player, ACTIONS action)
 {
     int ispressed=0;
@@ -200,7 +212,7 @@ int ReadKeyboard(int player, ACTIONS action)
                 KeyExist=1;
             }
         }
-       if (KeyExist==1)
+        if (KeyExist==1)
         {
             temp=Player1Keyboard[action];
             Player2Keyboard[action]=TempKeyRead;
