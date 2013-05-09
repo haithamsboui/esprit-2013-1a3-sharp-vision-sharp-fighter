@@ -58,6 +58,7 @@ void draw_text(FONTS font,const char* text,float size,float x, float y, FONTSTYL
 
     glScalef(size/100.0f,size/100  * AspectRatio,1.0f);
 
+    Transparency=Percentage(Transparency);
     glColor4f(1.0f,1.0f,1.0f,Transparency/100.0f);
     glBindTexture(GL_TEXTURE_2D,0);
     ftglRenderFont(fontlist[font], text, FTGL_RENDER_ALL);
