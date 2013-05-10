@@ -807,7 +807,7 @@ void versus (int intro)
 // Draw and turn Mokhtar
             if (selectedPers[0]==0 )
             {
-                w=(50.0f/((float)mokhtar[mokhtar_turn]->h/(float)mokhtar[mokhtar_turn]->w))/AspectRatio;
+                w=(50.0f/((float)mokhtar[0]->h/(float)mokhtar[0]->w))/AspectRatio;
                 draw_image_ex(mokhtar[0],pos_player[0]+2+(15.0f/2.0f)-(float)w/2.0f,21,w,50,Turn[0],100-fade);
             }
             else
