@@ -15,6 +15,7 @@ typedef struct
 Point **SalahCollision;
 Point **HaithamCollision;
 
+int ProcessCollision(IMAGE ** pics1, int index1, Point **Data1,int x1,int y1,int w1,int h1,IMAGE ** pics2, int index2, Point **Data2,int x2,int y2,int w2,int h2);
 //Intersection of two lines
 int Intersect(Point pt1,Point pt2,Point pt3,Point pt4);
 //Intersection of two shapes

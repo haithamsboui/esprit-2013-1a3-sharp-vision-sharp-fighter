@@ -3,6 +3,13 @@
 Point **SalahCollision;
 Point **HaithamCollision;
 
+
+int ProcessCollision(IMAGE ** pics1, int index1, Point **Data1,int x1,int y1,int w1,int h1,IMAGE ** pics2, int index2, Point **Data2,int x2,int y2,int w2,int h2)
+{
+
+}
+
+
 int Intersect(Point pt1,Point pt2,Point pt3,Point pt4)
 {
     float A1, A2, B1, B2, C1, C2, det;
@@ -52,7 +59,7 @@ void LoadCollisionData()
     set_config_file("Resources/Collision.cfg");
     //Loading Salah Data
     sprintf(Section,"/Resources/Images/Salah/GamePlay");
-    SalahCollision=malloc(SalahImageCount*sizeof(Point*));
+    SalahCollision=calloc(SalahImageCount,sizeof(Point*));
     for(i=0; i<SalahImageCount; i++)
     {
         sprintf(buffer,"%s/%d.png.Count",Section,i);
@@ -63,7 +70,6 @@ void LoadCollisionData()
         if(count && data!=NULL)
         {
             SalahCollision[i]=malloc((count+1)*sizeof(Point));
-
             SalahCollision[i][0].X=atoi(strtok(data,","));
             SalahCollision[i][0].Y=atoi(strtok(NULL,","));
             for(j=1; j<count; j++)
@@ -77,7 +83,7 @@ void LoadCollisionData()
     }
     //Loading Haitham Data
     sprintf(Section,"/Resources/Images/Haitham/GamePlay");
-    SalahCollision=malloc(HaithamImageCount*sizeof(Point*));
+    HaithamCollision=calloc(HaithamImageCount,sizeof(Point*));
     for(i=0; i<HaithamImageCount; i++)
     {
         sprintf(buffer,"%s/%d.png.Count",Section,i);
@@ -100,6 +106,7 @@ void LoadCollisionData()
             HaithamCollision[i][j].Y=-1;
         }
     }
+    set_config_file("Resources/Setting.cfg");
 }
 
 void UnLoadCollisionData()
