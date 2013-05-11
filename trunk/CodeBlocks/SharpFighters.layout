@@ -7,14 +7,14 @@
 	<File name="../include/Calcul.h" open="0" top="0" tabpos="13">
 		<Cursor position="151" topLine="0" />
 	</File>
-	<File name="../include/Collision.h" open="0" top="0" tabpos="12">
-		<Cursor position="448" topLine="0" />
+	<File name="../include/Collision.h" open="1" top="0" tabpos="8">
+		<Cursor position="216" topLine="0" />
 	</File>
 	<File name="../include/Earth.h" open="1" top="0" tabpos="4">
 		<Cursor position="340" topLine="3" />
 	</File>
 	<File name="../include/Graphics.h" open="0" top="0" tabpos="4">
-		<Cursor position="195" topLine="0" />
+		<Cursor position="206" topLine="0" />
 	</File>
 	<File name="../include/Haitham.h" open="0" top="0" tabpos="15">
 		<Cursor position="147" topLine="0" />
@@ -34,7 +34,7 @@
 	<File name="../include/Setting.h" open="0" top="0" tabpos="6">
 		<Cursor position="223" topLine="0" />
 	</File>
-	<File name="../include/Textout.h" open="1" top="0" tabpos="9">
+	<File name="../include/Textout.h" open="0" top="0" tabpos="8">
 		<Cursor position="462" topLine="0" />
 	</File>
 	<File name="../include/Texture.h" open="0" top="0" tabpos="3">
@@ -49,44 +49,44 @@
 	<File name="../src/AudioPlayer.c" open="0" top="0" tabpos="6">
 		<Cursor position="1175" topLine="0" />
 	</File>
-	<File name="../src/Calcul.c" open="1" top="0" tabpos="10">
+	<File name="../src/Calcul.c" open="0" top="0" tabpos="9">
 		<Cursor position="258" topLine="0" />
 	</File>
-	<File name="../src/Collision.c" open="0" top="0" tabpos="8">
-		<Cursor position="3060" topLine="88" />
+	<File name="../src/Collision.c" open="1" top="0" tabpos="7">
+		<Cursor position="236" topLine="0" />
 	</File>
-	<File name="../src/Earth.c" open="1" top="1" tabpos="13">
+	<File name="../src/Earth.c" open="0" top="0" tabpos="12">
 		<Cursor position="2687" topLine="60" />
 	</File>
-	<File name="../src/Graphics.c" open="0" top="0" tabpos="5">
-		<Cursor position="140" topLine="0" />
+	<File name="../src/Graphics.c" open="0" top="0" tabpos="14">
+		<Cursor position="114" topLine="0" />
 	</File>
 	<File name="../src/Haitham.c" open="0" top="0" tabpos="16">
 		<Cursor position="427" topLine="87" />
 	</File>
-	<File name="../src/Input.c" open="1" top="0" tabpos="7">
-		<Cursor position="3675" topLine="89" />
+	<File name="../src/Input.c" open="0" top="0" tabpos="7">
+		<Cursor position="12430" topLine="345" />
 	</File>
 	<File name="../src/Install.c" open="1" top="0" tabpos="5">
-		<Cursor position="42" topLine="0" />
+		<Cursor position="455" topLine="75" />
 	</File>
-	<File name="../src/Menus.c" open="1" top="0" tabpos="2">
-		<Cursor position="23" topLine="0" />
+	<File name="../src/Menus.c" open="1" top="1" tabpos="2">
+		<Cursor position="466" topLine="0" />
 	</File>
 	<File name="../src/Salah.c" open="0" top="0" tabpos="9">
 		<Cursor position="23" topLine="0" />
 	</File>
-	<File name="../src/Setting.c" open="1" top="0" tabpos="11">
-		<Cursor position="764" topLine="0" />
+	<File name="../src/Setting.c" open="0" top="0" tabpos="10">
+		<Cursor position="229" topLine="0" />
 	</File>
-	<File name="../src/Textout.c" open="1" top="0" tabpos="8">
+	<File name="../src/Textout.c" open="0" top="0" tabpos="7">
 		<Cursor position="954" topLine="22" />
 	</File>
-	<File name="../src/Texture.c" open="1" top="0" tabpos="12">
+	<File name="../src/Texture.c" open="0" top="0" tabpos="11">
 		<Cursor position="372" topLine="0" />
 	</File>
-	<File name="../src/VideoPlayer.c" open="0" top="0" tabpos="16">
-		<Cursor position="59" topLine="81" />
+	<File name="../src/VideoPlayer.c" open="0" top="0" tabpos="15">
+		<Cursor position="2261" topLine="39" />
 	</File>
 	<File name="../src/main.c" open="1" top="0" tabpos="1">
 		<Cursor position="219" topLine="0" />

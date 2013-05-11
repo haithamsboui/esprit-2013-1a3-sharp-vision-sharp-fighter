@@ -29,6 +29,8 @@ int install()
 
     LoadSettings();
 
+    LoadCollisionData();
+
     if(install_keyboard())
         return 1;
     if(install_timer())
@@ -103,6 +105,7 @@ int change_resolution(int fullscreen, int ResIndex)
     Height=Resolutions->mode[ResIndex].height;
     depth=Resolutions->mode[ResIndex].bpp;
     ResolutionIndex=ResIndex;
+    set_config_file("Resources/Setting.cfg");
     set_config_int("graphics","Fullscreen",Fullscreen);
     set_config_int("graphics","Width",Width);
     set_config_int("graphics","Height",Height);
@@ -156,7 +159,7 @@ void uninstall()
     free(GlobalTextures);
     TextureCount=0;
     free(screenimage);
-   // UnLoadCollisionData();
+    UnLoadCollisionData();
     destroy_gfx_mode_list(Resolutions);
 
     DisposeVoices();

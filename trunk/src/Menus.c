@@ -4,7 +4,7 @@
 void intromenu(int intro)
 {
     int waitframes,keypress=0;
-    float texttrans=0, textmulti=3;
+    float texttrans=0, textmulti=3, drawtrans=0,drawmulti=0.4;
     IMAGE *background,*logo;
     background=load_image("Resources/Images/Origin.png");
     logo=load_image("Resources/Images/logo2.png");
@@ -38,12 +38,19 @@ void intromenu(int intro)
             voice_ramp_volume(intro,1000,Music_volume);
 
         }
+
         draw_image_ex(background,0,0,100,100,NONE,100);
+        draw_image_ex(logo,10-drawtrans/6.25,32-drawtrans/12.5,80+drawtrans/3.125,0,NONE,(drawtrans-20)/4);
+        draw_image_ex(logo,10-drawtrans/25,32-drawtrans/50,80+drawtrans/12.5,0,NONE,(drawtrans-20)/2);
         draw_image_ex(logo,10,32,80,0,NONE,100);
         if(texttrans>100 || texttrans<0){
             textmulti=textmulti* (-1);
         }
         texttrans+=textmulti;
+        if(drawtrans>100 || drawtrans<0){
+            drawmulti=drawmulti* (-1);
+        }
+        drawtrans+=drawmulti;
         draw_text(Arista,"Press any key to continue...",10,50,80,CENTER,texttrans);
         next_frame();
     }
