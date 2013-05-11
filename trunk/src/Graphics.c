@@ -4,7 +4,7 @@ void draw_image_ex(IMAGE *image, float x, float y, float w, float h,flip flips, 
 {
     int hflip,vflip;
 
-    if ((image->ID==0) || (w==0 && h==0)) return;
+    if ((image->ID==0) || (w==0 && h==0) || trans==0.0f) return;
 
 
     if(w==0 && h!=0){

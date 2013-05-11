@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="../include/AudioPlayer.h" open="1" top="0" tabpos="6">
+	<File name="../include/AudioPlayer.h" open="0" top="0" tabpos="6">
 		<Cursor position="0" topLine="0" />
 	</File>
 	<File name="../include/Calcul.h" open="0" top="0" tabpos="13">
 		<Cursor position="151" topLine="0" />
 	</File>
-	<File name="../include/Collision.h" open="1" top="0" tabpos="8">
-		<Cursor position="216" topLine="0" />
+	<File name="../include/Collision.h" open="0" top="0" tabpos="11">
+		<Cursor position="445" topLine="0" />
 	</File>
-	<File name="../include/Earth.h" open="1" top="0" tabpos="4">
+	<File name="../include/Earth.h" open="0" top="0" tabpos="4">
 		<Cursor position="340" topLine="3" />
 	</File>
 	<File name="../include/Graphics.h" open="0" top="0" tabpos="4">
@@ -25,7 +25,7 @@
 	<File name="../include/Install.h" open="0" top="0" tabpos="4">
 		<Cursor position="521" topLine="0" />
 	</File>
-	<File name="../include/Menus.h" open="1" top="0" tabpos="3">
+	<File name="../include/Menus.h" open="0" top="0" tabpos="3">
 		<Cursor position="99" topLine="0" />
 	</File>
 	<File name="../include/Salah.h" open="0" top="0" tabpos="11">
@@ -52,14 +52,14 @@
 	<File name="../src/Calcul.c" open="0" top="0" tabpos="9">
 		<Cursor position="258" topLine="0" />
 	</File>
-	<File name="../src/Collision.c" open="1" top="0" tabpos="7">
-		<Cursor position="236" topLine="0" />
+	<File name="../src/Collision.c" open="1" top="0" tabpos="3">
+		<Cursor position="1395" topLine="27" />
 	</File>
 	<File name="../src/Earth.c" open="0" top="0" tabpos="12">
-		<Cursor position="2687" topLine="60" />
+		<Cursor position="5267" topLine="138" />
 	</File>
-	<File name="../src/Graphics.c" open="0" top="0" tabpos="14">
-		<Cursor position="114" topLine="0" />
+	<File name="../src/Graphics.c" open="0" top="0" tabpos="10">
+		<Cursor position="195" topLine="0" />
 	</File>
 	<File name="../src/Haitham.c" open="0" top="0" tabpos="16">
 		<Cursor position="427" topLine="87" />
@@ -67,11 +67,11 @@
 	<File name="../src/Input.c" open="0" top="0" tabpos="7">
 		<Cursor position="12430" topLine="345" />
 	</File>
-	<File name="../src/Install.c" open="1" top="0" tabpos="5">
+	<File name="../src/Install.c" open="0" top="0" tabpos="5">
 		<Cursor position="1427" topLine="45" />
 	</File>
 	<File name="../src/Menus.c" open="1" top="1" tabpos="2">
-		<Cursor position="2860" topLine="704" />
+		<Cursor position="369" topLine="6" />
 	</File>
 	<File name="../src/Salah.c" open="0" top="0" tabpos="9">
 		<Cursor position="23" topLine="0" />
@@ -82,10 +82,10 @@
 	<File name="../src/Textout.c" open="0" top="0" tabpos="7">
 		<Cursor position="954" topLine="22" />
 	</File>
-	<File name="../src/Texture.c" open="0" top="0" tabpos="11">
-		<Cursor position="372" topLine="0" />
+	<File name="../src/Texture.c" open="0" top="0" tabpos="9">
+		<Cursor position="372" topLine="81" />
 	</File>
-	<File name="../src/VideoPlayer.c" open="1" top="0" tabpos="9">
+	<File name="../src/VideoPlayer.c" open="0" top="0" tabpos="8">
 		<Cursor position="1649" topLine="49" />
 	</File>
 	<File name="../src/main.c" open="1" top="0" tabpos="1">
