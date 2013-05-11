@@ -30,7 +30,7 @@ void intromenu(int intro)
 
     waitframes=FrameCount;
 
-    while(!keypress)
+    while(!keypress && !close_button_pressed)
     {
         if(FrameCount%5==0)
         {
@@ -219,6 +219,7 @@ void setting ()
 
     while (!IsKeyPressed(3,RETURN) || second_menu==1)
     {
+        if(close_button_pressed) return;
         if (second_menu==0)
         {
             if (IsKeyPressed(3,RIGHT) && button_press>10 )
@@ -695,6 +696,7 @@ void credit ()
     voice_start(intro);
     while (!IsKeyPressed(3,RETURN) && i!=100)
     {
+        if(close_button_pressed) return;
         draw_image_ex(credit,0,100-i,100,100,NONE,100);//draw background
         i+=0.1;
         next_frame();
@@ -757,7 +759,7 @@ void versus (int intro)
 
     while (!IsKeyPressed(3,RETURN))
     {
-
+        if(close_button_pressed) return;
         if(choix1+choix2!=2)
         {
 

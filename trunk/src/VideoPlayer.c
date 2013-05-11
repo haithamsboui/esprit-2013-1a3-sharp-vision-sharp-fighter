@@ -61,7 +61,7 @@ int PlayVideo(const char *filename)
     while(apeg_advance_stream(stream, 0) == APEG_OK)
     {
         // Stop if a key is pressed
-        if(IsKeyPressed(3,ENTER) || IsKeyPressed(3,RETURN) || IsKeyPressed(3,PUNCH) || IsKeyPressed(3,KICK)) //Condition to exit
+        if(AnyKeyPressed(3) || close_button_pressed) //Condition to exit
             break;
 
         // If the bitmap was updated, update the screen, else mark it as
