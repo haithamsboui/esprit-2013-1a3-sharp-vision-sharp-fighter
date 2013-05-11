@@ -62,6 +62,7 @@ int install()
         allegro_message("Unable to set graphic mode\n%s\n", allegro_error);
         return 1;
     }
+    set_close_button_callback(close_button_handler);
     SetOpenGL2D();
     screenimage=(IMAGE*)malloc(sizeof(IMAGE));
     screenimage->ID=0;

@@ -1,5 +1,11 @@
 #include "includes.h"
+int close_button_pressed = 0;
 
+void close_button_handler()
+{
+    close_button_pressed = 1;
+}
+END_OF_FUNCTION(close_button_handler)
 
 void intromenu(int intro)
 {
@@ -12,7 +18,8 @@ void intromenu(int intro)
     PlayVideo("Resources/Videos/SharpIntro.ogv");
     PlayVideo("Resources/Videos/FighterIntro.ogv");
 
-    while(AnyKeyPressed(3)){
+    while(AnyKeyPressed(3))
+    {
         rest(10);
     }
 
@@ -25,7 +32,8 @@ void intromenu(int intro)
 
     while(!keypress)
     {
-        if(FrameCount%5==0){
+        if(FrameCount%5==0)
+        {
             keypress=AnyKeyPressed(3);
         }
 
@@ -43,11 +51,13 @@ void intromenu(int intro)
         draw_image_ex(logo,10-drawtrans/6.25,32-drawtrans/12.5,80+drawtrans/3.125,0,NONE,(drawtrans-20)/4);
         draw_image_ex(logo,10-drawtrans/25,32-drawtrans/50,80+drawtrans/12.5,0,NONE,(drawtrans-20)/2);
         draw_image_ex(logo,10,32,80,0,NONE,100);
-        if(texttrans>100 || texttrans<0){
+        if(texttrans>100 || texttrans<0)
+        {
             textmulti=textmulti* (-1);
         }
         texttrans+=textmulti;
-        if(drawtrans>100 || drawtrans<0){
+        if(drawtrans>100 || drawtrans<0)
+        {
             drawmulti=drawmulti* (-1);
         }
         drawtrans+=drawmulti;
@@ -88,7 +98,7 @@ void mainmenu(int *choix)
     ind_2=(ind_1-1+5)%5;
     ind_3=(ind_2-1+5)%5;
     ind_4=(ind_3-1+5)%5;
-    while (!IsKeyPressed(3,ENTER))
+    while (!IsKeyPressed(3,ENTER) && !close_button_pressed)
     {
         if (IsKeyPressed(3,RIGHT) && press_buton>10)
         {
