@@ -17,7 +17,9 @@ void intromenu(int intro)
     }
 
     voice_set_playmode(intro, PLAYMODE_LOOP);
+    voice_set_volume(intro,0);
     voice_start(intro);
+    voice_ramp_volume(intro,1000,Music_volume);
 
     waitframes=FrameCount;
 
@@ -29,20 +31,20 @@ void intromenu(int intro)
 
         if((FrameCount-waitframes)/(float)FPS>30)
         {
-            voice_stop(intro);
+            voice_ramp_volume(intro,1000,0);
             PlayVideo("Resources/Videos/FighterIntro.ogv");
 
             waitframes=FrameCount;
-            voice_start(intro);
-            voice_set_playmode(intro, PLAYMODE_LOOP);
+            voice_ramp_volume(intro,1000,Music_volume);
+
         }
         draw_image_ex(background,0,0,100,100,NONE,100);
-        draw_image_ex(logo,5,20,90,0,NONE,100);
+        draw_image_ex(logo,10,32,80,0,NONE,100);
         if(texttrans>100 || texttrans<0){
             textmulti=textmulti* (-1);
         }
         texttrans+=textmulti;
-        draw_text(Arista,"Press any key to continue...",10,50,75,CENTER,texttrans);
+        draw_text(Arista,"Press any key to continue...",10,50,80,CENTER,texttrans);
         next_frame();
     }
 }
