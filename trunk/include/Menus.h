@@ -2,6 +2,10 @@
 #define MENUS_H_INCLUDED
 #include "includes.h"
 
+int close_button_pressed;
+
+void close_button_handler();
+
 void intromenu(int intro);
 
 void mainmenu(int *choix);

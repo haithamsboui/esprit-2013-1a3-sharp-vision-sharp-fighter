@@ -26,7 +26,7 @@
 		<Cursor position="521" topLine="0" />
 	</File>
 	<File name="../include/Menus.h" open="1" top="0" tabpos="3">
-		<Cursor position="109" topLine="0" />
+		<Cursor position="99" topLine="0" />
 	</File>
 	<File name="../include/Salah.h" open="0" top="0" tabpos="11">
 		<Cursor position="53" topLine="0" />
@@ -68,10 +68,10 @@
 		<Cursor position="12430" topLine="345" />
 	</File>
 	<File name="../src/Install.c" open="1" top="0" tabpos="5">
-		<Cursor position="455" topLine="75" />
+		<Cursor position="1427" topLine="45" />
 	</File>
-	<File name="../src/Menus.c" open="1" top="1" tabpos="2">
-		<Cursor position="466" topLine="0" />
+	<File name="../src/Menus.c" open="1" top="0" tabpos="2">
+		<Cursor position="3014" topLine="117" />
 	</File>
 	<File name="../src/Salah.c" open="0" top="0" tabpos="9">
 		<Cursor position="23" topLine="0" />
@@ -88,7 +88,7 @@
 	<File name="../src/VideoPlayer.c" open="0" top="0" tabpos="15">
 		<Cursor position="2261" topLine="39" />
 	</File>
-	<File name="../src/main.c" open="1" top="0" tabpos="1">
-		<Cursor position="219" topLine="0" />
+	<File name="../src/main.c" open="1" top="1" tabpos="1">
+		<Cursor position="502" topLine="15" />
 	</File>
 </CodeBlocks_layout_file>

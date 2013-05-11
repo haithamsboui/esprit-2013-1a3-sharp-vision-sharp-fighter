@@ -3,7 +3,7 @@
 int main()
 {
     int intro ;
-    int state=1,choix=0;
+    int choix=0;
 
 
     //intialization
@@ -15,35 +15,36 @@ int main()
 
     intromenu(intro);
 
-    while (state)
+    while (!close_button_pressed)
     {
         mainmenu(&choix);
-
-        switch (choix)
+        if(!close_button_pressed)
         {
-        case 0 :
+            switch (choix)
+            {
+            case 0 :
 //        arcade();
-            break;
+                break;
 
-        case 1:
-            versus(intro);
-            break;
+            case 1:
+                versus(intro);
+                break;
 
-        case 2 :
-            setting ();
-            break;
+            case 2 :
+                setting ();
+                break;
 
-        case 3 :
-            voice_stop(intro);
-            credit();
-            voice_start(intro);
-            break;
+            case 3 :
+                voice_stop(intro);
+                credit();
+                voice_start(intro);
+                break;
 
-        case 4 :
-            state=0;
-            break;
+            case 4 :
+                close_button_pressed=1;
+                break;
+            }
         }
-
     }
 
     voice_stop(intro);
