@@ -6,8 +6,8 @@ int TextureCount=0; //Number of textures
 IMAGE* load_image(char *filename)
 {
     int ID,i;
-    IMAGE *img;
-    BITMAP *bmp;
+    IMAGE *img=NULL;
+    BITMAP *bmp=NULL;
 
     for(i=0;i<TextureCount;i++){
         if(strcmp(filename,GlobalTextures[i]->filename)==0){
