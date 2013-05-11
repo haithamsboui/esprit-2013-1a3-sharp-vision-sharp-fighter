@@ -4,9 +4,55 @@ Point **SalahCollision;
 Point **HaithamCollision;
 
 
-int ProcessCollision(IMAGE ** pics1, int index1, Point **Data1,int x1,int y1,int w1,int h1,IMAGE ** pics2, int index2, Point **Data2,int x2,int y2,int w2,int h2)
+int ProcessCollision(IMAGE ** pics1, int index1, Point **Data1,float x1,float y1,float w1,float h1,
+                     IMAGE ** pics2, int index2, Point **Data2,float x2,float y2,float w2,float h2)
 {
+    int i=0,j=0;
+    Point pt1,pt2,pt3,pt4;
 
+    //testing for valid params
+    if ((w1==0 && h1==0) || (w2==0 && h2==0)) return 0;
+
+    if(w1==0 && h1!=0){
+        w1=(h1/((float)pics1[index1]->h/(float)pics1[index1]->w))/AspectRatio;
+    }
+    if(w1!=0 && h1==0){
+        h1=(w1/((float)pics1[index1]->w/(float)pics1[index1]->h))*AspectRatio;
+    }
+    if(w2==0 && h2!=0){
+        w2=(h2/((float)pics2[index2]->h/(float)pics2[index2]->w))/AspectRatio;
+    }
+    if(w2!=0 && h2==0){
+        h2=(w2/((float)pics2[index2]->w/(float)pics2[index2]->h))*AspectRatio;
+    }
+
+    //if there is data
+    if (Data1[index1]!=NULL && Data2[index2]!=NULL)
+    {
+        for(i=0; Data1[index1][i+1].X!=-1; i++)
+        {
+            //Convert points1 from image coords to screen coords
+            pt1.X=(Data1[index1][i].X/(float)pics1[index1]->w)*w1 + x1;
+            pt1.Y=(Data1[index1][i].Y/(float)pics1[index1]->h)*h1 + y1;
+            pt2.X=(Data1[index1][i+1].X/(float)pics1[index1]->w)*w1 + x1;
+            pt2.Y=(Data1[index1][i+1].Y/(float)pics1[index1]->h)*h1 + y1;
+
+            for(j=0; Data2[index2][j+1].X!=-1; j++)
+            {
+                //Convert points2 from image coords to screen coords
+                pt3.X=(Data2[index2][j].X/(float)pics2[index2]->w)*w2 + x2;
+                pt3.Y=(Data2[index2][j].Y/(float)pics2[index2]->h)*h2 + y2;
+                pt4.X=(Data2[index2][j+1].X/(float)pics2[index2]->w)*w2 + x2;
+                pt4.Y=(Data2[index2][j+1].Y/(float)pics2[index2]->h)*h2 + y2;
+
+                if(Intersect(pt1,pt2,pt3,pt4))
+                {
+                    return 1;
+                }
+            }
+        }
+    }
+    return 0;
 }
 
 
@@ -35,7 +81,7 @@ int Intersect(Point pt1,Point pt2,Point pt3,Point pt4)
     }
     return 0;
 }
-
+/*
 int Collision(Point Shape1[], int n1,Point Shape2[], int n2)
 {
     int i,j;
@@ -50,7 +96,7 @@ int Collision(Point Shape1[], int n1,Point Shape2[], int n2)
         }
     }
     return 0;
-}
+}*/
 
 void LoadCollisionData()
 {
@@ -123,3 +169,6 @@ void UnLoadCollisionData()
     }
     free(HaithamCollision);
 }
+
+
+

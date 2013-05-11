@@ -9,9 +9,10 @@ END_OF_FUNCTION(close_button_handler)
 
 void intromenu(int intro)
 {
-    int waitframes,keypress=0;
-    float texttrans=0, textmulti=3, drawtrans=0,drawmulti=0.4;
+    int i,waitframes,keypress=0;
+    float texttrans=0, textmulti=3, drawtrans=0,drawmulti=0.3, drawval=0;
     IMAGE *background,*logo;
+    Pointf InterpolationPoints[]= {{.x=-25.0f,.y=-100.0f},{.x=0.0f,.y=0.0f},{.x=50.0f,.y=75.0f},{.x=100.0f,.y=100.0f}};
     background=load_image("Resources/Images/Origin.png");
     logo=load_image("Resources/Images/logo2.png");
     PlayVideo("Resources/Videos/EspritIntro.ogv");
@@ -44,23 +45,24 @@ void intromenu(int intro)
 
             waitframes=FrameCount;
             voice_ramp_volume(intro,1000,Music_volume);
-
         }
 
         draw_image_ex(background,0,0,100,100,NONE,100);
-        draw_image_ex(logo,10-drawtrans/6.25,32-drawtrans/12.5,80+drawtrans/3.125,0,NONE,(drawtrans-20)/4);
-        draw_image_ex(logo,10-drawtrans/25,32-drawtrans/50,80+drawtrans/12.5,0,NONE,(drawtrans-20)/2);
-        draw_image_ex(logo,10,32,80,0,NONE,100);
+        for(i=256;i>0;i/=2){
+            draw_image_ex(logo,10-drawtrans/(100.0f/(4.0f*i)),32-drawtrans/(100.0f/(2.0f*i)),80+drawtrans/(100.0f/(8.0f*i)),0,NONE,(drawtrans-10)/(2*i));
+        }
+        draw_image_ex(logo,10,32,80,0,NONE,150-drawtrans);
         if(texttrans>100 || texttrans<0)
         {
             textmulti=textmulti* (-1);
         }
         texttrans+=textmulti;
-        if(drawtrans>100 || drawtrans<0)
+        if(drawval>100 || drawval<0)
         {
             drawmulti=drawmulti* (-1);
         }
-        drawtrans+=drawmulti;
+        drawval+=drawmulti;
+        drawtrans=LaGrange(InterpolationPoints,3,drawval);
         draw_text(Arista,"Press any key to continue...",10,50,80,CENTER,texttrans);
         next_frame();
     }
