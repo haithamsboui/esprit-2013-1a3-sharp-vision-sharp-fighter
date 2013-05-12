@@ -4,11 +4,10 @@
 #include "includes.h"
 
 typedef enum {NORMAL,CENTER_X,CENTER_Y,CENTER} FONTSTYLE;
-typedef enum {SharpCurve,Verdana,Arista,Arista2} FONTS;
+typedef enum {SharpCurve,Verdana,Arista,Arista2,FONTSCOUNT} FONTS;
 
 //TODO : Fix variable size according to FONTS size"
-//#define FONTSCOUNT sizeof(FONTS)/sizeof(int)
-const char *FontFiles[];
+const char *FontFiles[FONTSCOUNT];
 FTGLfont **fontlist;
 FTGLfont **fontlist2;
 //Load .ttf files

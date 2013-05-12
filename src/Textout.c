@@ -7,13 +7,12 @@ FTGLfont **fontlist2;
 
 int install_fonts()
 {
-    int i,n,fail=0;
+    int i,fail=0;
     char filename[255];
-    n=sizeof(FontFiles) / sizeof ( const char * );
-    fontlist=malloc(n*sizeof(FTGLfont*));
-    fontlist2=malloc(n*sizeof(FTGLfont*));
+    fontlist=malloc(FONTSCOUNT*sizeof(FTGLfont*));
+    fontlist2=malloc(FONTSCOUNT*sizeof(FTGLfont*));
 
-    for(i=0; i<n; i++)
+    for(i=0; i<FONTSCOUNT; i++)
     {
         sprintf(filename,"Resources/Fonts/%s",FontFiles[i]);
         fontlist[i]=ftglCreatePolygonFont(filename);

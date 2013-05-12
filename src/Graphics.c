@@ -4,6 +4,7 @@ void draw_image_ex(IMAGE *image, float x, float y, float w, float h,flip flips, 
 {
     int hflip,vflip;
 
+    trans=Percentage(trans);
     if ((image->ID==0) || (w==0 && h==0) || trans==0.0f) return;
 
 
@@ -17,7 +18,7 @@ void draw_image_ex(IMAGE *image, float x, float y, float w, float h,flip flips, 
 
     vflip = (flips & 1)==1;
     hflip = (flips & 2)==2;
-    trans=Percentage(trans)/100.0f;
+    trans/=100.0f;
     x=x/50 -1;
     y=-(y/50 -1);
     w=w/50;
