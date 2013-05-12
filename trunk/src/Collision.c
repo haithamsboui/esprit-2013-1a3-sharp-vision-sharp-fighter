@@ -101,7 +101,7 @@ int Collision(Point Shape1[], int n1,Point Shape2[], int n2)
 
 void LoadCollisionData()
 {
-    char Section[255],buffer[255],*data=NULL;
+    char Section[255],buffer[255],*data;
     int i,j,count;
     set_config_file("Resources/Collision.cfg");
     //Loading Salah Data
@@ -112,7 +112,7 @@ void LoadCollisionData()
         sprintf(buffer,"%s/%d.png.Count",Section,i);
         count=get_config_int(Section,buffer,0);
         sprintf(buffer,"%s/%d.png.Data",Section,i);
-        data=get_config_string(Section,buffer,NULL);
+        data=(char*)get_config_string(Section,buffer,NULL);
 
         if(count && data!=NULL)
         {
@@ -127,6 +127,7 @@ void LoadCollisionData()
             SalahCollision[i][j].X=-1;
             SalahCollision[i][j].Y=-1;
         }
+
     }
     //Loading Haitham Data
     sprintf(Section,"/Resources/Images/Haitham/GamePlay");
@@ -136,7 +137,7 @@ void LoadCollisionData()
         sprintf(buffer,"%s/%d.png.Count",Section,i);
         count=get_config_int(Section,buffer,0);
         sprintf(buffer,"%s/%d.png.Data",Section,i);
-        data=get_config_string(Section,buffer,NULL);
+        data=(char*)get_config_string(Section,buffer,NULL);
 
         if(count && data!=NULL)
         {
@@ -152,6 +153,7 @@ void LoadCollisionData()
             HaithamCollision[i][j].X=-1;
             HaithamCollision[i][j].Y=-1;
         }
+
     }
     set_config_file("Resources/Setting.cfg");
 }

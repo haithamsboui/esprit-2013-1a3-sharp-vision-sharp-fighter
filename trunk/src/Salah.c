@@ -94,7 +94,7 @@ void Draw_Salah()
     else
         vflip = NONE;
 
-    if(etatS!=Kick && etatS!=Punch && etatS!=Fireball && etatS != Freeze & etatS !=Jump  && etatS !=Wind && etatS !=Thunder &&etatS!=Fall&&etatS!=Hit&&etatS!=Defence&etatS!=Down)
+    if(etatS!=Kick && etatS!=Punch && etatS!=Fireball && etatS != Freeze && etatS !=Jump  && etatS !=Wind && etatS !=Thunder &&etatS!=Fall&&etatS!=Hit&&etatS!=Defence&&etatS!=Down)
     {
         if(IsKeyPressed(PlayerS,KICK))
         {
@@ -119,12 +119,12 @@ void Draw_Salah()
         else if (IsKeyPressed(PlayerS,UP))
         {
             if (etatS!=Fall)
-         {
-             etatS=Jump;
-            yS+=0.2;
-        }
-        else
-        etatS=Stable;
+            {
+                etatS=Jump;
+                yS+=0.2;
+            }
+            else
+                etatS=Stable;
         }
         else if (IsKeyPressed(PlayerS,DOWN))
         {
@@ -246,7 +246,7 @@ void Draw_Salah()
                 etatS=Stable;
             }
         }
-    break;
+        break;
     case Thunder:
         wS=(hS/((float)SalahPics[IndexS+ThunderStartS]->h/(float)SalahPics[IndexS+ThunderStartS]->w))/AspectRatio;
         if(PlayerS==2) xS-=wS;
@@ -263,7 +263,7 @@ void Draw_Salah()
         break;
 
     case Wind:
-    wS=(hS/((float)SalahPics[IndexS+WindStartS]->h/(float)SalahPics[IndexS+WindStartS]->w))/AspectRatio;
+        wS=(hS/((float)SalahPics[IndexS+WindStartS]->h/(float)SalahPics[IndexS+WindStartS]->w))/AspectRatio;
         if(PlayerS==2) xS-=wS;
         draw_image_ex(SalahPics[IndexS+WindStartS],xS,yS,wS,hS,vflip,100);
         if(PlayerS==2) xS+=wS;
@@ -276,9 +276,9 @@ void Draw_Salah()
             }
         }
 
-    break;
+        break;
     case Freeze:
-    wS=(hS/((float)SalahPics[IndexS+FreezeStartS]->h/(float)SalahPics[IndexS+FreezeStartS]->w))/AspectRatio;
+        wS=(hS/((float)SalahPics[IndexS+FreezeStartS]->h/(float)SalahPics[IndexS+FreezeStartS]->w))/AspectRatio;
         if(PlayerS==2) xS-=wS;
         draw_image_ex(SalahPics[IndexS+FreezeStartS],xS,yS,wS,hS,vflip,100);
         if(PlayerS==2) xS+=wS;
@@ -291,10 +291,10 @@ void Draw_Salah()
             }
         }
 
-    break;
+        break;
 
-        case Crouch:
-    wS=(hS/((float)SalahPics[IndexS+CrouchStartS]->h/(float)SalahPics[IndexS+CrouchStartS]->w))/AspectRatio;
+    case Crouch:
+        wS=(hS/((float)SalahPics[IndexS+CrouchStartS]->h/(float)SalahPics[IndexS+CrouchStartS]->w))/AspectRatio;
         if(PlayerS==2) xS-=wS;
         draw_image_ex(SalahPics[IndexS+CrouchStartS],xS,yS,wS,hS,vflip,100);
         if(PlayerS==2) xS+=wS;
@@ -306,11 +306,11 @@ void Draw_Salah()
                 etatS=Stable;
             }
         }
-break;
+        break;
 
 
-  case Defence:
-    wS=(hS/((float)SalahPics[IndexS+DefenceStartS]->h/(float)SalahPics[IndexS+DefenceStartS]->w))/AspectRatio;
+    case Defence:
+        wS=(hS/((float)SalahPics[IndexS+DefenceStartS]->h/(float)SalahPics[IndexS+DefenceStartS]->w))/AspectRatio;
         if(PlayerS==2) xS-=wS;
         draw_image_ex(SalahPics[IndexS+DefenceStartS],xS,yS,wS,hS,vflip,100);
         if(PlayerS==2) xS+=wS;
@@ -322,10 +322,10 @@ break;
                 etatS=Stable;
             }
         }
-break;
+        break;
 
-  case Fall:
-    wS=(hS/((float)SalahPics[IndexS+HitStartS]->h/(float)SalahPics[IndexS+HitStartS]->w))/AspectRatio;
+    case Fall:
+        wS=(hS/((float)SalahPics[IndexS+HitStartS]->h/(float)SalahPics[IndexS+HitStartS]->w))/AspectRatio;
         if(PlayerS==2) xS-=wS;
         draw_image_ex(SalahPics[IndexS+HitStartS],xS,yS,wS,hS,vflip,100);
         if(PlayerS==2) xS+=wS;
@@ -337,7 +337,9 @@ break;
                 etatS=Stable;
             }
         }
-break;
+        break;
+    default:
+        break;
     }
 }
 

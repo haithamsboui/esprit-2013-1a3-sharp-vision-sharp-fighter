@@ -2,9 +2,8 @@
 
 int main()
 {
-    int intro ;
+    int intro;
     int choix=0;
-
 
     //intialization
 

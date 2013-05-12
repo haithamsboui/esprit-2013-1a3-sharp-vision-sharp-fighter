@@ -91,7 +91,7 @@ void Draw_Haitham()
     else
         vflip = VERTICAL;
 
-    if(etatH!=Kick && etatH!=Punch && etatH!=Fireball && etatH != Freeze & etatH !=Jump  && etatH !=Wind && etatH !=Thunder &&etatH!=Fall&&etatH!=Hit&&etatH!=Defence&etatH!=Down)
+    if(etatH!=Kick && etatH!=Punch && etatH!=Fireball && etatH != Freeze && etatH !=Jump  && etatH !=Wind && etatH !=Thunder &&etatH!=Fall&&etatH!=Hit&&etatH!=Defence&&etatH!=Down)
     {
         if(IsKeyPressed(PlayerH,KICK))
         {
@@ -116,12 +116,12 @@ void Draw_Haitham()
         else if (IsKeyPressed(PlayerH,UP))
         {
             if (etatH!=Fall)
-         {
-             etatH=Jump;
-            yH+=0.2;
-        }
-        else
-        etatH=Stable;
+            {
+                etatH=Jump;
+                yH+=0.2;
+            }
+            else
+                etatH=Stable;
         }
         else if (IsKeyPressed(PlayerH,DOWN))
         {
@@ -243,7 +243,7 @@ void Draw_Haitham()
                 etatH=Stable;
             }
         }
-    break;
+        break;
     case Thunder:
         wH=(hH/((float)HaithamPics[IndexH+ThunderStartH]->h/(float)HaithamPics[IndexH+ThunderStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
@@ -260,7 +260,7 @@ void Draw_Haitham()
         break;
 
     case Wind:
-    wH=(hH/((float)HaithamPics[IndexH+WindStartH]->h/(float)HaithamPics[IndexH+WindStartH]->w))/AspectRatio;
+        wH=(hH/((float)HaithamPics[IndexH+WindStartH]->h/(float)HaithamPics[IndexH+WindStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+WindStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
@@ -273,9 +273,9 @@ void Draw_Haitham()
             }
         }
 
-    break;
+        break;
     case Freeze:
-    wH=(hH/((float)HaithamPics[IndexH+FreezeStartH]->h/(float)HaithamPics[IndexH+FreezeStartH]->w))/AspectRatio;
+        wH=(hH/((float)HaithamPics[IndexH+FreezeStartH]->h/(float)HaithamPics[IndexH+FreezeStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+FreezeStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
@@ -288,10 +288,10 @@ void Draw_Haitham()
             }
         }
 
-    break;
+        break;
 
-        case Crouch:
-    wH=(hH/((float)HaithamPics[IndexH+CrouchStartH]->h/(float)HaithamPics[IndexH+CrouchStartH]->w))/AspectRatio;
+    case Crouch:
+        wH=(hH/((float)HaithamPics[IndexH+CrouchStartH]->h/(float)HaithamPics[IndexH+CrouchStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+CrouchStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
@@ -303,11 +303,11 @@ void Draw_Haitham()
                 etatH=Stable;
             }
         }
-break;
+        break;
 
 
-  case Defence:
-    wH=(hH/((float)HaithamPics[IndexH+DefenceStartH]->h/(float)HaithamPics[IndexH+DefenceStartH]->w))/AspectRatio;
+    case Defence:
+        wH=(hH/((float)HaithamPics[IndexH+DefenceStartH]->h/(float)HaithamPics[IndexH+DefenceStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+DefenceStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
@@ -319,10 +319,10 @@ break;
                 etatH=Stable;
             }
         }
-break;
+        break;
 
-  case Fall:
-    wH=(hH/((float)HaithamPics[IndexH+HitStartH]->h/(float)HaithamPics[IndexH+HitStartH]->w))/AspectRatio;
+    case Fall:
+        wH=(hH/((float)HaithamPics[IndexH+HitStartH]->h/(float)HaithamPics[IndexH+HitStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+HitStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
@@ -334,7 +334,10 @@ break;
                 etatH=Stable;
             }
         }
-break;
+        break;
+
+    default:
+        break;
     }
 }
 

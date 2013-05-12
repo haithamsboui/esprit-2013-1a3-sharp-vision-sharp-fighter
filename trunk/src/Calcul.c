@@ -2,9 +2,7 @@
 
 float Percentage(float x)
 {
-    x= x>100.0f ? 100.0f : x;
-    x= x<0.0f ? 0.0f : x;
-    return x;
+    return Max(Min(x,100.0f),0.0f);
 }
 
 float LinearFunc(float start, float end,float percentage)
