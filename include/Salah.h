@@ -10,14 +10,14 @@ typedef enum {Stable, Forward, Backward,Jump,Crouch,Punch,Kick,Fireball,Thunder,
 
 IMAGE *SalahPics[51];
 
-float x,y;
-float w,h;
-int direction;
-int Player;
-EtatPlayer etat;
-int Index;
+float xS,yS;
+float wS,hS;
+int directionS;
+int PlayerS;
+EtatPlayer etatS;
+int IndexS;
 
-void LoadSalah(int player);
+void LoadSalah(int PlayerS);
 
 void Draw_Salah();
 
