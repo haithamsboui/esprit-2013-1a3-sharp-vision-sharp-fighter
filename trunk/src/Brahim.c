@@ -57,7 +57,6 @@ void LoadBrahim(int player)
     {
         sprintf(path,"Resources/Images/Brahim/Gameplay/%d.png",i);
         BrahimPics[i]=load_image(path);
-        printf ("%p\n",BrahimPics[i]);
     }
 
     PlayerB=player;

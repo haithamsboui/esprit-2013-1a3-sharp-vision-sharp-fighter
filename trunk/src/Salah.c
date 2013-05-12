@@ -3,23 +3,54 @@
 #define StableStartS 0
 #define StableCountS 3
 
-#define WalkStartS 9
-#define WalkCountS 4
+#define JumpStartS 3
+#define JumpCountS 4
 
-#define KickStartS 19
-#define KickCountS 4
+#define CrouchStartS 7
+#define CrouchCountS 2
+
+#define WalkStartS 9
+#define WalkCountS 3
 
 #define PunchStartS 14
 #define PunchCountS 5
 
+#define KickStartS 19
+#define KickCountS 4
+
+#define FireballStartS 33
+#define FireballCountS 5
+
+#define FreezeStartS 38
+#define FreezeCountS 4
+
+#define ThunderStartS 42
+#define ThunderCountS 5
+
+#define WindStartS 47
+#define WindCountS 4
+
+#define DefenceStartS 12
+#define DefenceCountS 2
+
+#define FallStartS 26
+#define FallCountS 4
+
+#define HitStartS 23
+#define HitCountS 2
+
+#define UpStartS 30
+#define UpCountS 3
+
 IMAGE *SalahPics[SalahImageCount];
 
-float x,y;
-float w,h;
-int direction;
-int Player=0;
-EtatPlayer etat;
-int Index;
+float xS,yS;
+float wS,hS;
+int directionS;
+int PlayerS=0;
+EtatPlayer etatS;
+int IndexS;
+
 
 void LoadSalah(int player)
 {
@@ -31,137 +62,283 @@ void LoadSalah(int player)
         SalahPics[i]=load_image(path);
     }
 
-    Player=player;
-    etat=Stable;
-    Index=0;
-    y=55;
-    w=10;
-    h=40;
+    PlayerS=player;
+    etatS=Stable;
+    IndexS=0;
+    yS=55;
+    wS=10;
+    hS=40;
 
 
     switch(player)
     {
     case 1:
-        direction=1;
-        x=10;
+        directionS=0;
+        xS=10;
         break;
     case 2:
-        direction=0;
-        x=70;
+        directionS=1;
+        xS=90;
         break;
     }
 
 }
 
-int i=1;
+int iS=1;
 void Draw_Salah()
 {
     flip vflip;
 
-    if(direction)
-        vflip=NONE;
+    if(directionS)
+        vflip=VERTICAL;
     else
-        vflip = VERTICAL;
+        vflip = NONE;
 
-    if(etat!=Kick && etat!=Punch)
+    if(etatS!=Kick && etatS!=Punch && etatS!=Fireball && etatS != Freeze & etatS !=Jump  && etatS !=Wind && etatS !=Thunder &&etatS!=Fall&&etatS!=Hit&&etatS!=Defence&etatS!=Down)
     {
-        if(IsKeyPressed(Player,KICK))
+        if(IsKeyPressed(PlayerS,KICK))
         {
-            etat=Kick;
-            Index=0;
+            etatS=Kick;
+            IndexS=0;
         }
-        else if(IsKeyPressed(Player,PUNCH))
+        else if(IsKeyPressed(PlayerS,PUNCH))
         {
-            etat=Punch;
-            Index=0;
+            etatS=Punch;
+            IndexS=0;
         }
-        else if(IsKeyPressed(Player,RIGHT))
+        else if(IsKeyPressed(PlayerS,RIGHT))
         {
-            etat=Forward;
-            x+=0.2;
+            etatS=Forward;
+            xS+=0.2;
         }
-        else if (IsKeyPressed(Player,LEFT))
+        else if (IsKeyPressed(PlayerS,LEFT))
         {
-            etat=Backward;
-            x-=0.2;
+            etatS=Backward;
+            xS-=0.2;
+        }
+        else if (IsKeyPressed(PlayerS,UP))
+        {
+            if (etatS!=Fall)
+         {
+             etatS=Jump;
+            yS+=0.2;
         }
         else
-            etat=Stable;
+        etatS=Stable;
+        }
+        else if (IsKeyPressed(PlayerS,DOWN))
+        {
+            etatS=Crouch;
+            IndexS=0;
+        }
+        else if (IsKeyPressed(PlayerS,FIREBALL))
+        {
+            etatS=Fireball;
+            IndexS=0;
+
+        }
+        else if (IsKeyPressed(PlayerS,FREEZE))
+        {
+            etatS=Freeze;
+            IndexS=0;
+
+        }
+        else if (IsKeyPressed(PlayerS,THUNDER))
+        {
+            etatS=Thunder;
+            IndexS=0;
+
+        }
+        else if (IsKeyPressed(PlayerS,WIND))
+        {
+            etatS=Wind;
+            IndexS=0;
+
+        }
+        else
+            etatS=Stable;
     }
 
 
-    switch(etat)
+
+    switch(etatS)
     {
     case Stable:
-        if(FrameCount%13==0)
+        if(FrameCount%10==0)
         {
-            if(Index==0)
-                i=1;
-            if(Index>=StableCountS-1)
-                i=-1;
+            if(IndexS==0)
+                iS=1;
+            if(IndexS>=StableCountS-1)
+                iS=-1;
 
-            Index=Index+i;
+            IndexS=IndexS+iS;
         }
-        Index = Min(Index,StableCountS-1);
-        w=(h/((float)SalahPics[Index+StableStartS]->h/(float)SalahPics[Index+StableStartS]->w))/AspectRatio;
-        if(Player==2) x-=w;
-        draw_image_ex(SalahPics[Index+StableStartS],x,y,w,h,vflip,100);
-        if(Player==2) x+=w;
+        IndexS = Min(IndexS,StableCountS-1);
+        wS=(hS/((float)SalahPics[IndexS+StableStartS]->h/(float)SalahPics[IndexS+StableStartS]->w))/AspectRatio;
+        if(PlayerS==2) xS-=wS;
+        draw_image_ex(SalahPics[IndexS+StableStartS],xS,yS,wS,hS,vflip,100);
+        if(PlayerS==2) xS+=wS;
         break;
     case Forward:
         if(FrameCount%10==0)
         {
-            Index=((Index-1+WalkCountS)%WalkCountS);
+            IndexS=((IndexS-1+WalkCountS)%WalkCountS);
         }
-        Index = Min(Index,WalkCountS-1);
-        w=(h/((float)SalahPics[Index+WalkStartS]->h/(float)SalahPics[Index+WalkStartS]->w))/AspectRatio;
-        if(Player==2) x-=w;
-        draw_image_ex(SalahPics[Index+WalkStartS],x,y,w,h,vflip,100);
-        if(Player==2) x+=w;
+        IndexS = Min(IndexS,WalkCountS-1);
+        wS=(hS/((float)SalahPics[IndexS+WalkStartS]->h/(float)SalahPics[IndexS+WalkStartS]->w))/AspectRatio;
+        if(PlayerS==2) xS-=wS;
+        draw_image_ex(SalahPics[IndexS+WalkStartS],xS,yS,wS,hS,vflip,100);
+        if(PlayerS==2) xS+=wS;
         break;
 
     case Backward:
         if(FrameCount%10==0)
         {
-            Index=((Index+1)%WalkCountS);
+            IndexS=((IndexS+1)%WalkCountS);
         }
-        Index = Min(Index,WalkCountS-1);
-        w=(h/((float)SalahPics[Index+WalkStartS]->h/(float)SalahPics[Index+WalkStartS]->w))/AspectRatio;
-        if(Player==2) x-=w;
-        draw_image_ex(SalahPics[Index+WalkStartS],x,y,w,h,vflip,100);
-        if(Player==2) x+=w;
+        IndexS = Min(IndexS,WalkCountS-1);
+        wS=(hS/((float)SalahPics[IndexS+WalkStartS]->h/(float)SalahPics[IndexS+WalkStartS]->w))/AspectRatio;
+        if(PlayerS==2) xS-=wS;
+        draw_image_ex(SalahPics[IndexS+WalkStartS],xS,yS,wS,hS,vflip,100);
+        if(PlayerS==2) xS+=wS;
         break;
 
     case Kick:
-        w=(h/((float)SalahPics[Index+KickStartS]->h/(float)SalahPics[Index+KickStartS]->w))/AspectRatio;
-        if(Player==2) x-=w;
-        draw_image_ex(SalahPics[Index+KickStartS],x,y,w,h,vflip,100);
-        if(Player==2) x+=w;
+        wS=(hS/((float)SalahPics[IndexS+KickStartS]->h/(float)SalahPics[IndexS+KickStartS]->w))/AspectRatio;
+        if(PlayerS==2) xS-=wS;
+        draw_image_ex(SalahPics[IndexS+KickStartS],xS,yS,wS,hS,vflip,100);
+        if(PlayerS==2) xS+=wS;
         if(FrameCount%10==0)
         {
-            Index++;
-            if(Index==KickCountS)
+            IndexS++;
+            if(IndexS==KickCountS)
             {
-                etat=Stable;
+                etatS=Stable;
             }
         }
 
         break;
 
     case Punch:
-        w=(h/((float)SalahPics[Index+PunchStartS]->h/(float)SalahPics[Index+PunchStartS]->w))/AspectRatio;
-        if(Player==2) x-=w;
-        draw_image_ex(SalahPics[Index+PunchStartS],x,y,w,h,vflip,100);
-        if(Player==2) x+=w;
+        wS=(hS/((float)SalahPics[IndexS+PunchStartS]->h/(float)SalahPics[IndexS+PunchStartS]->w))/AspectRatio;
+        if(PlayerS==2) xS-=wS;
+        draw_image_ex(SalahPics[IndexS+PunchStartS],xS,yS,wS,hS,vflip,100);
+        if(PlayerS==2) xS+=wS;
         if(FrameCount%10==0)
         {
-            Index++;
-            if(Index==PunchCountS)
+            IndexS++;
+            if(IndexS==PunchCountS)
             {
-                etat=Stable;
+                etatS=Stable;
             }
         }
         break;
+    case Fireball:
+        wS=(hS/((float)SalahPics[IndexS+FireballStartS]->h/(float)SalahPics[IndexS+FireballStartS]->w))/AspectRatio;
+        if(PlayerS==2) xS-=wS;
+        draw_image_ex(SalahPics[IndexS+FireballStartS],xS,yS,wS,hS,vflip,100);
+        if(PlayerS==2) xS+=wS;
+        if(FrameCount%10==0)
+        {
+            IndexS++;
+            if(IndexS==FireballCountS)
+            {
+                etatS=Stable;
+            }
+        }
+    break;
+    case Thunder:
+        wS=(hS/((float)SalahPics[IndexS+ThunderStartS]->h/(float)SalahPics[IndexS+ThunderStartS]->w))/AspectRatio;
+        if(PlayerS==2) xS-=wS;
+        draw_image_ex(SalahPics[IndexS+ThunderStartS],xS,yS,wS,hS,vflip,100);
+        if(PlayerS==2) xS+=wS;
+        if(FrameCount%10==0)
+        {
+            IndexS++;
+            if(IndexS==ThunderCountS)
+            {
+                etatS=Stable;
+            }
+        }
+        break;
+
+    case Wind:
+    wS=(hS/((float)SalahPics[IndexS+WindStartS]->h/(float)SalahPics[IndexS+WindStartS]->w))/AspectRatio;
+        if(PlayerS==2) xS-=wS;
+        draw_image_ex(SalahPics[IndexS+WindStartS],xS,yS,wS,hS,vflip,100);
+        if(PlayerS==2) xS+=wS;
+        if(FrameCount%10==0)
+        {
+            IndexS++;
+            if(IndexS==WindCountS)
+            {
+                etatS=Stable;
+            }
+        }
+
+    break;
+    case Freeze:
+    wS=(hS/((float)SalahPics[IndexS+FreezeStartS]->h/(float)SalahPics[IndexS+FreezeStartS]->w))/AspectRatio;
+        if(PlayerS==2) xS-=wS;
+        draw_image_ex(SalahPics[IndexS+FreezeStartS],xS,yS,wS,hS,vflip,100);
+        if(PlayerS==2) xS+=wS;
+        if(FrameCount%10==0)
+        {
+            IndexS++;
+            if(IndexS==FreezeCountS)
+            {
+                etatS=Stable;
+            }
+        }
+
+    break;
+
+        case Crouch:
+    wS=(hS/((float)SalahPics[IndexS+CrouchStartS]->h/(float)SalahPics[IndexS+CrouchStartS]->w))/AspectRatio;
+        if(PlayerS==2) xS-=wS;
+        draw_image_ex(SalahPics[IndexS+CrouchStartS],xS,yS,wS,hS,vflip,100);
+        if(PlayerS==2) xS+=wS;
+        if(FrameCount%10==0)
+        {
+            IndexS++;
+            if(IndexS==CrouchCountS)
+            {
+                etatS=Stable;
+            }
+        }
+break;
+
+
+  case Defence:
+    wS=(hS/((float)SalahPics[IndexS+DefenceStartS]->h/(float)SalahPics[IndexS+DefenceStartS]->w))/AspectRatio;
+        if(PlayerS==2) xS-=wS;
+        draw_image_ex(SalahPics[IndexS+DefenceStartS],xS,yS,wS,hS,vflip,100);
+        if(PlayerS==2) xS+=wS;
+        if(FrameCount%10==0)
+        {
+            IndexS++;
+            if(IndexS==DefenceCountS)
+            {
+                etatS=Stable;
+            }
+        }
+break;
+
+  case Fall:
+    wS=(hS/((float)SalahPics[IndexS+HitStartS]->h/(float)SalahPics[IndexS+HitStartS]->w))/AspectRatio;
+        if(PlayerS==2) xS-=wS;
+        draw_image_ex(SalahPics[IndexS+HitStartS],xS,yS,wS,hS,vflip,100);
+        if(PlayerS==2) xS+=wS;
+        if(FrameCount%10==0)
+        {
+            IndexS++;
+            if(IndexS==HitCountS)
+            {
+                etatS=Stable;
+            }
+        }
+break;
     }
 }
+
 
