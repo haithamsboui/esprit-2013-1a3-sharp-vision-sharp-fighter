@@ -1,16 +1,43 @@
 #include "includes.h"
 
-#define StableStartH 5
+#define StableStartH 0
 #define StableCountH 4
 
-#define WalkStartH 16
-#define WalkCountH 5
+#define WalkStartH 4
+#define WalkCountH 4
 
-#define KickStartH 9
+#define KickStartH 8
 #define KickCountH 4
 
-#define PunchStartH 22
-#define PunchCountH 5
+#define PunchStartH 12
+#define PunchCountH 4
+
+#define FireballStartH 33
+#define FireballCountH 4
+
+#define FreezeStartH 37
+#define FreezeCountH 3
+
+#define ThunderStartH 40
+#define ThunderCountH 7
+
+#define WindStartH 47
+#define WindCountH 3
+
+#define DefenceStartH 18
+#define DefenceCountH 2
+
+#define CrouchStartH 16
+#define CrouchCountH 2
+
+#define JumpStartH 29
+#define JumpCountH 4
+
+#define FallStartH 20
+#define FallCountH 4
+
+#define HitStartH 27
+#define HitCountH 2
 
 IMAGE *HaithamPics[HaithamImageCount];
 
@@ -64,7 +91,7 @@ void Draw_Haitham()
     else
         vflip = VERTICAL;
 
-    if(etatH!=Kick && etatH!=Punch)
+    if(etatH!=Kick && etatH!=Punch && etatH!=Fireball && etatH != Freeze & etatH !=Jump  && etatH !=Wind && etatH !=Thunder &&etatH!=Fall&&etatH!=Hit&&etatH!=Defence&etatH!=Down)
     {
         if(IsKeyPressed(PlayerH,KICK))
         {
@@ -86,9 +113,49 @@ void Draw_Haitham()
             etatH=Backward;
             xH-=0.2;
         }
+        else if (IsKeyPressed(PlayerH,UP))
+        {
+            if (etatH!=Fall)
+         {
+             etatH=Jump;
+            yH+=0.2;
+        }
+        else
+        etatH=Stable;
+        }
+        else if (IsKeyPressed(PlayerH,DOWN))
+        {
+            etatH=Crouch;
+            IndexH=0;
+        }
+        else if (IsKeyPressed(PlayerH,FIREBALL))
+        {
+            etatH=Fireball;
+            IndexH=0;
+
+        }
+        else if (IsKeyPressed(PlayerH,FREEZE))
+        {
+            etatH=Freeze;
+            IndexH=0;
+
+        }
+        else if (IsKeyPressed(PlayerH,THUNDER))
+        {
+            etatH=Thunder;
+            IndexH=0;
+
+        }
+        else if (IsKeyPressed(PlayerH,WIND))
+        {
+            etatH=Wind;
+            IndexH=0;
+
+        }
         else
             etatH=Stable;
     }
+
 
 
     switch(etatH)
@@ -163,6 +230,112 @@ void Draw_Haitham()
             }
         }
         break;
+    case Fireball:
+        wH=(hH/((float)HaithamPics[IndexH+FireballStartH]->h/(float)HaithamPics[IndexH+FireballStartH]->w))/AspectRatio;
+        if(PlayerH==2) xH-=wH;
+        draw_image_ex(HaithamPics[IndexH+FireballStartH],xH,yH,wH,hH,vflip,100);
+        if(PlayerH==2) xH+=wH;
+        if(FrameCount%10==0)
+        {
+            IndexH++;
+            if(IndexH==FireballCountH)
+            {
+                etatH=Stable;
+            }
+        }
+    break;
+    case Thunder:
+        wH=(hH/((float)HaithamPics[IndexH+ThunderStartH]->h/(float)HaithamPics[IndexH+ThunderStartH]->w))/AspectRatio;
+        if(PlayerH==2) xH-=wH;
+        draw_image_ex(HaithamPics[IndexH+ThunderStartH],xH,yH,wH,hH,vflip,100);
+        if(PlayerH==2) xH+=wH;
+        if(FrameCount%10==0)
+        {
+            IndexH++;
+            if(IndexH==ThunderCountH)
+            {
+                etatH=Stable;
+            }
+        }
+        break;
+
+    case Wind:
+    wH=(hH/((float)HaithamPics[IndexH+WindStartH]->h/(float)HaithamPics[IndexH+WindStartH]->w))/AspectRatio;
+        if(PlayerH==2) xH-=wH;
+        draw_image_ex(HaithamPics[IndexH+WindStartH],xH,yH,wH,hH,vflip,100);
+        if(PlayerH==2) xH+=wH;
+        if(FrameCount%10==0)
+        {
+            IndexH++;
+            if(IndexH==WindCountH)
+            {
+                etatH=Stable;
+            }
+        }
+
+    break;
+    case Freeze:
+    wH=(hH/((float)HaithamPics[IndexH+FreezeStartH]->h/(float)HaithamPics[IndexH+FreezeStartH]->w))/AspectRatio;
+        if(PlayerH==2) xH-=wH;
+        draw_image_ex(HaithamPics[IndexH+FreezeStartH],xH,yH,wH,hH,vflip,100);
+        if(PlayerH==2) xH+=wH;
+        if(FrameCount%10==0)
+        {
+            IndexH++;
+            if(IndexH==FreezeCountH)
+            {
+                etatH=Stable;
+            }
+        }
+
+    break;
+
+        case Crouch:
+    wH=(hH/((float)HaithamPics[IndexH+CrouchStartH]->h/(float)HaithamPics[IndexH+CrouchStartH]->w))/AspectRatio;
+        if(PlayerH==2) xH-=wH;
+        draw_image_ex(HaithamPics[IndexH+CrouchStartH],xH,yH,wH,hH,vflip,100);
+        if(PlayerH==2) xH+=wH;
+        if(FrameCount%10==0)
+        {
+            IndexH++;
+            if(IndexH==CrouchCountH)
+            {
+                etatH=Stable;
+            }
+        }
+break;
+
+
+  case Defence:
+    wH=(hH/((float)HaithamPics[IndexH+DefenceStartH]->h/(float)HaithamPics[IndexH+DefenceStartH]->w))/AspectRatio;
+        if(PlayerH==2) xH-=wH;
+        draw_image_ex(HaithamPics[IndexH+DefenceStartH],xH,yH,wH,hH,vflip,100);
+        if(PlayerH==2) xH+=wH;
+        if(FrameCount%10==0)
+        {
+            IndexH++;
+            if(IndexH==DefenceCountH)
+            {
+                etatH=Stable;
+            }
+        }
+break;
+
+  case Fall:
+    wH=(hH/((float)HaithamPics[IndexH+HitStartH]->h/(float)HaithamPics[IndexH+HitStartH]->w))/AspectRatio;
+        if(PlayerH==2) xH-=wH;
+        draw_image_ex(HaithamPics[IndexH+HitStartH],xH,yH,wH,hH,vflip,100);
+        if(PlayerH==2) xH+=wH;
+        if(FrameCount%10==0)
+        {
+            IndexH++;
+            if(IndexH==HitCountH)
+            {
+                etatH=Stable;
+            }
+        }
+break;
     }
 }
+
 

@@ -3,7 +3,7 @@
 
 #include "includes.h"
 
-#define HaithamImageCount 27
+#define HaithamImageCount 50
 
 IMAGE *HaithamPics[HaithamImageCount];
 

@@ -94,7 +94,7 @@ void mainmenu(int *choix)
     }
     taille_x=(((float)Firstmenu[0]->w)/1366)*100;
     taille_y=(((float)Firstmenu[0]->h)/1366)*100;
-    // drawing
+    // drawingsvn
     *choix=*choix+1;
     ind_1=*choix;
     ind_2=(ind_1-1+5)%5;
@@ -1104,6 +1104,7 @@ void GamePlay(int Player1,int Player2,int Map)
         LoadHaitham(1);
         break;
     case 2 :
+    LoadBrahim(1);
         break;
     case 3 :
         LoadSalah(1);
@@ -1120,6 +1121,7 @@ void GamePlay(int Player1,int Player2,int Map)
         LoadHaitham(2);
         break;
     case 2 :
+    LoadBrahim(2);
         break;
     case 3 :
         LoadSalah(2);
@@ -1135,7 +1137,7 @@ void GamePlay(int Player1,int Player2,int Map)
 
     while(!IsKeyPressed(3,RETURN))
     {
-        if (round<4)
+        if (round<3)
         {
 
             switch (Map)
@@ -1183,6 +1185,8 @@ void GamePlay(int Player1,int Player2,int Map)
                 Draw_Haitham();
                 break;
             case 2 :
+           Draw_Brahim();
+
                 break;
             case 3 :
                 Draw_Salah();
@@ -1199,6 +1203,9 @@ void GamePlay(int Player1,int Player2,int Map)
                 Draw_Haitham();
                 break;
             case 2 :
+            printf("111");
+printf("**%d",IndexB);
+           Draw_Brahim();
                 break;
             case 3 :
                 Draw_Salah();
