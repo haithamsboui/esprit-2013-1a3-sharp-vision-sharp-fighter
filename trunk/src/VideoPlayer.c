@@ -27,7 +27,7 @@ int PlayVideo(const char *filename)
 
     // Reset APEG's color tables since we just entered a valid video mode
     apeg_reset_colors(stream);
-
+    voice_set_volume(apeg_get_stream_voice(stream),Music_volume);
     apeg_advance_stream(stream, 0);
     tex_id=allegro_gl_make_texture_ex(AGL_TEXTURE_FLIP,stream->bitmap,-1);
     apeg_reset_stream(stream);
@@ -58,6 +58,7 @@ int PlayVideo(const char *filename)
     while(stream->timer == -1);
 
     // Get the next video frame
+
     while(apeg_advance_stream(stream, 0) == APEG_OK)
     {
         // Stop if a key is pressed

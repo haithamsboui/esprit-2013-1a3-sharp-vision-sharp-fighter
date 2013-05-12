@@ -40,22 +40,25 @@
 	<File name="../include/Texture.h" open="0" top="0" tabpos="3">
 		<Cursor position="0" topLine="0" />
 	</File>
+	<File name="../include/apeg.h" open="1" top="0" tabpos="14">
+		<Cursor position="3072" topLine="110" />
+	</File>
 	<File name="../include/icon.h" open="0" top="0" tabpos="0">
 		<Cursor position="221406" topLine="6373" />
 	</File>
 	<File name="../include/includes.h" open="0" top="0" tabpos="10">
 		<Cursor position="381" topLine="0" />
 	</File>
-	<File name="../src/AudioPlayer.c" open="0" top="0" tabpos="6">
-		<Cursor position="1175" topLine="0" />
+	<File name="../src/AudioPlayer.c" open="1" top="0" tabpos="15">
+		<Cursor position="964" topLine="27" />
 	</File>
 	<File name="../src/Brahim.c" open="1" top="0" tabpos="8">
-		<Cursor position="8296" topLine="323" />
+		<Cursor position="8296" topLine="314" />
 	</File>
 	<File name="../src/Calcul.c" open="1" top="0" tabpos="7">
 		<Cursor position="202" topLine="0" />
 	</File>
-	<File name="../src/Collision.c" open="1" top="1" tabpos="3">
+	<File name="../src/Collision.c" open="1" top="0" tabpos="3">
 		<Cursor position="4440" topLine="125" />
 	</File>
 	<File name="../src/Earth.c" open="0" top="0" tabpos="12">
@@ -65,7 +68,7 @@
 		<Cursor position="154" topLine="0" />
 	</File>
 	<File name="../src/Haitham.c" open="1" top="0" tabpos="4">
-		<Cursor position="8356" topLine="319" />
+		<Cursor position="8356" topLine="313" />
 	</File>
 	<File name="../src/Input.c" open="0" top="0" tabpos="7">
 		<Cursor position="12430" topLine="345" />
@@ -77,7 +80,7 @@
 		<Cursor position="27334" topLine="707" />
 	</File>
 	<File name="../src/Salah.c" open="1" top="0" tabpos="12">
-		<Cursor position="8308" topLine="322" />
+		<Cursor position="8308" topLine="315" />
 	</File>
 	<File name="../src/Setting.c" open="0" top="0" tabpos="10">
 		<Cursor position="229" topLine="0" />
@@ -88,8 +91,8 @@
 	<File name="../src/Texture.c" open="0" top="0" tabpos="9">
 		<Cursor position="372" topLine="81" />
 	</File>
-	<File name="../src/VideoPlayer.c" open="0" top="0" tabpos="8">
-		<Cursor position="1649" topLine="49" />
+	<File name="../src/VideoPlayer.c" open="1" top="1" tabpos="13">
+		<Cursor position="725" topLine="0" />
 	</File>
 	<File name="../src/main.c" open="1" top="0" tabpos="1">
 		<Cursor position="916" topLine="0" />
