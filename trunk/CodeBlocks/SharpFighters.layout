@@ -53,7 +53,7 @@
 		<Cursor position="258" topLine="0" />
 	</File>
 	<File name="../src/Collision.c" open="1" top="0" tabpos="3">
-		<Cursor position="1395" topLine="27" />
+		<Cursor position="296" topLine="0" />
 	</File>
 	<File name="../src/Earth.c" open="0" top="0" tabpos="12">
 		<Cursor position="5267" topLine="138" />
@@ -71,7 +71,7 @@
 		<Cursor position="1427" topLine="45" />
 	</File>
 	<File name="../src/Menus.c" open="1" top="1" tabpos="2">
-		<Cursor position="369" topLine="6" />
+		<Cursor position="31871" topLine="833" />
 	</File>
 	<File name="../src/Salah.c" open="0" top="0" tabpos="9">
 		<Cursor position="23" topLine="0" />
@@ -89,6 +89,6 @@
 		<Cursor position="1649" topLine="49" />
 	</File>
 	<File name="../src/main.c" open="1" top="0" tabpos="1">
-		<Cursor position="502" topLine="0" />
+		<Cursor position="201" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

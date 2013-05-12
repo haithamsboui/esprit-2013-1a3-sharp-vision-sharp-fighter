@@ -37,6 +37,7 @@ int ProcessCollision(IMAGE ** pics1, int index1, Point **Data1,float x1,float y1
             pt2.X=(Data1[index1][i+1].X/(float)pics1[index1]->w)*w1 + x1;
             pt2.Y=(Data1[index1][i+1].Y/(float)pics1[index1]->h)*h1 + y1;
 
+            //TODO : test the last point and the first point.
             for(j=0; Data2[index2][j+1].X!=-1; j++)
             {
                 //Convert points2 from image coords to screen coords
@@ -72,9 +73,9 @@ int Intersect(Point pt1,Point pt2,Point pt3,Point pt4)
         inter.X = (B2 * C1 - B1 * C2) / det;
         inter.Y = (A1 * C2 - A2 * C1) / det;
         if(Min(pt1.X, pt2.X) <= inter.X && Max(pt1.X, pt2.X) >= inter.X &&
-                Min(pt1.Y, pt2.Y) <= inter.Y && Max(pt1.Y, pt2.Y) >= inter.Y &&
-                Min(pt3.X, pt4.X) <= inter.X && Max(pt3.X, pt4.X) >= inter.X &&
-                Min(pt3.Y, pt4.Y) <= inter.Y && Max(pt3.Y, pt4.Y) >= inter.Y)
+           Min(pt1.Y, pt2.Y) <= inter.Y && Max(pt1.Y, pt2.Y) >= inter.Y &&
+           Min(pt3.X, pt4.X) <= inter.X && Max(pt3.X, pt4.X) >= inter.X &&
+           Min(pt3.Y, pt4.Y) <= inter.Y && Max(pt3.Y, pt4.Y) >= inter.Y)
         {
             return 1;
         }
