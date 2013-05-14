@@ -182,7 +182,6 @@ void setting ()
         BUTTONS[i]=load_image(buttons);
     }
     keybord_modif=load_image("Resources/Images/setting/select_modif_control.png");
-
     volume_cadre=load_image("Resources/Images/setting/Volume_cadre.png");
     cadre_control=load_image("Resources/Images/setting/cadre_control.png");
     screen=load_image("Resources/Images/setting/screen.png");
@@ -968,6 +967,7 @@ void versus (int intro)
                 draw_text(Verdana,"PLAYER 1 Ready",5,20,10,CENTER,100);
             if (choix2)
                 draw_text(Verdana,"PLAYER 2 Ready",5,75,10,CENTER,100);
+
             next_frame();
 
         }
@@ -1056,12 +1056,21 @@ void GamePlay(int Player1,int Player2,int Map)
     int time =30,round =1,i;
     char Round[10];
     char texttime[10];
-    IMAGE *MapLoad,*EFX[100];
+    IMAGE *MapLoad,*EFX[100],*Versus[6];
     int thunder, rainsound,gameplaysound,sarsour,fight,lotfi;
     char MapDirection[50];
     Location loc;
+    Versus[0]=load_image("Resources/Images/Mokhtar/Versus.png");
+Versus[1]=load_image("Resources/Images/Haitham/Versus.png");
+Versus[2]=load_image("Resources/Images/Brahim/Versus.png");
+Versus[3]=load_image("Resources/Images/Salah/Versus.png");
+Versus[4]=load_image("Resources/Images/Wassim/Versus.png");
+Versus[5]=load_image("Resources/Images/Versus.png");
+
     next_frame();
-    draw_text(SharpCurve,"Loading...",20,50,50,CENTER,100);
+    draw_image_ex(Versus[Player1],5,15,35,50,VERTICAL,100);
+        draw_image_ex(Versus[Player2],65,35,35,50,NONE,100);
+        draw_image_ex(Versus[5],35,40,30,30,NONE,100);
     next_frame();
     sprintf (MapDirection,"Resources/Images/maps/%d.png",Map);
     MapLoad=load_image(MapDirection);
