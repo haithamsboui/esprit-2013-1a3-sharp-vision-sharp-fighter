@@ -30,4 +30,5 @@
 #include "Collision.h"
 #include "Brahim.h"
 #include "Mokhtar.h"
+#include "Wassim.h"
 #endif // INCLUDES_H_INCLUDED
