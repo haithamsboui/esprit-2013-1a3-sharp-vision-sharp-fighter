@@ -8,7 +8,7 @@
 
 typedef enum {Stable, Forward, Backward,Jump,Crouch,Punch,Kick,Fireball,Thunder,Freeze,Wind,Fall,Hit,Defence,Down} EtatPlayer;
 
-IMAGE *SalahPics[51];
+IMAGE *SalahPics[SalahImageCount];
 
 float xS,yS;
 float wS,hS;

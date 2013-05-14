@@ -48,7 +48,8 @@ void intromenu(int intro)
         }
 
         draw_image_ex(background,0,0,100,100,NONE,100);
-        for(i=256;i>0;i/=2){
+        for(i=256; i>0; i/=2)
+        {
             draw_image_ex(logo,10-drawtrans/(100.0f/(4.0f*i)),32-drawtrans/(100.0f/(2.0f*i)),80+drawtrans/(100.0f/(8.0f*i)),0,NONE,(drawtrans-10)/(2*i));
         }
         draw_image_ex(logo,10,32,80,0,NONE,150-drawtrans);
@@ -170,7 +171,7 @@ void setting ()
     int i,Button;
     char screen_mod[15],res[10],buttons[50];
     int cadre_ind=0,control_in=0,key_modif=0;
-    char *keybord_control[]= {"UP","DOWN","LEFT","RIGHT","PUNCH","KICK","FIREBALL","FREEZE","THUNDER","WIND","ENTER","RETURN"};
+    char *keybord_control[]= {"UP","DOWN","LEFT","RIGHT","PUNCH","KICK","DEFENCE","FIREBALL","FREEZE","THUNDER","WIND","ENTER","RETURN"};
     IMAGE *BUTTONS[14],*keybord_modif;
     Button=AddVoice("Resources/Sounds/button3.wav",1);
     int ReadingKey=0,PlayerSelection=0,SelectedPlayer=1,PlayerPos[]= {45,60};
@@ -385,7 +386,6 @@ void setting ()
                     }
                 }
 
-
                 if (IsKeyPressed(3,RIGHT) && button_press>1)
                 {
                     voice_start(Button);
@@ -481,13 +481,13 @@ void setting ()
                             if (IsKeyPressed(3,UP) && button_press>10 )
                             {
                                 button_press=0;
-                                key_modif=(key_modif-1+12)%12;
+                                key_modif=(key_modif-1+13)%13;
                             }
 
                             if (IsKeyPressed(3,DOWN) && button_press>10 )
                             {
                                 button_press=0;
-                                key_modif=(key_modif+1)%12;
+                                key_modif=(key_modif+1)%13;
                             }
                         }
 
@@ -515,13 +515,13 @@ void setting ()
                             if (IsKeyPressed(3,UP) && button_press>10 )
                             {
                                 button_press=0;
-                                key_modif=(key_modif-1+12)%12;
+                                key_modif=(key_modif-1+13)%13;
                             }
 
                             if (IsKeyPressed(3,DOWN) && button_press>10 )
                             {
                                 button_press=0;
-                                key_modif=(key_modif+1)%12;
+                                key_modif=(key_modif+1)%13;
 
                             }
                         }
@@ -637,30 +637,30 @@ void setting ()
                 case 0:
 
 
-                    for (i=0; i<12; i++)
+                    for (i=0; i<13; i++)
                     {
 
-                        draw_text(Verdana,keybord_control[i],3.5,40,45+4.5*i,CENTER,modif_fade);
+                        draw_text(Verdana,keybord_control[i],2.5,40,45+4*i,CENTER,modif_fade);
                         if (SelectedPlayer==1)
-                            draw_text(Verdana,scancode_to_name(Player1Keyboard[i]),3.5,60,45+i*4.5,CENTER,modif_fade);
+                            draw_text(Verdana,scancode_to_name(Player1Keyboard[i]),2.5,60,45+i*4,CENTER,modif_fade);
                         else
-                            draw_text(Verdana,scancode_to_name(Player2Keyboard[i]),3.5,60,45+i*4.5,CENTER,modif_fade);
+                            draw_text(Verdana,scancode_to_name(Player2Keyboard[i]),2.5,60,45+i*4,CENTER,modif_fade);
                     }
-                    draw_image_ex(keybord_modif,35,42.5+key_modif*4.5,31,5,NONE,modif_fade);
+                    draw_image_ex(keybord_modif,35,42.5+key_modif*4,31,4,NONE,modif_fade);
 
                     break;
                 case 1 :
                     if (JoyStickEnabled)
                     {
-                        for (i=0; i<12; i++)
+                        for (i=0; i<13; i++)
                         {
-                            draw_text(Verdana,keybord_control[i],3.5,40,45+4.5*i,CENTER,modif_fade);
+                            draw_text(Verdana,keybord_control[i],2.5,40,45+4*i,CENTER,modif_fade);
                             if (SelectedPlayer==1)
-                                draw_image_ex(BUTTONS[Player1Joypad[i]],60,43+4.5*i,0,4,NONE,modif_fade);
+                                draw_image_ex(BUTTONS[Player1Joypad[i]],60,43+4*i,0,4,NONE,modif_fade);
                             else
-                                draw_image_ex(BUTTONS[Player2Joypad[i]],60,43+4.5*i,0,4,NONE,modif_fade);
+                                draw_image_ex(BUTTONS[Player2Joypad[i]],60,43+4*i,0,4,NONE,modif_fade);
                         }
-                        draw_image_ex(keybord_modif,35,42.5+key_modif*4.5,31,5,NONE,modif_fade);
+                        draw_image_ex(keybord_modif,35,42.5+key_modif*4,31,4,NONE,modif_fade);
 
                     }
                     else
@@ -766,11 +766,21 @@ void versus (int intro)
         if(choix1+choix2!=2)
         {
 
-            if (IsKeyPressed(1,ENTER))
+            if (IsKeyPressed(1,ENTER) && choix1!=1)
+            {
                 choix1=1;
-            if (IsKeyPressed(2,ENTER))
+                while (IsKeyPressed(2,ENTER))
+                    rest(1);
+            }
+
+            if (IsKeyPressed(2,ENTER)&& choix2!=1)
+            {
                 choix2=1;
-            //printf ("Choix1 %d choi %d \n",choix1,choix2);
+                while (IsKeyPressed(1,ENTER))
+                    rest(1);
+}
+
+
             if (IsKeyPressed(1,RIGHT) && press_buton>10 && choix1!=1)
             {
                 press_buton=0;
@@ -1100,12 +1110,13 @@ void GamePlay(int Player1,int Player2,int Map)
     switch (Player1)
     {
     case 0 :
+    LoadMokhtar(1);
         break;
     case 1 :
         LoadHaitham(1);
         break;
     case 2 :
-    LoadBrahim(1);
+        LoadBrahim(1);
         break;
     case 3 :
         LoadSalah(1);
@@ -1117,12 +1128,13 @@ void GamePlay(int Player1,int Player2,int Map)
     switch (Player2)
     {
     case 0 :
+    LoadMokhtar(2);
         break;
     case 1 :
         LoadHaitham(2);
         break;
     case 2 :
-    LoadBrahim(2);
+        LoadBrahim(2);
         break;
     case 3 :
         LoadSalah(2);
@@ -1132,7 +1144,7 @@ void GamePlay(int Player1,int Player2,int Map)
     }
 
     fight=AddVoice("Resources/Sounds/Fight.wav",1);
-   DoEarth(TUNISIA,loc);
+    // DoEarth(TUNISIA,loc);
     sprintf(texttime,"%d",time);
     voice_start(fight);
 
@@ -1181,12 +1193,13 @@ void GamePlay(int Player1,int Player2,int Map)
             switch (Player1)
             {
             case 0 :
+                Draw_Mokhtar();
                 break;
             case 1 :
                 Draw_Haitham();
                 break;
             case 2 :
-           Draw_Brahim();
+                Draw_Brahim();
 
                 break;
             case 3 :
@@ -1199,12 +1212,13 @@ void GamePlay(int Player1,int Player2,int Map)
             switch (Player2)
             {
             case 0 :
+                Draw_Mokhtar();
                 break;
             case 1 :
                 Draw_Haitham();
                 break;
             case 2 :
- Draw_Brahim();
+                Draw_Brahim();
                 break;
             case 3 :
                 Draw_Salah();
@@ -1242,7 +1256,6 @@ void GamePlay(int Player1,int Player2,int Map)
             next_frame();
         }
     }
-    //  voice_stop(fight);
     switch (Map)
     {
     case 0 :

@@ -57,6 +57,7 @@
 		<Unit filename="../include/Input.h" />
 		<Unit filename="../include/Install.h" />
 		<Unit filename="../include/Menus.h" />
+		<Unit filename="../include/Mokhtar.h" />
 		<Unit filename="../include/Salah.h" />
 		<Unit filename="../include/Setting.h" />
 		<Unit filename="../include/Textout.h" />
@@ -93,6 +94,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../src/Menus.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/Mokhtar.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../src/Salah.c">

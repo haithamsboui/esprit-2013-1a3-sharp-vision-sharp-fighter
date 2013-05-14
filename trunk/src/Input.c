@@ -2,10 +2,10 @@
 
 int JoyStickEnabled=0;
 
-int Player1Keyboard[12];
-int Player2Keyboard[12];
-int Player1Joypad[12];
-int Player2Joypad[12];
+int Player1Keyboard[13];
+int Player2Keyboard[13];
+int Player1Joypad[13];
+int Player2Joypad[13];
 
 JoyButton Player1Joystick[12];
 JoyButton Player2Joystick[12];
@@ -14,12 +14,12 @@ JoyAxe Player2JoyAxes[12];
 
 void LoadInput()
 {
-    int i,defaultkeyboardP1[]= {KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT,KEY_W,KEY_X,KEY_Q,KEY_F,KEY_S,KEY_D,KEY_ENTER,KEY_ESC},
-                               defaultkeyboardP2[]= {KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT,KEY_W,KEY_X,KEY_Q,KEY_F,KEY_S,KEY_D,KEY_ENTER,KEY_ESC},
-                                       defaultjoybuttonP2[]= {0,0,0,0,2,3,4,5,6,7,9,8},defaultjoybuttonP1[]= {0,0,0,0,2,3,4,5,6,7,9,8} ;
+    int i,defaultkeyboardP1[]= {KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT,KEY_W,KEY_X,KEY_C,KEY_Q,KEY_F,KEY_S,KEY_D,KEY_ENTER,KEY_ESC},
+                               defaultkeyboardP2[]= {KEY_UP,KEY_DOWN,KEY_LEFT,KEY_RIGHT,KEY_W,KEY_X,KEY_C,KEY_Q,KEY_F,KEY_S,KEY_D,KEY_ENTER,KEY_ESC},
+                                       defaultjoybuttonP2[]= {0,0,0,0,1,2,3,4,5,6,7,9,8},defaultjoybuttonP1[]= {0,0,0,0,1,2,3,4,5,6,7,9,8} ;
     char buffer[50];
     set_config_file("Resources/Setting.cfg");
-    for (i=0; i<12; i++)
+    for (i=0; i<13; i++)
     {
         sprintf(buffer,"Player1Keyboard[%d]",i);
         Player1Keyboard[i]=get_config_int("input",buffer,defaultkeyboardP1[i]);
@@ -74,7 +74,7 @@ void LoadInput()
         }
     }
 
-    for(i=0; i<12; i++)
+    for(i=0; i<13; i++)
     {
         if(Player1Joystick[i].InUse)
         {
@@ -177,7 +177,7 @@ int ReadKeyboard(int player, ACTIONS action)
     {
     case 1:
         TempKeyRead=readkey()>>8;
-        for (i=0; i<12; i++)
+        for (i=0; i<13; i++)
         {
             if (TempKeyRead==Player1Keyboard[i])
             {
@@ -205,7 +205,7 @@ int ReadKeyboard(int player, ACTIONS action)
 
     case 2:
         TempKeyRead=readkey()>>8;
-        for (i=0; i<12; i++)
+        for (i=0; i<13; i++)
         {
             if (TempKeyRead==Player2Keyboard[i])
             {

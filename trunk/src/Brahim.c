@@ -91,8 +91,7 @@ void Draw_Brahim()
         vflip=NONE;
     else
         vflip = VERTICAL;
-    printf("111");
-    printf("**%d",IndexB);
+
     if(etatB!=Kick && etatB!=Punch && etatB!=Fireball && etatB != Freeze && etatB !=Jump  && etatB !=Wind && etatB !=Thunder &&etatB!=Fall&&etatB!=Hit&&etatB!=Defence&&etatB!=Down)
     {
         if(IsKeyPressed(PlayerB,KICK))
@@ -154,6 +153,13 @@ void Draw_Brahim()
             IndexB=0;
 
         }
+        else if (IsKeyPressed(PlayerB,DEFENCE))
+        {
+            etatB=Defence;
+            IndexB=0;
+
+        }
+
         else
             etatB=Stable;
     }

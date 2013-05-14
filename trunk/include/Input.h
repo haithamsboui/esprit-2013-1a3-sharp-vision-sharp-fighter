@@ -5,7 +5,7 @@
 
 int JoyStickEnabled; //Check if Joystick plugged.
 
-typedef enum {UP,DOWN,LEFT,RIGHT,PUNCH,KICK,FIREBALL,FREEZE,THUNDER,WIND,ENTER,RETURN,ACTIONSCOUNT} ACTIONS;
+typedef enum {UP,DOWN,LEFT,RIGHT,PUNCH,KICK,DEFENCE,FIREBALL,FREEZE,THUNDER,WIND,ENTER,RETURN,ACTIONSCOUNT} ACTIONS;
 
 typedef struct {
     int InUse;
@@ -21,10 +21,10 @@ typedef struct {
 } JoyAxe;
 
 
-int Player1Keyboard[12];
-int Player2Keyboard[12];
-int Player1Joypad[12];
-int Player2Joypad[12];
+int Player1Keyboard[13];
+int Player2Keyboard[13];
+int Player1Joypad[13];
+int Player2Joypad[13];
 
 JoyButton Player1Joystick[12];
 JoyButton Player2Joystick[12];

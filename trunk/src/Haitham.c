@@ -152,6 +152,12 @@ void Draw_Haitham()
             IndexH=0;
 
         }
+        else if (IsKeyPressed(PlayerH,DEFENCE))
+        {
+            etatH=Defence;
+            IndexH=0;
+
+        }
         else
             etatH=Stable;
     }
