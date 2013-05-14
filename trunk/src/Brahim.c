@@ -39,6 +39,9 @@
 #define HitStartB 52
 #define HitCountB 4
 
+#define UpStartM 36
+#define UpCountM 4
+
 IMAGE *BrahimPics[BrahimImageCount];
 
 float xB,yB;

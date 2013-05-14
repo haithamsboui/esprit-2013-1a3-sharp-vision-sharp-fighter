@@ -836,8 +836,8 @@ void versus (int intro)
             draw_image_ex(Background_bar,0,-27,100,150,NONE,100-fade_start);
             for (i=4; i<90; i=i+18)
                 draw_image_ex(select,i,17.5,19,60,NONE,100-fade_start);
-            draw_image_ex(Player1,pos_player[select1]+distance_change1,17.5,19,60,NONE,100-fade_start);
-            draw_image_ex(Player2,pos_player[select2]+distance_change2,17.5,19,60,NONE,100-fade_start);
+            draw_image_ex(Player1,pos_player[select1]+distance_change1,8.1,19,69.5,NONE,100-fade_start);
+            draw_image_ex(Player2,pos_player[select2]+distance_change2,8.1,19,69.5,NONE,100-fade_start);
 // Draw and turn Mokhtar
             if (selectedPers[0]==0 )
             {
@@ -1122,6 +1122,7 @@ void GamePlay(int Player1,int Player2,int Map)
         LoadSalah(1);
         break;
     case 4 :
+    LoadWassim(1);
         break;
     }
 
@@ -1140,6 +1141,7 @@ void GamePlay(int Player1,int Player2,int Map)
         LoadSalah(2);
         break;
     case 4 :
+    LoadWassim(2);
         break;
     }
 
@@ -1206,6 +1208,7 @@ void GamePlay(int Player1,int Player2,int Map)
                 Draw_Salah();
                 break;
             case 4 :
+            Draw_Wassim();
                 break;
             }
 
@@ -1224,6 +1227,7 @@ void GamePlay(int Player1,int Player2,int Map)
                 Draw_Salah();
                 break;
             case 4 :
+            Draw_Wassim();
                 break;
             }
 

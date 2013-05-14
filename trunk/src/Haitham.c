@@ -39,6 +39,9 @@
 #define HitStartH 27
 #define HitCountH 2
 
+#define UpStartM 36
+#define UpCountM 4
+
 IMAGE *HaithamPics[HaithamImageCount];
 
 float xH,yH;

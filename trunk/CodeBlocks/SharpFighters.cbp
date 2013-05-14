@@ -63,6 +63,7 @@
 		<Unit filename="../include/Textout.h" />
 		<Unit filename="../include/Texture.h" />
 		<Unit filename="../include/VideoPlayer.h" />
+		<Unit filename="../include/Wassim.h" />
 		<Unit filename="../include/apeg.h" />
 		<Unit filename="../include/icon.h" />
 		<Unit filename="../include/includes.h" />
@@ -112,6 +113,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../src/VideoPlayer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/Wassim.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../src/main.c">
