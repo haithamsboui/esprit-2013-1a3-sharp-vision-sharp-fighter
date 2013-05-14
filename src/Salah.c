@@ -155,6 +155,12 @@ void Draw_Salah()
             IndexS=0;
 
         }
+        else if (IsKeyPressed(PlayerS,DEFENCE))
+        {
+            etatS=Defence;
+            IndexS=0;
+
+        }
         else
             etatS=Stable;
     }
