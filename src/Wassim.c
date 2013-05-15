@@ -60,7 +60,6 @@ void LoadWassim(int player)
     {
         sprintf(path,"Resources/Images/Wassim/Gameplay/%d.png",i);
         WassimPics[i]=load_image(path);
-        printf("%p\n",WassimPics[i]);
     }
 
     PlayerW=player;
