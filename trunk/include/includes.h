@@ -31,4 +31,6 @@
 #include "Brahim.h"
 #include "Mokhtar.h"
 #include "Wassim.h"
+#include "Versus.h"
+
 #endif // INCLUDES_H_INCLUDED

@@ -68,7 +68,7 @@
 1367183801 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/AudioPlayer.c
 	"includes.h"
 
-1368557276 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/includes.h
+1368613741 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/includes.h
 	<stdlib.h>
 	<stdio.h>
 	<math.h>
@@ -97,6 +97,7 @@
 	"Brahim.h"
 	"Mokhtar.h"
 	"Wassim.h"
+	"Versus.h"
 
 1366983576 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/AudioPlayer.h
 	"includes.h"
@@ -137,7 +138,7 @@
 1368301277 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Install.c
 	"includes.h"
 
-1368565204 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Menus.c
+1368613676 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Menus.c
 	"includes.h"
 
 1368257576 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Texture.c
@@ -328,6 +329,11 @@
 1368558806 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Wassim.h
 	"includes.h"
 
-1368559086 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Wassim.c
+1368620654 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Wassim.c
 	"includes.h"
+
+1368644859 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Versus.c
+	"includes.h"
+
+1368613791 /home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Versus.h
 

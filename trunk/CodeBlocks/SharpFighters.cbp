@@ -62,6 +62,7 @@
 		<Unit filename="../include/Setting.h" />
 		<Unit filename="../include/Textout.h" />
 		<Unit filename="../include/Texture.h" />
+		<Unit filename="../include/Versus.h" />
 		<Unit filename="../include/VideoPlayer.h" />
 		<Unit filename="../include/Wassim.h" />
 		<Unit filename="../include/apeg.h" />
@@ -110,6 +111,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../src/Texture.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/Versus.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../src/VideoPlayer.c">
