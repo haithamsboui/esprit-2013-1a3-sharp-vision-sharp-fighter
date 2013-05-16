@@ -11,6 +11,8 @@ void versus (int intro)
     char direction[100];
     int choix1=0,choix2=0,/*map_pos[]= {6,24,42,60,78}*/distance_change_map=20;
     float w;
+    char *maps_names[]= {"Tunisia,Tunis","Egypt,Giza","India,Taj Mahal","Japan,Kyoto","Malaysia,Kuala Lampur"};
+
 
     // Loading caracteres
 
@@ -54,27 +56,32 @@ void versus (int intro)
     Ready[0]=load_image("Resources/Images/Versus/ready1.png");
     Ready[1]=load_image("Resources/Images/Versus/ready2.png");
 
-    while (!IsKeyPressed(3,RETURN))
+    while (!IsKeyPressed(3,RETURN) || (choix1+choix2!=0))
     {
         if(close_button_pressed) return;
         if(choix1+choix2!=2)
         {
 
-            if (IsKeyPressed(1,ENTER) && choix1!=1)
-            {
+            if (IsKeyPressed(1,ENTER) && select1!=select2 )
                 choix1=1;
-                while (IsKeyPressed(2,ENTER))
-                    rest(1);
-            }
-
-            if (IsKeyPressed(2,ENTER)&& choix2!=1)
-            {
+            if (IsKeyPressed(2,ENTER) && select1!=select2)
                 choix2=1;
-                while (IsKeyPressed(1,ENTER))
+
+            if (IsKeyPressed(1,RETURN) && choix1==1)
+            {
+
+                choix1=0;
+                while (IsKeyPressed(1,RETURN))
                     rest(1);
             }
+            if (IsKeyPressed(2,RETURN) && choix2==1)
+            {
 
+                choix2=0;
+                while (IsKeyPressed(2,RETURN))
+                    rest(1);
 
+            }
             if (IsKeyPressed(1,RIGHT) && press_buton>10 && choix1!=1)
             {
                 press_buton=0;
@@ -261,7 +268,7 @@ void versus (int intro)
             if (choix1)
                 draw_image_ex(Ready[0],Ready_pos[select1],40,10,10,NONE,100);
             if (choix2)
-                draw_image_ex(Ready[1],Ready_pos[select2],40,10,20,NONE,100);
+                draw_image_ex(Ready[1],Ready_pos[select2],40,10,10,NONE,100);
 
             next_frame();
 
@@ -294,7 +301,7 @@ void versus (int intro)
                 press_buton=0;
                 voice_stop(intro);
                 GamePlay(select1,select2,select_map);
-                voice_start(intro);
+                return;
             }
 
             if (IsKeyPressed(3,RIGHT) && press_buton >10)
@@ -316,6 +323,8 @@ void versus (int intro)
             draw_image_ex(maps[(select_map+1)%5],-25+distance_change_map,27,50,40,NONE,30+distance_change_map);
             draw_image_ex(maps[select_map],25+distance_change_map,27,50,40,NONE,100);
             draw_image_ex(maps[(select_map-1+5)%5],75+distance_change_map,27,50,40,NONE,30-distance_change_map);
+            draw_text(SharpCurve,"Select a map ",9,48,20.5,CENTER,100);
+            draw_text(SharpCurve,maps_names[select_map],7,48.5,75,CENTER,100);
             draw_image_ex(select,20,23,60,48,NONE,100);
             press_buton++;
             next_frame();
@@ -328,6 +337,7 @@ void versus (int intro)
         draw_image_ex(Background_bar,0,-27,100,150,NONE,100-fade);
         next_frame();
     }
+
 }
 
 void ChargerEffetNaturel(IMAGE *effet[100], char chemin[200], int nombreFrame)
@@ -347,9 +357,9 @@ int indice_efx=0;
 void GamePlay(int Player1,int Player2,int Map)
 {
 
-    IMAGE *MapLoad,*EFX[100],*Versus[6],*Score,*Time,*bloodbar,*heads_bar,*heads[5];
-    int thunder, rainsound,gameplaysound,sarsour,fight,lotfi;
-    char MapDirection[50],direction[50],texttime[10],Round[10],time =30,round =1,i;
+    IMAGE *MapLoad,*EFX[100],*Versus[6],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[4],*Pause_cadre;
+    int thunder, rainsound,gameplaysound,sarsour,fight,lotfi,button_press=0;
+    char MapDirection[50],direction[50],texttime[10],Round[10],time =30,round =1,i,pause=0,Pause_pos_ind=0,Pause_pos[]= {14.5,31.5,48.5,65.5};
     Location loc;
     Versus[0]=load_image("Resources/Images/Mokhtar/Versus.png");
     Versus[1]=load_image("Resources/Images/Haitham/Versus.png");
@@ -357,10 +367,17 @@ void GamePlay(int Player1,int Player2,int Map)
     Versus[3]=load_image("Resources/Images/Salah/Versus.png");
     Versus[4]=load_image("Resources/Images/Wassim/Versus.png");
     Versus[5]=load_image("Resources/Images/Versus/Versus.png");
+    Pause_cadre=load_image("Resources/Images/Versus/pause_cadre.png");
+
     for (i=0; i<5; i++)
     {
         sprintf (direction,"Resources/Images/Versus/%d.png",i);
         heads[i]=load_image(direction);
+    }
+    for (i=0; i<4; i++)
+    {
+        sprintf (direction,"Resources/Images/Versus/pause%d.png",i);
+        Pause[i]=load_image(direction);
     }
     bloodbar=load_image("Resources/Images/Versus/bloodbar.png");
     Score=load_image("Resources/Images/Versus/score.png");
@@ -414,7 +431,6 @@ void GamePlay(int Player1,int Player2,int Map)
     break;
 
     }
-
     switch (Player1)
     {
     case 0 :
@@ -458,11 +474,10 @@ void GamePlay(int Player1,int Player2,int Map)
     sprintf(texttime,"%d",time);
     voice_start(fight);
 
-    while(!IsKeyPressed(3,RETURN) || round >=3)
+    while(round <=3 )
     {
-        if (round<=3)
+        if (pause==0)
         {
-
             switch (Map)
             {
             case 0 :
@@ -499,14 +514,14 @@ void GamePlay(int Player1,int Player2,int Map)
             draw_image_ex(MapLoad,-1.5,-2,103,104,NONE,100);
             draw_image_ex(EFX[indice_efx],0,-10,100,100,NONE,100);
             if(FrameCount%3==0)
-            indice_efx=(indice_efx+1)%100;
+                indice_efx=(indice_efx+1)%100;
             draw_image_ex(Score,-1.5,3.4,40,0,NONE,100);
             draw_image_ex(Score,61.5,4,40,0,VERTICAL,100);
             draw_image_ex(bloodbar,0,0,100,0,NONE,100);
             draw_image_ex(Time,0,-1,100,0,NONE,100);
             draw_image_ex(heads[Player1],-1,15,10,0,VERTICAL,100);
             draw_image_ex(heads[Player2],91,15,10,0,NONE,100);
-             draw_image_ex(heads_bar,0,0,100,0,NONE,100);
+            draw_image_ex(heads_bar,0,0,100,0,NONE,100);
             switch (Player1)
             {
             case 0 :
@@ -572,11 +587,110 @@ void GamePlay(int Player1,int Player2,int Map)
             // sprintf(Round,"Round %d",round);
             //  draw_text(Arista,Round,10,50,5,CENTER_X,100);
             draw_text(Arista,texttime,10,50,2,CENTER_X,95);
-            next_frame();
+            if (IsKeyPressed(3,RETURN) && button_press>10)
+            {
+                pause=1;
+                PrintScreen(0);
+            }
         }
+        if (pause==1)
+        {
+
+
+            draw_image_ex(screenimage,0,0 ,100,100,NONE,50);
+            for (i=0; i<4; i++)
+            draw_image_ex(Pause[i],35.5,Pause_pos[i],27.4,0,NONE,100);
+            draw_image_ex(Pause_cadre,35.5,Pause_pos[Pause_pos_ind],27.4,0,NONE,100);
+
+            if (IsKeyPressed(3,DOWN)&& button_press>10)
+            {
+                button_press=0;
+                Pause_pos_ind=(Pause_pos_ind+1)%4;
+            }
+            if (IsKeyPressed(3,UP)&& button_press>10)
+            {
+                button_press=0;
+                Pause_pos_ind=(Pause_pos_ind+3)%4;
+            }
+            if (IsKeyPressed(3,ENTER) && button_press>10)
+            {
+
+                button_press=0;
+                switch (Pause_pos_ind)
+                {
+                case 0 :
+                {
+                    pause=0;
+                }
+                break;
+                case 1 :
+                {
+                    switch (Map)
+                    {
+                    case 0 :
+                        voice_stop(sarsour);
+                        voice_stop(lotfi);
+                        break;
+                    case 1 :
+                        break;
+                    case 2 :
+                        break;
+                    case 3 :
+                        break;
+                    case 4 :
+                        voice_stop(thunder);
+                        voice_stop(rainsound);
+                        voice_stop(gameplaysound);
+                        break;
+                    }
+                    next_frame();
+                    GamePlay(Player1,Player2,Map);
+                }
+                break;
+                case 2 :
+                {
+                    switch (Map)
+                    {
+                    case 0 :
+                        voice_stop(sarsour);
+                        voice_stop(lotfi);
+                        break;
+                    case 1 :
+                        break;
+                    case 2 :
+                        break;
+                    case 3 :
+                        break;
+                    case 4 :
+                        voice_stop(thunder);
+                        voice_stop(rainsound);
+                        voice_stop(gameplaysound);
+                        break;
+                    }
+                    while (IsKeyPressed(3,ENTER))
+                    rest(1);
+                    return ;
+                }
+                break;
+                case 3 :
+                {
+                    uninstall();
+                    exit (0);
+                }
+                break;
+                }
+            }
+
+
+        }
+        button_press++;
+        next_frame();
+
+
     }
     switch (Map)
     {
+
     case 0 :
         voice_stop(sarsour);
         voice_stop(lotfi);
@@ -595,4 +709,5 @@ void GamePlay(int Player1,int Player2,int Map)
     }
 
 }
+
 
