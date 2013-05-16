@@ -2,6 +2,7 @@
 #define MENUS_H_INCLUDED
 #include "includes.h"
 
+int ingame;
 int close_button_pressed;
 
 void close_button_handler();

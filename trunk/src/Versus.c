@@ -46,7 +46,6 @@ void versus (int intro)
     {
         sprintf(direction,"Resources/Images/maps/%d.png",i);
         maps[i]=load_image(direction);
-        //printf ("iD %d \n",maps[i]->ID);
     }
     Background=load_image("Resources/Images/Origin.png");
     Background_bar=load_image("Resources/Images/Origin_bar.png");
@@ -357,9 +356,9 @@ int indice_efx=0;
 void GamePlay(int Player1,int Player2,int Map)
 {
 
-    IMAGE *MapLoad,*EFX[100],*Versus[6],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[4],*Pause_cadre;
+    IMAGE *MapLoad,*EFX[100],*Versus[6],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[5],*Pause_cadre;
     int thunder, rainsound,gameplaysound,sarsour,fight,lotfi,button_press=0;
-    char MapDirection[50],direction[50],texttime[10],Round[10],time =30,round =1,i,pause=0,Pause_pos_ind=0,Pause_pos[]= {14.5,31.5,48.5,65.5};
+    char MapDirection[50],direction[50],texttime[10],Round[10],time =30,round =1,i,pause=0,Pause_pos_ind=0,Pause_pos[]= {14.5,31.5,48.5,65.5,82.5};
     Location loc;
     Versus[0]=load_image("Resources/Images/Mokhtar/Versus.png");
     Versus[1]=load_image("Resources/Images/Haitham/Versus.png");
@@ -374,7 +373,7 @@ void GamePlay(int Player1,int Player2,int Map)
         sprintf (direction,"Resources/Images/Versus/%d.png",i);
         heads[i]=load_image(direction);
     }
-    for (i=0; i<4; i++)
+    for (i=0; i<5; i++)
     {
         sprintf (direction,"Resources/Images/Versus/pause%d.png",i);
         Pause[i]=load_image(direction);
@@ -595,22 +594,20 @@ void GamePlay(int Player1,int Player2,int Map)
         }
         if (pause==1)
         {
-
-
             draw_image_ex(screenimage,0,0 ,100,100,NONE,50);
-            for (i=0; i<4; i++)
-            draw_image_ex(Pause[i],35.5,Pause_pos[i],27.4,0,NONE,100);
+            for (i=0; i<5; i++)
+                draw_image_ex(Pause[i],35.5,Pause_pos[i],27.4,0,NONE,100);
             draw_image_ex(Pause_cadre,35.5,Pause_pos[Pause_pos_ind],27.4,0,NONE,100);
 
             if (IsKeyPressed(3,DOWN)&& button_press>10)
             {
                 button_press=0;
-                Pause_pos_ind=(Pause_pos_ind+1)%4;
+                Pause_pos_ind=(Pause_pos_ind+1)%5;
             }
             if (IsKeyPressed(3,UP)&& button_press>10)
             {
                 button_press=0;
-                Pause_pos_ind=(Pause_pos_ind+3)%4;
+                Pause_pos_ind=(Pause_pos_ind+4)%5;
             }
             if (IsKeyPressed(3,ENTER) && button_press>10)
             {
@@ -647,7 +644,7 @@ void GamePlay(int Player1,int Player2,int Map)
                     GamePlay(Player1,Player2,Map);
                 }
                 break;
-                case 2 :
+                case 3 :
                 {
                     switch (Map)
                     {
@@ -668,11 +665,18 @@ void GamePlay(int Player1,int Player2,int Map)
                         break;
                     }
                     while (IsKeyPressed(3,ENTER))
-                    rest(1);
+                        rest(1);
                     return ;
                 }
                 break;
-                case 3 :
+                case 2 :
+                {
+                    ingame=1;
+                    setting();
+                    ingame=0;
+                }
+                break;
+                case 4 :
                 {
                     uninstall();
                     exit (0);

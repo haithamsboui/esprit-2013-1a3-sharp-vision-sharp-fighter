@@ -1,4 +1,7 @@
 #include "includes.h"
+
+int ingame=0;
+
 int close_button_pressed = 0;
 
 void close_button_handler()
@@ -72,7 +75,6 @@ void intromenu(int intro)
 
 void mainmenu(int *choix)
 {
-clear_keybuf();
     IMAGE *Firstmenu[5],*Background,*back_bar,*Select,*Pers_main[5];
     int Button,i,press_buton=0,Pos_cadre[4]= {-10,15,45,70},select_pers=0;
     float taille_x,taille_y,scale,fade=1,back_fade,fade_start=100;
@@ -165,7 +167,7 @@ clear_keybuf();
 
 void setting ()
 {
-    IMAGE *Volumes[2],*Background,*back_cadre,*icon[3],*select,*volume_point,*display_cadre,*screen,* resolution,*joystick,*keybord,*cadre_control,*cadre_modif,*volume_cadre;
+    IMAGE *Ingame_bar,*Volumes[2],*Background,*back_cadre,*icon[3],*select,*volume_point,*display_cadre,*screen,* resolution,*joystick,*keybord,*cadre_control,*cadre_modif,*volume_cadre;
     float distance_change=100,cadre_display_pos[]= {49.6,76.6},cadre_volume_pos[]= {49.3,75.6},entre=0,fade=1,volume_fade=100,controlpos[]= {38.6,55.6},control_distance=5,keybord_fade=0,joystick_fade=0,modif_fade=0.1;
     int ind1=0,ind2=1,ind3=2,pos_x[]= {5,35,65},button_press=0,trans,second_menu=0,Nb_point_volume_music,Nb_point_volume_effect;
     int i,Button;
@@ -199,6 +201,7 @@ void setting ()
     Volumes[1]=load_image("Resources/Images/setting/Volume_bar1.png");
     volume_point=load_image("Resources/Images/setting/sound_point.png");
     cadre_modif=load_image("Resources/Images/setting/control_modif.png");
+Ingame_bar=load_image("Resources/Images/ingame_bar.png");
     Nb_point_volume_music=Music_volume/19;
     Nb_point_volume_effect=Effect_volume/19;
     if (Fullscreen==1)
@@ -211,8 +214,16 @@ void setting ()
     {
         distance_change=distance_change/1.1;
         trans=100-distance_change;
-        draw_image_ex(Background,0,0,100,100,NONE,100);
+        if (ingame==0)
+        {
+            draw_image_ex(Background,0,0,100,100,NONE,100);
         draw_image_ex(back_cadre,0,2,100,100,NONE,100);
+        }
+        else
+        {
+        draw_image_ex(screenimage,0,0,100,100,NONE,100);
+        draw_image_ex(Ingame_bar,0,2,100,100,NONE,50);
+        }
         draw_image_ex(select,36,30,27,40,NONE,trans);
         draw_image_ex(icon[0],distance_change+pos_x[0],30 ,30,40,NONE,100);
         draw_image_ex(icon[1],distance_change+pos_x[1],30 ,30,40,NONE,100);
@@ -575,9 +586,16 @@ void setting ()
             entre=entre*1.05;
         if( fade>0 )
             fade=fade/1.1;
-
-        draw_image_ex(Background,0,0,100,100,NONE,100);
+if (ingame==0)
+        {
+            draw_image_ex(Background,0,0,100,100,NONE,100);
         draw_image_ex(back_cadre,0,2,100,100,NONE,100);
+        }
+        else
+     {
+         draw_image_ex(screenimage,0,0,100,100,NONE,100);
+        draw_image_ex(Ingame_bar,0,2,100,100,NONE,50);
+    }
         draw_image_ex(select,pos_x[0]+31-entre/5,30-entre/3,27+entre/2,40+1.9*entre,NONE,100-3*distance_change);
         draw_image_ex(icon[ind1],distance_change+pos_x[0],30 ,30,40,NONE,100);
         draw_image_ex(icon[ind2],distance_change+pos_x[1]+entre/4+fade/4,30-1.5*entre-1.5*fade ,30-entre/2-fade/2,40-entre/2-fade/2,NONE,100);
@@ -674,8 +692,16 @@ void setting ()
     while (fade<100)
     {
         fade=fade*1.1;
-        draw_image_ex(Background,0,0,100,100,NONE,100);
+        if (ingame==0)
+        {
+            draw_image_ex(Background,0,0,100,100,NONE,100);
         draw_image_ex(back_cadre,0,2,100,100,NONE,100-fade);
+        }
+        else
+     {
+    draw_image_ex(screenimage,0,0,100,100,NONE,100);
+        draw_image_ex(Ingame_bar,0,2,100,100,NONE,50);
+    }
         draw_image_ex(select,pos_x[0]+31-entre/5,30-entre/3,27+entre/2,40+1.9*entre,NONE,100-fade);
         draw_image_ex(icon[ind1],distance_change+pos_x[0],30 ,30,40,NONE,100-fade);
         draw_image_ex(icon[ind2],distance_change+pos_x[1],30 ,30,40,NONE,100-fade);
