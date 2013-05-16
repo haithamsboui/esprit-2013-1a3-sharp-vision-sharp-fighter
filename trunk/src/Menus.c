@@ -72,6 +72,7 @@ void intromenu(int intro)
 
 void mainmenu(int *choix)
 {
+clear_keybuf();
     IMAGE *Firstmenu[5],*Background,*back_bar,*Select,*Pers_main[5];
     int Button,i,press_buton=0,Pos_cadre[4]= {-10,15,45,70},select_pers=0;
     float taille_x,taille_y,scale,fade=1,back_fade,fade_start=100;
@@ -157,7 +158,6 @@ void mainmenu(int *choix)
         draw_image_ex(Firstmenu[ind_3],Pos_cadre[2],35,taille_x,taille_y+10,NONE,100-fade);
         draw_image_ex(Select,16,32,27,40,NONE,100-fade);
         draw_image_ex(Pers_main[select_pers],60,0,50,0,NONE,100-fade ); // draw mokhtar
-
         next_frame();
     }
 
@@ -321,7 +321,6 @@ void setting ()
 
                     {
                         ResolutionIndex=(ResolutionIndex-1+(Resolutions->num_modes))%(Resolutions->num_modes);
-                        //TODO l'indice peut etre 0, donc indice-1 va etre -1.
                         if (Resolutions->mode[ResolutionIndex].width == Resolutions->mode[(ResolutionIndex+1)%Resolutions->num_modes].width && Resolutions->mode[ResolutionIndex].height==Resolutions->mode[(ResolutionIndex+1)%Resolutions->num_modes].height)
                             ResolutionIndex=(ResolutionIndex-1+Resolutions->num_modes)%(Resolutions->num_modes);
 
@@ -462,9 +461,7 @@ void setting ()
                             {
                                 ReadingKey=0;
                                 clear_keybuf();
-
                                 draw_image_ex(screenimage,0,0 ,100,100,NONE,30);
-
                                 draw_text( SharpCurve,"PRESS KEY ",15,50,45,CENTER_X,100);
                                 next_frame();
                                 ReadKeyboard(SelectedPlayer,key_modif);

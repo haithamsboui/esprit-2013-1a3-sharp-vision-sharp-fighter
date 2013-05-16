@@ -24,7 +24,6 @@ int main()
             case 0 :
 //        arcade();
                 break;
-
             case 1:
                 versus(intro);
                 break;
