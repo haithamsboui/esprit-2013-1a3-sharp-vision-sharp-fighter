@@ -88,7 +88,7 @@ int iH=1;
 void Draw_Haitham()
 {
     flip vflip;
-
+    int jump_stat=1;
     if(directionH)
         vflip=NONE;
     else
@@ -118,12 +118,11 @@ void Draw_Haitham()
         }
         else if (IsKeyPressed(PlayerH,UP))
         {
-            if (etatH!=Fall)
-            {
+            IndexH=0;
+            iH=1;
+            if (etatH==Stable)
                 etatH=Jump;
-                yH+=0.2;
-            }
-            else
+            if (etatH==Fall)
                 etatH=Stable;
         }
         else if (IsKeyPressed(PlayerH,DOWN))
@@ -300,20 +299,24 @@ void Draw_Haitham()
         break;
 
     case Crouch:
+
         wH=(hH/((float)HaithamPics[IndexH+CrouchStartH]->h/(float)HaithamPics[IndexH+CrouchStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+CrouchStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
-        if(FrameCount%10==0)
+           if(FrameCount%10==0)
         {
-            IndexH++;
-            if(IndexH==CrouchCountH)
+
+IndexH++;
+            if(IndexH>=CrouchCountH)
             {
                 etatH=Stable;
             }
-        }
-        break;
 
+        }
+
+
+  break;
 
     case Defence:
         wH=(hH/((float)HaithamPics[IndexH+DefenceStartH]->h/(float)HaithamPics[IndexH+DefenceStartH]->w))/AspectRatio;
@@ -330,7 +333,7 @@ void Draw_Haitham()
         }
         break;
 
-    case Fall:
+    case Hit:
         wH=(hH/((float)HaithamPics[IndexH+HitStartH]->h/(float)HaithamPics[IndexH+HitStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+HitStartH],xH,yH,wH,hH,vflip,100);
@@ -345,9 +348,55 @@ void Draw_Haitham()
         }
         break;
 
+    case Fall:
+        wH=(hH/((float)HaithamPics[IndexH+FallStartH]->h/(float)HaithamPics[IndexH+FallStartH]->w))/AspectRatio;
+        if(PlayerH==2) xH-=wH;
+        draw_image_ex(HaithamPics[IndexH+FallStartH],xH,yH,wH,hH,vflip,100);
+        if(PlayerH==2) xH+=wH;
+        if(FrameCount%10==0 && IndexH<=FallCountH)
+        {
+            IndexH++;
+        }
+        break;
+
+    case Jump:
+        if(FrameCount%10==0)
+        {
+            if(IndexH>=JumpCountH-1)
+            {
+                etatH=Stable;
+            }
+
+            if (IndexH>=2)
+                jump_stat=0;
+
+            if (jump_stat==1)
+            {
+
+                yH-=10;
+            }
+            if (jump_stat==0)
+            {
+
+                yH+=10;
+            }
+
+            IndexH=IndexH+iH;
+
+        }
+
+        wH=(hH/((float)HaithamPics[IndexH+JumpStartH]->h/(float)HaithamPics[IndexH+JumpStartH]->w))/AspectRatio;
+        if(PlayerH==2) xH-=wH;
+        draw_image_ex(HaithamPics[IndexH+JumpStartH],xH,yH,wH,hH,vflip,100);
+        if(PlayerH==2) xH+=wH;
+
+        break;
+
     default:
         break;
     }
 }
+
+
 
 

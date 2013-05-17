@@ -6,7 +6,6 @@
 #define HaithamImageCount 50
 
 IMAGE *HaithamPics[HaithamImageCount];
-
 float xH,yH;
 float wH,hH;
 int directionH;
