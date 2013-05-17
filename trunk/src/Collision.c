@@ -2,6 +2,9 @@
 
 Point **SalahCollision;
 Point **HaithamCollision;
+Point **MokhtarCollision;
+Point **BrahimCollision;
+Point **WassimCollision;
 
 
 int ProcessCollision(IMAGE ** pics1, int index1, Point **Data1,float x1,float y1,float w1,float h1,
@@ -13,16 +16,20 @@ int ProcessCollision(IMAGE ** pics1, int index1, Point **Data1,float x1,float y1
     //testing for valid params
     if ((w1==0 && h1==0) || (w2==0 && h2==0)) return 0;
 
-    if(w1==0 && h1!=0){
+    if(w1==0 && h1!=0)
+    {
         w1=(h1/((float)pics1[index1]->h/(float)pics1[index1]->w))/AspectRatio;
     }
-    if(w1!=0 && h1==0){
+    if(w1!=0 && h1==0)
+    {
         h1=(w1/((float)pics1[index1]->w/(float)pics1[index1]->h))*AspectRatio;
     }
-    if(w2==0 && h2!=0){
+    if(w2==0 && h2!=0)
+    {
         w2=(h2/((float)pics2[index2]->h/(float)pics2[index2]->w))/AspectRatio;
     }
-    if(w2!=0 && h2==0){
+    if(w2!=0 && h2==0)
+    {
         h2=(w2/((float)pics2[index2]->w/(float)pics2[index2]->h))*AspectRatio;
     }
 
@@ -73,9 +80,9 @@ int Intersect(Point pt1,Point pt2,Point pt3,Point pt4)
         inter.X = (B2 * C1 - B1 * C2) / det;
         inter.Y = (A1 * C2 - A2 * C1) / det;
         if(Min(pt1.X, pt2.X) <= inter.X && Max(pt1.X, pt2.X) >= inter.X &&
-           Min(pt1.Y, pt2.Y) <= inter.Y && Max(pt1.Y, pt2.Y) >= inter.Y &&
-           Min(pt3.X, pt4.X) <= inter.X && Max(pt3.X, pt4.X) >= inter.X &&
-           Min(pt3.Y, pt4.Y) <= inter.Y && Max(pt3.Y, pt4.Y) >= inter.Y)
+                Min(pt1.Y, pt2.Y) <= inter.Y && Max(pt1.Y, pt2.Y) >= inter.Y &&
+                Min(pt3.X, pt4.X) <= inter.X && Max(pt3.X, pt4.X) >= inter.X &&
+                Min(pt3.Y, pt4.Y) <= inter.Y && Max(pt3.Y, pt4.Y) >= inter.Y)
         {
             return 1;
         }
@@ -155,6 +162,84 @@ void LoadCollisionData()
         }
 
     }
+    //Loading Mokhtar Data
+    sprintf(Section,"/Resources/Images/Mokhtar/GamePlay");
+    MokhtarCollision=calloc(MokhtarImageCount,sizeof(Point*));
+    for(i=0; i<MokhtarImageCount; i++)
+    {
+        sprintf(buffer,"%s/%d.png.Count",Section,i);
+        count=get_config_int(Section,buffer,0);
+        sprintf(buffer,"%s/%d.png.Data",Section,i);
+        data=(char*)get_config_string(Section,buffer,NULL);
+
+        if(count && data!=NULL)
+        {
+            MokhtarCollision[i]=malloc((count+1)*sizeof(Point));
+
+            MokhtarCollision[i][0].X=atoi(strtok(data,","));
+            MokhtarCollision[i][0].Y=atoi(strtok(NULL,","));
+            for(j=1; j<count; j++)
+            {
+                MokhtarCollision[i][j].X=atoi(strtok(NULL,","));
+                MokhtarCollision[i][j].Y=atoi(strtok(NULL,","));
+            }
+            MokhtarCollision[i][j].X=-1;
+            MokhtarCollision[i][j].Y=-1;
+        }
+
+    }
+    //Loading Brahim Data
+    sprintf(Section,"/Resources/Images/Brahim/GamePlay");
+    BrahimCollision=calloc(BrahimImageCount,sizeof(Point*));
+    for(i=0; i<BrahimImageCount; i++)
+    {
+        sprintf(buffer,"%s/%d.png.Count",Section,i);
+        count=get_config_int(Section,buffer,0);
+        sprintf(buffer,"%s/%d.png.Data",Section,i);
+        data=(char*)get_config_string(Section,buffer,NULL);
+
+        if(count && data!=NULL)
+        {
+            BrahimCollision[i]=malloc((count+1)*sizeof(Point));
+
+            BrahimCollision[i][0].X=atoi(strtok(data,","));
+            BrahimCollision[i][0].Y=atoi(strtok(NULL,","));
+            for(j=1; j<count; j++)
+            {
+                BrahimCollision[i][j].X=atoi(strtok(NULL,","));
+                BrahimCollision[i][j].Y=atoi(strtok(NULL,","));
+            }
+            BrahimCollision[i][j].X=-1;
+            BrahimCollision[i][j].Y=-1;
+        }
+
+    }
+    //Loading Wassim Data
+    sprintf(Section,"/Resources/Images/Wassim/GamePlay");
+    WassimCollision=calloc(WassimImageCount,sizeof(Point*));
+    for(i=0; i<WassimImageCount; i++)
+    {
+        sprintf(buffer,"%s/%d.png.Count",Section,i);
+        count=get_config_int(Section,buffer,0);
+        sprintf(buffer,"%s/%d.png.Data",Section,i);
+        data=(char*)get_config_string(Section,buffer,NULL);
+
+        if(count && data!=NULL)
+        {
+            WassimCollision[i]=malloc((count+1)*sizeof(Point));
+
+            WassimCollision[i][0].X=atoi(strtok(data,","));
+            WassimCollision[i][0].Y=atoi(strtok(NULL,","));
+            for(j=1; j<count; j++)
+            {
+                WassimCollision[i][j].X=atoi(strtok(NULL,","));
+                WassimCollision[i][j].Y=atoi(strtok(NULL,","));
+            }
+            WassimCollision[i][j].X=-1;
+            WassimCollision[i][j].Y=-1;
+        }
+
+    }
     set_config_file("Resources/Setting.cfg");
 }
 
@@ -171,6 +256,21 @@ void UnLoadCollisionData()
         free(HaithamCollision[i]);
     }
     free(HaithamCollision);
+    for(i=0; i<MokhtarImageCount; i++)
+    {
+        free(MokhtarCollision[i]);
+    }
+    free(MokhtarCollision);
+    for(i=0; i<BrahimImageCount; i++)
+    {
+        free(BrahimCollision[i]);
+    }
+    free(BrahimCollision);
+    for(i=0; i<WassimImageCount; i++)
+    {
+        free(WassimCollision[i]);
+    }
+    free(WassimCollision);
 }
 
 
