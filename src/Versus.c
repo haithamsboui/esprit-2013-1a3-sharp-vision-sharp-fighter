@@ -358,7 +358,7 @@ void GamePlay(int Player1,int Player2,int Map)
 
     IMAGE *MapLoad,*EFX[100],*Versus[6],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[5],*Pause_cadre;
     int thunder, rainsound,gameplaysound,sarsour,fight,lotfi,button_press=0;
-    char MapDirection[50],direction[50],texttime[10],Round[10],time =30,round =1,i,pause=0,Pause_pos_ind=0,Pause_pos[]= {14.5,31.5,48.5,65.5,82.5};
+    char MapDirection[50],direction[50],texttime[10],Round[10],time =30,round =1,i,pause=0,Pause_pos_ind=0,Pause_pos[]= {20,35,50,65,80};
     Location loc;
     Versus[0]=load_image("Resources/Images/Mokhtar/Versus.png");
     Versus[1]=load_image("Resources/Images/Haitham/Versus.png");
@@ -509,7 +509,7 @@ void GamePlay(int Player1,int Player2,int Map)
             break;
 
             }
-            draw_image_ex(MapLoad,-1.5,-2,103,104,NONE,100);
+
             draw_image_ex(MapLoad,-1.5,-2,103,104,NONE,100);
             draw_image_ex(EFX[indice_efx],0,-10,100,100,NONE,100);
             if(FrameCount%3==0)
@@ -517,10 +517,11 @@ void GamePlay(int Player1,int Player2,int Map)
             draw_image_ex(Score,-1.5,3.4,40,0,NONE,100);
             draw_image_ex(Score,61.5,4,40,0,VERTICAL,100);
             draw_image_ex(bloodbar,0,0,100,0,NONE,100);
-            draw_image_ex(Time,0,-1,100,0,NONE,100);
-            draw_image_ex(heads[Player1],-1,15,10,0,VERTICAL,100);
-            draw_image_ex(heads[Player2],91,15,10,0,NONE,100);
+            draw_image_ex(Time,-15,0,130,0,NONE,100);
             draw_image_ex(heads_bar,0,0,100,0,NONE,100);
+
+            draw_image_ex(heads[Player1],-1,15,15,0,VERTICAL,100);
+            draw_image_ex(heads[Player2],91,15,15,0,NONE,100);
             switch (Player1)
             {
             case 0 :
@@ -566,25 +567,20 @@ void GamePlay(int Player1,int Player2,int Map)
                 sprintf(texttime,"%d",time);
                 time--;
             }
-            if(time<0)
+            if (time<0)
             {
 
-                next_frame();
                 time=30;
                 round++;
+                next_frame();
+                draw_image_ex(MapLoad,-1.5,-2,103,104,NONE,100);
                 sprintf(Round,"Round %d",round);
-                for (i=0; i<200; i++)
-                {
-
-                    draw_image_ex(MapLoad,-1.5,-2,103,104,NONE,(float)i/2);
-                    draw_text(Arista,Round,15,50,50,CENTER_X,(float)i/2);
-                    next_frame();
-                }
-                rest(2000);
+                draw_text(Arista,Round,15,50,50,CENTER_X,100);
+                next_frame();
+                rest(2500);
             }
 
-            // sprintf(Round,"Round %d",round);
-            //  draw_text(Arista,Round,10,50,5,CENTER_X,100);
+
             draw_text(Arista,texttime,10,50,2,CENTER_X,95);
             if (IsKeyPressed(3,RETURN) && button_press>10)
             {
@@ -598,6 +594,7 @@ void GamePlay(int Player1,int Player2,int Map)
             for (i=0; i<5; i++)
                 draw_image_ex(Pause[i],35.5,Pause_pos[i],27.4,0,NONE,100);
             draw_image_ex(Pause_cadre,35.5,Pause_pos[Pause_pos_ind],27.4,0,NONE,100);
+            draw_text(Arista,"PAUSE MENU",15,50,5,CENTER_X,100);
 
             if (IsKeyPressed(3,DOWN)&& button_press>10)
             {
@@ -687,6 +684,7 @@ void GamePlay(int Player1,int Player2,int Map)
 
 
         }
+
         button_press++;
         next_frame();
 
