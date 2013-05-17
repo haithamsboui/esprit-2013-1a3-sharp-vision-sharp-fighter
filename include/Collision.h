@@ -14,6 +14,9 @@ typedef struct
 
 Point **SalahCollision;
 Point **HaithamCollision;
+Point **MokhtarCollision;
+Point **BrahimCollision;
+Point **WassimCollision;
 
 int ProcessCollision(IMAGE ** pics1, int index1, Point **Data1,float x1,float y1,float w1,float h1,
                      IMAGE ** pics2, int index2, Point **Data2,float x2,float y2,float w2,float h2);
