@@ -14,6 +14,7 @@ int main()
 
     intromenu(intro);
 
+
     while (!close_button_pressed)
     {
         mainmenu(&choix);
@@ -22,7 +23,7 @@ int main()
             switch (choix)
             {
             case 0 :
-//        arcade();
+                Arcade();
                 break;
             case 1:
                 versus(intro);

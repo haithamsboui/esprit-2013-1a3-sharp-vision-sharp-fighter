@@ -3,6 +3,8 @@
 
 #include "includes.h"
 
+void Arcade();
+
 void Cinematic1();
 
 
