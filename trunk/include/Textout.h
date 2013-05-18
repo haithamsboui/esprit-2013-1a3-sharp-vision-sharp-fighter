@@ -4,7 +4,7 @@
 #include "includes.h"
 
 typedef enum {NORMAL,CENTER_X,CENTER_Y,CENTER} FONTSTYLE;
-typedef enum {SharpCurve,Verdana,Arista,Arista2,FONTSCOUNT} FONTS;
+typedef enum {SharpCurve,Verdana,Arista,velocity,FONTSCOUNT} FONTS;
 
 //TODO : Fix variable size according to FONTS size"
 const char *FontFiles[FONTSCOUNT];
