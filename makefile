@@ -4,7 +4,7 @@ ARCH := $(shell getconf LONG_BIT)
 CFILES := $(wildcard src/*.c)
 OFILES := $(addprefix obj/,$(notdir $(CFILES:.c=.o)))
 ALLEGROLIBS := $(shell allegro-config --libs)
-LIBS = -L./lib -lftgl -lapeg$(ARCH) -logg -ltheora -lvorbis -lalleggl -lloadpng $(ALLEGROLIBS:alleg-4.2.2=alleg)
+LIBS = -L./lib -lftgl -lapeg$(ARCH) -logg -ltheora -lvorbis -lalleggl -lloadpng -lm -lGL -lGLU $(ALLEGROLIBS:alleg-4.2.2=alleg)
 COMPILER = gcc
 OPTIONS = -c -Wall
 CFLAGS = $(shell freetype-config --cflags) $(shell allegro-config --cflags) -Iinclude
