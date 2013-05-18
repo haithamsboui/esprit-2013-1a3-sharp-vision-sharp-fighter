@@ -47,6 +47,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="../include/Arcade.h" />
 		<Unit filename="../include/AudioPlayer.h" />
 		<Unit filename="../include/Brahim.h" />
 		<Unit filename="../include/Calcul.h" />
@@ -68,6 +69,9 @@
 		<Unit filename="../include/apeg.h" />
 		<Unit filename="../include/icon.h" />
 		<Unit filename="../include/includes.h" />
+		<Unit filename="../src/Arcade.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="../src/AudioPlayer.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -32,5 +32,6 @@
 #include "Mokhtar.h"
 #include "Wassim.h"
 #include "Versus.h"
+#include "Arcade.h"
 
 #endif // INCLUDES_H_INCLUDED
