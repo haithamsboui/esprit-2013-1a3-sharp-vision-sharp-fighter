@@ -9,7 +9,6 @@ int main()
 
     if(install())
         return 1;//ERROR
-
     intro=AddVoice("Resources/Sounds/intro.wav",0);
 
     intromenu(intro);
