@@ -25,6 +25,8 @@ int Intersect(Point pt1,Point pt2,Point pt3,Point pt4);
 //Intersection of two shapes
 //int Collision(Point Shape1[], int n1,Point Shape2[], int n2);
 
+
+
 void LoadCollisionData();
 
 void UnLoadCollisionData();

@@ -13,7 +13,7 @@ int directionB;
 int PlayerB;
 EtatPlayer etatB;
 int IndexB;
-
+int IndexCollissionB;
 void LoadBrahim(int player);
 
 void Draw_Brahim();

@@ -15,7 +15,7 @@ int directionM;
 int PlayerM;
 EtatPlayer etatM;
 int IndexM;
-
+int IndexCollissionM;
 void LoadMokhtar(int PlayerM);
 
 void Draw_Mokhtar();

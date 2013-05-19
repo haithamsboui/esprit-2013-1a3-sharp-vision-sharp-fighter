@@ -6,13 +6,13 @@
 #define JumpStartM 4
 #define JumpCountM 6
 
-#define CrouchMtartM 9
+#define CrouchStartM 9
 #define CrouchCountM 1
 
 #define WalkStartM 63
 #define WalkCountM 3
 
-#define PunchMtartM 12
+#define PunchStartM 12
 #define PunchCountM 3
 
 #define KickStartM 15
@@ -54,8 +54,10 @@ int IndexM;
 
 void LoadMokhtar(int player)
 {
+
     int i;
     char path[255];
+
     for (i=0; i<MokhtarImageCount; i++)
     {
         sprintf(path,"Resources/Images/Mokhtar/Gamplay/%d.png",i);
@@ -85,86 +87,219 @@ void LoadMokhtar(int player)
 }
 
 int iM=1;
+int CollisionStatM=0;
+
 void Draw_Mokhtar()
 {
+    Point ** TAB;
+    IMAGE ** Vs;
+    int x,y,w,h,IndexVs;
     flip vflip;
-
+    int jump_stat=1;
     if(directionM)
         vflip=NONE;
     else
         vflip = VERTICAL;
 
-    if(etatM!=Kick && etatM!=Punch && etatM!=Fireball && etatM != Freeze && etatM !=Jump  && etatM !=Wind && etatM !=Thunder &&etatM!=Fall&&etatM!=Hit&&etatM!=Defence&&etatM!=Down)
+
+    if (player1==4 || player2==4)
     {
+        x=xW;
+        y=yW;
+        w=wW;
+        h=hW;
+        TAB=WassimCollision;
+        Vs=WassimPics;
+        IndexVs=IndexCollissionW;
+    }
+    if (player1==2 || player2==2)
+    {
+        x=xB;
+        y=yB;
+        w=wB;
+        h=hB;
+        TAB=BrahimCollision;
+        Vs=BrahimPics;
+        IndexVs=IndexCollissionB;
+    }
+    if (player1==3 || player2==3)
+    {
+        x=xS;
+        y=yS;
+        w=wS;
+        h=hS;
+        TAB=SalahCollision;
+        Vs=SalahPics;
+        IndexVs=IndexCollissionS;
+    }
+    if (player1==1 || player2==1)
+    {
+        x=xH;
+        y=yH;
+        w=wH;
+        h=hH;
+        TAB=HaithamCollision;
+        Vs=HaithamPics;
+        IndexVs=IndexCollissionH;
+    }
+
+
+        switch (etatM)
+        {
+        case Kick :
+        case Punch :
+         if (CollisionStatM==1)
+    {
+            if(PlayerM==2)
+                xM-=wM;
+            if (PlayerM==1)
+                x-=w;
+            if(ProcessCollision(MokhtarPics,IndexCollissionM,MokhtarCollision,xM,yM,wM,hM,
+                                Vs,IndexVs,TAB,x,y,w,h))
+            {
+                if(PlayerM==2)
+                {
+                    Player1Health-=2.5;
+                }
+                if(PlayerM==1)
+                {
+                    Player2Health-=2.5;
+                }
+                CollisionStatM=0;
+
+            }
+            if(PlayerM==2&& Player2Health==0)
+                etatM=Fall;
+            if (PlayerM==1 && Player1Health==0)
+                etatM=Fall;
+            if(PlayerM==2)
+                xM+=wM;
+            if (PlayerM==1)
+                x+=w;
+                 }
+            break;
+        case Stable :
+            if(PlayerM==2)
+                xM-=wM;
+            if (PlayerM==1)
+                x-=w;
+            if(ProcessCollision(MokhtarPics,IndexCollissionM,MokhtarCollision,xM,yM,wM,hM,
+                                Vs,IndexVs,TAB,x,y,w,h))
+
+                etatM=Hit;
+
+            if(PlayerM==2)
+                xM+=wM;
+            if (PlayerM==1)
+                x+=w;
+            break;
+
+    }
+
+    if(etatM!=Kick && etatM!=Punch && etatM!=Fireball && etatM != Freeze && etatM !=Jump  && etatM !=Wind && etatM !=Thunder &&etatM!=Fall&&etatM!=Hit&&etatM!=Defence&&etatM!=Up)
+    {
+        if(PlayerM==2)
+            xM-=wM;
+        if (PlayerM==1)
+            x-=w;
+        while(ProcessCollision(MokhtarPics,IndexCollissionM,MokhtarCollision,xM,yM,wM,hM,
+                               Vs,IndexVs,TAB,x,y,w,h))
+        {
+            if (PlayerM==2)
+                xM+=0.1;
+            else
+                xM-=0.1;
+        }
+        if(PlayerM==2)
+            xM+=wM;
+        if (PlayerM==1)
+            x+=w;
+
         if(IsKeyPressed(PlayerM,KICK))
         {
             etatM=Kick;
             IndexM=0;
+            IndexCollissionM=KickStartM;
+            CollisionStatM==1;
         }
         else if(IsKeyPressed(PlayerM,PUNCH))
         {
             etatM=Punch;
             IndexM=0;
+            IndexCollissionM=PunchStartM;
+            CollisionStatM==1;
         }
         else if(IsKeyPressed(PlayerM,RIGHT))
         {
             etatM=Forward;
-            xM+=0.2;
+            xM+=0.35;
+            IndexCollissionM=WalkStartM;
         }
         else if (IsKeyPressed(PlayerM,LEFT))
         {
             etatM=Backward;
-            xM-=0.2;
+            xM-=0.35;
+            IndexCollissionM=WalkStartM;
         }
         else if (IsKeyPressed(PlayerM,UP))
         {
-            if (etatM!=Fall)
+            IndexM=0;
+            iM=1;
+            if (etatM==Stable)
             {
                 etatM=Jump;
-                yM+=0.2;
+                IndexCollissionM=JumpStartM;
             }
-            else
-                etatM=Stable;
+            if (etatM==Fall)
+            {
+                etatM=Up;
+                IndexCollissionM=FallStartM;
+            }
         }
         else if (IsKeyPressed(PlayerM,DOWN))
         {
             etatM=Crouch;
             IndexM=0;
+            IndexCollissionM=CrouchStartM;
         }
         else if (IsKeyPressed(PlayerM,FIREBALL))
         {
             etatM=Fireball;
             IndexM=0;
+            IndexCollissionM=FireballStartM;
 
         }
         else if (IsKeyPressed(PlayerM,FREEZE))
         {
             etatM=Freeze;
             IndexM=0;
+            IndexCollissionM=FreezeStartM;
 
         }
         else if (IsKeyPressed(PlayerM,THUNDER))
         {
             etatM=Thunder;
             IndexM=0;
-
+            IndexCollissionM=ThunderStartM;
         }
         else if (IsKeyPressed(PlayerM,WIND))
         {
             etatM=Wind;
             IndexM=0;
-
+            IndexCollissionM=WindStartM;
         }
         else if (IsKeyPressed(PlayerM,DEFENCE))
         {
             etatM=Defence;
             IndexM=0;
-
+            IndexCollissionM=DefenceStartM;
         }
         else
+        {
             etatM=Stable;
+            IndexCollissionM=StableStartM;
+        }
     }
-
 
 
     switch(etatM)
@@ -178,6 +313,7 @@ void Draw_Mokhtar()
                 iM=-1;
 
             IndexM=IndexM+iM;
+            IndexCollissionM+=IndexM;
         }
         IndexM = Min(IndexM,StableCountM-1);
         wM=(hM/((float)MokhtarPics[IndexM+StableStartM]->h/(float)MokhtarPics[IndexM+StableStartM]->w))/AspectRatio;
@@ -189,6 +325,8 @@ void Draw_Mokhtar()
         if(FrameCount%10==0)
         {
             IndexM=((IndexM-1+WalkCountM)%WalkCountM);
+            IndexCollissionM+=IndexM;
+
         }
         IndexM = Min(IndexM,WalkCountM-1);
         wM=(hM/((float)MokhtarPics[IndexM+WalkStartM]->h/(float)MokhtarPics[IndexM+WalkStartM]->w))/AspectRatio;
@@ -201,6 +339,8 @@ void Draw_Mokhtar()
         if(FrameCount%10==0)
         {
             IndexM=((IndexM+1)%WalkCountM);
+            IndexCollissionM+=IndexM;
+
         }
         IndexM = Min(IndexM,WalkCountM-1);
         wM=(hM/((float)MokhtarPics[IndexM+WalkStartM]->h/(float)MokhtarPics[IndexM+WalkStartM]->w))/AspectRatio;
@@ -217,6 +357,8 @@ void Draw_Mokhtar()
         if(FrameCount%10==0)
         {
             IndexM++;
+            IndexCollissionM+=IndexM;
+
             if(IndexM==KickCountM)
             {
                 etatM=Stable;
@@ -226,13 +368,15 @@ void Draw_Mokhtar()
         break;
 
     case Punch:
-        wM=(hM/((float)MokhtarPics[IndexM+PunchMtartM]->h/(float)MokhtarPics[IndexM+PunchMtartM]->w))/AspectRatio;
+        wM=(hM/((float)MokhtarPics[IndexM+PunchStartM]->h/(float)MokhtarPics[IndexM+PunchStartM]->w))/AspectRatio;
         if(PlayerM==2) xM-=wM;
-        draw_image_ex(MokhtarPics[IndexM+PunchMtartM],xM,yM,wM,hM,vflip,100);
+        draw_image_ex(MokhtarPics[IndexM+PunchStartM],xM,yM,wM,hM,vflip,100);
         if(PlayerM==2) xM+=wM;
         if(FrameCount%10==0)
         {
             IndexM++;
+            IndexCollissionM+=IndexM;
+
             if(IndexM==PunchCountM)
             {
                 etatM=Stable;
@@ -247,6 +391,8 @@ void Draw_Mokhtar()
         if(FrameCount%10==0)
         {
             IndexM++;
+            IndexCollissionM+=IndexM;
+
             if(IndexM==FireballCountM)
             {
                 etatM=Stable;
@@ -261,6 +407,8 @@ void Draw_Mokhtar()
         if(FrameCount%10==0)
         {
             IndexM++;
+            IndexCollissionM+=IndexM;
+
             if(IndexM==ThunderCountM)
             {
                 etatM=Stable;
@@ -276,6 +424,8 @@ void Draw_Mokhtar()
         if(FrameCount%10==0)
         {
             IndexM++;
+            IndexCollissionM+=IndexM;
+
             if(IndexM==WindCountM)
             {
                 etatM=Stable;
@@ -291,6 +441,8 @@ void Draw_Mokhtar()
         if(FrameCount%10==0)
         {
             IndexM++;
+            IndexCollissionM+=IndexM;
+
             if(IndexM==FreezeCountM)
             {
                 etatM=Stable;
@@ -300,13 +452,15 @@ void Draw_Mokhtar()
         break;
 
     case Crouch:
-        wM=(hM/((float)MokhtarPics[IndexM+CrouchMtartM]->h/(float)MokhtarPics[IndexM+CrouchMtartM]->w))/AspectRatio;
+        wM=(hM/((float)MokhtarPics[IndexM+CrouchStartM]->h/(float)MokhtarPics[IndexM+CrouchStartM]->w))/AspectRatio;
         if(PlayerM==2) xM-=wM;
-        draw_image_ex(MokhtarPics[IndexM+CrouchMtartM],xM,yM,wM,hM,vflip,100);
+        draw_image_ex(MokhtarPics[IndexM+CrouchStartM],xM,yM,wM,hM,vflip,100);
         if(PlayerM==2) xM+=wM;
         if(FrameCount%10==0)
         {
             IndexM++;
+            IndexCollissionM+=IndexM;
+
             if(IndexM==CrouchCountM)
             {
                 etatM=Stable;
@@ -323,6 +477,8 @@ void Draw_Mokhtar()
         if(FrameCount%10==0)
         {
             IndexM++;
+            IndexCollissionM+=IndexM;
+
             if(IndexM==DefenceCountM)
             {
                 etatM=Stable;
@@ -330,7 +486,7 @@ void Draw_Mokhtar()
         }
         break;
 
-    case Fall:
+    case Hit:
         wM=(hM/((float)MokhtarPics[IndexM+HitStartM]->h/(float)MokhtarPics[IndexM+HitStartM]->w))/AspectRatio;
         if(PlayerM==2) xM-=wM;
         draw_image_ex(MokhtarPics[IndexM+HitStartM],xM,yM,wM,hM,vflip,100);
@@ -338,12 +494,83 @@ void Draw_Mokhtar()
         if(FrameCount%10==0)
         {
             IndexM++;
+            IndexCollissionM+=IndexM;
+
             if(IndexM==HitCountM)
             {
                 etatM=Stable;
             }
         }
         break;
+
+    case Fall:
+        wM=(hM/((float)MokhtarPics[IndexM+FallStartM]->h/(float)MokhtarPics[IndexM+FallStartM]->w))/AspectRatio;
+        if(PlayerM==2) xM-=wM;
+        draw_image_ex(MokhtarPics[IndexM+FallStartM],xM,yM,wM,hM,vflip,100);
+        if(PlayerM==2) xM+=wM;
+        if(FrameCount%10==0)
+        {
+            IndexM++;
+            IndexCollissionM+=IndexM;
+
+            if(IndexM==FallCountM)
+            {
+                etatM=Stable;
+            }
+        }
+        break;
+
+    case Up:
+        wM=(hM/((float)MokhtarPics[IndexM+UpStartM]->h/(float)MokhtarPics[IndexM+UpStartM]->w))/AspectRatio;
+        if(PlayerM==2) xM-=wM;
+        draw_image_ex(MokhtarPics[IndexM+UpStartM],xM,yM,wM,hM,vflip,100);
+        if(PlayerM==2) xM+=wM;
+        if(FrameCount%10==0)
+        {
+            IndexM++;
+            IndexCollissionM+=IndexM;
+
+            if(IndexM==UpCountM)
+            {
+                etatM=Stable;
+            }
+        }
+        break;
+
+    case Jump:
+        if(FrameCount%10==0)
+        {
+            if(IndexM>=JumpCountM-1)
+            {
+                etatM=Stable;
+            }
+
+            if (IndexM>=3)
+                jump_stat=0;
+
+            if (jump_stat==1)
+            {
+
+                yM-=6.5;
+            }
+            if (jump_stat==0)
+            {
+
+                yM+=6.5;
+            }
+
+            IndexM++;
+            IndexCollissionM+=IndexM;
+
+        }
+        wM=(hM/((float)MokhtarPics[IndexM+JumpStartM]->h/(float)MokhtarPics[IndexM+JumpStartM]->w))/AspectRatio;
+        if(PlayerM==2) xM-=wM;
+        draw_image_ex(MokhtarPics[IndexH+JumpStartM],xM,yM,wM,hM,vflip,100);
+        if(PlayerM==2) xM+=wM;
+
+        break;
+
+
     default:
         break;
     }
