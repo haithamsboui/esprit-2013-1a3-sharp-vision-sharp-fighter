@@ -12,7 +12,7 @@ int directionW;
 int PlayerW;
 EtatPlayer etatW;
 int IndexW;
-
+int IndexCollissionW;
 void LoadWassim(int player);
 
 void Draw_Wassim();

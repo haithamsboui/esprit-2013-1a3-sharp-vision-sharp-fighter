@@ -29,7 +29,7 @@ int install()
 
     LoadSettings();
 
-    LoadCollisionData();
+   LoadCollisionData();
 
     if(install_keyboard())
         return 1;

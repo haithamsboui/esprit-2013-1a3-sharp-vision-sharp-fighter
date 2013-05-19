@@ -299,6 +299,8 @@ void versus (int intro)
             {
                 press_buton=0;
                 voice_stop(intro);
+                player1=select1;
+                player2=select2;
                 GamePlay(select1,select2,select_map);
                 return;
             }
@@ -352,11 +354,13 @@ void ChargerEffetNaturel(IMAGE *effet[100], char chemin[200], int nombreFrame)
 }
 
 int indice_efx=0;
-
 void GamePlay(int Player1,int Player2,int Map)
 {
 
-    IMAGE *MapLoad,*EFX[100],*Versus[6],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[5],*Pause_cadre;
+    Player1Health=100;
+    Player2Health=100;
+
+    IMAGE *MapLoad,*EFX[100],*Versus[7],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[5],*Pause_cadre;
     int thunder, rainsound,gameplaysound,sarsour,fight,lotfi,button_press=0;
     char MapDirection[50],direction[50],texttime[10],Round[10],time =30,round =1,i,pause=0,Pause_pos_ind=0,Pause_pos[]= {20,35,50,65,80};
     Location loc;
@@ -366,6 +370,8 @@ void GamePlay(int Player1,int Player2,int Map)
     Versus[3]=load_image("Resources/Images/Salah/Versus.png");
     Versus[4]=load_image("Resources/Images/Wassim/Versus.png");
     Versus[5]=load_image("Resources/Images/Versus/Versus.png");
+        Versus[6]=load_image("Resources/Images/Versus/VS.png");
+
     Pause_cadre=load_image("Resources/Images/Versus/pause_cadre.png");
 
     for (i=0; i<5; i++)
@@ -383,10 +389,13 @@ void GamePlay(int Player1,int Player2,int Map)
     Time=load_image("Resources/Images/Versus/time.png");
     heads_bar=load_image("Resources/Images/Versus/heads.png");
     next_frame();
-    draw_image_ex(Versus[Player1],5,15,35,50,VERTICAL,100);
-    draw_image_ex(Versus[Player2],65,35,35,50,NONE,100);
-    draw_image_ex(Versus[5],35,40,30,30,NONE,100);
+    draw_image_ex(Versus[5],0,0,100,100,NONE,100);
+    draw_image_ex(Versus[Player1],0,0,100,100,VERTICAL,100);
+    draw_image_ex(Versus[Player2],0,0,100,100,NONE,100);
+draw_image_ex(Versus[6],0,0,100,100,NONE,100);
+
     next_frame();
+
     sprintf (MapDirection,"Resources/Images/maps/%d.png",Map);
     MapLoad=load_image(MapDirection);
     switch (Map)
@@ -514,14 +523,14 @@ void GamePlay(int Player1,int Player2,int Map)
             draw_image_ex(EFX[indice_efx],0,-10,100,100,NONE,100);
             if(FrameCount%3==0)
                 indice_efx=(indice_efx+1)%100;
-            draw_image_ex(Score,-1.5,3.4,40,0,NONE,100);
-            draw_image_ex(Score,61.5,4,40,0,VERTICAL,100);
+            draw_image_ex(Score,-2.5+(Player1Health/2.5-40),3.4,40,0,NONE,100);
+            draw_image_ex(Score,61.5+((-Player2Health)/2.5+40),4,40,0,VERTICAL,100);
             draw_image_ex(bloodbar,0,0,100,0,NONE,100);
             draw_image_ex(Time,-15,0,130,0,NONE,100);
             draw_image_ex(heads_bar,0,0,100,0,NONE,100);
 
-            draw_image_ex(heads[Player1],-1,15,15,0,VERTICAL,100);
-            draw_image_ex(heads[Player2],91,15,15,0,NONE,100);
+            draw_image_ex(heads[Player1],0,0,100,0,VERTICAL,100);
+            draw_image_ex(heads[Player2],0,0,100,0,NONE,100);
             switch (Player1)
             {
             case 0 :
@@ -567,20 +576,60 @@ void GamePlay(int Player1,int Player2,int Map)
                 sprintf(texttime,"%d",time);
                 time--;
             }
-            if (time<0)
+            if (time<0 || Player1Health<=0 || Player2Health<=0 )
             {
 
                 time=30;
                 round++;
-                next_frame();
-                draw_image_ex(MapLoad,-1.5,-2,103,104,NONE,100);
-                sprintf(Round,"Round %d",round);
-                draw_text(Arista,Round,15,50,50,CENTER_X,100);
-                next_frame();
-                rest(2500);
+                if (round<3)
+                {
+                    next_frame();
+                    draw_image_ex(MapLoad,-1.5,-2,103,104,NONE,100);
+                    sprintf(Round,"Round %d",round);
+                    draw_text(Arista,Round,15,50,50,CENTER_X,100);
+                    switch (Player1)
+                    {
+                    case 0 :
+                        xM=10;
+                        break;
+                    case 1 :
+                        xH=10;
+                        break;
+                    case 2 :
+                        xB=10;
+                        break;
+                    case 3 :
+                        xS=10;
+                        break;
+                    case 4 :
+                        xW=10;
+                        break;
+                    }
+
+                    switch (Player2)
+                    {
+                    case 0 :
+                        xM=90;
+                        break;
+                    case 1 :
+                        xH=90;
+                        break;
+                    case 2 :
+                        xB=90;
+                        break;
+                    case 3 :
+                        xS=90;
+                        break;
+                    case 4 :
+                        xW=90;
+                        break;
+                    }
+                    Player1Health=100;
+                    Player2Health=100;
+                    next_frame();
+                    rest(2500);
+                }
             }
-
-
             draw_text(Arista,texttime,10,50,2,CENTER_X,95);
             if (IsKeyPressed(3,RETURN) && button_press>10)
             {
@@ -681,18 +730,12 @@ void GamePlay(int Player1,int Player2,int Map)
                 break;
                 }
             }
-
-
         }
-
         button_press++;
         next_frame();
-
-
     }
     switch (Map)
     {
-
     case 0 :
         voice_stop(sarsour);
         voice_stop(lotfi);

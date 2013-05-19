@@ -6,7 +6,7 @@
 #include "includes.h"
 
 
-typedef enum {Stable, Forward, Backward,Jump,Crouch,Punch,Kick,Fireball,Thunder,Freeze,Wind,Fall,Hit,Defence,Down} EtatPlayer;
+typedef enum {Stable, Forward, Backward,Jump,Crouch,Punch,Kick,Fireball,Thunder,Freeze,Wind,Fall,Hit,Defence,Up} EtatPlayer;
 
 IMAGE *SalahPics[SalahImageCount];
 
@@ -16,7 +16,7 @@ int directionS;
 int PlayerS;
 EtatPlayer etatS;
 int IndexS;
-
+int IndexCollissionS;
 void LoadSalah(int PlayerS);
 
 void Draw_Salah();

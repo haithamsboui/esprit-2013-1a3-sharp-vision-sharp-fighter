@@ -8,10 +8,12 @@ void draw_image_freeze(IMAGE *image, float x, float y, float w, float h,flip fli
     if ((image->ID==0) || (w==0 && h==0) || trans==0.0f) return;
 
 
-    if(w==0 && h!=0){
+    if(w==0 && h!=0)
+    {
         w=(h/((float)image->h/(float)image->w))/AspectRatio;
     }
-    if(w!=0 && h==0){
+    if(w!=0 && h==0)
+    {
         h=(w/((float)image->w/(float)image->h))*AspectRatio;
     }
 
@@ -50,10 +52,12 @@ void draw_image_ex(IMAGE *image, float x, float y, float w, float h,flip flips, 
     if ((image==NULL) || (image->ID==0) || (w==0 && h==0) || trans==0.0f) return;
 
 
-    if(w==0 && h!=0){
+    if(w==0 && h!=0)
+    {
         w=(h/((float)image->h/(float)image->w))/AspectRatio;
     }
-    if(w!=0 && h==0){
+    if(w!=0 && h==0)
+    {
         h=(w/((float)image->w/(float)image->h))*AspectRatio;
     }
 

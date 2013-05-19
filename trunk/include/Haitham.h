@@ -12,7 +12,7 @@ int directionH;
 int PlayerH;
 EtatPlayer etatH;
 int IndexH;
-
+int IndexCollissionH;
 void LoadHaitham(int player);
 
 void Draw_Haitham();

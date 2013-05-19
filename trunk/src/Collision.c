@@ -45,6 +45,7 @@ int ProcessCollision(IMAGE ** pics1, int index1, Point **Data1,float x1,float y1
             pt2.Y=(Data1[index1][i+1].Y/(float)pics1[index1]->h)*h1 + y1;
 
             //TODO : test the last point and the first point.
+
             for(j=0; Data2[index2][j+1].X!=-1; j++)
             {
                 //Convert points2 from image coords to screen coords
@@ -243,6 +244,7 @@ void LoadCollisionData()
     set_config_file("Resources/Setting.cfg");
 }
 
+
 void UnLoadCollisionData()
 {
     int i;
@@ -272,6 +274,3 @@ void UnLoadCollisionData()
     }
     free(WassimCollision);
 }
-
-
-

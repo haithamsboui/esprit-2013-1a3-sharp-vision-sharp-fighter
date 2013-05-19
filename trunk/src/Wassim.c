@@ -39,8 +39,8 @@
 #define HitStartW 45
 #define HitcountW 2
 
-#define UpStartM 27
-#define UpCountM 3
+#define UpStartW 27
+#define UpCountW 3
 
 IMAGE *WassimPics[WassimImageCount];
 
@@ -54,8 +54,10 @@ int IndexW;
 
 void LoadWassim(int player)
 {
-    int i;
     char path[255];
+
+    int i;
+
     for (i=0; i<WassimImageCount; i++)
     {
         sprintf(path,"Resources/Images/Wassim/Gameplay/%d.png",i);
@@ -85,86 +87,230 @@ void LoadWassim(int player)
 }
 
 int iW=1;
+int CollisionStatW=0;
+
 void Draw_Wassim()
 {
     flip vflip;
-
+    int jump_stat=1;
+    Point ** TAB;
+    IMAGE ** Vs;
+    int x,y,w,h,IndexVs;
     if(directionW)
         vflip=NONE;
     else
         vflip = VERTICAL;
 
-    if(etatW!=Kick && etatW!=Punch && etatW!=Fireball && etatW != Freeze && etatW !=Jump  && etatW !=Wind && etatW !=Thunder &&etatW!=Fall&&etatW!=Hit&&etatW!=Defence&&etatW!=Down)
+    if (player1==0 || player2==0)
     {
+        x=xM;
+        y=yM;
+        w=wM;
+        h=hM;
+        TAB=MokhtarCollision;
+        Vs=MokhtarPics;
+        IndexVs=IndexCollissionM;
+
+    }
+
+    if (player1==2 || player2==2)
+    {
+        x=xB;
+        y=yB;
+        w=wB;
+        h=hB;
+        TAB=BrahimCollision;
+        Vs=BrahimPics;
+        IndexVs=IndexCollissionB;
+
+    }
+
+    if (player1==3 || player2==3)
+    {
+        x=xS;
+        y=yS;
+        w=wS;
+        h=hS;
+        TAB=SalahCollision;
+        Vs=SalahPics;
+        IndexVs=IndexCollissionS;
+
+    }
+
+    if (player1==1 || player2==1)
+    {
+        x=xH;
+        y=yH;
+        w=wH;
+        h=hH;
+        TAB=HaithamCollision;
+        Vs=HaithamPics;
+        IndexVs=IndexCollissionH;
+
+    }
+
+
+        switch (etatW)
+        {
+        case Kick :
+        case Punch :
+         if (CollisionStatW==1)
+    {
+            if(PlayerW==2)
+                xW-=wW;
+            if (PlayerW==1)
+                x-=w;
+            if(ProcessCollision(WassimPics,IndexCollissionW,WassimCollision,xW,yW,wW,hW,
+                                Vs,IndexVs,TAB,x,y,w,h))
+            {
+                if(PlayerW==2)
+                {
+                    Player1Health-=2.5;
+                }
+                if(PlayerW==1)
+                {
+                    Player2Health-=2.5;
+                }
+                CollisionStatW=0;
+
+            }
+            if(PlayerW==2&& Player2Health==0)
+                etatW=Fall;
+            if (PlayerW==1 && Player1Health==0)
+                etatW=Fall;
+            if(PlayerW==2)
+                xW+=wW;
+            if (PlayerW==1)
+                x+=w;
+            break;
+             }
+        case Stable :
+
+            if(PlayerW==2)
+                xW-=wW;
+            if (PlayerW==1)
+                x-=w;
+            if(ProcessCollision(WassimPics,IndexCollissionW,WassimCollision,xW,yW,wW,hW,
+                                Vs,IndexVs,TAB,x,y,w,h))
+            {
+                etatW=Hit;
+            }
+
+            if(PlayerW==2)
+                xW+=wW;
+            if (PlayerW==1)
+                x+=w;
+            break;
+
+    }
+
+    if(etatW!=Kick && etatW!=Punch && etatW!=Fireball && etatW != Freeze && etatW !=Jump  && etatW !=Wind && etatW !=Thunder &&etatW!=Fall&&etatW!=Hit&&etatW!=Defence&&etatW!=Up)
+    {
+        if(PlayerW==2)
+            xW-=wW;
+        if (PlayerW==1)
+            x-=w;
+        while(ProcessCollision(WassimPics,IndexCollissionW,WassimCollision,xW,yW,wW,hW,
+                               Vs,IndexVs,TAB,x,y,w,h))
+        {
+            if (PlayerW==2)
+                xW+=0.1;
+            else
+                xW-=0.1;
+        }
+        if(PlayerW==2)
+            xW+=wW;
+        if (PlayerW==1)
+            x+=w;
+
         if(IsKeyPressed(PlayerW,KICK))
         {
             etatW=Kick;
             IndexW=0;
+            IndexCollissionW=KickStartW;
+            CollisionStatW=1;
+
         }
         else if(IsKeyPressed(PlayerW,PUNCH))
         {
             etatW=Punch;
             IndexW=0;
+            IndexCollissionW=PunchStartW;
+            CollisionStatW=1;
+
         }
         else if(IsKeyPressed(PlayerW,RIGHT))
         {
             etatW=Forward;
-            xW+=0.2;
+            xW+=0.35;
+            IndexCollissionW=WalkStartW;
+
         }
         else if (IsKeyPressed(PlayerW,LEFT))
         {
             etatW=Backward;
-            xW-=0.2;
+            xW-=0.35;
+            IndexCollissionW=WalkStartW;
         }
         else if (IsKeyPressed(PlayerW,UP))
         {
-            if (etatW!=Fall)
+
+            IndexW=0;
+            iW=1;
+            if (etatW==Stable)
             {
                 etatW=Jump;
-                yW+=0.2;
+                IndexCollissionW=JumpStartW;
             }
-            else
-                etatW=Stable;
+            if (etatW==Fall)
+            {
+                etatW=Up;
+                IndexCollissionW=FallStartW;
+            }
         }
         else if (IsKeyPressed(PlayerW,DOWN))
         {
             etatW=Crouch;
             IndexW=0;
+            IndexCollissionW=CrouchStartW;
         }
         else if (IsKeyPressed(PlayerW,FIREBALL))
         {
             etatW=Fireball;
             IndexW=0;
-
+            IndexCollissionW=FireballStartW;
         }
         else if (IsKeyPressed(PlayerW,FREEZE))
         {
             etatW=Freeze;
             IndexW=0;
-
+            IndexCollissionW=FreezeStartW;
         }
         else if (IsKeyPressed(PlayerW,THUNDER))
         {
             etatW=Thunder;
             IndexW=0;
-
+            IndexCollissionW=ThunderStartW;
         }
         else if (IsKeyPressed(PlayerW,WIND))
         {
             etatW=Wind;
             IndexW=0;
-
+            IndexCollissionW=WindStartW;
         }
         else if (IsKeyPressed(PlayerW,DEFENCE))
         {
             etatW=Defence;
             IndexW=0;
-
+            IndexCollissionW=DefenceStartW;
         }
         else
+        {
             etatW=Stable;
-    }
+            IndexCollissionW=StablecountW;
 
+        }
+    }
 
 
     switch(etatW)
@@ -178,6 +324,7 @@ void Draw_Wassim()
                 iW=-1;
 
             IndexW=IndexW+iW;
+            IndexCollissionW+=IndexW;
         }
         IndexW = Min(IndexW,StablecountW-1);
         wW=(hW/((float)WassimPics[IndexW+StableStartW]->h/(float)WassimPics[IndexW+StableStartW]->w))/AspectRatio;
@@ -185,10 +332,12 @@ void Draw_Wassim()
         draw_image_ex(WassimPics[IndexW+StableStartW],xW,yW,wW,hW,vflip,100);
         if(PlayerW==2) xW+=wW;
         break;
+
     case Forward:
         if(FrameCount%10==0)
         {
             IndexW=((IndexW-1+WalkcountW)%WalkcountW);
+            IndexCollissionW+=IndexW;
         }
         IndexW = Min(IndexW,WalkcountW-1);
         wW=(hW/((float)WassimPics[IndexW+WalkStartW]->h/(float)WassimPics[IndexW+WalkStartW]->w))/AspectRatio;
@@ -201,6 +350,7 @@ void Draw_Wassim()
         if(FrameCount%10==0)
         {
             IndexW=((IndexW+1)%WalkcountW);
+            IndexCollissionW+=IndexW;
         }
         IndexW = Min(IndexW,WalkcountW-1);
         wW=(hW/((float)WassimPics[IndexW+WalkStartW]->h/(float)WassimPics[IndexW+WalkStartW]->w))/AspectRatio;
@@ -217,6 +367,7 @@ void Draw_Wassim()
         if(FrameCount%10==0)
         {
             IndexW++;
+            IndexCollissionW+=IndexW;
             if(IndexW==KickcountW)
             {
                 etatW=Stable;
@@ -233,6 +384,7 @@ void Draw_Wassim()
         if(FrameCount%10==0)
         {
             IndexW++;
+            IndexCollissionW+=IndexW;
             if(IndexW==PunchcountW)
             {
                 etatW=Stable;
@@ -247,6 +399,7 @@ void Draw_Wassim()
         if(FrameCount%10==0)
         {
             IndexW++;
+            IndexCollissionW+=IndexW;
             if(IndexW==FireballcountW)
             {
                 etatW=Stable;
@@ -261,6 +414,7 @@ void Draw_Wassim()
         if(FrameCount%10==0)
         {
             IndexW++;
+            IndexCollissionW+=IndexW;
             if(IndexW==ThundercountW)
             {
                 etatW=Stable;
@@ -276,6 +430,7 @@ void Draw_Wassim()
         if(FrameCount%10==0)
         {
             IndexW++;
+            IndexCollissionW+=IndexW;
             if(IndexW==WindcountW)
             {
                 etatW=Stable;
@@ -291,6 +446,7 @@ void Draw_Wassim()
         if(FrameCount%10==0)
         {
             IndexW++;
+            IndexCollissionW+=IndexW;
             if(IndexW==FreezecountW)
             {
                 etatW=Stable;
@@ -307,6 +463,7 @@ void Draw_Wassim()
         if(FrameCount%10==0)
         {
             IndexW++;
+            IndexCollissionW+=IndexW;
             if(IndexW==CrouchcountW)
             {
                 etatW=Stable;
@@ -314,6 +471,21 @@ void Draw_Wassim()
         }
         break;
 
+    case Up:
+        wW=(hW/((float)WassimPics[IndexW+UpStartW]->h/(float)WassimPics[IndexW+UpStartW]->w))/AspectRatio;
+        if(PlayerW==2) xW-=wW;
+        draw_image_ex(WassimPics[IndexW+UpStartW],xW,yW,wW,hW,vflip,100);
+        if(PlayerW==2) xW+=wW;
+        if(FrameCount%10==0)
+        {
+            IndexW++;
+            IndexCollissionW+=IndexW;
+            if(IndexW==UpCountW)
+            {
+                etatW=Stable;
+            }
+        }
+        break;
 
     case Defence:
         wW=(hW/((float)WassimPics[IndexW+DefenceStartW]->h/(float)WassimPics[IndexW+DefenceStartW]->w))/AspectRatio;
@@ -323,6 +495,7 @@ void Draw_Wassim()
         if(FrameCount%10==0)
         {
             IndexW++;
+            IndexCollissionW+=IndexW;
             if(IndexW==DefencecountW)
             {
                 etatW=Stable;
@@ -331,6 +504,23 @@ void Draw_Wassim()
         break;
 
     case Fall:
+        wW=(hW/((float)WassimPics[IndexW+FallStartW]->h/(float)WassimPics[IndexW+FallStartW]->w))/AspectRatio;
+        if(PlayerW==2) xW-=wW;
+        draw_image_ex(WassimPics[IndexW+FallStartW],xW,yW,wW,hW,vflip,100);
+        if(PlayerW==2) xW+=wW;
+        if(FrameCount%10==0)
+        {
+            IndexW++;
+            IndexCollissionW+=IndexW;
+            if(IndexW==FallcountW)
+            {
+                etatW=Stable;
+            }
+        }
+        break;
+
+
+    case Hit:
         wW=(hW/((float)WassimPics[IndexW+HitStartW]->h/(float)WassimPics[IndexW+HitStartW]->w))/AspectRatio;
         if(PlayerW==2) xW-=wW;
         draw_image_ex(WassimPics[IndexW+HitStartW],xW,yW,wW,hW,vflip,100);
@@ -338,6 +528,7 @@ void Draw_Wassim()
         if(FrameCount%10==0)
         {
             IndexW++;
+            IndexCollissionW+=IndexW;
             if(IndexW==HitcountW)
             {
                 etatW=Stable;
@@ -345,9 +536,31 @@ void Draw_Wassim()
         }
         break;
 
+    case Jump:
+        if(FrameCount%10==0)
+        {
+            if(IndexW>=JumpcountW-1)
+                etatW=Stable;
+            if (IndexW>=1)
+                jump_stat=0;
+            if (jump_stat==1)
+                yW-=20;
+            if (jump_stat==0)
+                yW+=10;
+            IndexW++;
+            IndexCollissionW+=IndexW;
+        }
+
+        wW=(hW/((float)WassimPics[IndexW+JumpStartW]->h/(float)WassimPics[IndexW+JumpStartW]->w))/AspectRatio;
+        if(PlayerW==2) xW-=wW;
+        draw_image_ex(WassimPics[IndexW+JumpStartW],xW,yW,wW,hW,vflip,100);
+        if(PlayerW==2) xW+=wW;
+        break;
+
     default:
         break;
     }
 }
+
 
 
