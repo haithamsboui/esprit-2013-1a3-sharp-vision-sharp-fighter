@@ -6,16 +6,19 @@
 
 IMAGE *WassimPics[WassimImageCount];
 
+EtatPlayer etatW;
+
 float xW,yW;
 float wW,hW;
+
 int directionW;
 int PlayerW;
-EtatPlayer etatW;
 int IndexW;
 int IndexCollissionW;
-void LoadWassim(int player);
+int SuperPowerW;
 
 void Draw_Wassim();
+void LoadWassim(int player);
 
 
 #endif // WASSIM_H_INCLUDED

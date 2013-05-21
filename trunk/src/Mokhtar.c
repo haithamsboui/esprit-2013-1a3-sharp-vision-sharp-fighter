@@ -88,13 +88,15 @@ void LoadMokhtar(int player)
 
 int iM=1;
 int CollisionStatM=0;
+int SuperPowerM=0;
 
 void Draw_Mokhtar()
 {
     Point ** TAB;
     IMAGE ** Vs;
-    int x,y,w,h,IndexVs;
+    int x,y,w,h,IndexVs,VsSuperPower;
     flip vflip;
+    EtatPlayer etatVS;
     int jump_stat=1;
     if(directionM)
         vflip=NONE;
@@ -104,6 +106,7 @@ void Draw_Mokhtar()
 
     if (player1==4 || player2==4)
     {
+        VsSuperPower=SuperPowerW;
         x=xW;
         y=yW;
         w=wW;
@@ -111,9 +114,11 @@ void Draw_Mokhtar()
         TAB=WassimCollision;
         Vs=WassimPics;
         IndexVs=IndexCollissionW;
+        etatVS=etatW;
     }
     if (player1==2 || player2==2)
     {
+        VsSuperPower=SuperPowerB;
         x=xB;
         y=yB;
         w=wB;
@@ -121,9 +126,11 @@ void Draw_Mokhtar()
         TAB=BrahimCollision;
         Vs=BrahimPics;
         IndexVs=IndexCollissionB;
+        etatVS=etatB;
     }
     if (player1==3 || player2==3)
     {
+        VsSuperPower=SuperPowerS;
         x=xS;
         y=yS;
         w=wS;
@@ -131,9 +138,11 @@ void Draw_Mokhtar()
         TAB=SalahCollision;
         Vs=SalahPics;
         IndexVs=IndexCollissionS;
+        etatVS=etatS;
     }
     if (player1==1 || player2==1)
     {
+        VsSuperPower=SuperPowerH;
         x=xH;
         y=yH;
         w=wH;
@@ -141,58 +150,70 @@ void Draw_Mokhtar()
         TAB=HaithamCollision;
         Vs=HaithamPics;
         IndexVs=IndexCollissionH;
+        etatVS=etatH;
     }
 
-
-        switch (etatM)
-        {
-        case Kick :
-        case Punch :
-         if (CollisionStatM==1)
+    if (PlayerM==1)
     {
-            if(PlayerM==2)
-                xM-=wM;
-            if (PlayerM==1)
-                x-=w;
-            if(ProcessCollision(MokhtarPics,IndexCollissionM,MokhtarCollision,xM,yM,wM,hM,
-                                Vs,IndexVs,TAB,x,y,w,h))
+        if (Combot1==10)
+        {
+            SuperPowerM=1;
+        }
+    }
+    if (PlayerM==2)
+    {
+        if (Combot2==10)
+        {
+            SuperPowerM=1;
+        }
+    }
+
+    switch (etatM)
+    {
+
+    case Stable :
+        if(PlayerM==2)
+            xM-=wM;
+        if (PlayerM==1)
+            x-=w;
+        if(ProcessCollision(MokhtarPics,IndexCollissionM,MokhtarCollision,xM,yM,wM,hM,
+                            Vs,IndexVs,TAB,x,y,w,h)&& (etatVS==Punch || etatVS==Kick))
+        {
+
+            etatM=Hit;
+            IndexM=0;
+            IndexCollissionM=HitStartM;
+            if (PlayerM==2)
             {
-                if(PlayerM==2)
-                {
-                    Player1Health-=2.5;
-                }
-                if(PlayerM==1)
-                {
-                    Player2Health-=2.5;
-                }
-                CollisionStatM=0;
+                Player2Health-=2.5;
+                if (VsSuperPower==0 && Combot1<10)
+
+                    Combot1++;
 
             }
-            if(PlayerM==2&& Player2Health==0)
-                etatM=Fall;
-            if (PlayerM==1 && Player1Health==0)
-                etatM=Fall;
-            if(PlayerM==2)
-                xM+=wM;
             if (PlayerM==1)
-                x+=w;
-                 }
-            break;
-        case Stable :
-            if(PlayerM==2)
-                xM-=wM;
-            if (PlayerM==1)
-                x-=w;
-            if(ProcessCollision(MokhtarPics,IndexCollissionM,MokhtarCollision,xM,yM,wM,hM,
-                                Vs,IndexVs,TAB,x,y,w,h))
+            {
+                Player1Health-=2.5;
+                if (VsSuperPower==0 && Combot2<10)
 
-                etatM=Hit;
+                    Combot2++;
 
-            if(PlayerM==2)
-                xM+=wM;
-            if (PlayerM==1)
-                x+=w;
-            break;
+            }
+
+        }
+        if(ProcessCollision(MokhtarPics,IndexCollissionM,MokhtarCollision,xM,yM,wM,hM,
+                            Vs,IndexVs,TAB,x,y,w,h)&& (etatVS==Fireball || etatVS==Freeze ||etatM==Thunder || etatM==Wind))
+        {
+
+            etatM=Fall;
+            IndexM=0;
+            IndexCollissionM=FallStartM;
+        }
+        if(PlayerM==2)
+            xM+=wM;
+        if (PlayerM==1)
+            x+=w;
+        break;
 
     }
 
@@ -262,31 +283,53 @@ void Draw_Mokhtar()
             IndexM=0;
             IndexCollissionM=CrouchStartM;
         }
-        else if (IsKeyPressed(PlayerM,FIREBALL))
+        else if (IsKeyPressed(PlayerM,FIREBALL)&& SuperPowerM==1)
         {
             etatM=Fireball;
             IndexM=0;
             IndexCollissionM=FireballStartM;
+            SuperPowerM=0;
+            if (PlayerM==1)
+                Combot1=0;
+            if (PlayerM==2)
+                Combot2=0;
 
         }
-        else if (IsKeyPressed(PlayerM,FREEZE))
+        else if (IsKeyPressed(PlayerM,FREEZE)&& SuperPowerM==1)
         {
             etatM=Freeze;
             IndexM=0;
             IndexCollissionM=FreezeStartM;
+            SuperPowerM=0;
+            if (PlayerM==1)
+                Combot1=0;
+            if (PlayerM==2)
+                Combot2=0;
 
         }
-        else if (IsKeyPressed(PlayerM,THUNDER))
+        else if (IsKeyPressed(PlayerM,THUNDER)&& SuperPowerM==1)
         {
             etatM=Thunder;
             IndexM=0;
             IndexCollissionM=ThunderStartM;
+            SuperPowerM=0;
+            if (PlayerM==1)
+                Combot1=0;
+            if (PlayerM==2)
+                Combot2=0;
+
         }
-        else if (IsKeyPressed(PlayerM,WIND))
+        else if (IsKeyPressed(PlayerM,WIND)&& SuperPowerM==1)
         {
             etatM=Wind;
             IndexM=0;
             IndexCollissionM=WindStartM;
+            SuperPowerM=0;
+            if (PlayerM==1)
+                Combot1=0;
+            if (PlayerM==2)
+                Combot2=0;
+
         }
         else if (IsKeyPressed(PlayerM,DEFENCE))
         {

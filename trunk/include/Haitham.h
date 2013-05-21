@@ -6,15 +6,19 @@
 #define HaithamImageCount 50
 
 IMAGE *HaithamPics[HaithamImageCount];
+
+EtatPlayer etatH;
+
 float xH,yH;
 float wH,hH;
+
 int directionH;
 int PlayerH;
-EtatPlayer etatH;
 int IndexH;
 int IndexCollissionH;
-void LoadHaitham(int player);
+int SuperPowerH;
 
+void LoadHaitham(int player);
 void Draw_Haitham();
 
 

@@ -36,8 +36,8 @@
 #define FallStartW 21
 #define FallcountW 5
 
-#define HitStartW 45
-#define HitcountW 2
+#define HitStartW 21
+#define HitcountW 3
 
 #define UpStartW 27
 #define UpCountW 3
@@ -55,9 +55,7 @@ int IndexW;
 void LoadWassim(int player)
 {
     char path[255];
-
     int i;
-
     for (i=0; i<WassimImageCount; i++)
     {
         sprintf(path,"Resources/Images/Wassim/Gameplay/%d.png",i);
@@ -70,7 +68,6 @@ void LoadWassim(int player)
     yW=55;
     wW=10;
     hW=40;
-
 
     switch(player)
     {
@@ -88,6 +85,7 @@ void LoadWassim(int player)
 
 int iW=1;
 int CollisionStatW=0;
+int SuperPowerW=0;
 
 void Draw_Wassim()
 {
@@ -95,7 +93,9 @@ void Draw_Wassim()
     int jump_stat=1;
     Point ** TAB;
     IMAGE ** Vs;
-    int x,y,w,h,IndexVs;
+    EtatPlayer etatVS;
+
+    int x,y,w,h,IndexVs,VsSuperPower;
     if(directionW)
         vflip=NONE;
     else
@@ -103,6 +103,7 @@ void Draw_Wassim()
 
     if (player1==0 || player2==0)
     {
+        VsSuperPower=SuperPowerM;
         x=xM;
         y=yM;
         w=wM;
@@ -110,11 +111,13 @@ void Draw_Wassim()
         TAB=MokhtarCollision;
         Vs=MokhtarPics;
         IndexVs=IndexCollissionM;
-
+        etatVS=etatM;
     }
 
     if (player1==2 || player2==2)
     {
+        etatVS=etatB;
+VsSuperPower=SuperPowerB;
         x=xB;
         y=yB;
         w=wB;
@@ -127,6 +130,8 @@ void Draw_Wassim()
 
     if (player1==3 || player2==3)
     {
+        VsSuperPower=SuperPowerS;
+        etatVS=etatS;
         x=xS;
         y=yS;
         w=wS;
@@ -139,6 +144,8 @@ void Draw_Wassim()
 
     if (player1==1 || player2==1)
     {
+        VsSuperPower=SuperPowerH;
+        etatVS=etatH;
         x=xH;
         y=yH;
         w=wH;
@@ -149,58 +156,67 @@ void Draw_Wassim()
 
     }
 
-
-        switch (etatW)
-        {
-        case Kick :
-        case Punch :
-         if (CollisionStatW==1)
+if (PlayerW==1)
+{
+    if (Combot1==10)
     {
-            if(PlayerW==2)
-                xW-=wW;
-            if (PlayerW==1)
-                x-=w;
-            if(ProcessCollision(WassimPics,IndexCollissionW,WassimCollision,xW,yW,wW,hW,
-                                Vs,IndexVs,TAB,x,y,w,h))
+        SuperPowerW=1;
+    }
+}
+if (PlayerW==2){
+     if (Combot2==10)
+    {
+        SuperPowerW=1;
+    }
+}
+    switch (etatW)
+    {
+
+    case Stable :
+
+        if(PlayerW==2)
+            xW-=wW;
+        if (PlayerW==1)
+            x-=w;
+        if(ProcessCollision(WassimPics,IndexCollissionW,WassimCollision,xW,yW,wW,hW,
+                            Vs,IndexVs,TAB,x,y,w,h)&& (etatVS==Punch || etatVS==Kick))
+        {
+            etatW=Hit;
+            IndexCollissionW=HitStartW;
+            IndexW=0;
+            if (PlayerW==2)
             {
-                if(PlayerW==2)
-                {
-                    Player1Health-=2.5;
-                }
-                if(PlayerW==1)
-                {
-                    Player2Health-=2.5;
-                }
-                CollisionStatW=0;
+                Player2Health-=2.5;
+
+                 if (VsSuperPower==0 && Combot1<10)
+               Combot1++;
 
             }
-            if(PlayerW==2&& Player2Health==0)
-                etatW=Fall;
-            if (PlayerW==1 && Player1Health==0)
-                etatW=Fall;
-            if(PlayerW==2)
-                xW+=wW;
             if (PlayerW==1)
-                x+=w;
-            break;
-             }
-        case Stable :
-
-            if(PlayerW==2)
-                xW-=wW;
-            if (PlayerW==1)
-                x-=w;
-            if(ProcessCollision(WassimPics,IndexCollissionW,WassimCollision,xW,yW,wW,hW,
-                                Vs,IndexVs,TAB,x,y,w,h))
             {
-                etatW=Hit;
+                Player1Health-=2.5;
+
+                                if (VsSuperPower==0 && Combot2<10)
+
+                Combot2++;
+
             }
 
-            if(PlayerW==2)
-                xW+=wW;
-            if (PlayerW==1)
-                x+=w;
-            break;
+        }
+
+        if(ProcessCollision(WassimPics,IndexCollissionW,WassimCollision,xW,yW,wW,hW,
+                            Vs,IndexVs,TAB,x,y,w,h)&& (etatVS==Fireball || etatVS==Freeze || etatVS==Thunder || etatVS==Wind))
+        {
+            etatW=Fall;
+            IndexCollissionW=FallStartW;
+            IndexW=0;
+        }
+
+        if(PlayerW==2)
+            xW+=wW;
+        if (PlayerW==1)
+            x+=w;
+        break;
 
     }
 
@@ -274,29 +290,49 @@ void Draw_Wassim()
             IndexW=0;
             IndexCollissionW=CrouchStartW;
         }
-        else if (IsKeyPressed(PlayerW,FIREBALL))
+        else if (IsKeyPressed(PlayerW,FIREBALL)&& SuperPowerW==1)
         {
             etatW=Fireball;
             IndexW=0;
             IndexCollissionW=FireballStartW;
+               SuperPowerW=0;
+            if (PlayerW==1)
+                Combot1=0;
+            if (PlayerW==2)
+                Combot2=0;
         }
-        else if (IsKeyPressed(PlayerW,FREEZE))
+        else if (IsKeyPressed(PlayerW,FREEZE)&& SuperPowerW==1)
         {
             etatW=Freeze;
             IndexW=0;
             IndexCollissionW=FreezeStartW;
+        SuperPowerW=0;
+            if (PlayerW==1)
+                Combot1=0;
+            if (PlayerW==2)
+                Combot2=0;
         }
-        else if (IsKeyPressed(PlayerW,THUNDER))
+        else if (IsKeyPressed(PlayerW,THUNDER) && SuperPowerW==1)
         {
             etatW=Thunder;
             IndexW=0;
             IndexCollissionW=ThunderStartW;
+        SuperPowerW=0;
+            if (PlayerW==1)
+                Combot1=0;
+            if (PlayerW==2)
+                Combot2=0;
         }
-        else if (IsKeyPressed(PlayerW,WIND))
+        else if (IsKeyPressed(PlayerW,WIND) && SuperPowerW==1)
         {
             etatW=Wind;
             IndexW=0;
             IndexCollissionW=WindStartW;
+        SuperPowerW=0;
+            if (PlayerW==1)
+                Combot1=0;
+            if (PlayerW==2)
+                Combot2=0;
         }
         else if (IsKeyPressed(PlayerW,DEFENCE))
         {
