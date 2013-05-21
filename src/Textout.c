@@ -26,12 +26,13 @@ int install_fonts()
 void draw_text(FONTS font,const char* text,float size,float x, float y, FONTSTYLE style, float Transparency)
 {
     float bbox[6],totalH=0;
-    char *buffer=malloc(strlen(text)+1);
+    char *buffer;
     char *textarray[200];
     int i,n;
-    if(fontlist[font]==NULL)
+    if(fontlist[font]==NULL || strlen(text)==0 || Transparency<=0.0f)
         return;
 
+    buffer=malloc(strlen(text)+1);
     sprintf(buffer,"%s",text);
     textarray[0]=strtok(buffer,"\n");
     for(n=1; (textarray[n]=strtok(NULL,"\n"))!=NULL; n++);

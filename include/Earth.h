@@ -4,7 +4,7 @@
 
 #include "includes.h"
 
-typedef enum {Tunisia,Egypt,France,NewYork,Japan,Malaysia} LocationName;
+typedef enum {Tunisia,Egypt,Japan,Malaysia,India} LocationName;
 //defines a location is space.
 typedef struct {
     float xRot;
@@ -17,7 +17,7 @@ typedef struct {
 } Location;
 
 //the location of the countries in space.
-Location TUNISIA,EGYPT,FRANCE,NEWYORK,JAPAN,MALAYSIA;
+Location TUNISIA,EGYPT,JAPAN,MALAYSIA,INDIA;
 //Images for the map of earth, and the stars of space.
 IMAGE *world,*stars;
 //define travel mode. INTERPOLATED is better.
