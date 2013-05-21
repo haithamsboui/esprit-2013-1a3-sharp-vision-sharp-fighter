@@ -7,17 +7,21 @@
 
 IMAGE *BrahimPics[BrahimImageCount];
 
+EtatPlayer etatB;
+
 float xB,yB;
 float wB,hB;
+
 int directionB;
 int PlayerB;
-EtatPlayer etatB;
 int IndexB;
 int IndexCollissionB;
-void LoadBrahim(int player);
+int SuperPowerB;
 
+void LoadBrahim(int player);
 void Draw_Brahim();
 
 
 
 #endif // BRAHIM_H_INCLUDED
+

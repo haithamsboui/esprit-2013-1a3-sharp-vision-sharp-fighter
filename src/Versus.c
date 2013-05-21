@@ -354,15 +354,19 @@ void ChargerEffetNaturel(IMAGE *effet[100], char chemin[200], int nombreFrame)
 }
 
 int indice_efx=0;
+
+
 void GamePlay(int Player1,int Player2,int Map)
 {
 
     Player1Health=100;
     Player2Health=100;
-
-    IMAGE *MapLoad,*EFX[100],*Versus[7],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[5],*Pause_cadre;
+    Combot1=0;
+    Combot2=0;
+    IMAGE *MapLoad,*Loadcombo,*EFX[100],*Versus[7],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[5],*Pause_cadre;
     int thunder, rainsound,gameplaysound,sarsour,fight,lotfi,button_press=0;
     char MapDirection[50],direction[50],texttime[10],Round[10],time =30,round =1,i,pause=0,Pause_pos_ind=0,Pause_pos[]= {20,35,50,65,80};
+    float  gamestart=1.0;
     Location loc;
     Versus[0]=load_image("Resources/Images/Mokhtar/Versus.png");
     Versus[1]=load_image("Resources/Images/Haitham/Versus.png");
@@ -370,10 +374,9 @@ void GamePlay(int Player1,int Player2,int Map)
     Versus[3]=load_image("Resources/Images/Salah/Versus.png");
     Versus[4]=load_image("Resources/Images/Wassim/Versus.png");
     Versus[5]=load_image("Resources/Images/Versus/Versus.png");
-        Versus[6]=load_image("Resources/Images/Versus/VS.png");
-
+    Versus[6]=load_image("Resources/Images/Versus/VS.png");
+    Loadcombo=load_image("Resources/Images/Versus/loadcombo.png");
     Pause_cadre=load_image("Resources/Images/Versus/pause_cadre.png");
-
     for (i=0; i<5; i++)
     {
         sprintf (direction,"Resources/Images/Versus/%d.png",i);
@@ -389,10 +392,12 @@ void GamePlay(int Player1,int Player2,int Map)
     Time=load_image("Resources/Images/Versus/time.png");
     heads_bar=load_image("Resources/Images/Versus/heads.png");
     next_frame();
+
+
     draw_image_ex(Versus[5],0,0,100,100,NONE,100);
     draw_image_ex(Versus[Player1],0,0,100,100,VERTICAL,100);
     draw_image_ex(Versus[Player2],0,0,100,100,NONE,100);
-draw_image_ex(Versus[6],0,0,100,100,NONE,100);
+    draw_image_ex(Versus[6],0,0,100,100,NONE,100);
 
     next_frame();
 
@@ -484,8 +489,10 @@ draw_image_ex(Versus[6],0,0,100,100,NONE,100);
 
     while(round <=3 )
     {
+        printf (" Com1 %d \n Com2 %d \n ***************\n",Combot1,Combot2);
         if (pause==0)
         {
+
             switch (Map)
             {
             case 0 :
@@ -531,6 +538,16 @@ draw_image_ex(Versus[6],0,0,100,100,NONE,100);
 
             draw_image_ex(heads[Player1],0,0,100,0,VERTICAL,100);
             draw_image_ex(heads[Player2],0,0,100,0,NONE,100);
+            if ( gamestart<100)
+            {
+                draw_text(PressStyle,"FIGHT ",gamestart/4,55,35,CENTER_X,gamestart);
+                gamestart+=1.8;
+            }
+            for (i=0; i<Combot1; i++)
+                draw_image_ex(Loadcombo,-2+(i+1)*2,0,100,0,NONE,100);
+
+            for (i=0; i<Combot2; i++)
+                draw_image_ex(Loadcombo,2-(i+1)*2,0,100,0,VERTICAL,100);
             switch (Player1)
             {
             case 0 :
@@ -590,18 +607,33 @@ draw_image_ex(Versus[6],0,0,100,100,NONE,100);
                     switch (Player1)
                     {
                     case 0 :
+                        SuperPowerM=0;
                         xM=10;
+                        Combot1=0;
+                        etatM=Stable;
                         break;
                     case 1 :
+                        etatH=Stable;
+                        SuperPowerH=0;
                         xH=10;
+                        Combot1=0;
                         break;
                     case 2 :
+                        Combot1=0;
+                        etatB=Stable;
+                        SuperPowerB=0;
                         xB=10;
                         break;
                     case 3 :
+                        Combot1=0;
+                        etatS=Stable;
+                        SuperPowerS=0;
                         xS=10;
                         break;
                     case 4 :
+                        etatW=Stable;
+                        Combot1=0;
+                        SuperPowerW=0;
                         xW=10;
                         break;
                     }
@@ -609,19 +641,35 @@ draw_image_ex(Versus[6],0,0,100,100,NONE,100);
                     switch (Player2)
                     {
                     case 0 :
+                        Combot2=0;
+                        etatM=Stable;
+                        SuperPowerM=0;
                         xM=90;
                         break;
                     case 1 :
+
+                        Combot2=0;
+                        etatH=Stable;
+                        SuperPowerH=0;
                         xH=90;
                         break;
                     case 2 :
+                        Combot2=0;
+                        etatB=Stable;
+                        SuperPowerB=0;
                         xB=90;
                         break;
                     case 3 :
+                        SuperPowerS=0;
                         xS=90;
+                        Combot2=0;
+                        etatS=Stable;
                         break;
                     case 4 :
+                        SuperPowerW=0;
                         xW=90;
+                        Combot2=0;
+                        etatW=Stable;
                         break;
                     }
                     Player1Health=100;

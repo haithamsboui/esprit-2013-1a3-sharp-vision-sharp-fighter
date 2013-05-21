@@ -84,14 +84,15 @@ void LoadSalah(int player)
 
 }
 int CollisionStatS=0;
-
+int SuperPowerS=0;
 int iS=1;
 void Draw_Salah()
 {
     Point ** TAB;
     IMAGE ** Vs;
-    int x,y,w,h,IndexVs;
+    int x,y,w,h,IndexVs,VsSuperPower;
     flip vflip;
+    EtatPlayer etatVS;
     int jump_stat=1;
     if(directionS)
         vflip=VERTICAL;
@@ -101,6 +102,7 @@ void Draw_Salah()
 
     if (player1==0 || player2==0)
     {
+        VsSuperPower=SuperPowerM;
         x=xM;
         y=yM;
         w=wM;
@@ -108,9 +110,11 @@ void Draw_Salah()
         TAB=MokhtarCollision;
         Vs=MokhtarPics;
         IndexVs=IndexCollissionM;
+        etatVS=etatM;
     }
     if (player1==2 || player2==2)
     {
+        VsSuperPower=SuperPowerB;
         x=xB;
         y=yB;
         w=wB;
@@ -118,9 +122,12 @@ void Draw_Salah()
         TAB=BrahimCollision;
         Vs=BrahimPics;
         IndexVs=IndexCollissionB;
+        etatVS=etatB;
     }
     if (player1==4 || player2==4)
     {
+        VsSuperPower=SuperPowerW;
+        etatVS=etatW;
         x=xW;
         y=yW;
         w=wW;
@@ -131,6 +138,8 @@ void Draw_Salah()
     }
     if (player1==1 || player2==1)
     {
+        VsSuperPower=SuperPowerH;
+        etatVS=etatH;
         x=xH;
         y=yH;
         w=wH;
@@ -140,58 +149,66 @@ void Draw_Salah()
         IndexVs=IndexCollissionH;
     }
 
-
-        switch (etatS)
-        {
-        case Kick :
-        case Punch :
-        if (CollisionStatS==1)
+    if (PlayerS==1)
     {
-            if(PlayerS==2)
-                xS-=wS;
-            if (PlayerS==1)
-                x-=w;
-            if(ProcessCollision(SalahPics,IndexCollissionS,SalahCollision,xS,yS,wS,hS,
-                                Vs,IndexVs,TAB,x,y,w,h))
+        if (Combot1==10)
+        {
+            SuperPowerS=1;
+        }
+    }
+    if (PlayerS==2)
+    {
+        if (Combot2==10)
+        {
+            SuperPowerS=1;
+        }
+    }
+
+    switch (etatS)
+    {
+
+
+    case Stable :
+        if(PlayerS==2)
+            xS-=wS;
+        if (PlayerS==1)
+            x-=w;
+        if(ProcessCollision(SalahPics,IndexCollissionS,SalahCollision,xS,yS,wS,hS,
+                            Vs,IndexVs,TAB,x,y,w,h)&& (etatVS==Punch || etatVS==Kick))
+        {
+            etatS=Hit;
+            IndexS=0;
+            IndexCollissionS=HitStartS;
+            if (PlayerS==2)
             {
-                if(PlayerS==2)
-                {
-                    Player1Health-=2.5;
-                }
-                if(PlayerS==1)
-                {
-                    Player2Health-=2.5;
-                }
-                CollisionStatS=0;
+                Player2Health-=2.5;
+                if (VsSuperPower==0 && Combot1<10)
+                    Combot1++;
 
             }
-            if(PlayerS==2&& Player2Health==0)
-                etatS=Fall;
-            if (PlayerS==1 && Player1Health==0)
-                etatS=Fall;
-            if(PlayerS==2)
-                xS+=wS;
             if (PlayerS==1)
-                x+=w;
-                 }
+            {
+                Player1Health-=2.5;
+                if (VsSuperPower==0 && Combot2<10)
+                    Combot2++;
 
-            break;
+            }
+        }
+        if(ProcessCollision(SalahPics,IndexCollissionS,SalahCollision,xS,yS,wS,hS,
+                            Vs,IndexVs,TAB,x,y,w,h)&& (etatVS==Fireball || etatVS==Freeze || etatVS==Thunder || etatVS==Wind))
+        {
+            etatS=Fall;
+            IndexCollissionS=FallStartS;
+            IndexS=0;
 
-        case Stable :
-            if(PlayerS==2)
-                xS-=wS;
-            if (PlayerS==1)
-                x-=w;
-            if(ProcessCollision(SalahPics,IndexCollissionS,SalahCollision,xS,yS,wS,hS,
-                                Vs,IndexVs,TAB,x,y,w,h))
-                etatS=Hit;
+        }
 
-            if(PlayerS==2)
-                xS+=wS;
-            if (PlayerS==1)
-                x+=w;
-            break;
- }
+        if(PlayerS==2)
+            xS+=wS;
+        if (PlayerS==1)
+            x+=w;
+        break;
+    }
 
     if(etatS!=Kick && etatS!=Punch && etatS!=Fireball && etatS != Freeze && etatS !=Jump  && etatS !=Wind && etatS !=Thunder &&etatS!=Fall&&etatS!=Hit&&etatS!=Defence&&etatS!=Up)
     {
@@ -217,12 +234,16 @@ void Draw_Salah()
             etatS=Kick;
             IndexS=0;
             IndexCollissionS=KickStartS;
+            CollisionStatS=1;
+
         }
         else if(IsKeyPressed(PlayerS,PUNCH))
         {
             etatS=Punch;
             IndexS=0;
             IndexCollissionS=PunchStartS;
+                    CollisionStatS=1;
+
         }
         else if(IsKeyPressed(PlayerS,RIGHT))
         {
@@ -248,7 +269,7 @@ void Draw_Salah()
             if (etatS==Fall)
             {
                 etatS=Up;
-                IndexCollissionS=FallStartS;
+                IndexCollissionS=StableStartS;
             }
         }
         else if (IsKeyPressed(PlayerS,DOWN))
@@ -257,29 +278,49 @@ void Draw_Salah()
             IndexS=0;
             IndexCollissionS=CrouchStartS;
         }
-        else if (IsKeyPressed(PlayerS,FIREBALL))
+        else if (IsKeyPressed(PlayerS,FIREBALL)&& SuperPowerS==1)
         {
             etatS=Fireball;
             IndexS=0;
             IndexCollissionS=FireballStartS;
+            SuperPowerS=0;
+            if (PlayerS==1)
+                Combot1=0;
+            if (PlayerS==2)
+                Combot2=0;
         }
-        else if (IsKeyPressed(PlayerS,FREEZE))
+        else if (IsKeyPressed(PlayerS,FREEZE)&& SuperPowerS==1)
         {
             etatS=Freeze;
             IndexS=0;
             IndexCollissionS=FreezeStartS;
+            SuperPowerS=0;
+            if (PlayerS==1)
+                Combot1=0;
+            if (PlayerS==2)
+                Combot2=0;
         }
-        else if (IsKeyPressed(PlayerS,THUNDER))
+        else if (IsKeyPressed(PlayerS,THUNDER)&& SuperPowerS==1)
         {
             etatS=Thunder;
             IndexS=0;
             IndexCollissionS=ThunderStartS;
+            SuperPowerS=0;
+            if (PlayerS==1)
+                Combot1=0;
+            if (PlayerS==2)
+                Combot2=0;
         }
-        else if (IsKeyPressed(PlayerS,WIND))
+        else if (IsKeyPressed(PlayerS,WIND)&& SuperPowerS==1)
         {
             etatS=Wind;
             IndexS=0;
             IndexCollissionS=WindStartS;
+            SuperPowerS=0;
+            if (PlayerS==1)
+                Combot1=0;
+            if (PlayerS==2)
+                Combot2=0;
         }
         else if (IsKeyPressed(PlayerS,DEFENCE))
         {
@@ -514,10 +555,6 @@ void Draw_Salah()
         break;
 
     case Hit:
-        wS=(hS/((float)SalahPics[IndexS+HitStartS]->h/(float)SalahPics[IndexS+HitStartS]->w))/AspectRatio;
-        if(PlayerS==2) xS-=wS;
-        draw_image_ex(SalahPics[IndexS+HitStartS],xS,yS,wS,hS,vflip,100);
-        if(PlayerS==2) xS+=wS;
         if(FrameCount%10==0)
         {
             IndexS++;
@@ -528,6 +565,11 @@ void Draw_Salah()
                 etatS=Stable;
             }
         }
+        wS=(hS/((float)SalahPics[IndexS+HitStartS]->h/(float)SalahPics[IndexS+HitStartS]->w))/AspectRatio;
+        if(PlayerS==2) xS-=wS;
+        draw_image_ex(SalahPics[IndexS+HitStartS],xS,yS,wS,hS,vflip,100);
+        if(PlayerS==2) xS+=wS;
+
         break;
 
     case Jump:

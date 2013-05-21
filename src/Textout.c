@@ -1,6 +1,6 @@
 #include "includes.h"
 
-const char *FontFiles[]= {"SharpCurve.ttf","verdana.ttf","Arista.ttf","velocity.ttf","Downlink.ttf","SFTransRobotics.ttf"};
+const char *FontFiles[]= {"SharpCurve.ttf","verdana.ttf","Arista.ttf","velocity.ttf","Downlink.ttf","SFTransRobotics.ttf","PressStyle.ttf"};
 
 FTGLfont **fontlist;
 FTGLfont **fontlist2;

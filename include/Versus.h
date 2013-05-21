@@ -8,4 +8,6 @@ int player2;
 int player1;
 int Player1Health;
 int Player2Health;
+int Combot1;
+int Combot2;
 #endif // VERSUS_H_INCLUDED

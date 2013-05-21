@@ -88,13 +88,17 @@ void LoadHaitham(int player)
 
 int iH=1;
 int CollisionStatH=0;
+int SuperPowerH=0;
+
 void Draw_Haitham()
 {
     flip vflip;
     Point ** TAB;
     IMAGE ** Vs;
-    int x,y,w,h,IndexVs,xh;
+    int x,y,w,h,IndexVs,xh,VsSuperPower;
+    EtatPlayer EtatVS;
     int jump_stat=1;
+
     if(directionH)
         vflip=NONE;
     else
@@ -102,6 +106,8 @@ void Draw_Haitham()
 
     if (player1==0 || player2==0)
     {
+        VsSuperPower=SuperPowerM;
+        EtatVS=etatM;
         x=xM;
         y=yM;
         w=wM;
@@ -113,7 +119,8 @@ void Draw_Haitham()
 
     if (player1==2 || player2==2)
     {
-
+        VsSuperPower=SuperPowerB;
+        EtatVS=etatB;
         x=xB;
         y=yB;
         w=wB;
@@ -125,7 +132,8 @@ void Draw_Haitham()
 
     if (player1==3 || player2==3)
     {
-
+                VsSuperPower=SuperPowerS;
+        EtatVS=etatS;
         x=xS;
         y=yS;
         w=wS;
@@ -137,7 +145,8 @@ void Draw_Haitham()
 
     if (player1==4 || player2==4)
     {
-
+                VsSuperPower=SuperPowerW;
+        EtatVS=etatW;
         x=xW;
         y=yW;
         w=wW;
@@ -147,61 +156,63 @@ void Draw_Haitham()
         IndexVs=IndexCollissionW;
     }
 
-
-
-        switch (etatH)
-        {
-        case Kick :
-        case Punch :
-        if (CollisionStatH==1)
+    if (PlayerH==1)
     {
-            if(PlayerH==2)
-                xH-=wH;
-            if (PlayerH==1)
-                x-=w;
-            if(ProcessCollision(HaithamPics,IndexCollissionH,HaithamCollision,xH,yH,wH,hH,
-                                Vs,IndexVs,TAB,x,y,w,h))
+        if (Combot1==10)
+        {
+            SuperPowerH=1;
+        }
+    }
+    if (PlayerH==2)
+    {
+        if (Combot2==10)
+        {
+            SuperPowerH=1;
+        }
+    }
+
+    switch (etatH)
+    {
+    case Stable :
+
+        if(PlayerH==2)
+            xH-=wH;
+        if (PlayerH==1)
+            x-=w;
+        if(ProcessCollision(HaithamPics,IndexCollissionH,HaithamCollision,xH,yH,wH,hH,
+                            Vs,IndexVs,TAB,x,y,w,h) && (EtatVS==Punch || EtatVS==Kick))
+        {
+            etatH=Hit;
+            IndexH=0;
+            IndexCollissionH=HitStartH;
+            if (PlayerH==2)
             {
-                if (PlayerH==2)
-                {
-                    Player1Health-=2.5;
-                }
-                if (PlayerH==1)
-                {
-                    Player2Health-=2.5;
-                }
-                CollisionStatH=0;
+                Player2Health-=2.5;
+                if (VsSuperPower==0 && Combot1<10)
+                    Combot1++;
             }
-            if(PlayerB==2&& Player2Health==0)
-                etatB=Fall;
-            if (PlayerB==1 && Player1Health==0)
-                etatB=Fall;
-            if(PlayerH==2)
-                xH+=wH;
             if (PlayerH==1)
-                x+=w;
-  }
-            break;
-
-        case Stable :
-            if(PlayerH==2)
-                xH-=wH;
-            if (PlayerH==1)
-                x-=w;
-            if(ProcessCollision(HaithamPics,IndexCollissionH,HaithamCollision,xH,yH,wH,hH,
-                                Vs,IndexVs,TAB,x,y,w,h))
             {
-                etatH=Hit;
+                Player1Health-=2.5;
+                if (VsSuperPower==0 && Combot2<10)
+                    Combot2++;
             }
+        }
 
-            if(PlayerH==2)
-                xH+=wH;
-            if (PlayerH==1)
-                x+=w;
+        if(ProcessCollision(HaithamPics,IndexCollissionH,HaithamCollision,xH,yH,wH,hH,
+                            Vs,IndexVs,TAB,x,y,w,h) && (EtatVS==Fireball || EtatVS==Thunder || EtatVS == Wind || EtatVS == Freeze))
+        {
+            etatH=Fall;
+            IndexH=0;
+            IndexCollissionH=FallStartH;
+        }
 
-            break;
+        if(PlayerH==2)
+            xH+=wH;
+        if (PlayerH==1)
+            x+=w;
 
-
+        break;
     }
 
 
@@ -266,7 +277,7 @@ void Draw_Haitham()
             if (etatH==Fall)
             {
                 etatH=Up;
-                IndexCollissionH=WalkStartH;
+                IndexCollissionH=StableStartH;
             }
         }
         else if (IsKeyPressed(PlayerH,DOWN))
@@ -275,36 +286,56 @@ void Draw_Haitham()
             IndexH=0;
             IndexCollissionH=CrouchStartH;
         }
-        else if (IsKeyPressed(PlayerH,FIREBALL))
+        else if (IsKeyPressed(PlayerH,FIREBALL)&& SuperPowerH==1)
         {
             etatH=Fireball;
             IndexH=0;
             IndexCollissionH=FireballStartH;
-
+            SuperPowerH=0;
+            if (PlayerH==1)
+                Combot1=0;
+            if (PlayerH==2)
+                Combot2=0;
         }
-        else if (IsKeyPressed(PlayerH,FREEZE))
+        else if (IsKeyPressed(PlayerH,FREEZE)&& SuperPowerH==1)
         {
             etatH=Freeze;
             IndexH=0;
             IndexCollissionH=FreezeStartH;
+            SuperPowerH=0;
+            if (PlayerH==1)
+                Combot1=0;
+            if (PlayerH==2)
+                Combot2=0;
         }
-        else if (IsKeyPressed(PlayerH,THUNDER))
+        else if (IsKeyPressed(PlayerH,THUNDER)&& SuperPowerH==1)
         {
             etatH=Thunder;
             IndexH=0;
             IndexCollissionH=ThunderStartH;
+            SuperPowerH=0;
+            if (PlayerH==1)
+                Combot1=0;
+            if (PlayerH==2)
+                Combot2=0;
         }
-        else if (IsKeyPressed(PlayerH,WIND))
+        else if (IsKeyPressed(PlayerH,WIND) && SuperPowerH==1)
         {
             etatH=Wind;
             IndexH=0;
             IndexCollissionH=WindStartH;
+            SuperPowerH=0;
+            if (PlayerH==1)
+                Combot1=0;
+            if (PlayerH==2)
+                Combot2=0;
         }
         else if (IsKeyPressed(PlayerH,DEFENCE))
         {
             etatH=Defence;
             IndexH=0;
             IndexCollissionH=DefenceStartH;
+
         }
         else
         {
@@ -319,6 +350,7 @@ void Draw_Haitham()
     switch(etatH)
     {
     case Stable:
+    {
         if(FrameCount%10==0)
         {
             if(IndexH==0)
@@ -334,8 +366,10 @@ void Draw_Haitham()
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+StableStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
-        break;
+    }
+    break;
     case Forward:
+    {
         if(FrameCount%10==0)
         {
             IndexH=((IndexH-1+WalkCountH)%WalkCountH);
@@ -347,25 +381,29 @@ void Draw_Haitham()
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+WalkStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
-        break;
+    }
+    break;
 
     case Backward:
+    {
         if(FrameCount%10==0)
         {
             IndexH=((IndexH+1)%WalkCountH);
             IndexCollissionH+=IndexH;
 
         }
-        IndexH = Min(IndexH,WalkCountH-1);
+        IndexH = Min(IndexH,WalkCountH);
         wH=(hH/((float)HaithamPics[IndexH+WalkStartH]->h/(float)HaithamPics[IndexH+WalkStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+WalkStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
-        break;
+    }
+    break;
 
     case Kick:
 
 
+    {
         wH=(hH/((float)HaithamPics[IndexH+KickStartH]->h/(float)HaithamPics[IndexH+KickStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+KickStartH],xH,yH,wH,hH,vflip,100);
@@ -375,17 +413,19 @@ void Draw_Haitham()
             IndexH++;
             IndexCollissionH+=IndexH;
 
-            if(IndexH==KickCountH)
+            if(IndexH>=KickCountH)
             {
                 etatH=Stable;
             }
 
         }
 
-        break;
+    }
+    break;
 
     case Punch:
 
+    {
         wH=(hH/((float)HaithamPics[IndexH+PunchStartH]->h/(float)HaithamPics[IndexH+PunchStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+PunchStartH],xH,yH,wH,hH,vflip,100);
@@ -395,13 +435,16 @@ void Draw_Haitham()
             IndexH++;
             IndexCollissionH+=IndexH;
 
-            if(IndexH==PunchCountH)
+            if(IndexH>=PunchCountH)
             {
                 etatH=Stable;
             }
         }
-        break;
+
+    }
+    break;
     case Fireball:
+    {
         wH=(hH/((float)HaithamPics[IndexH+FireballStartH]->h/(float)HaithamPics[IndexH+FireballStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+FireballStartH],xH,yH,wH,hH,vflip,100);
@@ -411,13 +454,15 @@ void Draw_Haitham()
             IndexH++;
             IndexCollissionH+=IndexH;
 
-            if(IndexH==FireballCountH)
+            if(IndexH>=FireballCountH)
             {
                 etatH=Stable;
             }
         }
-        break;
+    }
+    break;
     case Thunder:
+    {
         wH=(hH/((float)HaithamPics[IndexH+ThunderStartH]->h/(float)HaithamPics[IndexH+ThunderStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+ThunderStartH],xH,yH,wH,hH,vflip,100);
@@ -427,14 +472,16 @@ void Draw_Haitham()
             IndexH++;
             IndexCollissionH+=IndexH;
 
-            if(IndexH==ThunderCountH)
+            if(IndexH>=ThunderCountH)
             {
                 etatH=Stable;
             }
         }
-        break;
+    }
+    break;
 
     case Wind:
+    {
         wH=(hH/((float)HaithamPics[IndexH+WindStartH]->h/(float)HaithamPics[IndexH+WindStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+WindStartH],xH,yH,wH,hH,vflip,100);
@@ -444,14 +491,16 @@ void Draw_Haitham()
             IndexH++;
             IndexCollissionH+=IndexH;
 
-            if(IndexH==WindCountH)
+            if(IndexH>=WindCountH)
             {
                 etatH=Stable;
             }
         }
 
-        break;
+    }
+    break;
     case Freeze:
+    {
         wH=(hH/((float)HaithamPics[IndexH+FreezeStartH]->h/(float)HaithamPics[IndexH+FreezeStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+FreezeStartH],xH,yH,wH,hH,vflip,100);
@@ -461,16 +510,18 @@ void Draw_Haitham()
             IndexH++;
             IndexCollissionH+=IndexH;
 
-            if(IndexH==FreezeCountH)
+            if(IndexH>=FreezeCountH)
             {
                 etatH=Stable;
             }
         }
 
-        break;
+    }
+    break;
 
     case Crouch:
 
+    {
         wH=(hH/((float)HaithamPics[IndexH+CrouchStartH]->h/(float)HaithamPics[IndexH+CrouchStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+CrouchStartH],xH,yH,wH,hH,vflip,100);
@@ -485,10 +536,12 @@ void Draw_Haitham()
                 etatH=Stable;
             }
         }
-        break;
+    }
+    break;
 
     case Up:
 
+    {
         wH=(hH/((float)HaithamPics[IndexH+UpStartH]->h/(float)HaithamPics[IndexH+UpStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+UpStartH],xH,yH,wH,hH,vflip,100);
@@ -503,8 +556,10 @@ void Draw_Haitham()
                 etatH=Stable;
             }
         }
-        break;
+    }
+    break;
     case Defence:
+    {
         wH=(hH/((float)HaithamPics[IndexH+DefenceStartH]->h/(float)HaithamPics[IndexH+DefenceStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+DefenceStartH],xH,yH,wH,hH,vflip,100);
@@ -514,14 +569,16 @@ void Draw_Haitham()
             IndexH++;
             IndexCollissionH+=IndexH;
 
-            if(IndexH==DefenceCountH)
+            if(IndexH>=DefenceCountH)
             {
                 etatH=Stable;
             }
         }
-        break;
+    }
+    break;
 
     case Hit:
+    {
         wH=(hH/((float)HaithamPics[IndexH+HitStartH]->h/(float)HaithamPics[IndexH+HitStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+HitStartH],xH,yH,wH,hH,vflip,100);
@@ -531,14 +588,16 @@ void Draw_Haitham()
             IndexH++;
             IndexCollissionH+=IndexH;
 
-            if(IndexH==HitCountH)
+            if(IndexH>=HitCountH)
             {
                 etatH=Stable;
             }
         }
-        break;
+    }
+    break;
 
     case Fall:
+    {
         wH=(hH/((float)HaithamPics[IndexH+FallStartH]->h/(float)HaithamPics[IndexH+FallStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+FallStartH],xH,yH,wH,hH,vflip,100);
@@ -550,9 +609,11 @@ void Draw_Haitham()
 
         }
 
-        break;
+    }
+    break;
 
     case Jump:
+    {
         if(FrameCount%10==0)
         {
             if(IndexH>=JumpCountH-1)
@@ -584,12 +645,14 @@ void Draw_Haitham()
         draw_image_ex(HaithamPics[IndexH+JumpStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
 
-        break;
-
+    }
+    break;
     default:
         break;
     }
 }
+
+
 
 
 
