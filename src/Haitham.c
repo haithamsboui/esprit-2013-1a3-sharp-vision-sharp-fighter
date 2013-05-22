@@ -92,12 +92,14 @@ int SuperPowerH=0;
 
 void Draw_Haitham()
 {
+
     flip vflip;
     Point ** TAB;
     IMAGE ** Vs;
     int x,y,w,h,IndexVs,xh,VsSuperPower;
     EtatPlayer EtatVS;
     int jump_stat=1;
+
 
     if(directionH)
         vflip=NONE;
@@ -132,7 +134,7 @@ void Draw_Haitham()
 
     if (player1==3 || player2==3)
     {
-                VsSuperPower=SuperPowerS;
+        VsSuperPower=SuperPowerS;
         EtatVS=etatS;
         x=xS;
         y=yS;
@@ -145,7 +147,7 @@ void Draw_Haitham()
 
     if (player1==4 || player2==4)
     {
-                VsSuperPower=SuperPowerW;
+        VsSuperPower=SuperPowerW;
         EtatVS=etatW;
         x=xW;
         y=yW;
@@ -161,6 +163,11 @@ void Draw_Haitham()
         if (Combot1==10)
         {
             SuperPowerH=1;
+            if (FrameCount%2==0)
+                draw_image_ex(Power1,0,0,100,0,NONE,100);
+            if (FrameCount%3==0)
+                draw_image_ex(Power1,0,0,100,0,NONE,100);
+
         }
     }
     if (PlayerH==2)
@@ -168,9 +175,14 @@ void Draw_Haitham()
         if (Combot2==10)
         {
             SuperPowerH=1;
+            if (FrameCount%2==0)
+                draw_image_ex(Power2,0,0,100,0,NONE,100);
+            if (FrameCount%3==0)
+                draw_image_ex(Power2,0,0,100,0,NONE,100);
+
+
         }
     }
-
     switch (etatH)
     {
     case Stable :
@@ -469,10 +481,14 @@ void Draw_Haitham()
         if(PlayerH==2) xH+=wH;
         if(FrameCount%10==0)
         {
-            IndexH++;
-            IndexCollissionH+=IndexH;
+            if(IndexH<ThunderCountH)
+            {
 
-            if(IndexH>=ThunderCountH)
+                IndexH++;
+                IndexCollissionH++;
+
+            }
+            if(IndexH==ThunderCountH)
             {
                 etatH=Stable;
             }
@@ -488,12 +504,15 @@ void Draw_Haitham()
         if(PlayerH==2) xH+=wH;
         if(FrameCount%10==0)
         {
-            IndexH++;
-            IndexCollissionH+=IndexH;
-
-            if(IndexH>=WindCountH)
+            if (IndexH<WindCountH)
+            {
+                IndexH++;
+                IndexCollissionH++;
+            }
+            if(IndexH==WindCountH)
             {
                 etatH=Stable;
+                IndexCollissionH=StableStartH;
             }
         }
 
@@ -602,12 +621,13 @@ void Draw_Haitham()
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+FallStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
-        if(FrameCount%10==0 && IndexH<=FallCountH)
+        if(FrameCount%10==0  && IndexH<FallCountH)
         {
             IndexH++;
             IndexCollissionH+=IndexH;
-
         }
+
+
 
     }
     break;

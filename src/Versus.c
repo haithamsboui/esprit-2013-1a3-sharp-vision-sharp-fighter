@@ -358,16 +358,18 @@ int indice_efx=0;
 
 void GamePlay(int Player1,int Player2,int Map)
 {
-
-    Player1Health=100;
-    Player2Health=100;
-    Combot1=0;
-    Combot2=0;
     IMAGE *MapLoad,*Loadcombo,*EFX[100],*Versus[7],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[5],*Pause_cadre;
     int thunder, rainsound,gameplaysound,sarsour,fight,lotfi,button_press=0;
     char MapDirection[50],direction[50],texttime[10],Round[10],time =30,round =1,i,pause=0,Pause_pos_ind=0,Pause_pos[]= {20,35,50,65,80};
     float  gamestart=1.0;
+    Player1Health=100;
+    Player2Health=100;
+    Combot1=0;
+    Combot2=0;
     Location loc;
+
+Power1=load_image("Resources/Images/Versus/Power1.png");
+Power2=load_image("Resources/Images/Versus/Power2.png");
     Versus[0]=load_image("Resources/Images/Mokhtar/Versus.png");
     Versus[1]=load_image("Resources/Images/Haitham/Versus.png");
     Versus[2]=load_image("Resources/Images/Brahim/Versus.png");
@@ -377,6 +379,7 @@ void GamePlay(int Player1,int Player2,int Map)
     Versus[6]=load_image("Resources/Images/Versus/VS.png");
     Loadcombo=load_image("Resources/Images/Versus/loadcombo.png");
     Pause_cadre=load_image("Resources/Images/Versus/pause_cadre.png");
+
     for (i=0; i<5; i++)
     {
         sprintf (direction,"Resources/Images/Versus/%d.png",i);
@@ -489,7 +492,6 @@ void GamePlay(int Player1,int Player2,int Map)
 
     while(round <=3 )
     {
-        printf (" Com1 %d \n Com2 %d \n ***************\n",Combot1,Combot2);
         if (pause==0)
         {
 
@@ -535,19 +537,18 @@ void GamePlay(int Player1,int Player2,int Map)
             draw_image_ex(bloodbar,0,0,100,0,NONE,100);
             draw_image_ex(Time,-15,0,130,0,NONE,100);
             draw_image_ex(heads_bar,0,0,100,0,NONE,100);
-
-            draw_image_ex(heads[Player1],0,0,100,0,VERTICAL,100);
-            draw_image_ex(heads[Player2],0,0,100,0,NONE,100);
             if ( gamestart<100)
             {
-                draw_text(PressStyle,"FIGHT ",gamestart/4,55,35,CENTER_X,gamestart);
+                draw_text(Arista,"FIGHT ",gamestart/4,55,35,CENTER_X,gamestart);
                 gamestart+=1.8;
             }
             for (i=0; i<Combot1; i++)
-                draw_image_ex(Loadcombo,-2+(i+1)*2,0,100,0,NONE,100);
+                draw_image_ex(Loadcombo,-2+(i+1)*2.1,0.5,100,0,NONE,100);
 
             for (i=0; i<Combot2; i++)
-                draw_image_ex(Loadcombo,2-(i+1)*2,0,100,0,VERTICAL,100);
+                draw_image_ex(Loadcombo,2-(i+1)*2.1,0.5,100,0,VERTICAL,100);
+
+
             switch (Player1)
             {
             case 0 :
@@ -555,6 +556,7 @@ void GamePlay(int Player1,int Player2,int Map)
                 break;
             case 1 :
                 Draw_Haitham();
+
                 break;
             case 2 :
                 Draw_Brahim();
@@ -562,6 +564,7 @@ void GamePlay(int Player1,int Player2,int Map)
                 break;
             case 3 :
                 Draw_Salah();
+
                 break;
             case 4 :
                 Draw_Wassim();
@@ -587,12 +590,16 @@ void GamePlay(int Player1,int Player2,int Map)
                 break;
             }
 
+            draw_image_ex(heads[Player1],0,0,100,0,VERTICAL,100);
+            draw_image_ex(heads[Player2],0,0,100,0,NONE,100);
 
             if(FrameCount%60==0)
             {
                 sprintf(texttime,"%d",time);
                 time--;
             }
+
+
             if (time<0 || Player1Health<=0 || Player2Health<=0 )
             {
 
@@ -802,5 +809,7 @@ void GamePlay(int Player1,int Player2,int Map)
     }
 
 }
+
+
 
 

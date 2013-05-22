@@ -161,12 +161,20 @@ if (PlayerW==1)
     if (Combot1==10)
     {
         SuperPowerW=1;
+              if (FrameCount%2==0)
+draw_image_ex(Power1,0,0,100,0,NONE,100);
+ if (FrameCount%3==0)
+draw_image_ex(Power1,0,0,100,0,NONE,100);
     }
 }
 if (PlayerW==2){
      if (Combot2==10)
     {
         SuperPowerW=1;
+              if (FrameCount%2==0)
+draw_image_ex(Power2,0,0,100,0,NONE,100);
+ if (FrameCount%3==0)
+draw_image_ex(Power2,0,0,100,0,NONE,100);
     }
 }
     switch (etatW)
@@ -449,8 +457,11 @@ if (PlayerW==2){
         if(PlayerW==2) xW+=wW;
         if(FrameCount%10==0)
         {
-            IndexW++;
-            IndexCollissionW+=IndexW;
+                                 if(IndexW<ThundercountW)
+            {
+                IndexW++;
+                IndexCollissionW++;
+            }
             if(IndexW==ThundercountW)
             {
                 etatW=Stable;
@@ -465,11 +476,15 @@ if (PlayerW==2){
         if(PlayerW==2) xW+=wW;
         if(FrameCount%10==0)
         {
-            IndexW++;
-            IndexCollissionW+=IndexW;
+                                 if(IndexW<WindcountW)
+            {
+                IndexW++;
+                IndexCollissionW++;
+            }
             if(IndexW==WindcountW)
             {
                 etatW=Stable;
+                            IndexCollissionW=StableStartW;
             }
         }
 

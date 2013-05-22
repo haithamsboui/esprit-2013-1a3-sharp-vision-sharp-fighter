@@ -158,6 +158,10 @@ void Draw_Mokhtar()
         if (Combot1==10)
         {
             SuperPowerM=1;
+                  if (FrameCount%2==0)
+draw_image_ex(Power1,0,0,100,0,NONE,100);
+ if (FrameCount%3==0)
+draw_image_ex(Power1,0,0,100,0,NONE,100);
         }
     }
     if (PlayerM==2)
@@ -165,6 +169,10 @@ void Draw_Mokhtar()
         if (Combot2==10)
         {
             SuperPowerM=1;
+                  if (FrameCount%2==0)
+draw_image_ex(Power2,0,0,100,0,NONE,100);
+ if (FrameCount%3==0)
+draw_image_ex(Power2,0,0,100,0,NONE,100);
         }
     }
 
@@ -449,8 +457,13 @@ void Draw_Mokhtar()
         if(PlayerM==2) xM+=wM;
         if(FrameCount%10==0)
         {
-            IndexM++;
-            IndexCollissionM+=IndexM;
+            if(IndexM<ThunderCountM)
+            {
+
+                IndexM++;
+                IndexCollissionM++;
+
+            }
 
             if(IndexM==ThunderCountM)
             {
@@ -466,12 +479,18 @@ void Draw_Mokhtar()
         if(PlayerM==2) xM+=wM;
         if(FrameCount%10==0)
         {
-            IndexM++;
-            IndexCollissionM+=IndexM;
+            if(IndexM<WindCountM)
+            {
+
+                IndexM++;
+                IndexCollissionM++;
+
+            }
 
             if(IndexM==WindCountM)
             {
                 etatM=Stable;
+                IndexCollissionM=StableStartM;
             }
         }
 

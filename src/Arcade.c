@@ -233,12 +233,10 @@ void CinematicVoice(PLAYERNAME player,PLAYERNAME next, LocationName nextmap)
     i=0;
     while(!IsKeyPressed(3,ENTER) && !IsKeyPressed(3,RETURN) & i<(FPS*8))
     {
-
         draw_image_ex(screenimage,0,0,100,100,NONE,i);
         draw_text(SFTransRobotics,buffer,5,25,10,CENTER,100-i);
         draw_image_ex(voice[0],40,15,0,85,f,100-i);
         draw_image_ex(voice[1],40,10,0,90,f,i);
-
         next_frame();
         i++;
     }

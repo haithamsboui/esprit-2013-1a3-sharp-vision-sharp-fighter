@@ -154,6 +154,10 @@ void Draw_Salah()
         if (Combot1==10)
         {
             SuperPowerS=1;
+                  if (FrameCount%2==0)
+draw_image_ex(Power1,0,0,100,0,NONE,100);
+ if (FrameCount%3==0)
+draw_image_ex(Power1,0,0,100,0,NONE,100);
         }
     }
     if (PlayerS==2)
@@ -161,6 +165,10 @@ void Draw_Salah()
         if (Combot2==10)
         {
             SuperPowerS=1;
+                  if (FrameCount%2==0)
+draw_image_ex(Power2,0,0,100,0,NONE,100);
+ if (FrameCount%3==0)
+draw_image_ex(Power2,0,0,100,0,NONE,100);
         }
     }
 
@@ -441,8 +449,11 @@ void Draw_Salah()
         if(PlayerS==2) xS+=wS;
         if(FrameCount%10==0)
         {
-            IndexS++;
-            IndexCollissionS+=IndexS;
+                                   if(IndexS<ThunderCountS)
+            {
+                IndexS++;
+                IndexCollissionS++;
+            }
 
             if(IndexS==ThunderCountS)
             {
@@ -458,12 +469,16 @@ void Draw_Salah()
         if(PlayerS==2) xS+=wS;
         if(FrameCount%10==0)
         {
-            IndexS++;
-            IndexCollissionS+=IndexS;
+                                   if(IndexS<WindCountS)
+            {
+                IndexS++;
+                IndexCollissionS++;
+            }
 
             if(IndexS==WindCountS)
             {
                 etatS=Stable;
+                IndexCollissionS=StableStartS;
             }
         }
 
