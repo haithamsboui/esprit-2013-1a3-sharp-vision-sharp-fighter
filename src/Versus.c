@@ -368,8 +368,8 @@ void GamePlay(int Player1,int Player2,int Map)
     Combot2=0;
     Location loc;
 
-Power1=load_image("Resources/Images/Versus/Power1.png");
-Power2=load_image("Resources/Images/Versus/Power2.png");
+    Power1=load_image("Resources/Images/Versus/Power1.png");
+    Power2=load_image("Resources/Images/Versus/Power2.png");
     Versus[0]=load_image("Resources/Images/Mokhtar/Versus.png");
     Versus[1]=load_image("Resources/Images/Haitham/Versus.png");
     Versus[2]=load_image("Resources/Images/Brahim/Versus.png");
