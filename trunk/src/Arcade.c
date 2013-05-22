@@ -253,3 +253,7 @@ void CinematicVoice(PLAYERNAME player,PLAYERNAME next, LocationName nextmap)
 }
 
 
+int CharacterSelect()
+{
+
+}
