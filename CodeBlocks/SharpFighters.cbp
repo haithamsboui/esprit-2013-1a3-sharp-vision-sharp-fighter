@@ -27,6 +27,8 @@
 					<Add library="loadpng" />
 					<Add library="alleg" />
 					<Add library="ftgl" />
+					<Add library="GL" />
+					<Add library="GLU" />
 					<Add directory="../lib" />
 				</Linker>
 			</Target>
