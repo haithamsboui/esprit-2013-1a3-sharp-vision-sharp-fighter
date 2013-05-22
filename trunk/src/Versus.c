@@ -539,7 +539,8 @@ Power2=load_image("Resources/Images/Versus/Power2.png");
             draw_image_ex(heads_bar,0,0,100,0,NONE,100);
             if ( gamestart<100)
             {
-                draw_text(Arista,"FIGHT ",gamestart/4,55,35,CENTER_X,gamestart);
+
+                draw_text(Arista,"fight ",gamestart/4,55,35,CENTER_X,gamestart);
                 gamestart+=1.8;
             }
             for (i=0; i<Combot1; i++)
@@ -685,7 +686,10 @@ Power2=load_image("Resources/Images/Versus/Power2.png");
                     rest(2500);
                 }
             }
-            draw_text(Arista,texttime,10,50,2,CENTER_X,95);
+            draw_text(Arista,texttime,10,50,2,CENTER_X,100);
+            sprintf(Round,"Round %d",round);
+
+            draw_text(Arista,Round,5,50,(130.0/((float)Time->w/(float)Time->h))*AspectRatio*0.55,CENTER,100);
             if (IsKeyPressed(3,RETURN) && button_press>10)
             {
                 pause=1;
