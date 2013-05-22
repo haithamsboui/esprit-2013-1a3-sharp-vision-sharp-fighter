@@ -371,3 +371,156 @@
 1368955278 source:/home/haitham/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Arcade.c
 	"includes.h"
 
+1369146776 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Arcade.c
+	"includes.h"
+
+1369146772 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/includes.h
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<allegro.h>
+	<alleggl.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<loadpng.h>
+	<FTGL/ftgl.h>
+	"icon.h"
+	"Setting.h"
+	"AudioPlayer.h"
+	"Texture.h"
+	"Graphics.h"
+	"Input.h"
+	"Install.h"
+	"VideoPlayer.h"
+	"apeg.h"
+	"Menus.h"
+	"Earth.h"
+	"Calcul.h"
+	"Textout.h"
+	"Salah.h"
+	"Haitham.h"
+	"Collision.h"
+	"Brahim.h"
+	"Mokhtar.h"
+	"Wassim.h"
+	"Versus.h"
+	"Arcade.h"
+
+1369146772 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/icon.h
+	<allegro.h>
+
+1369146772 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Setting.h
+
+1369146772 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/AudioPlayer.h
+	"includes.h"
+
+1369146772 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Texture.h
+	"includes.h"
+
+1369146772 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Graphics.h
+	"includes.h"
+
+1369146772 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Input.h
+	"includes.h"
+
+1369146772 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Install.h
+	"includes.h"
+
+1369146772 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/VideoPlayer.h
+	"includes.h"
+
+1369146772 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/apeg.h
+	<allegro.h>
+
+1369146772 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Menus.h
+	"includes.h"
+
+1369146772 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Earth.h
+	"includes.h"
+
+1369146772 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Calcul.h
+	"includes.h"
+
+1369152960 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Textout.h
+	"includes.h"
+
+1369152960 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Salah.h
+	"includes.h"
+
+1369152960 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Haitham.h
+	"includes.h"
+
+1369146772 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Collision.h
+	"includes.h"
+
+1369152960 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Brahim.h
+	"includes.h"
+
+1369152960 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Mokhtar.h
+	"includes.h"
+
+1369152960 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Wassim.h
+	"includes.h"
+
+1369152960 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Versus.h
+
+1369146772 /home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/include/Arcade.h
+	"includes.h"
+
+1369146776 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/AudioPlayer.c
+	"includes.h"
+
+1369152278 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Brahim.c
+	"includes.h"
+
+1369146776 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Calcul.c
+	"includes.h"
+
+1369146776 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Collision.c
+	"includes.h"
+
+1369146776 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Earth.c
+	"includes.h"
+
+1369146776 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Graphics.c
+	"includes.h"
+
+1369152278 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Haitham.c
+	"includes.h"
+
+1369146776 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Input.c
+	"includes.h"
+
+1369146776 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Install.c
+	"includes.h"
+
+1369146776 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/main.c
+	"includes.h"
+
+1369146776 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Menus.c
+	"includes.h"
+
+1369152278 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Mokhtar.c
+	"includes.h"
+
+1369152278 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Salah.c
+	"includes.h"
+
+1369146776 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Setting.c
+	"includes.h"
+
+1369152278 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Textout.c
+	"includes.h"
+
+1369146776 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Texture.c
+	"includes.h"
+
+1369154368 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Versus.c
+	"includes.h"
+
+1369146776 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/VideoPlayer.c
+	"includes.h"
+
+1369152278 source:/home/salah/Desktop/esprit-2013-1a3-sharp-vision-sharp-fighter/src/Wassim.c
+	"includes.h"
+
