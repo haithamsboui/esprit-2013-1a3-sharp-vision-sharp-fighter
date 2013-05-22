@@ -164,7 +164,7 @@ void LoadCollisionData()
 
     }
     //Loading Mokhtar Data
-    sprintf(Section,"/Resources/Images/Mokhtar/GamePlay");
+    sprintf(Section,"/Resources/Images/Mokhtar/GamPlay");
     MokhtarCollision=calloc(MokhtarImageCount,sizeof(Point*));
     for(i=0; i<MokhtarImageCount; i++)
     {
