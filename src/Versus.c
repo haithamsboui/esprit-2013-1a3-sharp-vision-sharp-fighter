@@ -358,16 +358,18 @@ int indice_efx=0;
 
 void GamePlay(int Player1,int Player2,int Map)
 {
-    IMAGE *MapLoad,*Loadcombo,*EFX[100],*Versus[7],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[5],*Pause_cadre;
+    IMAGE *MapLoad,*Loadcombo,*EFX[100],*Versus[7],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[5],*Pause_cadre,*RoundWin;
     int thunder, rainsound,gameplaysound,sarsour,fight,lotfi,button_press=0;
-    char MapDirection[50],direction[50],texttime[10],Round[10],time =30,round =1,i,pause=0,Pause_pos_ind=0,Pause_pos[]= {20,35,50,65,80};
+    char MapDirection[50],direction[50],texttime[10],Round[10],time =60,round =1,i,pause=0,Pause_pos_ind=0;
+    int Pause_pos[]= {20,35,50,65,80};
     float  gamestart=1.0;
     Player1Health=100;
     Player2Health=100;
     Combot1=0;
     Combot2=0;
     Location loc;
-
+    int Player1Win=0,player2win=0;
+    RoundWin=load_image("Resources/Images/Versus/RoundWin.png");
     Power1=load_image("Resources/Images/Versus/Power1.png");
     Power2=load_image("Resources/Images/Versus/Power2.png");
     Versus[0]=load_image("Resources/Images/Mokhtar/Versus.png");
@@ -490,7 +492,7 @@ void GamePlay(int Player1,int Player2,int Map)
     sprintf(texttime,"%d",time);
     voice_start(fight);
 
-    while(round <=3 )
+    while(Player1Win!=2 && player2win !=2 )
     {
         if (pause==0)
         {
@@ -536,11 +538,12 @@ void GamePlay(int Player1,int Player2,int Map)
             draw_image_ex(Score,61.5+((-Player2Health)/2.5+40),4,40,0,VERTICAL,100);
             draw_image_ex(bloodbar,0,0,100,0,NONE,100);
             draw_image_ex(Time,-15,0,130,0,NONE,100);
+
+
             draw_image_ex(heads_bar,0,0,100,0,NONE,100);
             if ( gamestart<100)
             {
-
-                draw_text(Arista,"fight ",gamestart/4,55,35,CENTER_X,gamestart);
+                draw_text(Arista,"Fight ",gamestart/4,50,35,CENTER_X,gamestart);
                 gamestart+=1.8;
             }
             for (i=0; i<Combot1; i++)
@@ -593,7 +596,11 @@ void GamePlay(int Player1,int Player2,int Map)
 
             draw_image_ex(heads[Player1],0,0,100,0,VERTICAL,100);
             draw_image_ex(heads[Player2],0,0,100,0,NONE,100);
+ for (i=0;i<Player1Win;i++)
+                        draw_image_ex(RoundWin,27.5+i*3.4,26.9,2,0,NONE,100);
 
+            for (i=0;i<player2win;i++)
+                        draw_image_ex(RoundWin,71.95-i*3.4,26.9,2,0,NONE,100);
             if(FrameCount%60==0)
             {
                 sprintf(texttime,"%d",time);
@@ -603,11 +610,16 @@ void GamePlay(int Player1,int Player2,int Map)
 
             if (time<0 || Player1Health<=0 || Player2Health<=0 )
             {
+ if (Player1Health<=0)
+ player2win++;
 
-                time=30;
+ if (Player2Health<=0)
+ Player1Win++;
+ if (Player1Health!=0 && Player2Health!=0)
                 round++;
-                if (round<3)
+                if (round<=3 && Player1Win!=2 && player2win !=2)
                 {
+                     time=60;
                     next_frame();
                     draw_image_ex(MapLoad,-1.5,-2,103,104,NONE,100);
                     sprintf(Round,"Round %d",round);
@@ -686,10 +698,7 @@ void GamePlay(int Player1,int Player2,int Map)
                     rest(2500);
                 }
             }
-            draw_text(Arista,texttime,10,50,2,CENTER_X,100);
-            sprintf(Round,"Round %d",round);
-
-            draw_text(Arista,Round,5,50,(130.0/((float)Time->w/(float)Time->h))*AspectRatio*0.55,CENTER,100);
+            draw_text(Arista,texttime,10,50,2,CENTER_X,95);
             if (IsKeyPressed(3,RETURN) && button_press>10)
             {
                 pause=1;
@@ -791,8 +800,18 @@ void GamePlay(int Player1,int Player2,int Map)
             }
         }
         button_press++;
+
+        if (Player1Win==2)
+        {
+    draw_text(Arista,"Player 1 Win",15,45,45,CENTER_X,100);
+        }
+         if (player2win==2)
+        {
+    draw_text(Arista,"Player 2 Win",15,45,45,CENTER_X,100);
+        }
         next_frame();
     }
+    rest(2500);
     switch (Map)
     {
     case 0 :

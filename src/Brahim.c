@@ -50,7 +50,10 @@ int directionB;
 int PlayerB=0;
 EtatPlayer etatB;
 int IndexB;
-
+int FireB;
+int ThunderB;
+int WindB;
+int FreezeB;
 
 void LoadBrahim(int player)
 {

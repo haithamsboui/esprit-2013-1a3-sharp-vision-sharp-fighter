@@ -50,7 +50,10 @@ int directionM;
 int PlayerM=0;
 EtatPlayer etatM;
 int IndexM;
-
+int FireM;
+int ThunderM;
+int WindM;
+int FreezeM;
 
 void LoadMokhtar(int player)
 {

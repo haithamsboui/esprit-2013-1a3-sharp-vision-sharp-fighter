@@ -50,7 +50,10 @@ int directionS;
 int PlayerS=0;
 EtatPlayer etatS;
 int IndexS;
-
+int FireS;
+int ThunderS;
+int WindS;
+int FreezeS;
 
 void LoadSalah(int player)
 {

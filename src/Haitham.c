@@ -50,7 +50,10 @@ int directionH;
 int PlayerH=0;
 EtatPlayer etatH;
 int IndexH;
-
+int FireH;
+int ThunderH;
+int WindH;
+int FreezeH;
 
 void LoadHaitham(int player)
 {
