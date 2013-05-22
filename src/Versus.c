@@ -358,7 +358,7 @@ int indice_efx=0;
 
 void GamePlay(int Player1,int Player2,int Map)
 {
-    IMAGE *MapLoad,*Loadcombo,*EFX[100],*Versus[7],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[5],*Pause_cadre,*RoundWin;
+    IMAGE *MapLoad,*Loadcombo,*EFX[100],*Versus[7],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[5],*Pause_cadre,*RoundWin,*Final1,*Final2,*FIGHT;
     int thunder, rainsound,gameplaysound,sarsour,fight,lotfi,button_press=0;
     char MapDirection[50],direction[50],texttime[10],Round[10],time =60,round =1,i,pause=0,Pause_pos_ind=0;
     int Pause_pos[]= {20,35,50,65,80};
@@ -369,6 +369,9 @@ void GamePlay(int Player1,int Player2,int Map)
     Combot2=0;
     Location loc;
     int Player1Win=0,player2win=0;
+    Final1=load_image("Resources/Images/Versus/player1win.png");
+        Final2=load_image("Resources/Images/Versus/player2win.png");
+FIGHT=load_image("Resources/Images/Versus/fight.png");
     RoundWin=load_image("Resources/Images/Versus/RoundWin.png");
     Power1=load_image("Resources/Images/Versus/Power1.png");
     Power2=load_image("Resources/Images/Versus/Power2.png");
@@ -543,8 +546,8 @@ void GamePlay(int Player1,int Player2,int Map)
             draw_image_ex(heads_bar,0,0,100,0,NONE,100);
             if ( gamestart<100)
             {
-                draw_text(Arista,"Fight ",gamestart/4,50,35,CENTER_X,gamestart);
-                gamestart+=1.8;
+                draw_image_ex(FIGHT,50-gamestart/5,40,gamestart/2,0,NONE,gamestart);
+                gamestart+=2.0;
             }
             for (i=0; i<Combot1; i++)
                 draw_image_ex(Loadcombo,-2+(i+1)*2.1,0.5,100,0,NONE,100);
@@ -803,11 +806,11 @@ void GamePlay(int Player1,int Player2,int Map)
 
         if (Player1Win==2)
         {
-    draw_text(Arista,"Player 1 Win",15,45,45,CENTER_X,100);
-        }
+draw_image_ex(Final1,0,0,100,100,NONE,100);
+}
          if (player2win==2)
         {
-    draw_text(Arista,"Player 2 Win",15,45,45,CENTER_X,100);
+draw_image_ex(Final2,0,0,100,100,NONE,100);
         }
         next_frame();
     }

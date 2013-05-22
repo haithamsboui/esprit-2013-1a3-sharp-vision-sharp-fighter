@@ -205,12 +205,16 @@ void Draw_Haitham()
                 Player2Health-=2.5;
                 if (VsSuperPower==0 && Combot1<10)
                     Combot1++;
+                if (Player2Health<2.5)
+                    etatH=Fall;
             }
             if (PlayerH==1)
             {
                 Player1Health-=2.5;
                 if (VsSuperPower==0 && Combot2<10)
                     Combot2++;
+                if (Player1Health<2.5)
+                    etatH=Fall;
             }
         }
 
@@ -229,7 +233,6 @@ void Draw_Haitham()
 
         break;
     }
-
 
 
     if(etatH!=Kick && etatH!=Punch && etatH!=Fireball && etatH != Freeze && etatH !=Jump  && etatH !=Wind && etatH !=Thunder &&etatH!=Fall&&etatH!=Hit&&etatH!=Defence&&etatH!=Up)
@@ -289,11 +292,12 @@ void Draw_Haitham()
                 etatH=Jump;
                 IndexCollissionH=JumpStartH;
             }
-            if (etatH==Fall)
-            {
-                etatH=Up;
-                IndexCollissionH=StableStartH;
-            }
+             if (etatH==Fall)
+    {
+
+        etatH=Up;
+        IndexCollissionM=FallStartH;
+    }
         }
         else if (IsKeyPressed(PlayerH,DOWN))
         {
@@ -354,7 +358,6 @@ void Draw_Haitham()
         }
         else
         {
-
             etatH=Stable;
             IndexCollissionH=StableStartH;
         }
@@ -389,7 +392,6 @@ void Draw_Haitham()
         {
             IndexH=((IndexH-1+WalkCountH)%WalkCountH);
             IndexCollissionH+=IndexH;
-
         }
         IndexH = Min(IndexH,WalkCountH-1);
         wH=(hH/((float)HaithamPics[IndexH+WalkStartH]->h/(float)HaithamPics[IndexH+WalkStartH]->w))/AspectRatio;
@@ -405,7 +407,6 @@ void Draw_Haitham()
         {
             IndexH=((IndexH+1)%WalkCountH);
             IndexCollissionH+=IndexH;
-
         }
         IndexH = Min(IndexH,WalkCountH);
         wH=(hH/((float)HaithamPics[IndexH+WalkStartH]->h/(float)HaithamPics[IndexH+WalkStartH]->w))/AspectRatio;
@@ -620,17 +621,16 @@ void Draw_Haitham()
 
     case Fall:
     {
+
         wH=(hH/((float)HaithamPics[IndexH+FallStartH]->h/(float)HaithamPics[IndexH+FallStartH]->w))/AspectRatio;
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+FallStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
-        if(FrameCount%10==0  && IndexH<FallCountH)
+        if(FrameCount%10==0  && IndexH<FallCountH-1)
         {
             IndexH++;
             IndexCollissionH+=IndexH;
         }
-
-
 
     }
     break;

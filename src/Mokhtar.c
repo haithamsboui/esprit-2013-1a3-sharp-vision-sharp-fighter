@@ -161,10 +161,10 @@ void Draw_Mokhtar()
         if (Combot1==10)
         {
             SuperPowerM=1;
-                  if (FrameCount%2==0)
-draw_image_ex(Power1,0,0,100,0,NONE,100);
- if (FrameCount%3==0)
-draw_image_ex(Power1,0,0,100,0,NONE,100);
+            if (FrameCount%2==0)
+                draw_image_ex(Power1,0,0,100,0,NONE,100);
+            if (FrameCount%3==0)
+                draw_image_ex(Power1,0,0,100,0,NONE,100);
         }
     }
     if (PlayerM==2)
@@ -172,10 +172,10 @@ draw_image_ex(Power1,0,0,100,0,NONE,100);
         if (Combot2==10)
         {
             SuperPowerM=1;
-                  if (FrameCount%2==0)
-draw_image_ex(Power2,0,0,100,0,NONE,100);
- if (FrameCount%3==0)
-draw_image_ex(Power2,0,0,100,0,NONE,100);
+            if (FrameCount%2==0)
+                draw_image_ex(Power2,0,0,100,0,NONE,100);
+            if (FrameCount%3==0)
+                draw_image_ex(Power2,0,0,100,0,NONE,100);
         }
     }
 
@@ -228,7 +228,8 @@ draw_image_ex(Power2,0,0,100,0,NONE,100);
 
     }
 
-    if(etatM!=Kick && etatM!=Punch && etatM!=Fireball && etatM != Freeze && etatM !=Jump  && etatM !=Wind && etatM !=Thunder &&etatM!=Fall&&etatM!=Hit&&etatM!=Defence&&etatM!=Up)
+
+    if(etatM!=Kick && etatM!=Punch && etatM!=Fireball && etatM != Freeze && etatM !=Jump  && etatM !=Wind && etatM !=Thunder && etatM!=Hit &&etatM!=Defence && etatM!=Up)
     {
         if(PlayerM==2)
             xM-=wM;
@@ -573,15 +574,10 @@ draw_image_ex(Power2,0,0,100,0,NONE,100);
         if(PlayerM==2) xM-=wM;
         draw_image_ex(MokhtarPics[IndexM+FallStartM],xM,yM,wM,hM,vflip,100);
         if(PlayerM==2) xM+=wM;
-        if(FrameCount%10==0)
+        if(FrameCount%10==0 && IndexM<FallCountM)
         {
             IndexM++;
             IndexCollissionM+=IndexM;
-
-            if(IndexM==FallCountM)
-            {
-                etatM=Stable;
-            }
         }
         break;
 

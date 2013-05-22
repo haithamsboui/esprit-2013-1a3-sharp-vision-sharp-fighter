@@ -221,7 +221,15 @@ draw_image_ex(Power2,0,0,100,0,NONE,100);
         break;
     }
 
-    if(etatS!=Kick && etatS!=Punch && etatS!=Fireball && etatS != Freeze && etatS !=Jump  && etatS !=Wind && etatS !=Thunder &&etatS!=Fall&&etatS!=Hit&&etatS!=Defence&&etatS!=Up)
+      if (etatS==Fall&& IsKeyPressed(PlayerS,UP))
+    {
+        IndexS=0;
+        iS=1;
+        etatS=Up;
+        IndexCollissionS=FallStartS;
+    }
+
+    if(etatS!=Kick && etatS!=Punch && etatS!=Fireball && etatS != Freeze && etatS !=Jump  && etatS !=Wind && etatS !=Thunder &&etatS!=Hit&&etatS!=Defence&&etatS!=Up)
     {
         if(PlayerS==2)
             xS-=wS;
@@ -277,11 +285,7 @@ draw_image_ex(Power2,0,0,100,0,NONE,100);
                 etatS=Jump;
                 IndexCollissionS=JumpStartS;
             }
-            if (etatS==Fall)
-            {
-                etatS=Up;
-                IndexCollissionS=StableStartS;
-            }
+
         }
         else if (IsKeyPressed(PlayerS,DOWN))
         {

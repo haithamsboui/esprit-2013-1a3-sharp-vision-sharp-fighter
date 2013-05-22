@@ -230,7 +230,7 @@ void Draw_Brahim()
 
 
     }
-    if(etatB!=Kick && etatB!=Punch && etatB!=Fireball && etatB != Freeze && etatB !=Jump  && etatB !=Wind && etatB !=Thunder &&etatB!=Fall&&etatB!=Hit&&etatB!=Defence&&etatB!=Up)
+    if(etatB!=Kick && etatB!=Punch && etatB!=Fireball && etatB != Freeze && etatB !=Jump  && etatB !=Wind && etatB !=Thunder &&etatB!=Hit&&etatB!=Defence&&etatB!=Up)
     {
         if(PlayerB==2)
             xB-=wB;

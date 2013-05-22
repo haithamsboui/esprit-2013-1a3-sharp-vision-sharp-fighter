@@ -12,7 +12,8 @@ int depth=32;
 GFX_MODE_LIST * Resolutions;
 int ResolutionIndex=0;
 
-int LoadSettings(){
+int LoadSettings()
+{
     set_config_file("Resources/Setting.cfg");
     Music_volume=get_config_int("sound","Music_volume",Music_volume);
     Effect_volume=get_config_int("sound","Effect_volume",Effect_volume);
@@ -21,6 +22,7 @@ int LoadSettings(){
     Height=get_config_int("graphics","Height",Height);
     depth=get_config_int("graphics","depth",depth);
     ResolutionIndex=(get_config_int("graphics","ResolutionIndex",ResolutionIndex)%Resolutions->num_modes);
+    LoadSavegame();
     return 0;
 }
 
