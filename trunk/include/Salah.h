@@ -20,6 +20,10 @@ int PlayerS;
 int IndexS;
 int IndexCollissionS;
 int SuperPowerS;
+int FireS;
+int ThunderS;
+int WindS;
+int FreezeS;
 
 void LoadSalah(int PlayerS);
 void Draw_Salah();

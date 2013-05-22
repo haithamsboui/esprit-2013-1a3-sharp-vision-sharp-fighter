@@ -17,7 +17,10 @@ int PlayerB;
 int IndexB;
 int IndexCollissionB;
 int SuperPowerB;
-
+int FireB;
+int ThunderB;
+int WindB;
+int FreezeB;
 void LoadBrahim(int player);
 void Draw_Brahim();
 

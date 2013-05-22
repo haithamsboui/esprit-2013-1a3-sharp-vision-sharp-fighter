@@ -17,7 +17,10 @@ int PlayerH;
 int IndexH;
 int IndexCollissionH;
 int SuperPowerH;
-
+int FireH;
+int ThunderH;
+int WindH;
+int FreezeH;
 void LoadHaitham(int player);
 void Draw_Haitham();
 

@@ -50,7 +50,10 @@ int directionW;
 int PlayerW=0;
 EtatPlayer etatW;
 int IndexW;
-
+int FireW;
+int ThunderW;
+int WindW;
+int FreezeW;
 
 void LoadWassim(int player)
 {

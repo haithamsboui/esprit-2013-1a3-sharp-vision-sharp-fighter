@@ -12,4 +12,5 @@ int Combot1;
 int Combot2;
     IMAGE *Power1;
     IMAGE *Power2;
+
 #endif // VERSUS_H_INCLUDED

@@ -20,6 +20,10 @@ int PlayerM;
 int IndexM;
 int IndexCollissionM;
 int SuperPowerM;
+int FireM;
+int ThunderM;
+int WindM;
+int FreezeM;
 
 void Draw_Mokhtar();
 void LoadMokhtar(int PlayerM);

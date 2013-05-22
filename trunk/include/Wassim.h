@@ -16,7 +16,10 @@ int PlayerW;
 int IndexW;
 int IndexCollissionW;
 int SuperPowerW;
-
+int FireW;
+int ThunderW;
+int WindW;
+int FreezeW;
 void Draw_Wassim();
 void LoadWassim(int player);
 
