@@ -131,7 +131,7 @@ void Draw_Brahim()
 
     if (player1==3 || player2==3)
     {
-                VsSuperPower=SuperPowerS;
+        VsSuperPower=SuperPowerS;
         etatVS=etatS;
         x=xS;
         y=yS;
@@ -144,7 +144,7 @@ void Draw_Brahim()
 
     if (player1==1 || player2==1)
     {
-                VsSuperPower=SuperPowerH;
+        VsSuperPower=SuperPowerH;
         etatVS=etatH;
         x=xH;
         y=yH;
@@ -155,19 +155,30 @@ void Draw_Brahim()
         IndexVs=IndexCollissionH;
     }
 
-if (PlayerB==1)
-{
-    if (Combot1==10)
+    if (PlayerB==1)
     {
-        SuperPowerB=1;
+        if (Combot1==10)
+        {
+            SuperPowerB=1;
+
+            if (FrameCount%2==0)
+                draw_image_ex(Power1,0,0,100,0,NONE,100);
+            if (FrameCount%3==0)
+                draw_image_ex(Power1,0,0,100,0,NONE,100);
+        }
     }
-}
-if (PlayerB==2){
-     if (Combot2==10)
+    if (PlayerB==2)
     {
-        SuperPowerB=1;
+        if (Combot2==10)
+        {
+            SuperPowerB=1;
+            if (FrameCount%2==0)
+                draw_image_ex(Power2,0,0,100,0,NONE,100);
+            if (FrameCount%3==0)
+                draw_image_ex(Power2,0,0,100,0,NONE,100);
+
+        }
     }
-}
 
 
     switch (etatB)
@@ -188,14 +199,14 @@ if (PlayerB==2){
             {
                 Player2Health-=2.5;
                 if (VsSuperPower==0 && Combot1<10)
-                Combot1++;
+                    Combot1++;
 
             }
             if (PlayerB==1)
             {
                 Player1Health-=2.5;
                 if (VsSuperPower==0 && Combot2<10)
-                Combot2++;
+                    Combot2++;
             }
         }
 
@@ -288,9 +299,9 @@ if (PlayerB==2){
             IndexCollissionB=FireballStartB;
             SuperPowerB=0;
             if (PlayerB==1)
-            Combot1=0;
+                Combot1=0;
             if (PlayerB==2)
-            Combot2=0;
+                Combot2=0;
 
         }
         else if (IsKeyPressed(PlayerB,FREEZE)&& SuperPowerB==1)
@@ -300,31 +311,31 @@ if (PlayerB==2){
             IndexCollissionB=FreezeStartB;
             SuperPowerB=0;
             if (PlayerB==1)
-            Combot1=0;
+                Combot1=0;
             if (PlayerB==2)
-            Combot2=0;
+                Combot2=0;
         }
         else if (IsKeyPressed(PlayerB,THUNDER)&& SuperPowerB==1)
         {
             etatB=Thunder;
             IndexB=0;
             IndexCollissionB=ThunderStartB;
-        SuperPowerB=0;
+            SuperPowerB=0;
             if (PlayerB==1)
-            Combot1=0;
+                Combot1=0;
             if (PlayerB==2)
-            Combot2=0;
+                Combot2=0;
         }
         else if (IsKeyPressed(PlayerB,WIND)&& SuperPowerB==1)
         {
             etatB=Wind;
             IndexB=0;
             IndexCollissionB=WindStartB;
-        SuperPowerB=0;
+            SuperPowerB=0;
             if (PlayerB==1)
-            Combot1=0;
+                Combot1=0;
             if (PlayerB==2)
-            Combot2=0;
+                Combot2=0;
         }
         else if (IsKeyPressed(PlayerB,DEFENCE))
         {
@@ -447,8 +458,14 @@ if (PlayerB==2){
         if(PlayerB==2) xB+=wB;
         if(FrameCount%10==0)
         {
-            IndexB++;
-            IndexCollissionB+=IndexB;
+            if(IndexB<ThunderCountB)
+            {
+
+                IndexB++;
+                IndexCollissionB++;
+
+            }
+
 
             if(IndexB==ThunderCountB)
             {
@@ -464,8 +481,13 @@ if (PlayerB==2){
         if(PlayerB==2) xB+=wB;
         if(FrameCount%10==0)
         {
-            IndexB++;
-            IndexCollissionB+=IndexB;
+            if(IndexB<WindCountB)
+            {
+
+                IndexB++;
+                IndexCollissionB++;
+
+            }
 
             if(IndexB==WindCountB)
             {
@@ -477,13 +499,15 @@ if (PlayerB==2){
     case Freeze:
         wB=(hB/((float)BrahimPics[IndexB+FreezeStartB]->h/(float)BrahimPics[IndexB+FreezeStartB]->w))/AspectRatio;
         if(PlayerB==2) xB-=wB;
-        draw_image_ex(BrahimPics[IndexB+FreezeStartB],xB,yB,wB,hB,vflip,100);
+        draw_image_ex(BrahimPics[IndexB+FreezeStartB],xB,yB,wB,0,vflip,100);
         if(PlayerB==2) xB+=wB;
         if(FrameCount%10==0)
         {
-            IndexB++;
-            IndexCollissionB+=IndexB;
-
+            if(IndexB<WindCountB)
+            {
+                IndexB++;
+                IndexCollissionB++;
+            }
             if(IndexB==FreezeCountB)
             {
                 etatB=Stable;

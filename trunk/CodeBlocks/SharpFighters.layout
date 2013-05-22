@@ -49,8 +49,8 @@
 	<File name="../include/Texture.h" open="0" top="0" tabpos="11">
 		<Cursor position="436" topLine="10" />
 	</File>
-	<File name="../include/Versus.h" open="0" top="0" tabpos="13">
-		<Cursor position="330" topLine="0" />
+	<File name="../include/Versus.h" open="1" top="0" tabpos="8">
+		<Cursor position="337" topLine="0" />
 	</File>
 	<File name="../include/Wassim.h" open="0" top="0" tabpos="9">
 		<Cursor position="164" topLine="0" />
@@ -62,16 +62,16 @@
 		<Cursor position="341381" topLine="6545" />
 	</File>
 	<File name="../include/includes.h" open="0" top="0" tabpos="11">
-		<Cursor position="694" topLine="9" />
+		<Cursor position="153" topLine="8" />
 	</File>
-	<File name="../src/Arcade.c" open="1" top="0" tabpos="2">
-		<Cursor position="8007" topLine="229" />
+	<File name="../src/Arcade.c" open="0" top="0" tabpos="2">
+		<Cursor position="7496" topLine="215" />
 	</File>
 	<File name="../src/AudioPlayer.c" open="0" top="0" tabpos="15">
 		<Cursor position="964" topLine="27" />
 	</File>
-	<File name="../src/Brahim.c" open="0" top="0" tabpos="3">
-		<Cursor position="2699" topLine="168" />
+	<File name="../src/Brahim.c" open="1" top="1" tabpos="5">
+		<Cursor position="11599" topLine="472" />
 	</File>
 	<File name="../src/Calcul.c" open="0" top="0" tabpos="7">
 		<Cursor position="202" topLine="0" />
@@ -82,11 +82,11 @@
 	<File name="../src/Earth.c" open="0" top="0" tabpos="12">
 		<Cursor position="810" topLine="0" />
 	</File>
-	<File name="../src/Graphics.c" open="1" top="0" tabpos="3">
+	<File name="../src/Graphics.c" open="0" top="0" tabpos="3">
 		<Cursor position="2053" topLine="77" />
 	</File>
-	<File name="../src/Haitham.c" open="0" top="0" tabpos="2">
-		<Cursor position="6589" topLine="286" />
+	<File name="../src/Haitham.c" open="1" top="0" tabpos="4">
+		<Cursor position="14351" topLine="552" />
 	</File>
 	<File name="../src/Input.c" open="0" top="0" tabpos="6">
 		<Cursor position="5368" topLine="131" />
@@ -97,11 +97,11 @@
 	<File name="../src/Menus.c" open="0" top="0" tabpos="5">
 		<Cursor position="8472" topLine="69" />
 	</File>
-	<File name="../src/Mokhtar.c" open="0" top="0" tabpos="5">
-		<Cursor position="2930" topLine="175" />
+	<File name="../src/Mokhtar.c" open="1" top="0" tabpos="3">
+		<Cursor position="3019" topLine="153" />
 	</File>
-	<File name="../src/Salah.c" open="0" top="0" tabpos="14">
-		<Cursor position="2769" topLine="165" />
+	<File name="../src/Salah.c" open="1" top="0" tabpos="6">
+		<Cursor position="3021" topLine="147" />
 	</File>
 	<File name="../src/Setting.c" open="0" top="0" tabpos="10">
 		<Cursor position="229" topLine="0" />
@@ -112,16 +112,16 @@
 	<File name="../src/Texture.c" open="0" top="0" tabpos="8">
 		<Cursor position="2210" topLine="80" />
 	</File>
-	<File name="../src/Versus.c" open="0" top="0" tabpos="6">
-		<Cursor position="17827" topLine="557" />
+	<File name="../src/Versus.c" open="1" top="0" tabpos="2">
+		<Cursor position="18066" topLine="530" />
 	</File>
 	<File name="../src/VideoPlayer.c" open="0" top="0" tabpos="13">
 		<Cursor position="599" topLine="15" />
 	</File>
-	<File name="../src/Wassim.c" open="0" top="0" tabpos="4">
-		<Cursor position="4385" topLine="195" />
+	<File name="../src/Wassim.c" open="1" top="0" tabpos="7">
+		<Cursor position="2922" topLine="153" />
 	</File>
-	<File name="../src/main.c" open="1" top="1" tabpos="1">
-		<Cursor position="145" topLine="0" />
+	<File name="../src/main.c" open="1" top="0" tabpos="1">
+		<Cursor position="420" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

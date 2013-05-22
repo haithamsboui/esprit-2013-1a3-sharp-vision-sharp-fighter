@@ -25,13 +25,15 @@
 #include "Earth.h"
 #include "Calcul.h"
 #include "Textout.h"
+#include "Versus.h"
+
 #include "Salah.h"
 #include "Haitham.h"
-#include "Collision.h"
 #include "Brahim.h"
 #include "Mokhtar.h"
 #include "Wassim.h"
-#include "Versus.h"
+#include "Collision.h"
+
 #include "Arcade.h"
 
 #endif // INCLUDES_H_INCLUDED
