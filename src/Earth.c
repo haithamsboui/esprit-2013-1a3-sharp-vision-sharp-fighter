@@ -6,7 +6,8 @@ Location EGYPT = {.xRot=-121.0f,.yRot=0.0f,.zRot=-29.5f,.xTran=0.0f,.yTran=-0.6f
 //Location NEWYORK = {.xRot=-100.0f,.yRot=0.0f,.zRot=75.5f,.xTran=0.0f,.yTran=-0.6f,.zTran=-0.8f,.name=NewYork};
 Location JAPAN = {.xRot=-106.0f,.yRot=0.0f,.zRot=-138.0f,.xTran=0.0f,.yTran=-0.6f,.zTran=-0.8f,.name=Japan};
 Location MALAYSIA = {.xRot=-87.0f,.yRot=0.0f,.zRot=-101.0f,.xTran=0.0f,.yTran=-0.0f,.zTran=-1.0f,.name=Malaysia};
-//gluDeleteQuadric(quadratic);
+Location INDIA = {.xRot=-63.0f,.yRot=0.0f,.zRot=-76.0f,.xTran=0.0f,.yTran=-0.0f,.zTran=-0.9f,.name=India};
+
 GLUquadricObj* quadratic;
 IMAGE *world,*stars;
 
