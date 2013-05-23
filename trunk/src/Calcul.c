@@ -1,5 +1,11 @@
 #include "includes.h"
 
+int Random(int min, int max)
+{
+    srand (time(NULL));
+    return rand() % (max-min+1) + min;
+}
+
 float Percentage(float x)
 {
     return Max(Min(x,100.0f),0.0f);
