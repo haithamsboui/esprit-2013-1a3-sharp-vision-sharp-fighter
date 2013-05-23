@@ -5,6 +5,8 @@
 
 typedef enum {MOKHTAR,HAITHAM,BRAHIM,SALAH,WASSIM} PLAYERNAME;
 
+int Dramatic;
+
 void Arcade();
 
 void Cinematic1();

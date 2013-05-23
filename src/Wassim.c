@@ -214,7 +214,7 @@ draw_image_ex(Power2,0,0,100,0,NONE,100);
             }
 
         }
-
+        printf("Index COllision : %d\n",IndexCollissionW);
         if(ProcessCollision(WassimPics,IndexCollissionW,WassimCollision,xW,yW,wW,hW,
                             Vs,IndexVs,TAB,x,y,w,h)&& (etatVS==Fireball || etatVS==Freeze || etatVS==Thunder || etatVS==Wind))
         {

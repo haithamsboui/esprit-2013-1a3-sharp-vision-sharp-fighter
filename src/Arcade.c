@@ -1,19 +1,25 @@
 #include "includes.h"
 
+int Dramatic;
+
 void Arcade()
 {
     int selectedplayer,nextmap,nextplayer;
+    Location locat;
     //Loading of data
+    voice_set_playmode(Dramatic, PLAYMODE_LOOP);
     Cinematic1();
+    voice_ramp_volume(Dramatic,1000,Music_volume);
     rest(1000);
     selectedplayer=CharacterSelect();
     if(selectedplayer==-1) return;
     while((nextplayer=Random(0,4))==selectedplayer);
-    nextmap=Random(0,4);
+    nextmap=4;//Random(0,4);
     CinematicVoice(selectedplayer,nextplayer,nextmap);
+    voice_stop(Dramatic);
     GamePlay(selectedplayer,nextplayer,nextmap);
-    CinematicWin(selectedplayer,nextplayer);
 
+    CinematicWin(selectedplayer,nextplayer);
 }
 
 void Savegame ()
@@ -42,7 +48,7 @@ void Savegame ()
     flush_config_file();
 }
 
-void LoadSavegame ()
+void LoadSavegame()
 {
     set_config_file("Resources/Setting.cfg");
     get_config_int("Savegame","FireH",FireH);
@@ -96,6 +102,12 @@ void Cinematic1()
     int i,imageindex=0,timer,shaking=15;
     float xrand=0.5,yrand=0.5,TextY=100,TextSpeed=-0.025;
     IMAGE *powerups[39],*meeting[6],*swallow[2],*focuspoint,*storytext;
+    int laser,laserboom;
+
+    laser=AddVoice("Resources/Sounds/Laser.wav",1);
+    laserboom=AddVoice("Resources/Sounds/Laserboom.wav",1);
+    Dramatic=AddVoice("Resources/Sounds/Dramatic.wav",0);
+    voice_set_playmode(Dramatic, PLAYMODE_LOOP);
 
     for(i=0; i<39; i++)
     {
@@ -117,6 +129,7 @@ void Cinematic1()
     glClear(GL_COLOR_BUFFER_BIT);
     i=0;
     timer=FrameCount;
+    voice_start(Dramatic);
     while( (FrameCount-timer <8*FPS) && !close_button_pressed && !IsKeyPressed(3,RETURN) && !IsKeyPressed(3,ENTER))
     {
         draw_image_ex(screenimage,0,TextY,100,0,NONE,100);
@@ -157,6 +170,8 @@ void Cinematic1()
     }
     i=0;
     timer=FrameCount;
+    voice_ramp_volume(Dramatic,500,128);
+    voice_start(laser);
     while((FrameCount-timer <3*FPS) && !close_button_pressed && !IsKeyPressed(3,RETURN) && !IsKeyPressed(3,ENTER))
     {
         draw_image_ex(swallow[0],xrand-1,yrand-1,102,0,NONE,100);
@@ -178,9 +193,12 @@ void Cinematic1()
         if(FrameCount%shaking==0)xrand*=-1;
         if(FrameCount%(shaking*2)==0) yrand*=-1;
         if(FrameCount%5==0)shaking=Max(shaking-1,2);
+        if(i==28) voice_start(laserboom);
 
         next_frame();
     }
+    voice_ramp_volume(laser,500,0);
+
     while(i<39 && !close_button_pressed && !IsKeyPressed(3,RETURN) && !IsKeyPressed(3,ENTER))
     {
         draw_image_ex(swallow[0],xrand-1,yrand-1,102,0,NONE,((float)(38-i)/5.0f)*100);
@@ -319,7 +337,7 @@ int CharacterSelect()
     int i,pos_player[]= {4,22,40,58,76},select1=0,select2=4,Ready_pos[]= {8,26,44,62,80}; //distance=18
     int press_buton=0,press_buton2=0,ind_turn_mokhtar=0,ind_turn_haitham=0,ind_turn_brahim=0,ind_turn_salah=0,ind_turn_wassim=0;
     flip Turn[]= {NONE,NONE,NONE,NONE,NONE};
-    int selectedPers[5]= {1,0,0,0,1},brahim_turn=0,haitham_turn=0,salah_turn=0,mokhtar_turn=0,wassim_turn=0,select_map=0;
+    int selectedPers[5]= {1,0,0,0,0},brahim_turn=0,haitham_turn=0,salah_turn=0,mokhtar_turn=0,wassim_turn=0,select_map=0;
     float distance_change1=0,distance_change2=0,fade=1,fade_start=100;
     char direction[100];
     int choix1=0,choix2=0,/*map_pos[]= {6,24,42,60,78}*/distance_change_map=20;
@@ -544,11 +562,13 @@ int CharacterSelect()
         draw_image_ex(Background_bar,0,-27,100,150,NONE,100-fade);
         next_frame();
     }
-    while(IsKeyPressed(1,ENTER)){
+    while(IsKeyPressed(1,ENTER))
+    {
         rest(1);
     }
 
     return -1;
 }
+
 
 

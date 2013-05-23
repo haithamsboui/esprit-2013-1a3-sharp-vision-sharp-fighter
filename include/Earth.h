@@ -4,7 +4,7 @@
 
 #include "includes.h"
 
-typedef enum {Tunisia,Egypt,Japan,Malaysia,India} LocationName;
+typedef enum {Tunisia,Egypt,India,Japan,Malaysia} LocationName;
 //defines a location is space.
 typedef struct {
     float xRot;

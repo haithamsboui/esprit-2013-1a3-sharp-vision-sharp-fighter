@@ -338,7 +338,6 @@ void versus (int intro)
         draw_image_ex(Background_bar,0,-27,100,150,NONE,100-fade);
         next_frame();
     }
-
 }
 
 void ChargerEffetNaturel(IMAGE *effet[100], char chemin[200], int nombreFrame)
@@ -491,7 +490,7 @@ FIGHT=load_image("Resources/Images/Versus/fight.png");
     }
 
     fight=AddVoice("Resources/Sounds/Fight.wav",1);
-    //  DoEarth(TUNISIA,loc);
+    DoEarth(TUNISIA,loc);
     sprintf(texttime,"%d",time);
     voice_start(fight);
 

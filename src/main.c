@@ -22,6 +22,7 @@ int main()
             switch (choix)
             {
             case 0 :
+            voice_stop(intro);
                 Arcade();
                 break;
             case 1:
