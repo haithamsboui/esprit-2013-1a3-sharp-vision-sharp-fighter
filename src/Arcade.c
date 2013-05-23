@@ -2,8 +2,18 @@
 
 void Arcade()
 {
+    int selectedplayer,nextmap,nextplayer;
     //Loading of data
     Cinematic1();
+    rest(1000);
+    selectedplayer=CharacterSelect();
+    if(selectedplayer==-1) return;
+    while((nextplayer=Random(0,4))==selectedplayer);
+    nextmap=Random(0,4);
+    CinematicVoice(selectedplayer,nextplayer,nextmap);
+    GamePlay(selectedplayer,nextplayer,nextmap);
+    CinematicWin(selectedplayer,nextplayer);
+
 }
 
 void Savegame ()
@@ -533,6 +543,9 @@ int CharacterSelect()
         draw_image_ex(Background,0,0,100,100,NONE,100);
         draw_image_ex(Background_bar,0,-27,100,150,NONE,100-fade);
         next_frame();
+    }
+    while(IsKeyPressed(1,ENTER)){
+        rest(1);
     }
 
     return -1;
