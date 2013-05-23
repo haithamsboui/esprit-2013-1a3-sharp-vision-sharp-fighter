@@ -8,6 +8,7 @@ typedef struct {
     float y;
 } Pointf;
 
+int Random(int min, int max);
 // test if number is between 0 and 100
 float Percentage(float x);
 
