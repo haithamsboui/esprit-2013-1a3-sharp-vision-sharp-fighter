@@ -139,7 +139,7 @@ void mainmenu(int *choix)
         draw_image_ex(Firstmenu[ind_4],Pos_cadre[3]-scale,35,taille_x,taille_y+10,NONE,100-fade_start);
 
         draw_image_ex(Select,16,32,27,40,NONE,100-fade_start);
-        draw_image_ex(Pers_main[select_pers],60,0,50,0,NONE,100-fade_start-abs(2*scale)); // draw mokhtar
+        draw_image_evil(Pers_main[select_pers],60,0,50,0,NONE,100-fade_start-abs(2*scale)); // draw mokhtar
         next_frame();
         press_buton++;
     }
@@ -713,19 +713,6 @@ if (ingame==0)
 
 void credit ()
 {
-    IMAGE *credit;
-    int intro;
-    float i=0;
-    intro=AddVoice("Resources/Sounds/Credit.wav",0);
-    credit=load_image("Resources/Images/credit.png");
-    voice_start(intro);
-    while (!IsKeyPressed(3,RETURN) && i!=100)
-    {
-        if(close_button_pressed) return;
-        draw_image_ex(credit,0,100-i,100,100,NONE,100);//draw background
-        i+=0.1;
-        next_frame();
-    }
-    voice_stop(intro);
+   PlayVideo("Resources/Videos/Credits.ogv");
 }
 
