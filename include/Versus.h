@@ -12,5 +12,8 @@ int Combot1;
 int Combot2;
     IMAGE *Power1;
     IMAGE *Power2;
-
+ IMAGE *ThunderEffet[50];
+ IMAGE *FireEffet[50];
+ IMAGE *WindEffet[50];
+IMAGE *FreezeEffet[2];
 #endif // VERSUS_H_INCLUDED

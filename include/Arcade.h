@@ -16,5 +16,7 @@ void CinematicWin(PLAYERNAME winner,PLAYERNAME looser);
 void CinematicVoice(PLAYERNAME player,PLAYERNAME next, LocationName nextmap);
 
 int CharacterSelect();
+void Savegame ();
+void LoadSavegame ();
 
 #endif // ARCADE_H_INCLUDED

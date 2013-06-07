@@ -358,7 +358,7 @@ int indice_efx=0;
 void GamePlay(int Player1,int Player2,int Map)
 {
     IMAGE *MapLoad,*Loadcombo,*EFX[100],*Versus[7],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[5],*Pause_cadre,*RoundWin,*Final1,*Final2,*FIGHT;
-    int thunder, rainsound,gameplaysound,sarsour,fight,lotfi,button_press=0;
+    int thunder, rainsound,gameplaysound,sarsour,fight,lotfi,button_press=0,japan,egypt;
     char MapDirection[50],direction[50],texttime[10],Round[10],time =60,round =1,i,pause=0,Pause_pos_ind=0;
     int Pause_pos[]= {20,35,50,65,80};
     float  gamestart=1.0;
@@ -368,9 +368,16 @@ void GamePlay(int Player1,int Player2,int Map)
     Combot2=0;
     Location loc;
     int Player1Win=0,player2win=0;
+
+
+    ChargerEffetNaturel(ThunderEffet,"Resources/Images/Thunder/thunder00",50);
+    ChargerEffetNaturel(FireEffet,"Resources/Images/Fireball/Fire00",50);
+    ChargerEffetNaturel(WindEffet,"Resources/Images/Smoke/wind00",50);
+        ChargerEffetNaturel(FreezeEffet,"Resources/Images/Versus/freeze",2);
+
     Final1=load_image("Resources/Images/Versus/player1win.png");
-        Final2=load_image("Resources/Images/Versus/player2win.png");
-FIGHT=load_image("Resources/Images/Versus/fight.png");
+    Final2=load_image("Resources/Images/Versus/player2win.png");
+    FIGHT=load_image("Resources/Images/Versus/fight.png");
     RoundWin=load_image("Resources/Images/Versus/RoundWin.png");
     Power1=load_image("Resources/Images/Versus/Power1.png");
     Power2=load_image("Resources/Images/Versus/Power2.png");
@@ -413,28 +420,37 @@ FIGHT=load_image("Resources/Images/Versus/fight.png");
     switch (Map)
     {
     case 0 :
-    {
+
         loc=TUNISIA;
-        ChargerEffetNaturel(EFX,"Resources/Images/nightFilies/nightFlies00",100);
+        ChargerEffetNaturel(EFX,"Resources/Images/Firework/firework00",100);
         lotfi=AddVoice("Resources/Sounds/Lotfi.wav",0);
         sarsour=AddVoice("Resources/Sounds/Sarsour.wav",1);
         voice_set_playmode(sarsour, PLAYMODE_LOOP);
         voice_set_playmode(lotfi, PLAYMODE_LOOP);
         voice_set_volume(lotfi,80);
-    }
-    break;
+
+        break;
     case 1 :
+        ChargerEffetNaturel(EFX,"Resources/Images/Fog/fog00",100);
         loc=EGYPT;
+        egypt=AddVoice("Resources/Sounds/egypt.wav",0);
+        voice_set_playmode(egypt, PLAYMODE_LOOP);
+        voice_set_volume(egypt,128);
         break;
     case 2 :
-
+        loc=INDIA;
+        ChargerEffetNaturel(EFX,"Resources/Images/nightFilies/nightFlies00",100);
         break;
     case 3 :
         loc=JAPAN;
+        japan=AddVoice("Resources/Sounds/china.wav",0);
+        voice_set_playmode(japan, PLAYMODE_LOOP);
+        voice_set_volume(japan,128);
         ChargerEffetNaturel(EFX,"Resources/Images/Leaf/leaf00",100);
+
         break;
     case 4 :
-    {
+
         loc=MALAYSIA;
         ChargerEffetNaturel(EFX,"Resources/Images/Rain/rain00",100);
         thunder=AddVoice("Resources/Sounds/Thunder.wav",1);
@@ -446,9 +462,8 @@ FIGHT=load_image("Resources/Images/Versus/fight.png");
         voice_set_volume(rainsound,255);
         voice_set_volume(thunder,100);
         voice_set_volume(gameplaysound,128);
-    }
 
-    break;
+        break;
 
     }
     switch (Player1)
@@ -490,52 +505,58 @@ FIGHT=load_image("Resources/Images/Versus/fight.png");
     }
 
     fight=AddVoice("Resources/Sounds/Fight.wav",1);
-    DoEarth(TUNISIA,loc);
+    //  DoEarth(TUNISIA,loc);
     sprintf(texttime,"%d",time);
     voice_start(fight);
-
     while(Player1Win!=2 && player2win !=2 )
     {
         if (pause==0)
         {
-
             switch (Map)
             {
+            case 3 :
+                 voice_start(japan);
+                break;
             case 0 :
-            {
                 voice_start(sarsour);
                 voice_start(lotfi);
-            }
-            break;
+                break;
             case 1 :
-            {
+                voice_start(egypt);
+                break;
 
-            }
-            break;
-            case 2 :
-            {
 
-            }
-            break;
-            case 3 :
-            {
-
-            }
-            break;
             case 4 :
-            {
                 voice_start(gameplaysound);
                 voice_start(thunder);
                 voice_start(rainsound);
-            }
-            break;
+
+                break;
 
             }
 
             draw_image_ex(MapLoad,-1.5,-2,103,104,NONE,100);
-            draw_image_ex(EFX[indice_efx],0,-10,100,100,NONE,100);
+
+          if (Map==0){
+              draw_image_ex(EFX[indice_efx],-40,-30,100,100,NONE,100);
+            draw_image_ex(EFX[indice_efx],50,-30,100,100,NONE,100);
+                        draw_image_ex(EFX[indice_efx],5,-30,100,100,NONE,100);
+
+
             if(FrameCount%3==0)
                 indice_efx=(indice_efx+1)%100;
+                }
+                else if (Map==1)
+                {
+                    draw_image_ex(EFX[indice_efx],0,-15,120,140,NONE,80);
+            if(FrameCount%3==0)
+                indice_efx=(indice_efx+1)%100;
+                }
+                else
+                  {  draw_image_ex(EFX[indice_efx],0,-10,100,100,NONE,100);
+            if(FrameCount%3==0)
+                indice_efx=(indice_efx+1)%100;
+                  }
             draw_image_ex(Score,-2.5+(Player1Health/2.5-40),3.4,40,0,NONE,100);
             draw_image_ex(Score,61.5+((-Player2Health)/2.5+40),4,40,0,VERTICAL,100);
             draw_image_ex(bloodbar,0,0,100,0,NONE,100);
@@ -598,11 +619,11 @@ FIGHT=load_image("Resources/Images/Versus/fight.png");
 
             draw_image_ex(heads[Player1],0,0,100,0,VERTICAL,100);
             draw_image_ex(heads[Player2],0,0,100,0,NONE,100);
- for (i=0;i<Player1Win;i++)
-                        draw_image_ex(RoundWin,27.5+i*3.4,26.9,2,0,NONE,100);
+            for (i=0; i<Player1Win; i++)
+                draw_image_ex(RoundWin,26.9+i*3.4,26.91,2,0,NONE,100);
 
-            for (i=0;i<player2win;i++)
-                        draw_image_ex(RoundWin,71.95-i*3.4,26.9,2,0,NONE,100);
+            for (i=0; i<player2win; i++)
+                draw_image_ex(RoundWin,71.65-i*3.4,26.91,2,0,NONE,100);
             if(FrameCount%60==0)
             {
                 sprintf(texttime,"%d",time);
@@ -612,16 +633,17 @@ FIGHT=load_image("Resources/Images/Versus/fight.png");
 
             if (time<0 || Player1Health<=0 || Player2Health<=0 )
             {
- if (Player1Health<=0)
- player2win++;
+                rest(1500);
+                if (Player1Health<=0)
+                    player2win++;
 
- if (Player2Health<=0)
- Player1Win++;
- if (Player1Health!=0 && Player2Health!=0)
-                round++;
+                if (Player2Health<=0)
+                    Player1Win++;
+                if (Player1Health!=0 && Player2Health!=0)
+                    round++;
                 if (round<=3 && Player1Win!=2 && player2win !=2)
                 {
-                     time=60;
+                    time=60;
                     next_frame();
                     draw_image_ex(MapLoad,-1.5,-2,103,104,NONE,100);
                     sprintf(Round,"Round %d",round);
@@ -707,7 +729,8 @@ FIGHT=load_image("Resources/Images/Versus/fight.png");
                 PrintScreen(0);
             }
         }
-        if (pause==1)
+
+        else
         {
             draw_image_ex(screenimage,0,0 ,100,100,NONE,50);
             for (i=0; i<5; i++)
@@ -729,6 +752,7 @@ FIGHT=load_image("Resources/Images/Versus/fight.png");
             {
 
                 button_press=0;
+
                 switch (Pause_pos_ind)
                 {
                 case 0 :
@@ -745,11 +769,13 @@ FIGHT=load_image("Resources/Images/Versus/fight.png");
                         voice_stop(lotfi);
                         break;
                     case 1 :
+                        voice_stop(egypt);
                         break;
-                    case 2 :
-                        break;
+
                     case 3 :
+                        voice_stop(japan);
                         break;
+
                     case 4 :
                         voice_stop(thunder);
                         voice_stop(rainsound);
@@ -769,10 +795,13 @@ FIGHT=load_image("Resources/Images/Versus/fight.png");
                         voice_stop(lotfi);
                         break;
                     case 1 :
+                        voice_stop(egypt);
+
                         break;
-                    case 2 :
-                        break;
+
                     case 3 :
+                        voice_stop(japan);
+
                         break;
                     case 4 :
                         voice_stop(thunder);
@@ -805,11 +834,11 @@ FIGHT=load_image("Resources/Images/Versus/fight.png");
 
         if (Player1Win==2)
         {
-draw_image_ex(Final1,0,0,100,100,NONE,100);
-}
-         if (player2win==2)
+            draw_image_ex(Final1,0,0,100,100,NONE,100);
+        }
+        if (player2win==2)
         {
-draw_image_ex(Final2,0,0,100,100,NONE,100);
+            draw_image_ex(Final2,0,0,100,100,NONE,100);
         }
         next_frame();
     }
@@ -821,10 +850,12 @@ draw_image_ex(Final2,0,0,100,100,NONE,100);
         voice_stop(lotfi);
         break;
     case 1 :
+        voice_stop(egypt);
         break;
-    case 2 :
-        break;
+
     case 3 :
+        voice_stop(japan);
+
         break;
     case 4 :
         voice_stop(thunder);
@@ -834,6 +865,7 @@ draw_image_ex(Final2,0,0,100,100,NONE,100);
     }
 
 }
+
 
 
 
