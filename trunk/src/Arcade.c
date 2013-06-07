@@ -12,14 +12,21 @@ void Arcade()
     voice_ramp_volume(Dramatic,1000,Music_volume);
     rest(1000);
     selectedplayer=CharacterSelect();
-    if(selectedplayer==-1) return;
-    while((nextplayer=Random(0,4))==selectedplayer);
+    if(selectedplayer==-1)
+    {
+        voice_stop(Dramatic);
+        return;
+
+    }
+        while((nextplayer=Random(0,4))==selectedplayer);
     nextmap=4;//Random(0,4);
     CinematicVoice(selectedplayer,nextplayer,nextmap);
     voice_stop(Dramatic);
     GamePlay(selectedplayer,nextplayer,nextmap);
 
     CinematicWin(selectedplayer,nextplayer);
+        voice_stop(Dramatic);
+
 }
 
 void Savegame ()

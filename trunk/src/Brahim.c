@@ -92,9 +92,11 @@ void LoadBrahim(int player)
 int iB=1;
 int CollisionStatB=0;
 int SuperPowerB=0;
-
+int effB=0;
 void Draw_Brahim()
 {
+
+
     Point ** TAB;
     IMAGE ** Vs;
     int x,y,w,h,IndexVs,xb,VsSuperPower;
@@ -188,6 +190,9 @@ void Draw_Brahim()
     {
 
     case Stable :
+    case Forward :
+    case Backward :
+    case Crouch :
         if(PlayerB==2)
             xB-=wB;
         if (PlayerB==1)
@@ -195,6 +200,7 @@ void Draw_Brahim()
         if(ProcessCollision(BrahimPics,IndexCollissionB,BrahimCollision,xB,yB,wB,hB,
                             Vs,IndexVs,TAB,x,y,w,h) && (etatVS==Punch || etatVS==Kick))
         {
+
             etatB=Hit;
             IndexB=0;
             IndexCollissionB=HitStartB;
@@ -203,6 +209,8 @@ void Draw_Brahim()
                 Player2Health-=2.5;
                 if (VsSuperPower==0 && Combot1<10)
                     Combot1++;
+                if (Player2Health<=0)
+                    etatB=Fall;
 
             }
             if (PlayerB==1)
@@ -210,6 +218,9 @@ void Draw_Brahim()
                 Player1Health-=2.5;
                 if (VsSuperPower==0 && Combot2<10)
                     Combot2++;
+                if (Player1Health<=0)
+                    etatB=Fall;
+
             }
         }
 
@@ -232,6 +243,10 @@ void Draw_Brahim()
     }
     if(etatB!=Kick && etatB!=Punch && etatB!=Fireball && etatB != Freeze && etatB !=Jump  && etatB !=Wind && etatB !=Thunder &&etatB!=Hit&&etatB!=Defence&&etatB!=Up)
     {
+         while (xB>99.0)
+        xB--;
+        while (xB<1.0)
+        xB++;
         if(PlayerB==2)
             xB-=wB;
         if (PlayerB==1)
@@ -239,10 +254,11 @@ void Draw_Brahim()
         while(ProcessCollision(BrahimPics,IndexCollissionB,BrahimCollision,xB,yB,wB,hB,
                                Vs,IndexVs,TAB,x,y,w,h))
         {
-            if (PlayerB==2)
-                xB+=0.1;
-            else
-                xB-=0.1;
+            if (PlayerB==2 )
+                xB+=0.05;
+            if (PlayerB==1 )
+
+                xB-=0.05;
         }
         if(PlayerB==2)
             xB+=wB;
@@ -262,13 +278,13 @@ void Draw_Brahim()
             IndexCollissionB=PunchStartB;
             CollisionStatB=1;
         }
-        else if(IsKeyPressed(PlayerB,RIGHT))
+        else if(IsKeyPressed(PlayerB,RIGHT) && xB<99.0)
         {
             etatB=Forward;
             xB+=0.35;
             IndexCollissionB=WalkStartB;
         }
-        else if (IsKeyPressed(PlayerB,LEFT))
+        else if (IsKeyPressed(PlayerB,LEFT)&& xB>1.0)
         {
             etatB=Backward;
             xB-=0.35;
@@ -301,10 +317,13 @@ void Draw_Brahim()
             IndexB=0;
             IndexCollissionB=FireballStartB;
             SuperPowerB=0;
-            if (PlayerB==1)
+               if (PlayerB==1)
+            {
                 Combot1=0;
-            if (PlayerB==2)
+            }
+            if (PlayerB==2){
                 Combot2=0;
+                }
 
         }
         else if (IsKeyPressed(PlayerB,FREEZE)&& SuperPowerB==1)
@@ -313,21 +332,28 @@ void Draw_Brahim()
             IndexB=0;
             IndexCollissionB=FreezeStartB;
             SuperPowerB=0;
-            if (PlayerB==1)
+              if (PlayerB==1)
+            {
                 Combot1=0;
-            if (PlayerB==2)
+            }
+            if (PlayerB==2){
                 Combot2=0;
+                }
         }
         else if (IsKeyPressed(PlayerB,THUNDER)&& SuperPowerB==1)
         {
+            effB=0;
             etatB=Thunder;
             IndexB=0;
             IndexCollissionB=ThunderStartB;
             SuperPowerB=0;
-            if (PlayerB==1)
+               if (PlayerB==1)
+            {
                 Combot1=0;
-            if (PlayerB==2)
+            }
+            if (PlayerB==2){
                 Combot2=0;
+                }
         }
         else if (IsKeyPressed(PlayerB,WIND)&& SuperPowerB==1)
         {
@@ -335,10 +361,13 @@ void Draw_Brahim()
             IndexB=0;
             IndexCollissionB=WindStartB;
             SuperPowerB=0;
-            if (PlayerB==1)
+              if (PlayerB==1)
+            {
                 Combot1=0;
-            if (PlayerB==2)
+            }
+            if (PlayerB==2){
                 Combot2=0;
+                }
         }
         else if (IsKeyPressed(PlayerB,DEFENCE))
         {
@@ -443,6 +472,11 @@ void Draw_Brahim()
         if(PlayerB==2) xB-=wB;
         draw_image_ex(BrahimPics[IndexB+FireballStartB],xB,yB,wB,hB,vflip,100);
         if(PlayerB==2) xB+=wB;
+        if (effB<50)
+        {
+            draw_image_ex(FireEffet[effB],10+((x-xB)/50)*effB,60,5+effB/5,0,NONE,100);
+            effB++;
+        }
         if(FrameCount%10==0)
         {
             IndexB++;
@@ -451,10 +485,23 @@ void Draw_Brahim()
             if(IndexB==FireballCountB)
             {
                 etatB=Stable;
+                    if (PlayerB==1)
+            {
+                Player2Health-=20;
+            }
+            if (PlayerB==2)
+            {
+                Player1Health-=20;
+
+            }
             }
         }
         break;
     case Thunder:
+    if (effB<50)
+        {
+            draw_image_ex(ThunderEffet[effB],((x-xB)/50)*effB,-2+effB/3,70+effB/4,100,NONE,100);
+  }
         wB=(hB/((float)BrahimPics[IndexB+ThunderStartB]->h/(float)BrahimPics[IndexB+ThunderStartB]->w))/AspectRatio;
         if(PlayerB==2) xB-=wB;
         draw_image_ex(BrahimPics[IndexB+ThunderStartB],xB,yB,wB,hB,vflip,100);
@@ -473,6 +520,15 @@ void Draw_Brahim()
             if(IndexB==ThunderCountB)
             {
                 etatB=Stable;
+                    if (PlayerB==1)
+            {
+                Player2Health-=20;
+            }
+            if (PlayerB==2)
+            {
+                Player1Health-=20;
+
+            }
             }
         }
         break;
@@ -482,6 +538,7 @@ void Draw_Brahim()
         if(PlayerB==2) xB-=wB;
         draw_image_ex(BrahimPics[IndexB+WindStartB],xB,yB,wB,hB,vflip,100);
         if(PlayerB==2) xB+=wB;
+
         if(FrameCount%10==0)
         {
             if(IndexB<WindCountB)
@@ -495,6 +552,15 @@ void Draw_Brahim()
             if(IndexB==WindCountB)
             {
                 etatB=Stable;
+                    if (PlayerB==1)
+            {
+                Player2Health-=20;
+            }
+            if (PlayerB==2)
+            {
+                Player1Health-=20;
+
+            }
             }
         }
 
@@ -514,6 +580,15 @@ void Draw_Brahim()
             if(IndexB==FreezeCountB)
             {
                 etatB=Stable;
+                    if (PlayerB==1)
+            {
+                Player2Health-=20;
+            }
+            if (PlayerB==2)
+            {
+                Player1Health-=20;
+
+            }
             }
         }
 
