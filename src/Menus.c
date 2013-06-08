@@ -139,7 +139,7 @@ void mainmenu(int *choix)
         draw_image_ex(Firstmenu[ind_4],Pos_cadre[3]-scale,35,taille_x,taille_y+10,NONE,100-fade_start);
 
         draw_image_ex(Select,16,32,27,40,NONE,100-fade_start);
-        draw_image_evil(Pers_main[select_pers],60,0,50,0,NONE,100-fade_start-abs(2*scale)); // draw mokhtar
+        draw_image_ex(Pers_main[select_pers],60,0,50,0,NONE,100-fade_start-abs(2*scale)); // draw mokhtar
         next_frame();
         press_buton++;
     }

@@ -301,7 +301,9 @@ void versus (int intro)
                 voice_stop(intro);
                 player1=select1;
                 player2=select2;
+                voice_stop(intro);
                 GamePlay(select1,select2,select_map);
+                voice_start(intro);
                 return;
             }
 
