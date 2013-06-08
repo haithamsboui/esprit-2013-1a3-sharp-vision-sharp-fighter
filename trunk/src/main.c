@@ -24,6 +24,7 @@ int main()
             case 0 :
             voice_stop(intro);
                 Arcade();
+                voice_start(intro);
                 break;
             case 1:
 
