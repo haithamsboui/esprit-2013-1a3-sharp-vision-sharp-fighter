@@ -23,7 +23,6 @@ void Arcade()
     CinematicVoice(selectedplayer,nextplayer,nextmap);
     voice_stop(Dramatic);
     GamePlay(selectedplayer,nextplayer,nextmap);
-
     CinematicWin(selectedplayer,nextplayer);
         voice_stop(Dramatic);
 

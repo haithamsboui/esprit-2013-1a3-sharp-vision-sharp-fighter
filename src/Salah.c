@@ -199,8 +199,7 @@ void Draw_Salah()
                 Player2Health-=2.5;
                 if (VsSuperPower==0 && Combot1<10)
                     Combot1++;
-                if (Player2Health<=0)
-                    etatB=Fall;
+
 
             }
             if (PlayerS==1)
@@ -208,19 +207,11 @@ void Draw_Salah()
                 Player1Health-=2.5;
                 if (VsSuperPower==0 && Combot2<10)
                     Combot2++;
-                if (Player1Health<=0)
-                    etatB=Fall;
+
 
             }
         }
-        if(ProcessCollision(SalahPics,IndexCollissionS,SalahCollision,xS,yS,wS,hS,
-                            Vs,IndexVs,TAB,x,y,w,h)&& (etatVS==Fireball || etatVS==Freeze || etatVS==Thunder || etatVS==Wind))
-        {
-            etatS=Fall;
-            IndexCollissionS=FallStartS;
-            IndexS=0;
 
-        }
 
         if(PlayerS==2)
             xS+=wS;
@@ -237,12 +228,12 @@ void Draw_Salah()
         IndexCollissionS=FallStartS;
     }
 
-    if(etatS!=Kick && etatS!=Punch && etatS!=Fireball && etatS != Freeze && etatS !=Jump  && etatS !=Wind && etatS !=Thunder &&etatS!=Hit&&etatS!=Defence&&etatS!=Up)
+    if(etatS!=Kick && etatS!=Punch && etatS!=Fireball && etatS != Freeze && etatS !=Jump  && etatS !=Wind && etatS !=Thunder &&etatS!=Hit&&etatS!=Defence&&etatS!=Up && etatS!=Crouch)
     {
-         while (xS>99.0)
-        xS--;
+        while (xS>99.0)
+            xS--;
         while (xS<1.0)
-        xS++;
+            xS++;
         if(PlayerS==2)
             xS-=wS;
         if (PlayerS==1)
@@ -305,62 +296,72 @@ void Draw_Salah()
             IndexS=0;
             IndexCollissionS=CrouchStartS;
         }
-        else if (IsKeyPressed(PlayerS,FIREBALL)&& SuperPowerS==1)
+        else if (IsKeyPressed(PlayerS,FIREBALL)&& SuperPowerS==1&& FireS==1)
         {
+            effS=0;
+
             etatS=Fireball;
             IndexS=0;
             IndexCollissionS=FireballStartS;
             SuperPowerS=0;
-              if (PlayerS==1)
+            if (PlayerS==1)
             {
                 Combot1=0;
             }
-            if (PlayerS==2){
+            if (PlayerS==2)
+            {
                 Combot2=0;
-                }
+            }
         }
-        else if (IsKeyPressed(PlayerS,FREEZE)&& SuperPowerS==1)
+        else if (IsKeyPressed(PlayerS,FREEZE)&& SuperPowerS==1 && FreezeS==1)
         {
+            effS=0;
+
             etatS=Freeze;
             IndexS=0;
             IndexCollissionS=FreezeStartS;
             SuperPowerS=0;
-              if (PlayerS==1)
+            if (PlayerS==1)
             {
                 Combot1=0;
             }
-            if (PlayerS==2){
+            if (PlayerS==2)
+            {
                 Combot2=0;
-                }
+            }
         }
-        else if (IsKeyPressed(PlayerS,THUNDER)&& SuperPowerS==1)
+        else if (IsKeyPressed(PlayerS,THUNDER)&& SuperPowerS==1&& ThunderS==1)
         {
             effS=0;
             etatS=Thunder;
             IndexS=0;
             IndexCollissionS=ThunderStartS;
             SuperPowerS=0;
-               if (PlayerS==1)
+            if (PlayerS==1)
             {
                 Combot1=0;
             }
-            if (PlayerS==2){
+            if (PlayerS==2)
+            {
                 Combot2=0;
-                }
+            }
         }
-        else if (IsKeyPressed(PlayerS,WIND)&& SuperPowerS==1)
+        else if (IsKeyPressed(PlayerS,WIND)&& SuperPowerS==1&& WindS==1)
         {
+            effS=0;
+
             etatS=Wind;
             IndexS=0;
             IndexCollissionS=WindStartS;
             SuperPowerS=0;
-             if (PlayerS==1)
+            if (PlayerS==1)
             {
                 Combot1=0;
             }
-            if (PlayerS==2){
+            if (PlayerS==2)
+            {
                 Combot2=0;
-                }
+            }
         }
         else if (IsKeyPressed(PlayerS,DEFENCE))
         {
@@ -464,61 +465,84 @@ void Draw_Salah()
         draw_image_ex(SalahPics[IndexS+FireballStartS],xS,yS,wS,hS,vflip,100);
         if(PlayerS==2) xS+=wS;
 
-       if (effS<50)
+        if (effS<50 && IndexS>=FireballCountS-1)
         {
-            draw_image_ex(FireEffet[effS],10+((x-xS)/50)*effS,60,5+effS/5,0,NONE,100);
-            effS++;
-        }
-         if(FrameCount%10==0)
-        {
-            IndexS++;
-            IndexCollissionS+=IndexS;
-
-            if(IndexS==FireballCountS)
+            if (PlayerS==1)
             {
-                etatS=Stable;
-                    if (PlayerS==1)
-            {
-                Player2Health-=20;
+                draw_image_ex(FireEffet[effS],xS+10+((x-xS-20)/50)*effS,60,5+effS/5,0,NONE,100);
             }
             if (PlayerS==2)
             {
-                Player1Health-=20;
-
+                draw_image_ex(FireEffet[effS],xS-15-((xS-x-12)/50)*effS,60,5+effS/5,0,NONE,100);
             }
+            effS++;
+
+        }
+
+        if(FrameCount%10==0)
+        {
+            if(IndexS<FireballCountS-1)
+            {
+                IndexS++;
+                IndexCollissionS++;
+            }
+            if(IndexS>=FireballCountS-1 && effS>=50)
+            {
+                etatS=Stable;
+                if (PlayerS==1)
+                {
+                    Player2Health-=20;
+                }
+                if (PlayerS==2)
+                {
+                    Player1Health-=20;
+
+                }
             }
         }
         break;
     case Thunder:
-    if (effS<50)
-        {
-            draw_image_ex(ThunderEffet[effS],((x-xS)/50)*effS,-2+effS/3,70+effS/4,100,NONE,100);
-                      effS++;
-        }
+
         wS=(hS/((float)SalahPics[IndexS+ThunderStartS]->h/(float)SalahPics[IndexS+ThunderStartS]->w))/AspectRatio;
         if(PlayerS==2) xS-=wS;
         draw_image_ex(SalahPics[IndexS+ThunderStartS],xS,yS,wS,hS,vflip,100);
         if(PlayerS==2) xS+=wS;
+
+        if (effS<50 &&IndexS>=ThunderCountS-1)
+        {
+            if (PlayerS==1)
+            {
+                draw_image_ex(ThunderEffet[effS],xS-25+((x-xS-20)/50)*effS,-2+effS/3,70+effS/4,100,NONE,100);
+            }
+            if (PlayerS==2)
+            {
+                draw_image_ex(ThunderEffet[effS],xS-30+((x-xS)/50)*effS,-2+effS/3,70+effS/4,100,NONE,100);
+            }
+            effS++;
+
+        }
+
+
         if(FrameCount%10==0)
         {
-            if(IndexS<ThunderCountS)
+            if(IndexS<ThunderCountS-1)
             {
                 IndexS++;
                 IndexCollissionS++;
             }
 
-            if(IndexS==ThunderCountS)
+            if(IndexS==ThunderCountS-1 && effS>=50)
             {
                 etatS=Stable;
-                    if (PlayerS==1)
-            {
-                Player2Health-=20;
-            }
-            if (PlayerS==2)
-            {
-                Player1Health-=20;
+                if (PlayerS==1)
+                {
+                    Player2Health-=20;
+                }
+                if (PlayerS==2)
+                {
+                    Player1Health-=20;
 
-            }
+                }
             }
         }
         break;
@@ -528,55 +552,89 @@ void Draw_Salah()
         if(PlayerS==2) xS-=wS;
         draw_image_ex(SalahPics[IndexS+WindStartS],xS,yS,wS,hS,vflip,100);
         if(PlayerS==2) xS+=wS;
+        if (effS<50 &&IndexS>=WindCountS-1)
+        {
+            if (PlayerS==1)
+            {
+                draw_image_ex(WindEffet[effS],xS+10+((x-xS-20)/50)*effS,50-effS/3,20+effS,30+effS,NONE,100);
+            }
+            if (PlayerS==2)
+            {
+                draw_image_ex(WindEffet[effS],xS-15+((x-xS)/50)*effS,50-effS/3,20+effS,30+effS,NONE,100);
+            }
+
+            effS++;
+
+        }
+
+
         if(FrameCount%10==0)
         {
-            if(IndexS<WindCountS)
+            if(IndexS<WindCountS-1)
             {
                 IndexS++;
                 IndexCollissionS++;
             }
 
-            if(IndexS==WindCountS)
+            if(IndexS>=WindCountS-1 && effS>=50)
             {
                 etatS=Stable;
-                IndexCollissionS=StableStartS;
-                    if (PlayerS==1)
-            {
-                Player2Health-=20;
-            }
-            if (PlayerS==2)
-            {
-                Player1Health-=20;
+                if (PlayerS==1)
+                {
+                    Player2Health-=20;
+                }
+                if (PlayerS==2)
+                {
+                    Player1Health-=20;
 
-            }
+                }
             }
         }
-
         break;
     case Freeze:
         wS=(hS/((float)SalahPics[IndexS+FreezeStartS]->h/(float)SalahPics[IndexS+FreezeStartS]->w))/AspectRatio;
         if(PlayerS==2) xS-=wS;
         draw_image_ex(SalahPics[IndexS+FreezeStartS],xS,yS,wS,hS,vflip,100);
         if(PlayerS==2) xS+=wS;
-        if(FrameCount%10==0)
+        if ( IndexS>=FreezeCountS-1)
         {
-            IndexS++;
-            IndexCollissionS+=IndexS;
+            if (PlayerS==1)
+            {
+                draw_image_ex(FreezeEffet[1],x-15,35,20,0,NONE,100);
 
-            if(IndexS==FreezeCountS)
-            {
-                etatS=Stable;
-                    if (PlayerS==1)
-            {
-                Player2Health-=20;
+                if (FrameCount%5)
+                    draw_image_ex(FreezeEffet[0],x-15,35,20,0,NONE,100);
             }
             if (PlayerS==2)
             {
-                Player1Health-=20;
+                draw_image_ex(FreezeEffet[1],x-5,35,20,0,NONE,100);
 
-            }
+                if (FrameCount%5)
+                    draw_image_ex(FreezeEffet[0],x-5,35,20,0,NONE,100);
             }
         }
+        if(FrameCount%10==0)
+        {
+            if(IndexS<FreezeCountS-1)
+            {
+                IndexS++;
+                IndexCollissionS++;
+            }
+            if(IndexS>=FreezeCountS-1 && FrameCount%120==0)
+            {
+                etatS=Stable;
+                if (PlayerS==1)
+                {
+                    Player2Health-=20;
+                }
+                if (PlayerS==2)
+                {
+                    Player1Health-=20;
+
+                }
+            }
+        }
+
 
         break;
 
