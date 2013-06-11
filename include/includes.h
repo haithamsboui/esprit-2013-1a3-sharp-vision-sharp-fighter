@@ -32,6 +32,7 @@
 #include "Brahim.h"
 #include "Mokhtar.h"
 #include "Wassim.h"
+#include "CPU.h"
 #include "Collision.h"
 
 #include "Arcade.h"

@@ -50,10 +50,6 @@ int directionS;
 int PlayerS=0;
 EtatPlayer etatS;
 int IndexS;
-int FireS;
-int ThunderS;
-int WindS;
-int FreezeS;
 
 void LoadSalah(int player)
 {
@@ -70,9 +66,9 @@ void LoadSalah(int player)
     PlayerS=player;
     etatS=Stable;
     IndexS=0;
-    yS=55;
-    wS=10;
-    hS=40;
+    yS=45;
+    wS=20;
+    hS=50;
     switch(player)
     {
     case 1:
@@ -276,13 +272,13 @@ if (OnAttack==1)
         else if(IsKeyPressed(PlayerS,RIGHT) && xS<99.0)
         {
             etatS=Forward;
-            xS+=0.35;
+            xS+=0.50;
             IndexCollissionS=WalkStartS;
         }
         else if (IsKeyPressed(PlayerS,LEFT) && xS>1.0)
         {
             etatS=Backward;
-            xS-=0.35;
+            xS-=0.50;
             IndexCollissionS=WalkStartS;
         }
         else if (IsKeyPressed(PlayerS,UP))
@@ -434,7 +430,7 @@ if (OnAttack==1)
         if(PlayerS==2) xS-=wS;
         draw_image_ex(SalahPics[IndexS+KickStartS],xS,yS,wS,hS,vflip,100);
         if(PlayerS==2) xS+=wS;
-        if(FrameCount%10==0)
+        if(FrameCount%9==0)
         {
             IndexS++;
             IndexCollissionS+=IndexS;
@@ -452,7 +448,7 @@ if (OnAttack==1)
         if(PlayerS==2) xS-=wS;
         draw_image_ex(SalahPics[IndexS+PunchStartS],xS,yS,wS,hS,vflip,100);
         if(PlayerS==2) xS+=wS;
-        if(FrameCount%10==0)
+        if(FrameCount%8==0)
         {
             IndexS++;
             IndexCollissionS+=IndexS;

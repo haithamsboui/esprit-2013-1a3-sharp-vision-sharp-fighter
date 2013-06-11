@@ -50,10 +50,6 @@ int directionB;
 int PlayerB=0;
 EtatPlayer etatB;
 int IndexB;
-int FireB;
-int ThunderB;
-int WindB;
-int FreezeB;
 
 void LoadBrahim(int player)
 {
@@ -70,9 +66,9 @@ void LoadBrahim(int player)
     PlayerB=player;
     etatB=Stable;
     IndexB=0;
-    yB=55;
-    wB=10;
-    hB=40;
+    yB=45;
+    wB=20;
+    hB=50;
 
 
     switch(player)
@@ -274,13 +270,13 @@ void Draw_Brahim()
         else if(IsKeyPressed(PlayerB,RIGHT) && xB<99.0)
         {
             etatB=Forward;
-            xB+=0.35;
+            xB+=0.50;
             IndexCollissionB=WalkStartB;
         }
         else if (IsKeyPressed(PlayerB,LEFT)&& xB>1.0)
         {
             etatB=Backward;
-            xB-=0.35;
+            xB-=0.50;
             IndexCollissionB=WalkStartB;
         }
         else if (IsKeyPressed(PlayerB,UP))
@@ -434,7 +430,7 @@ void Draw_Brahim()
         if(PlayerB==2) xB-=wB;
         draw_image_ex(BrahimPics[IndexB+KickStartB],xB,yB,wB,hB,vflip,100);
         if(PlayerB==2) xB+=wB;
-        if(FrameCount%10==0)
+        if(FrameCount%7==0)
         {
             IndexB++;
             IndexCollissionB+=IndexB;

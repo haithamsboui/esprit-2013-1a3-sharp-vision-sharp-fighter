@@ -371,7 +371,6 @@ void GamePlay(int Player1,int Player2,int Map)
     Location loc;
     int Player1Win=0,player2win=0;
     int OnAttack=0;
-
     ChargerEffetNaturel(ThunderEffet,"Resources/Images/Thunder/thunder00",50);
     ChargerEffetNaturel(FireEffet,"Resources/Images/Fireball/Fire00",50);
     ChargerEffetNaturel(WindEffet,"Resources/Images/Smoke/wind00",50);

@@ -50,10 +50,6 @@ int directionM;
 int PlayerM=0;
 EtatPlayer etatM;
 int IndexM;
-int FireM;
-int ThunderM;
-int WindM;
-int FreezeM;
 
 void LoadMokhtar(int player)
 {
@@ -70,9 +66,9 @@ void LoadMokhtar(int player)
     PlayerM=player;
     etatM=Stable;
     IndexM=0;
-    yM=55;
-    wM=10;
-    hM=40;
+    yM=45;
+    wM=20;
+    hM=50;
 
 
     switch(player)
@@ -273,7 +269,7 @@ if (OnAttack==1)
         {
 
             etatM=Forward;
-            xM+=0.35;
+            xM+=0.50;
             IndexCollissionM=WalkStartM;
         }
         else if (IsKeyPressed(PlayerM,LEFT) && xM> 1.0 )
@@ -281,7 +277,7 @@ if (OnAttack==1)
 
 
             etatM=Backward;
-            xM-=0.35;
+            xM-=0.50;
             IndexCollissionM=WalkStartM;
 
 
@@ -436,7 +432,7 @@ switch(etatM)
         if(PlayerM==2) xM-=wM;
         draw_image_ex(MokhtarPics[IndexM+KickStartM],xM,yM,wM,hM,vflip,100);
         if(PlayerM==2) xM+=wM;
-        if(FrameCount%10==0)
+        if(FrameCount%5==0)
         {
             IndexM++;
             IndexCollissionM+=IndexM;
@@ -454,7 +450,7 @@ switch(etatM)
         if(PlayerM==2) xM-=wM;
         draw_image_ex(MokhtarPics[IndexM+PunchStartM],xM,yM,wM,hM,vflip,100);
         if(PlayerM==2) xM+=wM;
-        if(FrameCount%10==0)
+        if(FrameCount%9==0)
         {
             IndexM++;
             IndexCollissionM+=IndexM;

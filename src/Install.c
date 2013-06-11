@@ -113,6 +113,7 @@ int change_resolution(int fullscreen, int ResIndex)
     set_config_int("graphics","depth",depth);
     set_config_int("graphics","ResolutionIndex",ResIndex);
     flush_config_file();
+    LoadSavegame();
     return 0;
 }
 

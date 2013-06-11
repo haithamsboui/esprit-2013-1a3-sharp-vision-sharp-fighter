@@ -12,8 +12,6 @@ int main()
 
     intro=AddVoice("Resources/Sounds/intro.wav",0);
     intromenu(intro);
-
-
     while (!close_button_pressed)
     {
         mainmenu(&choix);
@@ -27,7 +25,6 @@ int main()
                 voice_start(intro);
                 break;
             case 1:
-
                 versus(intro);
                 break;
 
