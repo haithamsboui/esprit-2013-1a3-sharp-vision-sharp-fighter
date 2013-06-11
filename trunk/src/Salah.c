@@ -199,7 +199,8 @@ void Draw_Salah()
                 Player2Health-=2.5;
                 if (VsSuperPower==0 && Combot1<10)
                     Combot1++;
-
+if (Player2Health<5)
+                    etatS=Fall;
 
             }
             if (PlayerS==1)
@@ -207,7 +208,8 @@ void Draw_Salah()
                 Player1Health-=2.5;
                 if (VsSuperPower==0 && Combot2<10)
                     Combot2++;
-
+if (Player1Health<5)
+                    etatS=Fall;
 
             }
         }
@@ -227,8 +229,12 @@ void Draw_Salah()
         etatS=Up;
         IndexCollissionS=FallStartS;
     }
-
-    if(etatS!=Kick && etatS!=Punch && etatS!=Fireball && etatS != Freeze && etatS !=Jump  && etatS !=Wind && etatS !=Thunder &&etatS!=Hit&&etatS!=Defence&&etatS!=Up && etatS!=Crouch)
+if (OnAttack==1)
+    {
+        etatS=Fall;
+        OnAttack=0;
+    }
+    if(etatS!=Kick && etatS!=Punch && etatS!=Fireball && etatS != Freeze && etatS !=Jump  && etatS !=Wind && etatS !=Thunder &&etatS!=Hit&&etatS!=Defence&&etatS!=Up && etatS!=Crouch && etatS!=Fall)
     {
         while (xS>99.0)
             xS--;
@@ -283,11 +289,9 @@ void Draw_Salah()
         {
             IndexS=0;
             iS=1;
-            if (etatS==Stable)
-            {
                 etatS=Jump;
                 IndexCollissionS=JumpStartS;
-            }
+
 
         }
         else if (IsKeyPressed(PlayerS,DOWN))
@@ -487,7 +491,8 @@ void Draw_Salah()
                 IndexCollissionS++;
             }
             if(IndexS>=FireballCountS-1 && effS>=50)
-            {
+            {                OnAttack=1;
+
                 etatS=Stable;
                 if (PlayerS==1)
                 {
@@ -532,7 +537,8 @@ void Draw_Salah()
             }
 
             if(IndexS==ThunderCountS-1 && effS>=50)
-            {
+            {                OnAttack=1;
+
                 etatS=Stable;
                 if (PlayerS==1)
                 {
@@ -577,7 +583,8 @@ void Draw_Salah()
             }
 
             if(IndexS>=WindCountS-1 && effS>=50)
-            {
+            {                OnAttack=1;
+
                 etatS=Stable;
                 if (PlayerS==1)
                 {
@@ -621,7 +628,8 @@ void Draw_Salah()
                 IndexCollissionS++;
             }
             if(IndexS>=FreezeCountS-1 && FrameCount%120==0)
-            {
+            {                OnAttack=1;
+
                 etatS=Stable;
                 if (PlayerS==1)
                 {
@@ -660,7 +668,7 @@ void Draw_Salah()
         if(PlayerS==2) xS-=wS;
         draw_image_ex(SalahPics[IndexS+UpStartS],xS,yS,wS,hS,vflip,100);
         if(PlayerS==2) xS+=wS;
-        if(FrameCount%10==0)
+        if(FrameCount%15==0)
         {
             IndexS++;
             IndexCollissionS+=IndexS;
@@ -694,14 +702,22 @@ void Draw_Salah()
         if(PlayerS==2) xS-=wS;
         draw_image_ex(SalahPics[IndexS+FallStartS],xS,yS,wS,hS,vflip,100);
         if(PlayerS==2) xS+=wS;
-        if(FrameCount%10==0)
+        if(FrameCount%20==0)
         {
             IndexS++;
             IndexCollissionS+=IndexS;
 
-            if(IndexS==FallCountS)
+           if (IndexS>=FallCountS)
             {
-                etatS=Stable;
+
+                if (PlayerS==1 && Player1Health<5)
+                    Player1Health=0;
+                if (PlayerS==2 && Player2Health<5)
+                    Player2Health=0;
+                if (PlayerS==1 && Player1Health>5)
+                    etatS=Up;
+                if (PlayerS==2 && Player2Health>5)
+                    etatS=Up;
             }
         }
         break;

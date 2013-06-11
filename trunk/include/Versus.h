@@ -16,4 +16,5 @@ int Combot2;
  IMAGE *FireEffet[50];
  IMAGE *WindEffet[50];
 IMAGE *FreezeEffet[2];
+int OnAttack;
 #endif // VERSUS_H_INCLUDED

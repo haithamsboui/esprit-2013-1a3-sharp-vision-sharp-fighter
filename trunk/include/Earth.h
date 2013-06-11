@@ -24,7 +24,7 @@ IMAGE *world,*stars;
 typedef enum {LINEAR,INTERPOLATED} TravelMode;
 
 //Travels from a country to another.
-void DoEarth(Location start, Location end);
+void DoEarth(Location start, Location End);
 //Advances the position of the traveling.
 //this function is called from DoEarth
 Location Travel(Location start,Location end,float percentage,TravelMode t);

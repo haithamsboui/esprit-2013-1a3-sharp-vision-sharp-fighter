@@ -9,9 +9,9 @@ void versus (int intro)
     int selectedPers[5]= {1,0,0,0,1},brahim_turn=0,haitham_turn=0,salah_turn=0,mokhtar_turn=0,wassim_turn=0,select_map=0;
     float distance_change1=0,distance_change2=0,fade=1,fade_start=100;
     char direction[100];
-    int choix1=0,choix2=0,/*map_pos[]= {6,24,42,60,78}*/distance_change_map=20;
+    int choix1=0,choix2=0,distance_change_map=20;
     float w;
-    char *maps_names[]= {"Tunisia,Tunis","Egypt,Giza","India,Taj Mahal","Japan,Kyoto","Malaysia,Kuala Lampur"};
+    char *maps_names[]= {"Tunisia,Monastir","Egypt,Giza","India,Taj Mahal","Japan,Kyoto","Malaysia,Kuala Lampur"};
 
 
     // Loading caracteres
@@ -360,8 +360,8 @@ int indice_efx=0;
 void GamePlay(int Player1,int Player2,int Map)
 {
     IMAGE *MapLoad,*Loadcombo,*EFX[100],*Versus[7],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[5],*Pause_cadre,*RoundWin,*Final1,*Final2,*FIGHT;
-    int thunder, rainsound,gameplaysound,sarsour,fight,lotfi,button_press=0,japan,egypt;
-    char MapDirection[50],direction[50],texttime[10],Round[10],time =60,round =1,i,pause=0,Pause_pos_ind=0;
+    int thunder, rainsound,gameplaysound,sarsour,fight,lotfi,button_press=0,japan,egypt,india;
+    char MapDirection[50],direction[50],texttime[10],Round[10],time =90,round =1,i,pause=0,Pause_pos_ind=0;
     int Pause_pos[]= {20,35,50,65,80};
     float  gamestart=1.0;
     Player1Health=100;
@@ -370,12 +370,12 @@ void GamePlay(int Player1,int Player2,int Map)
     Combot2=0;
     Location loc;
     int Player1Win=0,player2win=0;
-
+    int OnAttack=0;
 
     ChargerEffetNaturel(ThunderEffet,"Resources/Images/Thunder/thunder00",50);
     ChargerEffetNaturel(FireEffet,"Resources/Images/Fireball/Fire00",50);
     ChargerEffetNaturel(WindEffet,"Resources/Images/Smoke/wind00",50);
-        ChargerEffetNaturel(FreezeEffet,"Resources/Images/Versus/freeze",2);
+    ChargerEffetNaturel(FreezeEffet,"Resources/Images/Versus/freeze",2);
 
     Final1=load_image("Resources/Images/Versus/player1win.png");
     Final2=load_image("Resources/Images/Versus/player2win.png");
@@ -426,8 +426,7 @@ void GamePlay(int Player1,int Player2,int Map)
         loc=TUNISIA;
         ChargerEffetNaturel(EFX,"Resources/Images/Firework/firework00",100);
         lotfi=AddVoice("Resources/Sounds/Lotfi.wav",0);
-        sarsour=AddVoice("Resources/Sounds/Sarsour.wav",1);
-        voice_set_playmode(sarsour, PLAYMODE_LOOP);
+
         voice_set_playmode(lotfi, PLAYMODE_LOOP);
         voice_set_volume(lotfi,80);
 
@@ -442,6 +441,11 @@ void GamePlay(int Player1,int Player2,int Map)
     case 2 :
         loc=INDIA;
         ChargerEffetNaturel(EFX,"Resources/Images/nightFilies/nightFlies00",100);
+        india=AddVoice("Resources/Sounds/india.wav",0);
+        sarsour=AddVoice("Resources/Sounds/Sarsour.wav",1);
+        voice_set_playmode(sarsour, PLAYMODE_LOOP);
+        voice_set_playmode(india, PLAYMODE_LOOP);
+        voice_set_volume(india,128);
         break;
     case 3 :
         loc=JAPAN;
@@ -507,7 +511,7 @@ void GamePlay(int Player1,int Player2,int Map)
     }
 
     fight=AddVoice("Resources/Sounds/Fight.wav",1);
-    //  DoEarth(TUNISIA,loc);
+    DoEarth(TUNISIA,loc);
     sprintf(texttime,"%d",time);
     voice_start(fight);
     while(Player1Win!=2 && player2win !=2 )
@@ -517,16 +521,18 @@ void GamePlay(int Player1,int Player2,int Map)
             switch (Map)
             {
             case 3 :
-                 voice_start(japan);
+                voice_start(japan);
                 break;
             case 0 :
-                voice_start(sarsour);
                 voice_start(lotfi);
                 break;
             case 1 :
                 voice_start(egypt);
                 break;
-
+            case 2 :
+                voice_start(sarsour);
+                voice_start(india);
+                break;
 
             case 4 :
                 voice_start(gameplaysound);
@@ -539,26 +545,29 @@ void GamePlay(int Player1,int Player2,int Map)
 
             draw_image_ex(MapLoad,-1.5,-2,103,104,NONE,100);
 
-          if (Map==0){
-              draw_image_ex(EFX[indice_efx],-40,-30,100,100,NONE,100);
-            draw_image_ex(EFX[indice_efx],50,-30,100,100,NONE,100);
-                        draw_image_ex(EFX[indice_efx],5,-30,100,100,NONE,100);
+            if (Map==0)
+            {
+                draw_image_ex(EFX[indice_efx],-40,-30,100,100,NONE,100);
+                draw_image_ex(EFX[indice_efx],50,-30,100,100,NONE,100);
+                draw_image_ex(EFX[indice_efx],5,-30,100,100,NONE,100);
 
 
-            if(FrameCount%3==0)
-                indice_efx=(indice_efx+1)%100;
-                }
-                else if (Map==1)
-                {
-                    draw_image_ex(EFX[indice_efx],0,-15,120,140,NONE,80);
-            if(FrameCount%3==0)
-                indice_efx=(indice_efx+1)%100;
-                }
-                else
-                  {  draw_image_ex(EFX[indice_efx],0,-10,100,100,NONE,100);
-            if(FrameCount%3==0)
-                indice_efx=(indice_efx+1)%100;
-                  }
+                if(FrameCount%3==0)
+                    indice_efx=(indice_efx+1)%100;
+            }
+            else if (Map==1)
+            {
+                draw_image_ex(EFX[indice_efx],0,-15,120,140,NONE,80);
+                if(FrameCount%3==0)
+                    indice_efx=(indice_efx+1)%100;
+            }
+
+            else
+            {
+                draw_image_ex(EFX[indice_efx],0,-10,100,100,NONE,100);
+                if(FrameCount%3==0)
+                    indice_efx=(indice_efx+1)%100;
+            }
             draw_image_ex(Score,-2.5+(Player1Health/2.5-40),3.4,40,0,NONE,100);
             draw_image_ex(Score,61.5+((-Player2Health)/2.5+40),4,40,0,VERTICAL,100);
             draw_image_ex(bloodbar,0,0,100,0,NONE,100);
@@ -626,26 +635,32 @@ void GamePlay(int Player1,int Player2,int Map)
 
             for (i=0; i<player2win; i++)
                 draw_image_ex(RoundWin,71.65-i*3.4,26.91,2,0,NONE,100);
-            if(FrameCount%60==0)
+            if(FrameCount%90==0)
             {
                 sprintf(texttime,"%d",time);
                 time--;
             }
 
 
-            if (time<0 || Player1Health<=0 || Player2Health<=0 )
+            if (time<-1 || Player1Health<=0 || Player2Health<=0 )
             {
                 rest(1500);
                 if (Player1Health<=0)
                     player2win++;
-
                 if (Player2Health<=0)
                     Player1Win++;
-                if (Player1Health!=0 && Player2Health!=0)
-                    round++;
-                if (round<=3 && Player1Win!=2 && player2win !=2)
+
+                if (Player1Health!=100 && Player2Health!=100 )
                 {
-                    time=60;
+                    round++;
+                    if (Player1Health>Player2Health)
+                        Player1Win++;
+                    if (Player1Health<Player2Health)
+                        player2win++;
+                }
+                if (round<4 && Player1Win!=2 && player2win !=2)
+                {
+                    time=90;
                     next_frame();
                     draw_image_ex(MapLoad,-1.5,-2,103,104,NONE,100);
                     sprintf(Round,"Round %d",round);
@@ -767,13 +782,15 @@ void GamePlay(int Player1,int Player2,int Map)
                     switch (Map)
                     {
                     case 0 :
-                        voice_stop(sarsour);
                         voice_stop(lotfi);
                         break;
                     case 1 :
                         voice_stop(egypt);
                         break;
-
+                    case 2 :
+                        voice_stop(sarsour);
+                        voice_stop(india);
+                        break;
                     case 3 :
                         voice_stop(japan);
                         break;
@@ -793,14 +810,16 @@ void GamePlay(int Player1,int Player2,int Map)
                     switch (Map)
                     {
                     case 0 :
-                        voice_stop(sarsour);
                         voice_stop(lotfi);
                         break;
                     case 1 :
                         voice_stop(egypt);
 
                         break;
-
+                    case 2 :
+                        voice_stop(sarsour);
+                        voice_stop(india);
+                        break;
                     case 3 :
                         voice_stop(japan);
 
@@ -848,13 +867,15 @@ void GamePlay(int Player1,int Player2,int Map)
     switch (Map)
     {
     case 0 :
-        voice_stop(sarsour);
         voice_stop(lotfi);
         break;
     case 1 :
         voice_stop(egypt);
         break;
-
+    case 2 :
+        voice_stop(sarsour);
+        voice_stop(india);
+        break;
     case 3 :
         voice_stop(japan);
 
