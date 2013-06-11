@@ -50,10 +50,7 @@ int directionH;
 int PlayerH=0;
 EtatPlayer etatH;
 int IndexH;
-int FireH;
-int ThunderH;
-int WindH;
-int FreezeH;
+
 
 void LoadHaitham(int player)
 {
@@ -69,9 +66,9 @@ void LoadHaitham(int player)
     PlayerH=player;
     etatH=Stable;
     IndexH=0;
-    yH=55;
-    wH=10;
-    hH=40;
+    yH=45;
+    wH=20;
+    hH=50;
 
 
     switch(player)
@@ -283,14 +280,14 @@ void Draw_Haitham()
         else if(IsKeyPressed(PlayerH,RIGHT) &&xH<99.0)
         {
             etatH=Forward;
-            xH+=0.35;
+            xH+=0.50;
             IndexCollissionH=WalkStartH;
 
         }
         else if (IsKeyPressed(PlayerH,LEFT) && xH>1.0)
         {
             etatH=Backward;
-            xH-=0.35;
+            xH-=0.50;
             IndexCollissionH=WalkStartH;
         }
         else if (IsKeyPressed(PlayerH,UP))
@@ -460,7 +457,7 @@ void Draw_Haitham()
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+PunchStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
-        if(FrameCount%10==0)
+        if(FrameCount%8==0)
         {
             IndexH++;
             IndexCollissionH+=IndexH;

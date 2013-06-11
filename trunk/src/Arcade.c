@@ -1,6 +1,26 @@
 #include "includes.h"
 
 int Dramatic;
+  int FireH;
+int ThunderH;
+int WindH;
+int FreezeH;
+int FireB;
+int ThunderB;
+int WindB;
+int FreezeB;
+int FireW;
+int ThunderW;
+int WindW;
+int FreezeW;
+int FireM;
+int ThunderM;
+int WindM;
+int FreezeM;
+int FireS;
+int ThunderS;
+int WindS;
+int FreezeS;
 
 void Arcade()
 {
@@ -25,12 +45,13 @@ void Arcade()
     GamePlay(selectedplayer,nextplayer,nextmap);
     CinematicWin(selectedplayer,nextplayer);
         voice_stop(Dramatic);
+        Savegame();
 
 }
 
 void Savegame ()
 {
-    set_config_file("Resources/Setting.cfg");
+    set_config_file("Resources/Save.cfg");
     set_config_int("Savegame","FireH",FireH);
     set_config_int("Savegame","ThunderH",ThunderH);
     set_config_int("Savegame","WindH",WindH);
@@ -56,7 +77,10 @@ void Savegame ()
 
 void LoadSavegame()
 {
-    set_config_file("Resources/Setting.cfg");
+
+
+    set_config_file("Resources/Save.cfg");
+
     get_config_int("Savegame","FireH",FireH);
     get_config_int("Savegame","ThunderH",ThunderH);
     get_config_int("Savegame","WindH",WindH);

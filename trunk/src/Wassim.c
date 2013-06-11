@@ -50,10 +50,7 @@ int directionW;
 int PlayerW=0;
 EtatPlayer etatW;
 int IndexW;
-int FireW;
-int ThunderW;
-int WindW;
-int FreezeW;
+
 
 void LoadWassim(int player)
 {
@@ -68,9 +65,9 @@ void LoadWassim(int player)
     PlayerW=player;
     etatW=Stable;
     IndexW=0;
-    yW=55;
-    wW=10;
-    hW=40;
+    yW=45;
+    wW=20;
+    hW=50;
 
     switch(player)
     {
@@ -274,14 +271,14 @@ void Draw_Wassim()
         else if(IsKeyPressed(PlayerW,RIGHT) && xW<99.0)
         {
             etatW=Forward;
-            xW+=0.35;
+            xW+=0.50;
             IndexCollissionW=WalkStartW;
 
         }
         else if (IsKeyPressed(PlayerW,LEFT)&& xW>1.0)
         {
             etatW=Backward;
-            xW-=0.35;
+            xW-=0.50;
             IndexCollissionW=WalkStartW;
         }
         else if (IsKeyPressed(PlayerW,UP))
@@ -430,7 +427,7 @@ void Draw_Wassim()
         if(PlayerW==2) xW-=wW;
         draw_image_ex(WassimPics[IndexW+KickStartW],xW,yW,wW,hW,vflip,100);
         if(PlayerW==2) xW+=wW;
-        if(FrameCount%10==0)
+        if(FrameCount%9==0)
         {
             IndexW++;
             IndexCollissionW+=IndexW;
@@ -447,7 +444,7 @@ void Draw_Wassim()
         if(PlayerW==2) xW-=wW;
         draw_image_ex(WassimPics[IndexW+PunchStartW],xW,yW,wW,hW,vflip,100);
         if(PlayerW==2) xW+=wW;
-        if(FrameCount%10==0)
+        if(FrameCount%8==0)
         {
             IndexW++;
             IndexCollissionW+=IndexW;
