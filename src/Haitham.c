@@ -209,13 +209,19 @@ void Draw_Haitham()
                 Player2Health-=2.5;
                 if (VsSuperPower==0 && Combot1<10)
                     Combot1++;
+                if (Player2Health<5)
+                    etatH=Fall;
             }
             if (PlayerH==1 )
             {
                 Player1Health-=2.5;
                 if (VsSuperPower==0 && Combot2<10)
                     Combot2++;
+                if (Player1Health<5)
+                    etatH=Fall;
             }
+
+
         }
 
 
@@ -227,7 +233,11 @@ void Draw_Haitham()
         break;
     }
 
-
+    if (OnAttack==1)
+    {
+        etatH=Fall;
+        OnAttack=0;
+    }
     if(etatH!=Kick && etatH!=Punch && etatH!=Fireball && etatH != Freeze && etatH !=Jump  && etatH !=Wind && etatH !=Thunder &&etatH!=Fall&&etatH!=Hit&&etatH!=Defence&&etatH!=Up &&etatH!=Crouch)
     {
         while (xH>99.0)
@@ -287,17 +297,8 @@ void Draw_Haitham()
         {
             IndexH=0;
             iH=1;
-            if (etatH==Stable)
-            {
-                etatH=Jump;
-                IndexCollissionH=JumpStartH;
-            }
-            if (etatH==Fall)
-            {
-
-                etatH=Up;
-                IndexCollissionM=FallStartH;
-            }
+            etatH=Jump;
+            IndexCollissionH=JumpStartH;
         }
         else if (IsKeyPressed(PlayerH,DOWN))
         {
@@ -479,19 +480,19 @@ void Draw_Haitham()
         draw_image_ex(HaithamPics[IndexH+FireballStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
 
-            if (effH<50 && IndexH>=FireballCountH-1)
+        if (effH<50 && IndexH>=FireballCountH-1)
+        {
+            if (PlayerH==1)
             {
-                if (PlayerH==1)
-                {
-                    draw_image_ex(FireEffet[effH],xH+10+((x-xH-20)/50)*effH,60,5+effH/5,0,NONE,100);
-                }
-                if (PlayerH==2)
-                {
-                    draw_image_ex(FireEffet[effH],xH-15-((xH-x-12)/50)*effH,60,5+effH/5,0,NONE,100);
-                }
-                effH++;
-
+                draw_image_ex(FireEffet[effH],xH+10+((x-xH-20)/50)*effH,60,5+effH/5,0,NONE,100);
             }
+            if (PlayerH==2)
+            {
+                draw_image_ex(FireEffet[effH],xH-15-((xH-x-12)/50)*effH,60,5+effH/5,0,NONE,100);
+            }
+            effH++;
+
+        }
 
         if(FrameCount%10==0)
         {
@@ -501,7 +502,8 @@ void Draw_Haitham()
                 IndexCollissionH++;
             }
             if(IndexH>=FireballCountH-1 && effH>=50)
-            {
+            {                OnAttack=1;
+
                 etatH=Stable;
                 if (PlayerH==1)
                 {
@@ -539,30 +541,31 @@ void Draw_Haitham()
         }
 
 
-    if(FrameCount%10==0)
-    {
-        if(IndexH<ThunderCountH-1)
+        if(FrameCount%10==0)
         {
-            IndexH++;
-            IndexCollissionH++;
+            if(IndexH<ThunderCountH-1)
+            {
+                IndexH++;
+                IndexCollissionH++;
+            }
+
+            if(IndexH==ThunderCountH-1 && effH>=50)
+            {                OnAttack=1;
+
+                etatH=Stable;
+                if (PlayerH==1)
+                {
+                    Player2Health-=20;
+                }
+                if (PlayerH==2)
+                {
+                    Player1Health-=20;
+
+                }
+            }
         }
 
-        if(IndexH==ThunderCountH-1 && effH>=50)
-        {
-            etatH=Stable;
-            if (PlayerH==1)
-            {
-                Player2Health-=20;
-            }
-            if (PlayerH==2)
-            {
-                Player1Health-=20;
-
-            }
-        }
-    }
-
-    break;
+        break;
 
     case Wind:
     {
@@ -596,7 +599,8 @@ void Draw_Haitham()
             }
 
             if(IndexH>=WindCountH-1 && effH>=50)
-            {
+            {                OnAttack=1;
+
                 etatH=Stable;
                 if (PlayerH==1)
                 {
@@ -617,32 +621,33 @@ void Draw_Haitham()
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+FreezeStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
-         if ( IndexH>=FreezeCountH-1)
+        if ( IndexH>=FreezeCountH-1)
         {
-        if (PlayerH==1)
-        {
-                        draw_image_ex(FreezeEffet[1],x-15,35,20,0,NONE,100);
+            if (PlayerH==1)
+            {
+                draw_image_ex(FreezeEffet[1],x-15,35,20,0,NONE,100);
 
-            if (FrameCount%5)
-                draw_image_ex(FreezeEffet[0],x-15,35,20,0,NONE,100);
-        }
-        if (PlayerH==2)
-        {
-                        draw_image_ex(FreezeEffet[1],x-5,35,20,0,NONE,100);
+                if (FrameCount%5)
+                    draw_image_ex(FreezeEffet[0],x-15,35,20,0,NONE,100);
+            }
+            if (PlayerH==2)
+            {
+                draw_image_ex(FreezeEffet[1],x-5,35,20,0,NONE,100);
 
-            if (FrameCount%5)
-                draw_image_ex(FreezeEffet[0],x-5,35,20,0,NONE,100);
-        }
+                if (FrameCount%5)
+                    draw_image_ex(FreezeEffet[0],x-5,35,20,0,NONE,100);
+            }
         }
         if(FrameCount%10==0)
         {
-if(IndexH<FreezeCountH-1)
+            if(IndexH<FreezeCountH-1)
             {
-            IndexH++;
-            IndexCollissionH++;
+                IndexH++;
+                IndexCollissionH++;
             }
             if(IndexH>=FreezeCountH-1 && FrameCount%120==0)
-            {
+            {                OnAttack=1;
+
                 etatH=Stable;
                 if (PlayerH==1)
                 {
@@ -687,7 +692,7 @@ if(IndexH<FreezeCountH-1)
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+UpStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
-        if(FrameCount%10==0)
+        if(FrameCount%15==0)
         {
             IndexH++;
             IndexCollissionH+=IndexH;
@@ -744,10 +749,22 @@ if(IndexH<FreezeCountH-1)
         if(PlayerH==2) xH-=wH;
         draw_image_ex(HaithamPics[IndexH+FallStartH],xH,yH,wH,hH,vflip,100);
         if(PlayerH==2) xH+=wH;
-        if(FrameCount%10==0  && IndexH<FallCountH-1)
+        if(FrameCount%20==0  )
         {
             IndexH++;
-            IndexCollissionH+=IndexH;
+            IndexCollissionH++;
+            if (IndexH>=FallCountH)
+            {
+
+                if (PlayerH==1 && Player1Health<5)
+                    Player1Health=0;
+                if (PlayerH==2 && Player2Health<5)
+                    Player2Health=0;
+                if (PlayerH==1 && Player1Health>5)
+                    etatH=Up;
+                if (PlayerH==2 && Player2Health>5)
+                    etatH=Up;
+            }
         }
 
     }

@@ -11,7 +11,7 @@ Location INDIA = {.xRot=-63.0f,.yRot=0.0f,.zRot=-76.0f,.xTran=0.0f,.yTran=-0.0f,
 GLUquadricObj* quadratic;
 IMAGE *world,*stars;
 
-void DoEarth(Location start, Location end)
+void DoEarth(Location start, Location End)
 {
     char text[100];
     Location Current;
@@ -44,7 +44,7 @@ void DoEarth(Location start, Location end)
     rest(500);
     while(perc<100)
     {
-        Current=Travel(start,end,perc,INTERPOLATED);
+        Current=Travel(start,End,perc,INTERPOLATED);
         perc+=0.5f;
         glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         glLoadIdentity();
@@ -64,7 +64,7 @@ void DoEarth(Location start, Location end)
         next_frame();
     }
     perc=0;
-    switch(end.name){
+    switch(End.name){
         case Malaysia:
             sprintf(text,"Kuala Lumpur - Malaysia");
         break;
