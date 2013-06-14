@@ -75,7 +75,7 @@ void DoEarth(Location start, Location End)
             sprintf(text,"Tunis - Monastir");
         break;
         case Egypt:
-            sprintf(text,"Giza - Egypt");
+            sprintf(text,"Cairo - Egypt");
         break;
         case India:
             sprintf(text,"Taj Mahal - India");

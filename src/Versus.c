@@ -11,7 +11,7 @@ void versus (int intro)
     char direction[100];
     int choix1=0,choix2=0,distance_change_map=20;
     float w;
-    char *maps_names[]= {"Tunisia,Monastir","Egypt,Giza","India,Taj Mahal","Japan,Kyoto","Malaysia,Kuala Lampur"};
+    char *maps_names[]= {"Tunisia,Monastir","Egypt, Cairo","India,Taj Mahal","Japan,Kyoto","Malaysia,Kuala Lampur"};
       IMAGE *button=load_image("Resources/Images/Select.png");
       char buttons[30];
       IMAGE *BUTTONS[14];
@@ -352,8 +352,8 @@ void versus (int intro)
             draw_image_ex(maps[(select_map+1)%5],-25+distance_change_map,27,50,40,NONE,30+distance_change_map);
             draw_image_ex(maps[select_map],25+distance_change_map,27,50,40,NONE,100);
             draw_image_ex(maps[(select_map-1+5)%5],75+distance_change_map,27,50,40,NONE,30-distance_change_map);
-            draw_text(SharpCurve,"Select a map ",9,48,20.5,CENTER,100);
-            draw_text(SharpCurve,maps_names[select_map],7,48.5,75,CENTER,100);
+            draw_text(Arista,"Select a map ",9,48,20.5,CENTER,100);
+            draw_text(Arista,maps_names[select_map],7,48.5,75,CENTER,100);
             draw_image_ex(select,20,23,60,48,NONE,100);
             press_buton++;
        if (JoyStickEnabled==0)
@@ -560,7 +560,7 @@ int KickVoice=AddVoice("Resources/Sounds/Kick.wav",1);
     }
 
     fight=AddVoice("Resources/Sounds/Fight.wav",1);
-    //DoEarth(TUNISIA,loc);
+    DoEarth(TUNISIA,loc);
     sprintf(texttime,"%d",time);
 
            next_frame();
