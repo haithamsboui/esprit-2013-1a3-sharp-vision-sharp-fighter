@@ -1,46 +1,5 @@
 #include "includes.h"
 
-#define StableStartS 0
-#define StableCountS 3
-
-#define JumpStartS 3
-#define JumpCountS 4
-
-#define CrouchStartS 7
-#define CrouchCountS 2
-
-#define WalkStartS 9
-#define WalkCountS 3
-
-#define PunchStartS 14
-#define PunchCountS 5
-
-#define KickStartS 19
-#define KickCountS 4
-
-#define FireballStartS 33
-#define FireballCountS 5
-
-#define FreezeStartS 38
-#define FreezeCountS 4
-
-#define ThunderStartS 42
-#define ThunderCountS 5
-
-#define WindStartS 47
-#define WindCountS 4
-
-#define DefenceStartS 12
-#define DefenceCountS 2
-
-#define FallStartS 26
-#define FallCountS 4
-
-#define HitStartS 23
-#define HitCountS 2
-
-#define UpStartS 30
-#define UpCountS 3
 
 IMAGE *SalahPics[SalahImageCount];
 
@@ -305,7 +264,7 @@ if (etatVS==Kick)
             IndexS=0;
             IndexCollissionS=CrouchStartS;
         }
-        else if (IsKeyPressed(PlayerS,FIREBALL)&& SuperPowerS==1&& FireS==1)
+        else if (IsKeyPressed(PlayerS,FIREBALL)&& SuperPowerS==1/*&& FireS==1*/)
         {
             effS=0;
 
@@ -322,7 +281,7 @@ if (etatVS==Kick)
                 Combot2=0;
             }
         }
-        else if (IsKeyPressed(PlayerS,FREEZE)&& SuperPowerS==1 && FreezeS==1)
+        else if (IsKeyPressed(PlayerS,FREEZE)&& SuperPowerS==1 /*&& FreezeS==1*/)
         {
             effS=0;
 
@@ -339,7 +298,7 @@ if (etatVS==Kick)
                 Combot2=0;
             }
         }
-        else if (IsKeyPressed(PlayerS,THUNDER)&& SuperPowerS==1&& ThunderS==1)
+        else if (IsKeyPressed(PlayerS,THUNDER)&& SuperPowerS==1/*&& ThunderS==1*/)
         {
             effS=0;
             etatS=Thunder;
@@ -355,7 +314,7 @@ if (etatVS==Kick)
                 Combot2=0;
             }
         }
-        else if (IsKeyPressed(PlayerS,WIND)&& SuperPowerS==1&& WindS==1)
+        else if (IsKeyPressed(PlayerS,WIND)&& SuperPowerS==1/*&& WindS==1*/)
         {
             effS=0;
 

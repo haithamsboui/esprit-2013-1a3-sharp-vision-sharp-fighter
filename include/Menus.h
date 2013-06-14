@@ -3,6 +3,7 @@
 #include "includes.h"
 
 int ingame;
+  IMAGE **BUTTONS;
 int close_button_pressed;
 
 void close_button_handler();
