@@ -510,7 +510,7 @@ void GamePlay(int Player1,int Player2,int Map)
     }
 
     fight=AddVoice("Resources/Sounds/Fight.wav",1);
-    DoEarth(TUNISIA,loc);
+   DoEarth(TUNISIA,loc);
     sprintf(texttime,"%d",time);
     voice_start(fight);
     while(Player1Win!=2 && player2win !=2 )

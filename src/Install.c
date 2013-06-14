@@ -40,7 +40,6 @@ int install()
 
     JoyStickEnabled=(install_joystick(JOY_TYPE_AUTODETECT)==0);
     JoyStickEnabled=JoyStickEnabled && num_joysticks;
-
     LoadInput();
 
     if(install_fonts())

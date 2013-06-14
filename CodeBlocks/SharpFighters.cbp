@@ -52,6 +52,7 @@
 		<Unit filename="../include/Arcade.h" />
 		<Unit filename="../include/AudioPlayer.h" />
 		<Unit filename="../include/Brahim.h" />
+		<Unit filename="../include/CPU.h" />
 		<Unit filename="../include/Calcul.h" />
 		<Unit filename="../include/Collision.h" />
 		<Unit filename="../include/Earth.h" />
@@ -78,6 +79,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../src/Brahim.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/CPU.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../src/Calcul.c">

@@ -195,8 +195,12 @@ void Draw_Salah()
                 Player2Health-=2.5;
                 if (VsSuperPower==0 && Combot1<10)
                     Combot1++;
-if (Player2Health<5)
+                if (Player2Health<5)
+                {
                     etatS=Fall;
+                    IndexS=0;
+                    IndexCollissionS=FallStartS;
+                }
 
             }
             if (PlayerS==1)
@@ -204,9 +208,12 @@ if (Player2Health<5)
                 Player1Health-=2.5;
                 if (VsSuperPower==0 && Combot2<10)
                     Combot2++;
-if (Player1Health<5)
+                if (Player1Health<5)
+                {
                     etatS=Fall;
-
+                    IndexS=0;
+                    IndexCollissionS=FallStartS;
+                }
             }
         }
 
@@ -218,17 +225,12 @@ if (Player1Health<5)
         break;
     }
 
-    if (etatS==Fall&& IsKeyPressed(PlayerS,UP))
-    {
-        IndexS=0;
-        iS=1;
-        etatS=Up;
-        IndexCollissionS=FallStartS;
-    }
-if (OnAttack==1)
+    if (OnAttack==1)
     {
         etatS=Fall;
         OnAttack=0;
+        IndexS=0;
+        IndexCollissionS;
     }
     if(etatS!=Kick && etatS!=Punch && etatS!=Fireball && etatS != Freeze && etatS !=Jump  && etatS !=Wind && etatS !=Thunder &&etatS!=Hit&&etatS!=Defence&&etatS!=Up && etatS!=Crouch && etatS!=Fall)
     {
@@ -285,8 +287,8 @@ if (OnAttack==1)
         {
             IndexS=0;
             iS=1;
-                etatS=Jump;
-                IndexCollissionS=JumpStartS;
+            etatS=Jump;
+            IndexCollissionS=JumpStartS;
 
 
         }
@@ -438,6 +440,8 @@ if (OnAttack==1)
             if(IndexS==KickCountS)
             {
                 etatS=Stable;
+                IndexS=0;
+                IndexCollissionS=StableStartS;
             }
         }
 
@@ -451,11 +455,13 @@ if (OnAttack==1)
         if(FrameCount%8==0)
         {
             IndexS++;
-            IndexCollissionS+=IndexS;
+            IndexCollissionS++;
 
             if(IndexS==PunchCountS)
             {
                 etatS=Stable;
+                IndexS=0;
+                IndexCollissionS=StableStartS;
             }
         }
         break;
@@ -469,11 +475,11 @@ if (OnAttack==1)
         {
             if (PlayerS==1)
             {
-                draw_image_ex(FireEffet[effS],xS+10+((x-xS-20)/50)*effS,60,5+effS/5,0,NONE,100);
+                draw_image_ex(FireEffet[effS],xS+10+((x-xS-20)/50)*effS,55,5+effS/5,0,NONE,100);
             }
             if (PlayerS==2)
             {
-                draw_image_ex(FireEffet[effS],xS-15-((xS-x-12)/50)*effS,60,5+effS/5,0,NONE,100);
+                draw_image_ex(FireEffet[effS],xS-15-((xS-x-12)/50)*effS,55,5+effS/5,0,NONE,100);
             }
             effS++;
 
@@ -487,9 +493,12 @@ if (OnAttack==1)
                 IndexCollissionS++;
             }
             if(IndexS>=FireballCountS-1 && effS>=50)
-            {                OnAttack=1;
+            {
+                OnAttack=1;
 
                 etatS=Stable;
+                IndexS=0;
+                IndexCollissionS=StableStartS;
                 if (PlayerS==1)
                 {
                     Player2Health-=20;
@@ -513,11 +522,11 @@ if (OnAttack==1)
         {
             if (PlayerS==1)
             {
-                draw_image_ex(ThunderEffet[effS],xS-25+((x-xS-20)/50)*effS,-2+effS/3,70+effS/4,100,NONE,100);
+                draw_image_ex(ThunderEffet[effS],xS-25+((x-xS-20)/50)*effS,-7+effS/3,70+effS/4,100,NONE,100);
             }
             if (PlayerS==2)
             {
-                draw_image_ex(ThunderEffet[effS],xS-30+((x-xS)/50)*effS,-2+effS/3,70+effS/4,100,NONE,100);
+                draw_image_ex(ThunderEffet[effS],xS-30+((x-xS)/50)*effS,-7+effS/3,70+effS/4,100,NONE,100);
             }
             effS++;
 
@@ -533,9 +542,13 @@ if (OnAttack==1)
             }
 
             if(IndexS==ThunderCountS-1 && effS>=50)
-            {                OnAttack=1;
+            {
+                OnAttack=1;
 
                 etatS=Stable;
+                IndexS=0;
+                IndexCollissionS=StableStartS;
+
                 if (PlayerS==1)
                 {
                     Player2Health-=20;
@@ -543,7 +556,6 @@ if (OnAttack==1)
                 if (PlayerS==2)
                 {
                     Player1Health-=20;
-
                 }
             }
         }
@@ -579,9 +591,12 @@ if (OnAttack==1)
             }
 
             if(IndexS>=WindCountS-1 && effS>=50)
-            {                OnAttack=1;
+            {
+                OnAttack=1;
 
                 etatS=Stable;
+                IndexS=0;
+                IndexCollissionS=StableStartS;
                 if (PlayerS==1)
                 {
                     Player2Health-=20;
@@ -624,9 +639,12 @@ if (OnAttack==1)
                 IndexCollissionS++;
             }
             if(IndexS>=FreezeCountS-1 && FrameCount%120==0)
-            {                OnAttack=1;
+            {
+                OnAttack=1;
 
                 etatS=Stable;
+                IndexS=0;
+                IndexCollissionS=StableStartS;
                 if (PlayerS==1)
                 {
                     Player2Health-=20;
@@ -655,6 +673,8 @@ if (OnAttack==1)
             if(IndexS==CrouchCountS)
             {
                 etatS=Stable;
+                IndexS=0;
+                IndexCollissionS=StableStartS;
             }
         }
         break;
@@ -664,14 +684,16 @@ if (OnAttack==1)
         if(PlayerS==2) xS-=wS;
         draw_image_ex(SalahPics[IndexS+UpStartS],xS,yS,wS,hS,vflip,100);
         if(PlayerS==2) xS+=wS;
-        if(FrameCount%15==0)
+        if(FrameCount%10==0)
         {
             IndexS++;
-            IndexCollissionS+=IndexS;
+            IndexCollissionS++;
 
             if(IndexS==UpCountS)
             {
                 etatS=Stable;
+                IndexS=0;
+                IndexCollissionS=StableStartS;
             }
         }
         break;
@@ -685,10 +707,11 @@ if (OnAttack==1)
         {
             IndexS++;
             IndexCollissionS+=IndexS;
-
             if(IndexS==DefenceCountS)
             {
                 etatS=Stable;
+                IndexS=0;
+                IndexCollissionS=StableStartS;
             }
         }
         break;
@@ -698,22 +721,28 @@ if (OnAttack==1)
         if(PlayerS==2) xS-=wS;
         draw_image_ex(SalahPics[IndexS+FallStartS],xS,yS,wS,hS,vflip,100);
         if(PlayerS==2) xS+=wS;
-        if(FrameCount%20==0)
+        if(FrameCount%15==0)
         {
             IndexS++;
-            IndexCollissionS+=IndexS;
-
-           if (IndexS>=FallCountS)
+            IndexCollissionS++;
+            if (IndexS>=FallCountS)
             {
-
                 if (PlayerS==1 && Player1Health<5)
                     Player1Health=0;
                 if (PlayerS==2 && Player2Health<5)
                     Player2Health=0;
                 if (PlayerS==1 && Player1Health>5)
+                {
                     etatS=Up;
+                    IndexS=0;
+                    IndexCollissionW=UpStartS;
+                }
                 if (PlayerS==2 && Player2Health>5)
+                {
                     etatS=Up;
+                    IndexS=0;
+                    IndexCollissionW=UpStartS;
+                }
             }
         }
         break;
@@ -727,20 +756,27 @@ if (OnAttack==1)
             if(IndexS==HitCountS)
             {
                 etatS=Stable;
+                IndexS=0;
+                IndexCollissionS=StableStartS;
             }
         }
         wS=(hS/((float)SalahPics[IndexS+HitStartS]->h/(float)SalahPics[IndexS+HitStartS]->w))/AspectRatio;
         if(PlayerS==2) xS-=wS;
         draw_image_ex(SalahPics[IndexS+HitStartS],xS,yS,wS,hS,vflip,100);
         if(PlayerS==2) xS+=wS;
-
         break;
 
     case Jump:
+
         if(FrameCount%10==0)
         {
             if(IndexS>=JumpCountS-2)
+            {
                 etatS=Stable;
+                IndexS=0;
+                IndexCollissionS=StableStartS;
+        yS=55;
+            }
             if (IndexS>=2)
                 jump_stat=0;
             if (jump_stat==1)
@@ -748,9 +784,9 @@ if (OnAttack==1)
             if (jump_stat==0)
                 yS+=20;
             IndexS++;
-            IndexCollissionS+=IndexS;
-
+            IndexCollissionS++;
         }
+
         wS=(hS/((float)SalahPics[IndexS+JumpStartS]->h/(float)SalahPics[IndexS+JumpStartS]->w))/AspectRatio;
         if(PlayerS==2) xS-=wS;
         draw_image_ex(SalahPics[IndexS+JumpStartS],xS,yS,wS,hS,vflip,100);
