@@ -193,6 +193,10 @@ void Draw_Wassim()
         if(ProcessCollision(WassimPics,IndexCollissionW,WassimCollision,xW,yW,wW,hW,
                             Vs,IndexVs,TAB,x,y,w,h)&& (etatVS==Punch || etatVS==Kick))
         {
+            if (etatVS==Punch)
+    ComboPunch=1;
+if (etatVS==Kick)
+    Combokick=1;
             etatW=Hit;
             IndexCollissionW=HitStartW;
             IndexW=0;

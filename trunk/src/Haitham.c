@@ -194,6 +194,10 @@ void Draw_Haitham()
         if(ProcessCollision(HaithamPics,IndexCollissionH,HaithamCollision,xH,yH,wH,hH,
                             Vs,IndexVs,TAB,x,y,w,h) && (EtatVS==Punch || EtatVS==Kick))
         {
+           if (EtatVS==Punch)
+    ComboPunch=1;
+if (EtatVS==Kick)
+    Combokick=1;
             etatH=Hit;
             IndexH=0;
             IndexCollissionH=HitStartH;

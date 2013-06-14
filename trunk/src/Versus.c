@@ -364,11 +364,15 @@ void GamePlay(int Player1,int Player2,int Map)
     char MapDirection[50],direction[50],texttime[10],Round[10],time =90,round =1,i,pause=0,Pause_pos_ind=0;
     int Pause_pos[]= {20,35,50,65,80};
     float  gamestart=1.0;
+int PunchVoice=AddVoice("Resources/Sounds/Punch.wav",1);
+int KickVoice=AddVoice("Resources/Sounds/Kick.wav",1);
     Player1Health=100;
     Player2Health=100;
     Combot1=0;
     Combot2=0;
     Location loc;
+    Combokick=0;
+    ComboPunch=0;
     int Player1Win=0,player2win=0;
     int OnAttack=0;
     ChargerEffetNaturel(ThunderEffet,"Resources/Images/Thunder/thunder00",50);
@@ -510,9 +514,17 @@ void GamePlay(int Player1,int Player2,int Map)
     }
 
     fight=AddVoice("Resources/Sounds/Fight.wav",1);
-   DoEarth(TUNISIA,loc);
+    //DoEarth(TUNISIA,loc);
     sprintf(texttime,"%d",time);
+
+           next_frame();
+                    draw_image_ex(MapLoad,-1.5,-2,103,104,NONE,100);
+                    sprintf(Round,"Round %d",round);
+                    draw_text(Arista,Round,15,50,50,CENTER_X,100);
+next_frame();
+rest(2500);
     voice_start(fight);
+
     while(Player1Win!=2 && player2win !=2 )
     {
         if (pause==0)
@@ -572,13 +584,14 @@ void GamePlay(int Player1,int Player2,int Map)
             draw_image_ex(bloodbar,0,0,100,0,NONE,100);
             draw_image_ex(Time,-15,0,130,0,NONE,100);
 
-
             draw_image_ex(heads_bar,0,0,100,0,NONE,100);
+
             if ( gamestart<100)
             {
                 draw_image_ex(FIGHT,50-gamestart/5,40,gamestart/2,0,NONE,gamestart);
                 gamestart+=2.0;
             }
+
             for (i=0; i<Combot1; i++)
                 draw_image_ex(Loadcombo,-2+(i+1)*2.1,0.5,100,0,NONE,100);
 
@@ -626,37 +639,71 @@ void GamePlay(int Player1,int Player2,int Map)
                 Draw_Wassim();
                 break;
             }
+if (Combokick==1)
+{
+    voice_start(KickVoice);
+    Combokick=0;
+}
+if (ComboPunch==1)
+{
+    voice_start(PunchVoice);
+    ComboPunch=0;
+}
 
             draw_image_ex(heads[Player1],0,0,100,0,VERTICAL,100);
             draw_image_ex(heads[Player2],0,0,100,0,NONE,100);
+
             for (i=0; i<Player1Win; i++)
                 draw_image_ex(RoundWin,26.9+i*3.4,26.91,2,0,NONE,100);
 
             for (i=0; i<player2win; i++)
                 draw_image_ex(RoundWin,71.65-i*3.4,26.91,2,0,NONE,100);
+
             if(FrameCount%90==0)
             {
                 sprintf(texttime,"%d",time);
                 time--;
             }
+ draw_text(Arista,texttime,10,50,2,CENTER_X,95);
 
 
-            if (time<-1 || Player1Health<=0 || Player2Health<=0 )
+            if (time<=-1 || Player1Health<=0 || Player2Health<=0 )
             {
                 rest(1500);
-                if (Player1Health<=0)
-                    player2win++;
-                if (Player2Health<=0)
-                    Player1Win++;
 
-                if (Player1Health!=100 && Player2Health!=100 )
+                if (Player1Health<=0)
                 {
+                    player2win++;
+                    Player1Health=100;
+                    Player2Health=100;
                     round++;
-                    if (Player1Health>Player2Health)
-                        Player1Win++;
-                    if (Player1Health<Player2Health)
-                        player2win++;
                 }
+                if (Player2Health<=0)
+                {
+                    Player1Win++;
+                    Player1Health=100;
+                    Player2Health=100;
+                    round++;
+                }
+                printf ("Player 1 %d player 2 %d",Player1Win,player2win);
+
+                if (time <=-1 )
+                {
+                    if (Player1Health>Player2Health)
+                    {
+                        Player1Win++;
+                        round++;
+                    }
+                    if (Player1Health<Player2Health)
+                    {
+                        player2win++;
+                        round++;
+                    }
+                    Player1Health=100;
+                    Player2Health=100;
+
+                }
+
                 if (round<4 && Player1Win!=2 && player2win !=2)
                 {
                     time=90;
@@ -732,13 +779,13 @@ void GamePlay(int Player1,int Player2,int Map)
                         etatW=Stable;
                         break;
                     }
-                    Player1Health=100;
-                    Player2Health=100;
                     next_frame();
+                    gamestart=1.0;
                     rest(2500);
+    voice_start(fight);
+
                 }
             }
-            draw_text(Arista,texttime,10,50,2,CENTER_X,95);
             if (IsKeyPressed(3,RETURN) && button_press>10)
             {
                 pause=1;
@@ -885,7 +932,8 @@ void GamePlay(int Player1,int Player2,int Map)
         voice_stop(gameplaysound);
         break;
     }
-
+voice_stop(PunchVoice);
+voice_stop(KickVoice);
 }
 
 

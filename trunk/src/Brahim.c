@@ -196,6 +196,10 @@ void Draw_Brahim()
                             Vs,IndexVs,TAB,x,y,w,h) && (etatVS==Punch || etatVS==Kick))
         {
 
+if (etatVS==Punch)
+    ComboPunch=1;
+if (etatVS==Kick)
+    Combokick=1;
             etatB=Hit;
             IndexB=0;
             IndexCollissionB=HitStartB;

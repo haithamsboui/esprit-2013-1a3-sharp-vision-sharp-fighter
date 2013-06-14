@@ -10,11 +10,14 @@ int Player1Health;
 int Player2Health;
 int Combot1;
 int Combot2;
+int OnAttack;
+int Combokick;
+int ComboPunch;
     IMAGE *Power1;
     IMAGE *Power2;
  IMAGE *ThunderEffet[50];
  IMAGE *FireEffet[50];
  IMAGE *WindEffet[50];
 IMAGE *FreezeEffet[2];
-int OnAttack;
+
 #endif // VERSUS_H_INCLUDED
