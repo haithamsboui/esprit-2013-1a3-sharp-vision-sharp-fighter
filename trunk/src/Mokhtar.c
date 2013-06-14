@@ -200,7 +200,11 @@ void Draw_Mokhtar()
 
                     Combot1++;
  if (Player2Health<5)
+                    {
                     etatM=Fall;
+                    IndexM=0;
+                    IndexCollissionM=FallStartM;
+                    }
 
             }
             if (PlayerM==1)
@@ -209,8 +213,11 @@ void Draw_Mokhtar()
                 if (VsSuperPower==0 && Combot2<10)
                     Combot2++;
  if (Player1Health<5)
+                    {
                     etatM=Fall;
-
+                    IndexM=0;
+                    IndexCollissionM=FallStartM;
+                    }
             }
 
         }
@@ -227,6 +234,8 @@ if (OnAttack==1)
     {
         etatM=Fall;
         OnAttack=0;
+IndexM=0;
+IndexCollissionM=FallStartM;
     }
     if(etatM!=Kick && etatM!=Punch && etatM!=Fireball && etatM != Freeze&& etatM != Fall && etatM !=Jump  && etatM !=Wind && etatM !=Thunder && etatM!=Hit &&etatM!=Defence && etatM!=Up &&etatM!=Crouch)
     {
@@ -377,6 +386,7 @@ if (OnAttack==1)
     {
         etatM=Stable;
         IndexCollissionM=StableStartM;
+
     }
 }
 
@@ -384,6 +394,12 @@ if (OnAttack==1)
 switch(etatM)
     {
     case Stable:
+
+        IndexM = Min(IndexM,StableCountM-1);
+        wM=(hM/((float)MokhtarPics[IndexM+StableStartM]->h/(float)MokhtarPics[IndexM+StableStartM]->w))/AspectRatio;
+        if(PlayerM==2) xM-=wM;
+        draw_image_ex(MokhtarPics[IndexM+StableStartM],xM,yM,wM,hM,vflip,100);
+        if(PlayerM==2) xM+=wM;
         if(FrameCount%10==0)
         {
             if(IndexM==0)
@@ -394,11 +410,6 @@ switch(etatM)
             IndexM=IndexM+iM;
             IndexCollissionM+=IndexM;
         }
-        IndexM = Min(IndexM,StableCountM-1);
-        wM=(hM/((float)MokhtarPics[IndexM+StableStartM]->h/(float)MokhtarPics[IndexM+StableStartM]->w))/AspectRatio;
-        if(PlayerM==2) xM-=wM;
-        draw_image_ex(MokhtarPics[IndexM+StableStartM],xM,yM,wM,hM,vflip,100);
-        if(PlayerM==2) xM+=wM;
         break;
     case Forward:
         if(FrameCount%10==0)
@@ -440,6 +451,8 @@ switch(etatM)
             if(IndexM==KickCountM)
             {
                 etatM=Stable;
+        IndexM=0;
+        IndexCollissionM=StableStartM;
             }
         }
 
@@ -458,6 +471,8 @@ switch(etatM)
             if(IndexM==PunchCountM)
             {
                 etatM=Stable;
+        IndexM=0;
+        IndexCollissionM=StableStartM;
             }
         }
         break;
@@ -470,11 +485,11 @@ switch(etatM)
         {
             if (PlayerM==1)
             {
-                draw_image_ex(FireEffet[effM],xM+10+((x-xM-20)/50)*effM,60,5+effM/5,0,NONE,100);
+                draw_image_ex(FireEffet[effM],xM+10+((x-xM-20)/50)*effM,55,5+effM/5,0,NONE,100);
             }
             if (PlayerM==2)
             {
-                draw_image_ex(FireEffet[effM],xM-15-((xM-x-12)/50)*effM,60,5+effM/5,0,NONE,100);
+                draw_image_ex(FireEffet[effM],xM-15-((xM-x-12)/50)*effM,55,5+effM/5,0,NONE,100);
             }
             effM++;
 
@@ -491,6 +506,8 @@ switch(etatM)
             {                OnAttack=1;
 
                 etatM=Stable;
+                        IndexM=0;
+        IndexCollissionM=StableStartM;
                 if (PlayerM==1)
                 {
                     Player2Health-=20;
@@ -514,11 +531,11 @@ switch(etatM)
         {
             if (PlayerM==1)
             {
-                draw_image_ex(ThunderEffet[effM],xM-25+((x-xM-20)/50)*effM,-2+effM/3,70+effM/4,100,NONE,100);
+                draw_image_ex(ThunderEffet[effM],xM-25+((x-xM-20)/50)*effM,-7+effM/3,70+effM/4,100,NONE,100);
             }
             if (PlayerM==2)
             {
-                draw_image_ex(ThunderEffet[effM],xM-30+((x-xM)/50)*effM,-2+effM/3,70+effM/4,100,NONE,100);
+                draw_image_ex(ThunderEffet[effM],xM-30+((x-xM)/50)*effM,-7+effM/3,70+effM/4,100,NONE,100);
             }
             effM++;
 
@@ -537,6 +554,8 @@ switch(etatM)
         {                OnAttack=1;
 
             etatM=Stable;
+                    IndexM=0;
+        IndexCollissionM=StableStartM;
             if (PlayerM==1)
             {
                 Player2Health-=20;
@@ -583,6 +602,8 @@ switch(etatM)
             {                OnAttack=1;
 
                 etatM=Stable;
+                        IndexM=0;
+        IndexCollissionM=StableStartM;
                 if (PlayerM==1)
                 {
                     Player2Health-=20;
@@ -630,6 +651,8 @@ if(IndexM<FreezeCountM-1)
             {                OnAttack=1;
 
                 etatM=Stable;
+                        IndexM=0;
+        IndexCollissionM=StableStartM;
                 if (PlayerM==1)
                 {
                     Player2Health-=20;
@@ -653,11 +676,13 @@ if(IndexM<FreezeCountM-1)
         if(FrameCount%10==0)
         {
             IndexM++;
-            IndexCollissionM+=IndexM;
+            IndexCollissionM++;
 
-            if(IndexM==CrouchCountM)
+            if(IndexM>=CrouchCountM)
             {
                 etatM=Stable;
+                        IndexM=0;
+        IndexCollissionM=StableStartM;
             }
         }
         break;
@@ -673,9 +698,11 @@ if(IndexM<FreezeCountM-1)
             IndexM++;
             IndexCollissionM+=IndexM;
 
-            if(IndexM==DefenceCountM)
+            if(IndexM>=DefenceCountM)
             {
                 etatM=Stable;
+                        IndexM=0;
+        IndexCollissionM=StableStartM;
             }
         }
         break;
@@ -693,6 +720,8 @@ if(IndexM<FreezeCountM-1)
             if(IndexM==HitCountM)
             {
                 etatM=Stable;
+                IndexM=0;
+        IndexCollissionM=StableStartM;
             }
         }
         break;
@@ -702,7 +731,7 @@ if(IndexM<FreezeCountM-1)
         if(PlayerM==2) xM-=wM;
         draw_image_ex(MokhtarPics[IndexM+FallStartM],xM,yM,wM,hM,vflip,100);
         if(PlayerM==2) xM+=wM;
- if(FrameCount%20==0  )
+ if(FrameCount%15==0  )
         {
             IndexM++;
             IndexCollissionM++;
@@ -714,9 +743,17 @@ if(IndexM<FreezeCountM-1)
                 if (PlayerM==2 && Player2Health<5)
                     Player2Health=0;
                 if (PlayerM==1 && Player1Health>5)
-                    etatM=Up;
+              {
+                     etatM=Up;
+                 IndexM=0;
+                 IndexCollissionM=UpStartM;
+              }
                 if (PlayerM==2 && Player2Health>5)
-                    etatM=Up;
+              {
+                     etatM=Up;
+                 IndexM=0;
+                 IndexCollissionM=UpStartM;
+              }
             }
         }
         break;
@@ -726,7 +763,7 @@ if(IndexM<FreezeCountM-1)
         if(PlayerM==2) xM-=wM;
         draw_image_ex(MokhtarPics[IndexM+UpStartM],xM,yM,wM,hM,vflip,100);
         if(PlayerM==2) xM+=wM;
-        if(FrameCount%15==0)
+        if(FrameCount%10==0)
         {
             IndexM++;
             IndexCollissionM+=IndexM;
@@ -734,6 +771,8 @@ if(IndexM<FreezeCountM-1)
             if(IndexM==UpCountM)
             {
                 etatM=Stable;
+            IndexM=0;
+            IndexCollissionM=StableStartM;
             }
         }
         break;
@@ -745,6 +784,9 @@ if(IndexM<FreezeCountM-1)
             if(IndexM>=JumpCountM-1)
             {
                 etatM=Stable;
+                    IndexM=0;
+        IndexCollissionM=StableStartM;
+        yM=52;
             }
 
             if (IndexM>=3)

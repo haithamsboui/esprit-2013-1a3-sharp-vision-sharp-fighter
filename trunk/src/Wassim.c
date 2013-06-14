@@ -203,8 +203,11 @@ void Draw_Wassim()
                 if (VsSuperPower==0 && Combot1<10)
                     Combot1++;
                 if (Player2Health<5)
-                    etatW=Fall;
-
+              {
+                     etatW=Fall;
+IndexW=0;
+IndexCollissionW=FallStartW;
+              }
             }
             if (PlayerW==1)
             {
@@ -213,7 +216,11 @@ void Draw_Wassim()
                 if (VsSuperPower==0 && Combot2<10)
                     Combot2++;
                 if (Player1Health<5)
+{
                     etatW=Fall;
+ IndexW=0;
+IndexCollissionW=FallStartW;
+}
             }
 
         }
@@ -228,6 +235,8 @@ void Draw_Wassim()
     {
         etatW=Fall;
         OnAttack=0;
+        IndexW=0;
+        IndexCollissionW=FallStartW;
     }
     if(etatW!=Kick && etatW!=Punch && etatW!=Fireball && etatW != Freeze && etatW !=Jump  && etatW !=Wind && etatW !=Thunder &&etatW!=Fall&&etatW!=Hit&&etatW!=Defence&&etatW!=Up && etatW!=Crouch)
     {
@@ -434,6 +443,8 @@ void Draw_Wassim()
             if(IndexW==KickcountW)
             {
                 etatW=Stable;
+         IndexW=0;
+         IndexCollissionW=StableStartW;
             }
         }
 
@@ -451,6 +462,8 @@ void Draw_Wassim()
             if(IndexW==PunchcountW)
             {
                 etatW=Stable;
+         IndexW=0;
+         IndexCollissionW=StableStartW;
             }
         }
         break;
@@ -463,11 +476,11 @@ void Draw_Wassim()
         {
             if (PlayerW==1)
             {
-                draw_image_ex(FireEffet[effW],xW+10+((x-xW-20)/50)*effW,60,5+effW/5,0,NONE,100);
+                draw_image_ex(FireEffet[effW],xW+10+((x-xW-20)/50)*effW,55,5+effW/5,0,NONE,100);
             }
             if (PlayerW==2)
             {
-                draw_image_ex(FireEffet[effW],xW-15-((xW-x-12)/50)*effW,60,5+effW/5,0,NONE,100);
+                draw_image_ex(FireEffet[effW],xW-15-((xW-x-12)/50)*effW,55,5+effW/5,0,NONE,100);
             }
             effW++;
 
@@ -485,6 +498,8 @@ void Draw_Wassim()
                 OnAttack=1;
 
                 etatW=Stable;
+                         IndexW=0;
+         IndexCollissionW=StableStartW;
                 if (PlayerW==1)
                 {
                     Player2Health-=20;
@@ -507,11 +522,11 @@ void Draw_Wassim()
         {
             if (PlayerW==1)
             {
-                draw_image_ex(ThunderEffet[effW],xW-25+((x-xW-20)/50)*effW,-2+effW/3,70+effW/4,100,NONE,100);
+                draw_image_ex(ThunderEffet[effW],xW-25+((x-xW-20)/50)*effW,-7+effW/3,70+effW/4,100,NONE,100);
             }
             if (PlayerW==2)
             {
-                draw_image_ex(ThunderEffet[effW],xW-30+((x-xW)/50)*effW,-2+effW/3,70+effW/4,100,NONE,100);
+                draw_image_ex(ThunderEffet[effW],xW-30+((x-xW)/50)*effW,-7+effW/3,70+effW/4,100,NONE,100);
             }
             effW++;
 
@@ -531,6 +546,8 @@ void Draw_Wassim()
                 OnAttack=1;
 
                 etatW=Stable;
+                         IndexW=0;
+         IndexCollissionW=StableStartW;
                 if (PlayerW==1)
                 {
                     Player2Health-=20;
@@ -579,6 +596,8 @@ void Draw_Wassim()
                 OnAttack=1;
 
                 etatW=Stable;
+                         IndexW=0;
+         IndexCollissionW=StableStartW;
                 if (PlayerW==1)
                 {
                     Player2Health-=20;
@@ -626,6 +645,8 @@ void Draw_Wassim()
                 OnAttack=1;
 
                 etatW=Stable;
+                         IndexW=0;
+         IndexCollissionW=StableStartW;
                 if (PlayerW==1)
                 {
                     Player2Health-=20;
@@ -652,7 +673,8 @@ void Draw_Wassim()
             if(IndexW==CrouchcountW)
             {
                 etatW=Stable;
-
+         IndexW=0;
+         IndexCollissionW=StableStartW;
             }
         }
         break;
@@ -662,13 +684,15 @@ void Draw_Wassim()
         if(PlayerW==2) xW-=wW;
         draw_image_ex(WassimPics[IndexW+UpStartW],xW,yW,wW,hW,vflip,100);
         if(PlayerW==2) xW+=wW;
-        if(FrameCount%15==0)
+        if(FrameCount%10==0)
         {
             IndexW++;
-            IndexCollissionW+=IndexW;
-            if(IndexW==UpCountW)
+            IndexCollissionW++;
+            if(IndexW>=UpCountW)
             {
                 etatW=Stable;
+                         IndexW=0;
+         IndexCollissionW=StableStartW;
             }
         }
         break;
@@ -685,6 +709,8 @@ void Draw_Wassim()
             if(IndexW==DefencecountW)
             {
                 etatW=Stable;
+                         IndexW=0;
+         IndexCollissionW=StableStartW;
             }
         }
         break;
@@ -694,7 +720,7 @@ void Draw_Wassim()
         if(PlayerW==2) xW-=wW;
         draw_image_ex(WassimPics[IndexW+FallStartW],xW,yW,wW,hW,vflip,100);
         if(PlayerW==2) xW+=wW;
-        if(FrameCount%20==0  )
+        if(FrameCount%10==0  )
         {
             IndexW++;
             IndexCollissionW++;
@@ -706,9 +732,15 @@ void Draw_Wassim()
                 if (PlayerW==2 && Player2Health<5)
                     Player2Health=0;
                 if (PlayerW==1 && Player1Health>5)
-                    etatW=Up;
+                    {etatW=Up;
+                    IndexW=0;
+                    IndexCollissionW=FallStartW;
+                    }
                 if (PlayerW==2 && Player2Health>5)
-                    etatW=Up;
+                    {etatW=Up;
+                    IndexW=0;
+                    IndexCollissionW=FallStartW;
+                    }
             }
         }
         break;
@@ -726,6 +758,8 @@ void Draw_Wassim()
             if(IndexW==HitcountW)
             {
                 etatW=Stable;
+                         IndexW=0;
+         IndexCollissionW=StableStartW;
             }
         }
         break;
@@ -734,7 +768,12 @@ void Draw_Wassim()
         if(FrameCount%10==0)
         {
             if(IndexW>=JumpcountW-1)
+                {
                 etatW=Stable;
+                     IndexW=0;
+         IndexCollissionW=StableStartW;
+            yW=65;
+            }
             if (IndexW>=1)
                 jump_stat=0;
             if (jump_stat==1)
