@@ -1,47 +1,5 @@
 #include "includes.h"
 
-#define StableStartB 0
-#define StableCountB 4
-
-#define WalkStartB 4
-#define WalkCountB 4
-
-#define KickStartB 8
-#define KickCountB 5
-
-#define PunchStartB 13
-#define PunchCountB 3
-
-#define FireballStartB 16
-#define FireballCountB 5
-
-#define FreezeStartB 21
-#define FreezeCountB 4
-
-#define ThunderStartB 25
-#define ThunderCountB 4
-
-#define WindStartB 29
-#define WindCountB 4
-
-#define DefenceStartB 33
-#define DefenceCountB 3
-
-#define CrouchStartB 36
-#define CrouchCountB 2
-
-#define JumpStartB 38
-#define JumpCountB 5
-
-#define FallStartB 43
-#define FallCountB 6
-
-#define HitStartB 52
-#define HitCountB 4
-
-#define UpStartB 49
-#define UpCountB 3
-
 IMAGE *BrahimPics[BrahimImageCount];
 
 float xB,yB;
@@ -303,7 +261,7 @@ if (etatVS==Kick)
             IndexB=0;
             IndexCollissionB=CrouchStartB;
         }
-        else if (IsKeyPressed(PlayerB,FIREBALL)&& SuperPowerB==1 && FireB==1)
+        else if (IsKeyPressed(PlayerB,FIREBALL)&& SuperPowerB==1 /*&& FireB==1*/)
         {
             effB=0;
             etatB=Fireball;
@@ -319,7 +277,7 @@ if (etatVS==Kick)
                 Combot2=0;
             }
         }
-        else if (IsKeyPressed(PlayerB,FREEZE)&& SuperPowerB==1&& FreezeB==1)
+        else if (IsKeyPressed(PlayerB,FREEZE)&& SuperPowerB==1/*&& FreezeB==1*/)
         {
             effB=0;
             etatB=Freeze;
@@ -335,7 +293,7 @@ if (etatVS==Kick)
                 Combot2=0;
             }
         }
-        else if (IsKeyPressed(PlayerB,THUNDER)&& SuperPowerB==1&& ThunderB==1)
+        else if (IsKeyPressed(PlayerB,THUNDER)&& SuperPowerB==1/*&& ThunderB==1*/)
         {
             effB=0;
             etatB=Thunder;
@@ -351,7 +309,7 @@ if (etatVS==Kick)
                 Combot2=0;
             }
         }
-        else if (IsKeyPressed(PlayerB,WIND)&& SuperPowerB==1&& WindB==1)
+        else if (IsKeyPressed(PlayerB,WIND)&& SuperPowerB==1 /*&& WindB==1*/)
         {
             etatB=Wind;
             IndexB=0;
@@ -786,6 +744,7 @@ break;
                 etatB=Stable;
                 IndexB=0;
                 IndexCollissionB=StableStartB;
+                yB=55;
             }
             if (IndexB>=2)
                 jump_stat=0;

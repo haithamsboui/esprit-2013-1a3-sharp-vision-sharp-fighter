@@ -1,46 +1,6 @@
 #include "includes.h"
 
-#define StableStartW 0
-#define StablecountW 3
 
-#define WalkStartW 9
-#define WalkcountW 3
-
-#define KickStartW 18
-#define KickcountW 3
-
-#define PunchStartW 14
-#define PunchcountW 4
-
-#define FireballStartW 30
-#define FireballcountW 4
-
-#define FreezeStartW 34
-#define FreezecountW 3
-
-#define ThunderStartW 37
-#define ThundercountW 4
-
-#define WindStartW 42
-#define WindcountW 3
-
-#define DefenceStartW 12
-#define DefencecountW 2
-
-#define CrouchStartW 6
-#define CrouchcountW 2
-
-#define JumpStartW 3
-#define JumpcountW 3
-
-#define FallStartW 21
-#define FallcountW 5
-
-#define HitStartW 21
-#define HitcountW 3
-
-#define UpStartW 27
-#define UpCountW 3
 
 IMAGE *WassimPics[WassimImageCount];
 
@@ -310,7 +270,7 @@ IndexCollissionW=FallStartW;
             IndexW=0;
             IndexCollissionW=CrouchStartW;
         }
-        else if (IsKeyPressed(PlayerW,FIREBALL)&& SuperPowerW==1 && FireW==1)
+        else if (IsKeyPressed(PlayerW,FIREBALL)&& SuperPowerW==1/* && FireW==1*/)
         {
             effW=0;
             etatW=Fireball;
@@ -326,7 +286,7 @@ IndexCollissionW=FallStartW;
                 Combot2=0;
             }
         }
-        else if (IsKeyPressed(PlayerW,FREEZE)&& SuperPowerW==1&& FreezeW==1)
+        else if (IsKeyPressed(PlayerW,FREEZE)&& SuperPowerW==1/*&& FreezeW==1*/)
         {
             effW=0;
             etatW=Freeze;
@@ -342,7 +302,7 @@ IndexCollissionW=FallStartW;
                 Combot2=0;
             }
         }
-        else if (IsKeyPressed(PlayerW,THUNDER) && SuperPowerW==1&&ThunderW==1)
+        else if (IsKeyPressed(PlayerW,THUNDER) && SuperPowerW==1 /*&&ThunderW==1*/)
         {
             effW=0;
             etatW=Thunder;
@@ -358,7 +318,7 @@ IndexCollissionW=FallStartW;
                 Combot2=0;
             }
         }
-        else if (IsKeyPressed(PlayerW,WIND) && SuperPowerW==1&& WindW==1)
+        else if (IsKeyPressed(PlayerW,WIND) && SuperPowerW==1/*&& WindW==1*/)
         {
             effW=0;
             etatW=Wind;

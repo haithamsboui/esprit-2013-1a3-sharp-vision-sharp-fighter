@@ -75,13 +75,23 @@ void intromenu(int intro)
 
 void mainmenu(int *choix)
 {
+
     IMAGE *Firstmenu[5],*Background,*back_bar,*Select,*Pers_main[5];
     int Button,i,press_buton=0,Pos_cadre[4]= {-10,15,45,70},select_pers=0;
     float taille_x,taille_y,scale,fade=1,back_fade,fade_start=100;
     char direction[100];
     int ind_1,ind_2,ind_3,ind_4;
+      IMAGE *BUTTONS[14];
+      IMAGE *button=load_image("Resources/Images/Select.png");
+
+      char buttons[30];
 // loading
     install_timer();
+  for (i=0; i<14; i++)
+    {
+        sprintf(buttons,"Resources/Images/Buttons/%d.png",i);
+        BUTTONS[i]=load_image(buttons);
+    }
     Button=AddVoice("Resources/Sounds/button3.wav",1);
     Background=load_image("Resources/Images/Origin.png");
     back_bar=load_image("Resources/Images/Origin_bar.png");
@@ -139,7 +149,19 @@ void mainmenu(int *choix)
         draw_image_ex(Firstmenu[ind_4],Pos_cadre[3]-scale,35,taille_x,taille_y+10,NONE,100-fade_start);
 
         draw_image_ex(Select,16,32,27,40,NONE,100-fade_start);
-        draw_image_ex(Pers_main[select_pers],60,0,50,0,NONE,100-fade_start-abs(2*scale)); // draw mokhtar
+        draw_image_ex(Pers_main[select_pers],60,0,50,0,NONE,100-fade_start-abs(2*scale)); // draw mokhtarz
+        if (JoyStickEnabled==0)
+            {
+        draw_text(Arista,"Enter",4,6,90,CENTER,100-fade_start);
+        draw_image_ex(button,1,88,10,7,NONE,100);
+        draw_text(Arista,scancode_to_name(Player1Keyboard[11]),4,16,90,CENTER,100-fade_start);
+         }
+        else {
+
+        draw_text(Arista,"Enter",4,6,90,CENTER,100-fade_start);
+        draw_image_ex(button,1,88,10,7,NONE,100);
+        draw_image_ex(BUTTONS[Player2Joypad[11]],12,89,4,0,NONE,100-fade_start);
+}
         next_frame();
         press_buton++;
     }
@@ -203,6 +225,7 @@ void setting ()
     cadre_modif=load_image("Resources/Images/setting/control_modif.png");
     P1=load_image("Resources/Images/setting/Player1.png");
     P2=load_image("Resources/Images/setting/Player2.png");
+      IMAGE *button=load_image("Resources/Images/Select.png");
     Ingame_bar=load_image("Resources/Images/ingame_bar.png");
     Nb_point_volume_music=Music_volume/19;
     Nb_point_volume_effect=Effect_volume/19;
@@ -689,6 +712,26 @@ void setting ()
         }
         if (ReadingKey)
             PrintScreen(0);
+        if (JoyStickEnabled==0)
+            {
+        draw_text(Arista,"Enter",4,6,90,CENTER,100);
+        draw_image_ex(button,1,88,10,7,NONE,100);
+        draw_text(Arista,scancode_to_name(Player1Keyboard[11]),4,16,90,CENTER,100);
+        draw_text(Arista,"Back",4,6,82,CENTER,100);
+        draw_image_ex(button,1,80,10,7,NONE,100);
+        draw_text(Arista,scancode_to_name(Player1Keyboard[12]),4,16,82,CENTER,100);
+
+         }
+        else {
+
+        draw_text(Arista,"Enter",4,6,90,CENTER,100);
+        draw_image_ex(button,1,88,10,7,NONE,100);
+        draw_image_ex(BUTTONS[Player2Joypad[11]],12,89,4,0,NONE,100);
+        draw_text(Arista,"Back",4,6,82,CENTER,100);
+        draw_image_ex(button,1,80,10,7,NONE,100);
+        draw_image_ex(BUTTONS[Player2Joypad[12]],12,81,4,0,NONE,100);
+
+}
         next_frame();
     }
     fade=1;

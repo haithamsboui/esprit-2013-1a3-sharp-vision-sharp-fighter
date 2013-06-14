@@ -12,7 +12,14 @@ void versus (int intro)
     int choix1=0,choix2=0,distance_change_map=20;
     float w;
     char *maps_names[]= {"Tunisia,Monastir","Egypt,Giza","India,Taj Mahal","Japan,Kyoto","Malaysia,Kuala Lampur"};
-
+      IMAGE *button=load_image("Resources/Images/Select.png");
+      char buttons[30];
+      IMAGE *BUTTONS[14];
+ for (i=0; i<14; i++)
+    {
+        sprintf(buttons,"Resources/Images/Buttons/%d.png",i);
+        BUTTONS[i]=load_image(buttons);
+    }
 
     // Loading caracteres
 
@@ -268,7 +275,26 @@ void versus (int intro)
                 draw_image_ex(Ready[0],Ready_pos[select1],40,10,10,NONE,100);
             if (choix2)
                 draw_image_ex(Ready[1],Ready_pos[select2],40,10,10,NONE,100);
+  if (JoyStickEnabled==0)
+            {
+        draw_text(Arista,"Enter",4,6,90,CENTER,100);
+        draw_image_ex(button,1,88,10,7,NONE,100);
+        draw_text(Arista,scancode_to_name(Player1Keyboard[11]),4,16,90,CENTER,100);
+        draw_text(Arista,"Back",4,6,82,CENTER,100);
+        draw_image_ex(button,1,80,10,7,NONE,100);
+        draw_text(Arista,scancode_to_name(Player1Keyboard[12]),4,16,82,CENTER,100);
 
+         }
+        else {
+
+        draw_text(Arista,"Enter",4,6,90,CENTER,100);
+        draw_image_ex(button,1,88,10,7,NONE,100);
+        draw_image_ex(BUTTONS[Player2Joypad[11]],12,89,4,0,NONE,100);
+        draw_text(Arista,"Back",4,6,82,CENTER,100);
+        draw_image_ex(button,1,80,10,7,NONE,100);
+        draw_image_ex(BUTTONS[Player2Joypad[12]],12,81,4,0,NONE,100);
+
+}
             next_frame();
 
         }
@@ -330,6 +356,26 @@ void versus (int intro)
             draw_text(SharpCurve,maps_names[select_map],7,48.5,75,CENTER,100);
             draw_image_ex(select,20,23,60,48,NONE,100);
             press_buton++;
+       if (JoyStickEnabled==0)
+            {
+        draw_text(Arista,"Enter",4,6,90,CENTER,100);
+        draw_image_ex(button,1,88,10,7,NONE,100);
+        draw_text(Arista,scancode_to_name(Player1Keyboard[11]),4,16,90,CENTER,100);
+        draw_text(Arista,"Back",4,6,82,CENTER,100);
+        draw_image_ex(button,1,80,10,7,NONE,100);
+        draw_text(Arista,scancode_to_name(Player1Keyboard[12]),4,16,82,CENTER,100);
+
+         }
+        else {
+
+        draw_text(Arista,"Enter",4,6,90,CENTER,100);
+        draw_image_ex(button,1,88,10,7,NONE,100);
+        draw_image_ex(BUTTONS[Player2Joypad[11]],12,89,4,0,NONE,100);
+        draw_text(Arista,"Back",4,6,82,CENTER,100);
+        draw_image_ex(button,1,80,10,7,NONE,100);
+        draw_image_ex(BUTTONS[Player2Joypad[12]],12,81,4,0,NONE,100);
+
+}
             next_frame();
         }
     }
