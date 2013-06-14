@@ -99,7 +99,6 @@ void Draw_Salah()
     else
         vflip = NONE;
 
-
     if (player1==0 || player2==0)
     {
         VsSuperPower=SuperPowerM;
@@ -151,7 +150,7 @@ void Draw_Salah()
 
     if (PlayerS==1)
     {
-        if (Combot1==10)
+        if (Combot1>=10)
         {
             SuperPowerS=1;
             if (FrameCount%2==0)
@@ -162,7 +161,7 @@ void Draw_Salah()
     }
     if (PlayerS==2)
     {
-        if (Combot2==10)
+        if (Combot2>=10)
         {
             SuperPowerS=1;
             if (FrameCount%2==0)
@@ -187,14 +186,20 @@ void Draw_Salah()
         if(ProcessCollision(SalahPics,IndexCollissionS,SalahCollision,xS,yS,wS,hS,
                             Vs,IndexVs,TAB,x,y,w,h)&& (etatVS==Punch || etatVS==Kick))
         {
+            if (etatVS==Punch)
+    ComboPunch=1;
+if (etatVS==Kick)
+    Combokick=1;
             etatS=Hit;
             IndexS=0;
             IndexCollissionS=HitStartS;
             if (PlayerS==2)
             {
                 Player2Health-=2.5;
+
                 if (VsSuperPower==0 && Combot1<10)
                     Combot1++;
+
                 if (Player2Health<5)
                 {
                     etatS=Fall;
@@ -206,8 +211,10 @@ void Draw_Salah()
             if (PlayerS==1)
             {
                 Player1Health-=2.5;
+
                 if (VsSuperPower==0 && Combot2<10)
                     Combot2++;
+
                 if (Player1Health<5)
                 {
                     etatS=Fall;

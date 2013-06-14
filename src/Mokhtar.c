@@ -190,6 +190,10 @@ void Draw_Mokhtar()
                             Vs,IndexVs,TAB,x,y,w,h)&& (etatVS==Punch || etatVS==Kick))
         {
 
+if (etatVS==Punch)
+    ComboPunch=1;
+if (etatVS==Kick)
+    Combokick=1;
             etatM=Hit;
             IndexM=0;
             IndexCollissionM=HitStartM;
@@ -779,7 +783,7 @@ if(IndexM<FreezeCountM-1)
 
     case Jump:
 
-        if(FrameCount%10==0)
+        if(FrameCount%7==0)
         {
             if(IndexM>=JumpCountM-1)
             {
@@ -805,8 +809,6 @@ if(IndexM<FreezeCountM-1)
             IndexM++;
             IndexCollissionM++;
         }
-
-
         wM=(hM/((float)MokhtarPics[IndexM+JumpStartM]->h/(float)MokhtarPics[IndexM+JumpStartM]->w))/AspectRatio;
         if(PlayerM==2) xM-=wM;
         draw_image_ex(MokhtarPics[IndexM+JumpStartM],xM,yM,wM,hM,vflip,100);
