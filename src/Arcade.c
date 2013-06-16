@@ -1,7 +1,7 @@
 #include "includes.h"
 
 int Dramatic;
-  int FireH;
+int FireH;
 int ThunderH;
 int WindH;
 int FreezeH;
@@ -24,8 +24,9 @@ int FreezeS;
 
 void Arcade()
 {
-    int selectedplayer,nextmap,nextplayer;
+    int selectedplayer,nextmap,nextplayer,won=1;
     Location locat;
+    int Played[5],i,playedCount=1,exists=1;
     //Loading of data
     voice_set_playmode(Dramatic, PLAYMODE_LOOP);
     Cinematic1();
@@ -36,16 +37,102 @@ void Arcade()
     {
         voice_stop(Dramatic);
         return;
-
     }
-        while((nextplayer=Random(0,4))==selectedplayer);
-    nextmap=4;//Random(0,4);
-    CinematicVoice(selectedplayer,nextplayer,nextmap);
-    voice_stop(Dramatic);
-    GamePlay(selectedplayer,nextplayer,nextmap);
-    CinematicWin(selectedplayer,nextplayer);
+    Played[0]=selectedplayer;
+
+    while(playedCount<5)
+    {
+        if(won)
+        {
+            exists=1;
+            while(exists)
+            {
+                nextplayer=Random(0,4);
+                exists=0;
+                for (i=0; i<playedCount; i++)
+                {
+                    if(Played[i]==nextplayer)
+                    {
+                        exists=1;
+                    }
+                }
+            }
+            Played[playedCount]=nextplayer;
+            playedCount++;
+
+            nextmap=Random(0,4);
+        }
+
+        CinematicVoice(selectedplayer,nextplayer,nextmap);
         voice_stop(Dramatic);
+
+        switch(GamePlay(selectedplayer,nextplayer,nextmap))
+        {
+        case 0:
+            voice_stop(Dramatic);
+            return;
+        case 1:
+            won=1;
+            CinematicWin(selectedplayer,nextplayer);
+            break;
+        case 2:
+            won=0;
+            if(!GameOver(selectedplayer))
+            {
+                voice_stop(Dramatic);
+                return;
+            }
+            break;
+        }
         Savegame();
+    }
+    voice_stop(Dramatic);
+}
+
+int GameOver(int player)
+{
+    //MOKHTAR,HAITHAM,BRAHIM,SALAH,WASSIM
+    int FallIndexes[5]= {29,23,47,29,26},selection=0, button_pressed=0;;
+    IMAGE **Pics;
+    IMAGE*cadre=load_image("Resources/Images/ingame_bar.png");
+    switch(player)
+    {
+    case 0:
+        Pics=MokhtarPics;
+        break;
+    case 1:
+        Pics=HaithamPics;
+        break;
+    case 2:
+        Pics=BrahimPics;
+        break;
+    case 3:
+        Pics=SalahPics;
+        break;
+    case 4:
+        Pics=WassimPics;
+        break;
+    }
+
+    while(!IsKeyPressed(1,ENTER))
+    {
+
+        button_pressed++;
+        if((IsKeyPressed(1,LEFT) || IsKeyPressed(1,RIGHT)) && button_pressed>10)
+        {
+            selection=!selection;
+            button_pressed=0;
+        }
+        draw_text(SharpCurve,"Game Over",20,50,5,CENTER_X,100);
+        draw_text(Arista,"Continue?",8,50,30,CENTER_X,100);
+        draw_text(Arista,"YES",8,25,50,CENTER_X,100);
+        draw_text(Arista,"NO",8,75,50,CENTER_X,100);
+
+        draw_image_ex(Pics[FallIndexes[player]],25,30,50,0,NONE,100);
+        draw_image_ex(cadre,18+selection*50,40,15,30,NONE,100);
+        next_frame();
+    }
+
 
 }
 
@@ -599,6 +686,9 @@ int CharacterSelect()
 
     return -1;
 }
+
+
+
 
 
 
