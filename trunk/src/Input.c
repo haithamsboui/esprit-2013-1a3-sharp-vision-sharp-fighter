@@ -2,15 +2,15 @@
 
 int JoyStickEnabled=0;
 
-int Player1Keyboard[13];
-int Player2Keyboard[13];
-int Player1Joypad[13];
-int Player2Joypad[13];
+int Player1Keyboard[ACTIONSCOUNT];
+int Player2Keyboard[ACTIONSCOUNT];
+int Player1Joypad[ACTIONSCOUNT];
+int Player2Joypad[ACTIONSCOUNT];
 
-JoyButton Player1Joystick[12];
-JoyButton Player2Joystick[12];
-JoyAxe Player1JoyAxes[12];
-JoyAxe Player2JoyAxes[12];
+JoyButton Player1Joystick[ACTIONSCOUNT];
+JoyButton Player2Joystick[ACTIONSCOUNT];
+JoyAxe Player1JoyAxes[ACTIONSCOUNT];
+JoyAxe Player2JoyAxes[ACTIONSCOUNT];
 
 void LoadInput()
 {
@@ -74,7 +74,7 @@ void LoadInput()
         }
     }
 
-    for(i=0; i<13; i++)
+    for(i=0; i<ACTIONSCOUNT; i++)
     {
         if(Player1Joystick[i].InUse)
         {
@@ -112,7 +112,6 @@ int IsKeyPressed(int player, ACTIONS action)
     int ispressed=0;
     if(player & 1)
     {
-
         ispressed = key[Player1Keyboard[action]] ||
                     (JoyStickEnabled &&(
                          (Player1Joystick[action].InUse && Player1Joystick[action].JoyNumber<num_joysticks && joy[Player1Joystick[action].JoyNumber].button[Player1Joystick[action].ButtonNumber].b) ||
