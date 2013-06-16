@@ -21,15 +21,15 @@ typedef struct {
 } JoyAxe;
 
 
-int Player1Keyboard[13];
-int Player2Keyboard[13];
-int Player1Joypad[13];
-int Player2Joypad[13];
+int Player1Keyboard[ACTIONSCOUNT];
+int Player2Keyboard[ACTIONSCOUNT];
+int Player1Joypad[ACTIONSCOUNT];
+int Player2Joypad[ACTIONSCOUNT];
 
-JoyButton Player1Joystick[12];
-JoyButton Player2Joystick[12];
-JoyAxe Player1JoyAxes[12];
-JoyAxe Player2JoyAxes[12];
+JoyButton Player1Joystick[ACTIONSCOUNT];
+JoyButton Player2Joystick[ACTIONSCOUNT];
+JoyAxe Player1JoyAxes[ACTIONSCOUNT];
+JoyAxe Player2JoyAxes[ACTIONSCOUNT];
 
 void LoadInput();
 
