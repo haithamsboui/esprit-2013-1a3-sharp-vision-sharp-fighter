@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="../include/Arcade.h" open="0" top="0" tabpos="4">
-		<Cursor position="0" topLine="0" />
+	<File name="../include/Arcade.h" open="1" top="0" tabpos="2">
+		<Cursor position="56" topLine="0" />
 	</File>
 	<File name="../include/AudioPlayer.h" open="0" top="0" tabpos="9">
 		<Cursor position="0" topLine="0" />
@@ -52,8 +52,8 @@
 	<File name="../include/Texture.h" open="0" top="0" tabpos="11">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../include/Versus.h" open="0" top="0" tabpos="5">
-		<Cursor position="0" topLine="0" />
+	<File name="../include/Versus.h" open="1" top="0" tabpos="3">
+		<Cursor position="312" topLine="0" />
 	</File>
 	<File name="../include/Wassim.h" open="0" top="0" tabpos="14">
 		<Cursor position="0" topLine="0" />
@@ -67,8 +67,8 @@
 	<File name="../include/includes.h" open="0" top="0" tabpos="10">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../src/Arcade.c" open="0" top="0" tabpos="6">
-		<Cursor position="0" topLine="0" />
+	<File name="../src/Arcade.c" open="1" top="1" tabpos="1">
+		<Cursor position="974" topLine="32" />
 	</File>
 	<File name="../src/AudioPlayer.c" open="0" top="0" tabpos="16">
 		<Cursor position="0" topLine="0" />
@@ -112,14 +112,14 @@
 	<File name="../src/Setting.c" open="0" top="0" tabpos="12">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../src/Textout.c" open="1" top="1" tabpos="0">
-		<Cursor position="2377" topLine="63" />
+	<File name="../src/Textout.c" open="0" top="0" tabpos="0">
+		<Cursor position="2275" topLine="59" />
 	</File>
 	<File name="../src/Texture.c" open="0" top="0" tabpos="8">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="../src/Versus.c" open="0" top="0" tabpos="4">
-		<Cursor position="27574" topLine="818" />
+	<File name="../src/Versus.c" open="1" top="0" tabpos="4">
+		<Cursor position="14331" topLine="0" />
 	</File>
 	<File name="../src/VideoPlayer.c" open="0" top="0" tabpos="13">
 		<Cursor position="0" topLine="0" />

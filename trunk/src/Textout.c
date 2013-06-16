@@ -74,7 +74,7 @@ void draw_text(FONTS font,const char* text,float size,float x, float y, FONTSTYL
         ftglRenderFont(fontlist[font], textarray[i], FTGL_RENDER_ALL);
 
         glLineWidth(size/30);
-        glColor4f(0.0f,0.0f,0.0f,Transparency/100.0f);
+        //glColor4f(0.0f,0.0f,0.0f,Transparency/100.0f);
 
         ftglRenderFont(fontlist2[font], textarray[i], FTGL_RENDER_ALL);
 

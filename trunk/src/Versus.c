@@ -403,7 +403,7 @@ void ChargerEffetNaturel(IMAGE *effet[100], char chemin[200], int nombreFrame)
 int indice_efx=0;
 
 
-void GamePlay(int Player1,int Player2,int Map)
+int GamePlay(int Player1,int Player2,int Map)
 {
     IMAGE *MapLoad,*Loadcombo,*EFX[100],*Versus[7],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[5],*Pause_cadre,*RoundWin,*Final1,*Final2,*FIGHT;
     int thunder, rainsound,gameplaysound,sarsour,fight,lotfi,button_press=0,japan,egypt,india;

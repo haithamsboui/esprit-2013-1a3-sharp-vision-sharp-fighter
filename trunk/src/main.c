@@ -10,6 +10,9 @@ int main()
     if(install())
         return 1;//ERROR
 
+        LoadWassim(1);
+        GameOver(4);
+
     intro=AddVoice("Resources/Sounds/intro.wav",0);
     intromenu(intro);
     while (!close_button_pressed)
