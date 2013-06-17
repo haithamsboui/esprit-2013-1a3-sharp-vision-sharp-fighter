@@ -134,8 +134,10 @@ int GameOver(int player)
         draw_image_ex(cadre,18+selection*50,40,15,30,NONE,100);
         next_frame();
     }
+    while(IsKeyPressed(1,ENTER))
+        rest(1);
 
-
+    return !selection;
 }
 
 void Savegame ()
@@ -378,7 +380,7 @@ void CinematicVoice(PLAYERNAME player,PLAYERNAME next, LocationName nextmap)
 {
     char * Playernames[]= {"Mokhtar","Haitham","Brahim","Salah","Wassim"};
     char * Locationnames[]= {"Tunisia","Egypt","Japan","Malaysia","India"};
-    char * cities[]= {"Tunis","Giza","Tokyo","Kuala Lumpur","India"};
+    char * cities[]= {"Tunis","Cairo","Tokyo","Kuala Lumpur","Taj Mahal"};
     flip f=NONE;
     char buffer[500],buffer2[500];
 
