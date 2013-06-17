@@ -63,7 +63,7 @@ int ThunderH;
 int WindH;
 int FreezeH;
 void LoadHaitham(int player);
-void Draw_Haitham();
+void Draw_Haitham(int CPU);
 
 
 #endif // HAITHAM_H_INCLUDED

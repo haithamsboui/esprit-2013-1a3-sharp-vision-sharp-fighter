@@ -60,7 +60,7 @@ int FireW;
 int ThunderW;
 int WindW;
 int FreezeW;
-void Draw_Wassim();
+void Draw_Wassim(int CPU);
 void LoadWassim(int player);
 
 

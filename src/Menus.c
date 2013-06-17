@@ -196,6 +196,7 @@ void setting ()
     char screen_mod[15],res[10],buttons[50];
     int cadre_ind=0,control_in=0,key_modif=0;
     char *keybord_control[]= {"UP","DOWN","LEFT","RIGHT","PUNCH","KICK","DEFENCE","FIREBALL","FREEZE","THUNDER","WIND","ENTER","RETURN"};
+
     IMAGE *BUTTONS[14],*keybord_modif;
     Button=AddVoice("Resources/Sounds/button3.wav",1);
     int ReadingKey=0,PlayerSelection=0,SelectedPlayer=1,PlayerPos[]= {45,60};

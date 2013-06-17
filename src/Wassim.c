@@ -21,7 +21,7 @@ void LoadWassim(int player)
         sprintf(path,"Resources/Images/Wassim/Gameplay/%d.png",i);
         WassimPics[i]=load_image(path);
     }
-
+    IndexCollissionW=StableStartW;
     PlayerW=player;
     etatW=Stable;
     IndexW=0;
@@ -47,8 +47,11 @@ int iW=1;
 int CollisionStatW=0;
 int SuperPowerW=0;
 int effW=0;
-void Draw_Wassim()
+
+void Draw_Wassim(int CPU)
 {
+     EtatPlayer Def[]= {Defence,Crouch,Stable},Attack[]= {Punch,Kick},Spower[]= {Fireball,Freeze,Thunder,Wind},Mov[]= {Forward,Backward,Stable};
+    int def,att,spow,mov;
     flip vflip;
     int jump_stat=1;
     Point ** TAB;
@@ -154,9 +157,9 @@ void Draw_Wassim()
                             Vs,IndexVs,TAB,x,y,w,h)&& (etatVS==Punch || etatVS==Kick))
         {
             if (etatVS==Punch)
-    ComboPunch=1;
-if (etatVS==Kick)
-    Combokick=1;
+                ComboPunch=1;
+            if (etatVS==Kick)
+                Combokick=1;
             etatW=Hit;
             IndexCollissionW=HitStartW;
             IndexW=0;
@@ -167,11 +170,11 @@ if (etatVS==Kick)
                 if (VsSuperPower==0 && Combot1<10)
                     Combot1++;
                 if (Player2Health<5)
-              {
-                     etatW=Fall;
-IndexW=0;
-IndexCollissionW=FallStartW;
-              }
+                {
+                    etatW=Fall;
+                    IndexW=0;
+                    IndexCollissionW=FallStartW;
+                }
             }
             if (PlayerW==1)
             {
@@ -180,11 +183,11 @@ IndexCollissionW=FallStartW;
                 if (VsSuperPower==0 && Combot2<10)
                     Combot2++;
                 if (Player1Health<5)
-{
+                {
                     etatW=Fall;
- IndexW=0;
-IndexCollissionW=FallStartW;
-}
+                    IndexW=0;
+                    IndexCollissionW=FallStartW;
+                }
             }
 
         }
@@ -202,165 +205,297 @@ IndexCollissionW=FallStartW;
         IndexW=0;
         IndexCollissionW=FallStartW;
     }
-    if(etatW!=Kick && etatW!=Punch && etatW!=Fireball && etatW != Freeze && etatW !=Jump  && etatW !=Wind && etatW !=Thunder &&etatW!=Fall&&etatW!=Hit&&etatW!=Defence&&etatW!=Up && etatW!=Crouch)
+     while (xW>99.0)
+                xW--;
+            while (xW<1.0)
+                xW++;
+            if(PlayerW==2)
+                xW-=wW;
+            if (PlayerW==1)
+                x-=w;
+            while(ProcessCollision(WassimPics,IndexCollissionW,WassimCollision,xW,yW,wW,hW,
+                                   Vs,IndexVs,TAB,x,y,w,h) )
+            {
+                if (PlayerW==2)
+                    xW+=0.05;
+                else
+                    xW-=0.05;
+            }
+            if(PlayerW==2)
+                xW+=wW;
+            if (PlayerW==1)
+                x+=w;
+
+ if(etatW!=Kick && etatW!=Punch && etatW!=Fireball && etatW != Freeze && etatW !=Jump  && etatW !=Wind && etatW !=Thunder &&etatW!=Fall&&etatW!=Hit&&etatW!=Defence&&etatW!=Up && etatW!=Crouch)
+        {
+    if (CPU==0)
     {
-        while (xW>99.0)
-            xW--;
-        while (xW<1.0)
-            xW++;
-        if(PlayerW==2)
-            xW-=wW;
-        if (PlayerW==1)
-            x-=w;
-        while(ProcessCollision(WassimPics,IndexCollissionW,WassimCollision,xW,yW,wW,hW,
-                               Vs,IndexVs,TAB,x,y,w,h) )
-        {
-            if (PlayerW==2)
-                xW+=0.05;
+
+
+            if(IsKeyPressed(PlayerW,KICK))
+            {
+                etatW=Kick;
+                IndexW=0;
+                IndexCollissionW=KickStartW;
+                CollisionStatW=1;
+
+            }
+            else if(IsKeyPressed(PlayerW,PUNCH))
+            {
+                etatW=Punch;
+                IndexW=0;
+                IndexCollissionW=PunchStartW;
+                CollisionStatW=1;
+
+            }
+            else if(IsKeyPressed(PlayerW,RIGHT) && xW<99.0)
+            {
+                etatW=Forward;
+                xW+=0.50;
+                IndexCollissionW=WalkStartW;
+
+            }
+            else if (IsKeyPressed(PlayerW,LEFT)&& xW>1.0)
+            {
+                etatW=Backward;
+                xW-=0.50;
+                IndexCollissionW=WalkStartW;
+            }
+            else if (IsKeyPressed(PlayerW,UP))
+            {
+
+                IndexW=0;
+                iW=1;
+
+                etatW=Jump;
+                IndexCollissionW=JumpStartW;
+
+            }
+            else if (IsKeyPressed(PlayerW,DOWN))
+            {
+                etatW=Crouch;
+                IndexW=0;
+                IndexCollissionW=CrouchStartW;
+            }
+            else if (IsKeyPressed(PlayerW,FIREBALL)&& SuperPowerW==1/* && FireW==1*/)
+            {
+                effW=0;
+                etatW=Fireball;
+                IndexW=0;
+                IndexCollissionW=FireballStartW;
+                SuperPowerW=0;
+                if (PlayerW==1)
+                {
+                    Combot1=0;
+                }
+                if (PlayerW==2)
+                {
+                    Combot2=0;
+                }
+            }
+            else if (IsKeyPressed(PlayerW,FREEZE)&& SuperPowerW==1/*&& FreezeW==1*/)
+            {
+                effW=0;
+                etatW=Freeze;
+                IndexW=0;
+                IndexCollissionW=FreezeStartW;
+                SuperPowerW=0;
+                if (PlayerW==1)
+                {
+                    Combot1=0;
+                }
+                if (PlayerW==2)
+                {
+                    Combot2=0;
+                }
+            }
+            else if (IsKeyPressed(PlayerW,THUNDER) && SuperPowerW==1 /*&&ThunderW==1*/)
+            {
+                effW=0;
+                etatW=Thunder;
+                IndexW=0;
+                IndexCollissionW=ThunderStartW;
+                SuperPowerW=0;
+                if (PlayerW==1)
+                {
+                    Combot1=0;
+                }
+                if (PlayerW==2)
+                {
+                    Combot2=0;
+                }
+            }
+            else if (IsKeyPressed(PlayerW,WIND) && SuperPowerW==1/*&& WindW==1*/)
+            {
+                effW=0;
+                etatW=Wind;
+                IndexW=0;
+                IndexCollissionW=WindStartW;
+                SuperPowerW=0;
+                if (PlayerW==1)
+                {
+                    Combot1=0;
+                }
+                if (PlayerW==2)
+                {
+                    Combot2=0;
+                }
+            }
+            else if (IsKeyPressed(PlayerW,DEFENCE))
+            {
+                etatW=Defence;
+                IndexW=0;
+                IndexCollissionW=DefenceStartW;
+            }
             else
-                xW-=0.05;
-        }
-        if(PlayerW==2)
-            xW+=wW;
-        if (PlayerW==1)
-            x+=w;
-
-        if(IsKeyPressed(PlayerW,KICK))
-        {
-            etatW=Kick;
-            IndexW=0;
-            IndexCollissionW=KickStartW;
-            CollisionStatW=1;
-
-        }
-        else if(IsKeyPressed(PlayerW,PUNCH))
-        {
-            etatW=Punch;
-            IndexW=0;
-            IndexCollissionW=PunchStartW;
-            CollisionStatW=1;
-
-        }
-        else if(IsKeyPressed(PlayerW,RIGHT) && xW<99.0)
-        {
-            etatW=Forward;
-            xW+=0.50;
-            IndexCollissionW=WalkStartW;
-
-        }
-        else if (IsKeyPressed(PlayerW,LEFT)&& xW>1.0)
-        {
-            etatW=Backward;
-            xW-=0.50;
-            IndexCollissionW=WalkStartW;
-        }
-        else if (IsKeyPressed(PlayerW,UP))
-        {
-
-            IndexW=0;
-            iW=1;
-
-            etatW=Jump;
-            IndexCollissionW=JumpStartW;
-
-        }
-        else if (IsKeyPressed(PlayerW,DOWN))
-        {
-            etatW=Crouch;
-            IndexW=0;
-            IndexCollissionW=CrouchStartW;
-        }
-        else if (IsKeyPressed(PlayerW,FIREBALL)&& SuperPowerW==1/* && FireW==1*/)
-        {
-            effW=0;
-            etatW=Fireball;
-            IndexW=0;
-            IndexCollissionW=FireballStartW;
-            SuperPowerW=0;
-            if (PlayerW==1)
             {
-                Combot1=0;
-            }
-            if (PlayerW==2)
-            {
-                Combot2=0;
+                etatW=Stable;
+                IndexCollissionW=StablecountW;
+
             }
         }
-        else if (IsKeyPressed(PlayerW,FREEZE)&& SuperPowerW==1/*&& FreezeW==1*/)
-        {
-            effW=0;
-            etatW=Freeze;
-            IndexW=0;
-            IndexCollissionW=FreezeStartW;
-            SuperPowerW=0;
-            if (PlayerW==1)
+else {
+            switch (etatVS)
             {
-                Combot1=0;
-            }
-            if (PlayerW==2)
-            {
-                Combot2=0;
-            }
-        }
-        else if (IsKeyPressed(PlayerW,THUNDER) && SuperPowerW==1 /*&&ThunderW==1*/)
-        {
-            effW=0;
-            etatW=Thunder;
-            IndexW=0;
-            IndexCollissionW=ThunderStartW;
-            SuperPowerW=0;
-            if (PlayerW==1)
-            {
-                Combot1=0;
-            }
-            if (PlayerW==2)
-            {
-                Combot2=0;
-            }
-        }
-        else if (IsKeyPressed(PlayerW,WIND) && SuperPowerW==1/*&& WindW==1*/)
-        {
-            effW=0;
-            etatW=Wind;
-            IndexW=0;
-            IndexCollissionW=WindStartW;
-            SuperPowerW=0;
-            if (PlayerW==1)
-            {
-                Combot1=0;
-            }
-            if (PlayerW==2)
-            {
-                Combot2=0;
-            }
-        }
-        else if (IsKeyPressed(PlayerW,DEFENCE))
-        {
-            etatW=Defence;
-            IndexW=0;
-            IndexCollissionW=DefenceStartW;
-        }
-        else
-        {
-            etatW=Stable;
-            IndexCollissionW=StablecountW;
+            case Forward:
+            case Backward:
+            case Fireball:
+            case Freeze :
+            case Thunder :
+            case Wind :
+                etatW=Stable;
+                IndexW=0;
+                IndexCollissionW=StableStartW;
+                break;
+            case Punch :
+            case Kick :
+                if (abs(x-xW)<1)
+                    def=Random(0,2);
+                etatW=Def[def];
+                switch (def)
+                {
+                case 0 :
+                    IndexW=0;
+                    IndexCollissionW=DefenceStartW;
+                    break;
+                case 1 :
+                    IndexW=0;
+                    IndexCollissionW=CrouchStartW;
+                    break;
+                case 2 :
+                    IndexW=0;
+                    IndexCollissionW=StableStartW;
+                    break;
+                }
 
+                break;
+            case Stable :
+            case Crouch :
+
+                if (abs(x-xW)>1)
+                {
+                    mov=Random(0,2);
+                    etatW=Mov[mov];
+                    switch (mov)
+                    {
+                    case 0 :
+                        xW+=0.50;
+                        IndexCollissionW=WalkStartW;
+                        break;
+                    case 1 :
+                        xW-=0.50;
+                        IndexCollissionW=WalkStartW;
+                        break;
+                    case 2 :
+                        IndexW=0;
+                        IndexCollissionW=StableStartW;
+                        break;
+                    }
+                }
+                else
+                {
+                    if (SuperPowerW==0)
+                    {
+                        att=Random(0,1);
+                        etatW=Attack[att];
+                        switch (att)
+                        {
+                        case 0 :
+                            IndexW=0;
+                            IndexCollissionW=PunchStartW;
+                            CollisionStatW=1;
+                            break;
+                        case 1 :
+                            IndexW=0;
+                            IndexCollissionW=KickStartW;
+                            CollisionStatW=1;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        spow=Random(0,3);
+                        etatW=Spower[spow];
+                        switch (spow)
+                        {
+                        case 0 :
+                            effW=0;
+                            IndexW=0;
+                            IndexCollissionW=FireballStartW;
+                            SuperPowerW=0;
+                            Combot2=0;
+
+                            break;
+                        case 1 :
+                            effW=0;
+                            IndexW=0;
+                            IndexCollissionW=FreezeStartW;
+                            SuperPowerW=0;
+                            Combot2=0;
+                            break;
+                        case 2 :
+                            effW=0;
+                            IndexW=0;
+                            IndexCollissionB=ThunderStartW;
+                            SuperPowerW=0;
+                            Combot2=0;
+                            break;
+                        case 3 :
+                            effW=0;
+                            IndexW=0;
+                            IndexCollissionW=WindStartW;
+                            SuperPowerW=0;
+                            Combot2=0;
+                            break;
+                        }
+                    }
+                }
+                break;
+            default:
+                etatW=Stable;
+                IndexW=0;
+                IndexCollissionW=StableStartW;
+                break;
+            }
         }
+
     }
 
 
     switch(etatW)
     {
     case Stable:
+
         if(FrameCount%10==0)
         {
+
             if(IndexW==0)
                 iW=1;
             if(IndexW>=StablecountW-1)
                 iW=-1;
-
             IndexW=IndexW+iW;
             IndexCollissionW+=IndexW;
+
         }
         IndexW = Min(IndexW,StablecountW-1);
         wW=(hW/((float)WassimPics[IndexW+StableStartW]->h/(float)WassimPics[IndexW+StableStartW]->w))/AspectRatio;
@@ -407,8 +542,8 @@ IndexCollissionW=FallStartW;
             if(IndexW==KickcountW)
             {
                 etatW=Stable;
-         IndexW=0;
-         IndexCollissionW=StableStartW;
+                IndexW=0;
+                IndexCollissionW=StableStartW;
             }
         }
 
@@ -426,8 +561,8 @@ IndexCollissionW=FallStartW;
             if(IndexW==PunchcountW)
             {
                 etatW=Stable;
-         IndexW=0;
-         IndexCollissionW=StableStartW;
+                IndexW=0;
+                IndexCollissionW=StableStartW;
             }
         }
         break;
@@ -462,8 +597,8 @@ IndexCollissionW=FallStartW;
                 OnAttack=1;
 
                 etatW=Stable;
-                         IndexW=0;
-         IndexCollissionW=StableStartW;
+                IndexW=0;
+                IndexCollissionW=StableStartW;
                 if (PlayerW==1)
                 {
                     Player2Health-=20;
@@ -510,8 +645,8 @@ IndexCollissionW=FallStartW;
                 OnAttack=1;
 
                 etatW=Stable;
-                         IndexW=0;
-         IndexCollissionW=StableStartW;
+                IndexW=0;
+                IndexCollissionW=StableStartW;
                 if (PlayerW==1)
                 {
                     Player2Health-=20;
@@ -560,8 +695,8 @@ IndexCollissionW=FallStartW;
                 OnAttack=1;
 
                 etatW=Stable;
-                         IndexW=0;
-         IndexCollissionW=StableStartW;
+                IndexW=0;
+                IndexCollissionW=StableStartW;
                 if (PlayerW==1)
                 {
                     Player2Health-=20;
@@ -609,8 +744,8 @@ IndexCollissionW=FallStartW;
                 OnAttack=1;
 
                 etatW=Stable;
-                         IndexW=0;
-         IndexCollissionW=StableStartW;
+                IndexW=0;
+                IndexCollissionW=StableStartW;
                 if (PlayerW==1)
                 {
                     Player2Health-=20;
@@ -637,8 +772,8 @@ IndexCollissionW=FallStartW;
             if(IndexW==CrouchcountW)
             {
                 etatW=Stable;
-         IndexW=0;
-         IndexCollissionW=StableStartW;
+                IndexW=0;
+                IndexCollissionW=StableStartW;
             }
         }
         break;
@@ -655,8 +790,8 @@ IndexCollissionW=FallStartW;
             if(IndexW>=UpCountW)
             {
                 etatW=Stable;
-                         IndexW=0;
-         IndexCollissionW=StableStartW;
+                IndexW=0;
+                IndexCollissionW=StableStartW;
             }
         }
         break;
@@ -673,8 +808,8 @@ IndexCollissionW=FallStartW;
             if(IndexW==DefencecountW)
             {
                 etatW=Stable;
-                         IndexW=0;
-         IndexCollissionW=StableStartW;
+                IndexW=0;
+                IndexCollissionW=StableStartW;
             }
         }
         break;
@@ -696,15 +831,17 @@ IndexCollissionW=FallStartW;
                 if (PlayerW==2 && Player2Health<5)
                     Player2Health=0;
                 if (PlayerW==1 && Player1Health>5)
-                    {etatW=Up;
+                {
+                    etatW=Up;
                     IndexW=0;
                     IndexCollissionW=FallStartW;
-                    }
+                }
                 if (PlayerW==2 && Player2Health>5)
-                    {etatW=Up;
+                {
+                    etatW=Up;
                     IndexW=0;
                     IndexCollissionW=FallStartW;
-                    }
+                }
             }
         }
         break;
@@ -722,8 +859,8 @@ IndexCollissionW=FallStartW;
             if(IndexW==HitcountW)
             {
                 etatW=Stable;
-                         IndexW=0;
-         IndexCollissionW=StableStartW;
+                IndexW=0;
+                IndexCollissionW=StableStartW;
             }
         }
         break;
@@ -732,11 +869,11 @@ IndexCollissionW=FallStartW;
         if(FrameCount%10==0)
         {
             if(IndexW>=JumpcountW-1)
-                {
+            {
                 etatW=Stable;
-                     IndexW=0;
-         IndexCollissionW=StableStartW;
-            yW=65;
+                IndexW=0;
+                IndexCollissionW=StableStartW;
+                yW=65;
             }
             if (IndexW>=1)
                 jump_stat=0;

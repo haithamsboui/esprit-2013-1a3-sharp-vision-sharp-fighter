@@ -328,7 +328,7 @@ void versus (int intro)
                 player1=select1;
                 player2=select2;
                 voice_stop(intro);
-                GamePlay(select1,select2,select_map);
+                GamePlay(select1,select2,select_map,0);
                 voice_start(intro);
                 return;
             }
@@ -403,7 +403,7 @@ void ChargerEffetNaturel(IMAGE *effet[100], char chemin[200], int nombreFrame)
 int indice_efx=0;
 
 
-int GamePlay(int Player1,int Player2,int Map)
+int GamePlay(int Player1,int Player2,int Map,int CPU)
 {
     IMAGE *MapLoad,*Loadcombo,*EFX[100],*Versus[7],*Score,*Time,*bloodbar,*heads_bar,*heads[5],*Pause[5],*Pause_cadre,*RoundWin,*Final1,*Final2,*FIGHT;
     int thunder, rainsound,gameplaysound,sarsour,fight,lotfi,button_press=0,japan,egypt,india;
@@ -421,6 +421,7 @@ int KickVoice=AddVoice("Resources/Sounds/Kick.wav",1);
     ComboPunch=0;
     int Player1Win=0,player2win=0;
     int OnAttack=0;
+    int stat=0;
     ChargerEffetNaturel(ThunderEffet,"Resources/Images/Thunder/thunder00",50);
     ChargerEffetNaturel(FireEffet,"Resources/Images/Fireball/Fire00",50);
     ChargerEffetNaturel(WindEffet,"Resources/Images/Smoke/wind00",50);
@@ -560,7 +561,7 @@ int KickVoice=AddVoice("Resources/Sounds/Kick.wav",1);
     }
 
     fight=AddVoice("Resources/Sounds/Fight.wav",1);
-    DoEarth(TUNISIA,loc);
+    //DoEarth(TUNISIA,loc);
     sprintf(texttime,"%d",time);
 
            next_frame();
@@ -648,41 +649,41 @@ rest(2500);
             switch (Player1)
             {
             case 0 :
-                Draw_Mokhtar();
+                Draw_Mokhtar(0);
                 break;
             case 1 :
-                Draw_Haitham();
+                Draw_Haitham(0);
 
                 break;
             case 2 :
-                Draw_Brahim();
+                Draw_Brahim(0);
 
                 break;
             case 3 :
-                Draw_Salah();
+                Draw_Salah(0);
 
                 break;
             case 4 :
-                Draw_Wassim();
+                Draw_Wassim(0);
                 break;
             }
 
             switch (Player2)
             {
             case 0 :
-                Draw_Mokhtar();
+                Draw_Mokhtar(CPU);
                 break;
             case 1 :
-                Draw_Haitham();
+                Draw_Haitham(CPU);
                 break;
             case 2 :
-                Draw_Brahim();
+                Draw_Brahim(CPU);
                 break;
             case 3 :
-                Draw_Salah();
+                Draw_Salah(CPU);
                 break;
             case 4 :
-                Draw_Wassim();
+                Draw_Wassim(CPU);
                 break;
             }
 if (Combokick==1)
@@ -731,7 +732,6 @@ if (ComboPunch==1)
                     Player2Health=100;
                     round++;
                 }
-                printf ("Player 1 %d player 2 %d",Player1Win,player2win);
 
                 if (time <=-1 )
                 {
@@ -894,7 +894,7 @@ if (ComboPunch==1)
                         break;
                     }
                     next_frame();
-                    GamePlay(Player1,Player2,Map);
+                    GamePlay(Player1,Player2,Map,0);
                 }
                 break;
                 case 3 :
@@ -924,6 +924,7 @@ if (ComboPunch==1)
                     }
                     while (IsKeyPressed(3,ENTER))
                         rest(1);
+                        stat=0;
                     return ;
                 }
                 break;
@@ -956,6 +957,12 @@ if (ComboPunch==1)
         next_frame();
     }
     rest(2500);
+    if (Player1Win==2)
+        stat=1;
+    if (player2win==2)
+    stat=2;
+
+
     switch (Map)
     {
     case 0 :
@@ -980,6 +987,7 @@ if (ComboPunch==1)
     }
 voice_stop(PunchVoice);
 voice_stop(KickVoice);
+return stat;
 }
 
 

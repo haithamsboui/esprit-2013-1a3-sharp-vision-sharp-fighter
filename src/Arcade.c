@@ -48,6 +48,8 @@ void Arcade()
             while(exists)
             {
                 nextplayer=Random(0,4);
+                player1=selectedplayer;
+                player2=nextplayer;
                 exists=0;
                 for (i=0; i<playedCount; i++)
                 {
@@ -66,7 +68,7 @@ void Arcade()
         CinematicVoice(selectedplayer,nextplayer,nextmap);
         voice_stop(Dramatic);
 
-        switch(GamePlay(selectedplayer,nextplayer,nextmap))
+        switch(GamePlay(selectedplayer,nextplayer,nextmap,1))
         {
         case 0:
             voice_stop(Dramatic);
@@ -459,7 +461,7 @@ int CharacterSelect()
     char direction[100];
     int choix1=0,choix2=0,/*map_pos[]= {6,24,42,60,78}*/distance_change_map=20;
     float w;
-    char *maps_names[]= {"Tunisia,Tunis","Egypt,Giza","India,Taj Mahal","Japan,Kyoto","Malaysia,Kuala Lampur"};
+    char *maps_names[]= {"Tunisia,Tunis","Egypt,Cairo","India,Taj Mahal","Japan,Kyoto","Malaysia,Kuala Lampur"};
 
 
     // Loading caracteres

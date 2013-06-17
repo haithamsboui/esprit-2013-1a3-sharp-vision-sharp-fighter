@@ -2,6 +2,7 @@
 #define SALAH_H_INCLUDED
 
 #define SalahImageCount 51
+
 #define StableStartS 0
 #define StableCountS 3
 
@@ -67,7 +68,7 @@ int WindS;
 int FreezeS;
 
 void LoadSalah(int PlayerS);
-void Draw_Salah();
+void Draw_Salah(int CPU);
 
 
 

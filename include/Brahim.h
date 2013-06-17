@@ -64,7 +64,7 @@ int ThunderB;
 int WindB;
 int FreezeB;
 void LoadBrahim(int player);
-void Draw_Brahim();
+void Draw_Brahim(int CPU);
 
 
 
