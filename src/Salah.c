@@ -47,6 +47,8 @@ int iS=1;
 int effS=0;
 void Draw_Salah(int CPU)
 {
+     EtatPlayer Def[]= {Defence,Crouch,Stable},Attack[]= {Punch,Kick,Stable},Spower[]= {Fireball,Freeze,Thunder,Wind},Mov[]= {Forward,Backward,Stable};
+    int def,att,spow,mov;
     Point ** TAB;
     IMAGE ** Vs;
     int x,y,w,h,IndexVs,VsSuperPower;
@@ -199,31 +201,31 @@ void Draw_Salah(int CPU)
         IndexCollissionS;
     }
 
-     while (xS>99.0)
-                xS--;
-            while (xS<1.0)
-                xS++;
-            if(PlayerS==2)
-                xS-=wS;
-            if (PlayerS==1)
-                x-=w;
-            while( ProcessCollision(SalahPics,IndexCollissionS,SalahCollision,xS,yS,wS,hS,
-                                    Vs, IndexVs, TAB, x,y,w,h))
-            {
-                if (PlayerS==2)
-                    xS+=0.05;
-                else
-                    xS-=0.05;
-            }
-            if(PlayerS==2)
-                xS+=wS;
-            if (PlayerS==1)
-                x+=w;
-
-    if (CPU==0)
+    while (xS>99.0)
+        xS--;
+    while (xS<1.0)
+        xS++;
+    if(PlayerS==2)
+        xS-=wS;
+    if (PlayerS==1)
+        x-=w;
+    while( ProcessCollision(SalahPics,IndexCollissionS,SalahCollision,xS,yS,wS,hS,
+                            Vs, IndexVs, TAB, x,y,w,h))
     {
-        if(etatS!=Kick && etatS!=Punch && etatS!=Fireball && etatS != Freeze && etatS !=Jump  && etatS !=Wind && etatS !=Thunder &&etatS!=Hit&&etatS!=Defence&&etatS!=Up && etatS!=Crouch && etatS!=Fall)
+        if (PlayerS==2)
+            xS+=0.05;
+        else
+            xS-=0.05;
+    }
+    if(PlayerS==2)
+        xS+=wS;
+    if (PlayerS==1)
+        x+=w;
+    if(etatS!=Kick && etatS!=Punch && etatS!=Fireball && etatS != Freeze && etatS !=Jump  && etatS !=Wind && etatS !=Thunder &&etatS!=Hit&&etatS!=Defence&&etatS!=Up && etatS!=Crouch && etatS!=Fall)
+    {
+        if (CPU==0)
         {
+
 
             if(IsKeyPressed(PlayerS,KICK))
             {
@@ -348,7 +350,155 @@ void Draw_Salah(int CPU)
             }
         }
 
+
+
+        if (CPU==1)
+        {
+            switch (etatVS)
+            {
+
+            case Fireball:
+            case Freeze :
+            case Thunder :
+            case Wind :
+                etatS=Stable;
+                IndexS=0;
+                IndexCollissionS=StableStartS;
+                break;
+            case Punch :
+            case Kick :
+                if (-x+xS<5)
+                    def=Random(0,2);
+
+                switch (def)
+                {
+                case 0 :
+                    IndexS=0;
+                    IndexCollissionS=DefenceStartS;
+                    etatS=Defence;
+                    break;
+
+                case 2 :
+                    etatS=Stable;
+                    IndexS=0;
+                    IndexCollissionS=StableStartS;
+                    break;
+                }
+
+                break;
+
+            case Stable :
+            case Crouch :
+            case Forward:
+            case Backward :
+                if(xS-x>20)
+                {
+                    mov=Random(0,2);
+                    switch (mov)
+                    {
+                    case 0 :
+                        if (xS<99)
+                        {
+                            xS+=0.50;
+                            IndexCollissionS=WalkStartS;
+                            etatS=Forward;
+                        }
+                        break;
+                    case 1 :
+                        if (xS>=x)
+                        {
+                            etatS=Backward;
+                            xS-=0.50;
+                            IndexCollissionS=WalkStartS;
+                        }
+                        break;
+                    case 2 :
+                        etatS=Stable;
+                        IndexS=0;
+                        IndexCollissionS=StableStartS;
+                        break;
+                    }
+                }
+
+                if(xS-x<35)
+                {
+                    if (SuperPowerS==0)
+                    {
+                        att=Random(0,2);
+                        switch (att)
+                        {
+                        case 0 :
+                            etatS=Punch;
+                            IndexS=0;
+                            IndexCollissionS=PunchStartS;
+                            CollisionStatS=1;
+                            break;
+                        case 1 :
+                            etatS=Kick;
+                            IndexS=0;
+                            IndexCollissionS=KickStartS;
+                            CollisionStatS=1;
+                            break;
+                        case 2 :
+                            etatS=Stable;
+                            IndexS=0;
+                            IndexCollissionS=StableStartS;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        spow=Random(0,3);
+                        switch (spow)
+                        {
+                        case 0 :
+                            etatS=Fireball;
+                            effS=0;
+                            IndexS=0;
+                            IndexCollissionS=FireballStartS;
+                            SuperPowerS=0;
+                            Combot2=0;
+
+                            break;
+                        case 1 :
+                            etatS=Freeze;
+                            effS=0;
+                            IndexS=0;
+                            IndexCollissionS=FreezeStartS;
+                            SuperPowerS=0;
+                            Combot2=0;
+                            break;
+                        case 2 :
+                            etatS=Thunder;
+                            effS=0;
+                            IndexS=0;
+                            IndexCollissionS=ThunderStartS;
+                            SuperPowerS=0;
+                            Combot2=0;
+
+                            break;
+                        case 3 :
+                            etatS=Wind;
+                            effS=0;
+                            IndexS=0;
+                            IndexCollissionS=WindStartS;
+                            SuperPowerS=0;
+                            Combot2=0;
+
+                            break;
+                        }
+                    }
+                }
+                break;
+            default:
+                etatS=Stable;
+                IndexS=0;
+                IndexCollissionS=StableStartS;
+                break;
+            }
+        }
     }
+
     switch(etatS)
     {
     case Stable:

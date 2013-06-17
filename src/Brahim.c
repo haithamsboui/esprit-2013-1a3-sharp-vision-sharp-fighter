@@ -344,13 +344,11 @@ void Draw_Brahim(int CPU)
             }
         }
 
-
-        if (CPU==1)
+if (CPU==1)
         {
             switch (etatVS)
             {
-            case Forward:
-            case Backward:
+
             case Fireball:
             case Freeze :
             case Thunder :
@@ -361,76 +359,92 @@ void Draw_Brahim(int CPU)
                 break;
             case Punch :
             case Kick :
-                if (abs(x-xB)<10)
+                if (xB-x<20)
                     def=Random(0,2);
-                etatB=Def[def];
+
                 switch (def)
                 {
                 case 0 :
                     IndexB=0;
                     IndexCollissionB=DefenceStartB;
+                    etatB=Defence;
                     break;
-                case 1 :
-                    IndexB=0;
-                    IndexCollissionB=CrouchStartB;
-                    break;
+
                 case 2 :
+                    etatB=Stable;
                     IndexB=0;
-                    IndexCollissionB=StableStartB;
+                    IndexCollissionH=StableStartH;
                     break;
                 }
 
                 break;
+
             case Stable :
             case Crouch :
-
-                if (abs(x-xB)>5)
+            case Forward:
+            case Backward :
+                if(xB-x>20)
                 {
                     mov=Random(0,2);
-                    etatB=Mov[mov];
                     switch (mov)
                     {
                     case 0 :
-                        xB+=0.50;
-                        IndexCollissionB=WalkStartB;
+                        if (xB<99)
+                        {
+                            xB+=0.50;
+                            IndexCollissionB=WalkStartB;
+                            etatB=Forward;
+                        }
                         break;
                     case 1 :
-                        xB-=0.50;
-                        IndexCollissionB=WalkStartB;
+                        if (xB>=x)
+                        {
+                            etatB=Backward;
+                            xB-=0.50;
+                            IndexCollissionB=WalkStartB;
+                        }
                         break;
                     case 2 :
+                        etatB=Stable;
                         IndexB=0;
                         IndexCollissionB=StableStartB;
                         break;
                     }
                 }
-                else
+
+                if(xB-x<35)
                 {
                     if (SuperPowerB==0)
                     {
-                        att=Random(0,1);
-                        etatB=Attack[att];
+                        att=Random(0,2);
                         switch (att)
                         {
                         case 0 :
+                            etatB=Punch;
                             IndexB=0;
                             IndexCollissionB=PunchStartB;
                             CollisionStatB=1;
                             break;
                         case 1 :
+                            etatB=Kick;
                             IndexB=0;
                             IndexCollissionB=KickStartB;
                             CollisionStatB=1;
+                            break;
+                        case 2 :
+                            etatB=Stable;
+                            IndexB=0;
+                            IndexCollissionB=StableStartB;
                             break;
                         }
                     }
                     else
                     {
                         spow=Random(0,3);
-                        etatB=Spower[spow];
                         switch (spow)
                         {
                         case 0 :
+                            etatB=Fireball;
                             effB=0;
                             IndexB=0;
                             IndexCollissionB=FireballStartB;
@@ -439,6 +453,7 @@ void Draw_Brahim(int CPU)
 
                             break;
                         case 1 :
+                            etatB=Freeze;
                             effB=0;
                             IndexB=0;
                             IndexCollissionB=FreezeStartB;
@@ -446,18 +461,22 @@ void Draw_Brahim(int CPU)
                             Combot2=0;
                             break;
                         case 2 :
+                            etatB=Thunder;
                             effB=0;
                             IndexB=0;
                             IndexCollissionB=ThunderStartB;
                             SuperPowerB=0;
                             Combot2=0;
+
                             break;
                         case 3 :
+                            etatH=Wind;
                             effB=0;
                             IndexB=0;
                             IndexCollissionB=WindStartB;
                             SuperPowerB=0;
                             Combot2=0;
+
                             break;
                         }
                     }
@@ -470,6 +489,7 @@ void Draw_Brahim(int CPU)
                 break;
             }
         }
+
     }
     if (OnAttack==1)
     {

@@ -51,7 +51,8 @@ int effM=0;
 
 void Draw_Mokhtar(int CPU )
 {
-
+    EtatPlayer Def[]= {Defence,Crouch,Stable},Attack[]= {Punch,Kick,Stable},Spower[]= {Fireball,Freeze,Thunder,Wind},Mov[]= {Forward,Backward,Stable};
+    int def,att,spow,mov;
     Point ** TAB;
     IMAGE ** Vs;
     int x,y,w,h,IndexVs,VsSuperPower;
@@ -223,11 +224,10 @@ void Draw_Mokhtar(int CPU )
             if (PlayerM==1)
                 x+=w;
 
-    if (CPU==0)
-    {
         if(etatM!=Kick && etatM!=Punch && etatM!=Fireball && etatM != Freeze&& etatM != Fall && etatM !=Jump  && etatM !=Wind && etatM !=Thunder && etatM!=Hit &&etatM!=Defence && etatM!=Up &&etatM!=Crouch)
         {
-
+    if (CPU==0)
+    {
             if(IsKeyPressed(PlayerM,KICK))
             {
                 etatM=Kick;
@@ -357,6 +357,153 @@ void Draw_Mokhtar(int CPU )
 
             }
         }
+
+          if (CPU==1)
+        {
+            switch (etatVS)
+            {
+
+            case Fireball:
+            case Freeze :
+            case Thunder :
+            case Wind :
+                etatM=Stable;
+                IndexM=0;
+                IndexCollissionM=StableStartM;
+                break;
+            case Punch :
+            case Kick :
+                if (xM-x<5)
+                    def=Random(0,2);
+
+                switch (def)
+                {
+                case 0 :
+                    IndexM=0;
+                    IndexCollissionM=DefenceStartM;
+                    etatM=Defence;
+                    break;
+
+                case 2 :
+                    etatM=Stable;
+                    IndexM=0;
+                    IndexCollissionM=StableStartM;
+                    break;
+                }
+
+                break;
+
+            case Stable :
+            case Crouch :
+            case Forward:
+            case Backward :
+                if(xM-x>20)
+                {
+                    mov=Random(0,2);
+                    switch (mov)
+                    {
+                    case 0 :
+                        if (xM<99)
+                        {
+                            xM+=0.50;
+                            IndexCollissionM=WalkStartM;
+                            etatM=Forward;
+                        }
+                        break;
+                    case 1 :
+                        if (xM>=x)
+                        {
+                            etatM=Backward;
+                            xM-=0.50;
+                            IndexCollissionM=WalkStartM;
+                        }
+                        break;
+                    case 2 :
+                        etatM=Stable;
+                        IndexM=0;
+                        IndexCollissionM=StableStartM;
+                        break;
+                    }
+                }
+
+                if(xM-x<35)
+                {
+                    if (SuperPowerM==0)
+                    {
+                        att=Random(0,2);
+                        switch (att)
+                        {
+                        case 0 :
+                            etatM=Punch;
+                            IndexM=0;
+                            IndexCollissionM=PunchStartM;
+                            CollisionStatM=1;
+                            break;
+                        case 1 :
+                            etatM=Kick;
+                            IndexM=0;
+                            IndexCollissionM=KickStartM;
+                            CollisionStatM=1;
+                            break;
+                        case 2 :
+                            etatM=Stable;
+                            IndexM=0;
+                            IndexCollissionM=StableStartM;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        spow=Random(0,3);
+                        switch (spow)
+                        {
+                        case 0 :
+                            etatM=Fireball;
+                            effM=0;
+                            IndexM=0;
+                            IndexCollissionM=FireballStartM;
+                            SuperPowerM=0;
+                            Combot2=0;
+
+                            break;
+                        case 1 :
+                            etatM=Freeze;
+                            effM=0;
+                            IndexM=0;
+                            IndexCollissionM=FreezeStartM;
+                            SuperPowerM=0;
+                            Combot2=0;
+                            break;
+                        case 2 :
+                            etatM=Thunder;
+                            effM=0;
+                            IndexM=0;
+                            IndexCollissionM=ThunderStartM;
+                            SuperPowerM=0;
+                            Combot2=0;
+
+                            break;
+                        case 3 :
+                            etatM=Wind;
+                            effM=0;
+                            IndexM=0;
+                            IndexCollissionM=WindStartM;
+                            SuperPowerM=0;
+                            Combot2=0;
+
+                            break;
+                        }
+                    }
+                }
+                break;
+            default:
+                etatM=Stable;
+                IndexM=0;
+                IndexCollissionM=StableStartM;
+                break;
+            }
+        }
+
     }
 
 

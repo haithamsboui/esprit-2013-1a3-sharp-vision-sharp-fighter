@@ -354,11 +354,11 @@ void Draw_Wassim(int CPU)
 
             }
         }
-else {
+  if (CPU==1)
+        {
             switch (etatVS)
             {
-            case Forward:
-            case Backward:
+
             case Fireball:
             case Freeze :
             case Thunder :
@@ -369,76 +369,92 @@ else {
                 break;
             case Punch :
             case Kick :
-                if (abs(x-xW)<1)
+                if (-x+xW<10)
                     def=Random(0,2);
-                etatW=Def[def];
+
                 switch (def)
                 {
                 case 0 :
                     IndexW=0;
                     IndexCollissionW=DefenceStartW;
+                    etatW=Defence;
                     break;
-                case 1 :
-                    IndexW=0;
-                    IndexCollissionW=CrouchStartW;
-                    break;
+
                 case 2 :
+                    etatW=Stable;
                     IndexW=0;
-                    IndexCollissionW=StableStartW;
+                    IndexCollissionH=StableStartH;
                     break;
                 }
 
                 break;
+
             case Stable :
             case Crouch :
-
-                if (abs(x-xW)>1)
+            case Forward:
+            case Backward :
+                if(xW-x>20)
                 {
                     mov=Random(0,2);
-                    etatW=Mov[mov];
                     switch (mov)
                     {
                     case 0 :
-                        xW+=0.50;
-                        IndexCollissionW=WalkStartW;
+                        if (xW<99)
+                        {
+                            xW+=0.50;
+                            IndexCollissionW=WalkStartW;
+                            etatW=Forward;
+                        }
                         break;
                     case 1 :
-                        xW-=0.50;
-                        IndexCollissionW=WalkStartW;
+                        if (xW>=x)
+                        {
+                            etatW=Backward;
+                            xW-=0.50;
+                            IndexCollissionW=WalkStartW;
+                        }
                         break;
                     case 2 :
+                        etatW=Stable;
                         IndexW=0;
                         IndexCollissionW=StableStartW;
                         break;
                     }
                 }
-                else
+
+                if(xW-x<35)
                 {
                     if (SuperPowerW==0)
                     {
-                        att=Random(0,1);
-                        etatW=Attack[att];
+                        att=Random(0,2);
                         switch (att)
                         {
                         case 0 :
+                            etatW=Punch;
                             IndexW=0;
                             IndexCollissionW=PunchStartW;
                             CollisionStatW=1;
                             break;
                         case 1 :
+                            etatW=Kick;
                             IndexW=0;
                             IndexCollissionW=KickStartW;
                             CollisionStatW=1;
+                            break;
+                        case 2 :
+                            etatW=Stable;
+                            IndexW=0;
+                            IndexCollissionW=StableStartW;
                             break;
                         }
                     }
                     else
                     {
                         spow=Random(0,3);
-                        etatW=Spower[spow];
                         switch (spow)
                         {
                         case 0 :
+                            etatW=Fireball;
                             effW=0;
                             IndexW=0;
                             IndexCollissionW=FireballStartW;
@@ -447,6 +463,7 @@ else {
 
                             break;
                         case 1 :
+                            etatW=Freeze;
                             effW=0;
                             IndexW=0;
                             IndexCollissionW=FreezeStartW;
@@ -454,18 +471,22 @@ else {
                             Combot2=0;
                             break;
                         case 2 :
+                            etatW=Thunder;
                             effW=0;
                             IndexW=0;
-                            IndexCollissionB=ThunderStartW;
+                            IndexCollissionW=ThunderStartW;
                             SuperPowerW=0;
                             Combot2=0;
+
                             break;
                         case 3 :
+                            etatH=Wind;
                             effW=0;
                             IndexW=0;
                             IndexCollissionW=WindStartW;
                             SuperPowerW=0;
                             Combot2=0;
+
                             break;
                         }
                     }
