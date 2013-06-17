@@ -21,7 +21,7 @@ void LoadSalah(int player)
         sprintf(path,"Resources/Images/Salah/GamePlay/%d.png",i);
         SalahPics[i]=load_image(path);
     }
-
+    IndexCollissionS=StableStartS;
     PlayerS=player;
     etatS=Stable;
     IndexS=0;
@@ -41,11 +41,11 @@ void LoadSalah(int player)
     }
 
 }
-int CollisionStatS=0;
+int CollisionStatS=StableStartS;
 int SuperPowerS=0;
 int iS=1;
 int effS=0;
-void Draw_Salah()
+void Draw_Salah(int CPU)
 {
     Point ** TAB;
     IMAGE ** Vs;
@@ -146,9 +146,9 @@ void Draw_Salah()
                             Vs,IndexVs,TAB,x,y,w,h)&& (etatVS==Punch || etatVS==Kick))
         {
             if (etatVS==Punch)
-    ComboPunch=1;
-if (etatVS==Kick)
-    Combokick=1;
+                ComboPunch=1;
+            if (etatVS==Kick)
+                Combokick=1;
             etatS=Hit;
             IndexS=0;
             IndexCollissionS=HitStartS;
@@ -198,159 +198,163 @@ if (etatVS==Kick)
         IndexS=0;
         IndexCollissionS;
     }
-    if(etatS!=Kick && etatS!=Punch && etatS!=Fireball && etatS != Freeze && etatS !=Jump  && etatS !=Wind && etatS !=Thunder &&etatS!=Hit&&etatS!=Defence&&etatS!=Up && etatS!=Crouch && etatS!=Fall)
+
+     while (xS>99.0)
+                xS--;
+            while (xS<1.0)
+                xS++;
+            if(PlayerS==2)
+                xS-=wS;
+            if (PlayerS==1)
+                x-=w;
+            while( ProcessCollision(SalahPics,IndexCollissionS,SalahCollision,xS,yS,wS,hS,
+                                    Vs, IndexVs, TAB, x,y,w,h))
+            {
+                if (PlayerS==2)
+                    xS+=0.05;
+                else
+                    xS-=0.05;
+            }
+            if(PlayerS==2)
+                xS+=wS;
+            if (PlayerS==1)
+                x+=w;
+
+    if (CPU==0)
     {
-        while (xS>99.0)
-            xS--;
-        while (xS<1.0)
-            xS++;
-        if(PlayerS==2)
-            xS-=wS;
-        if (PlayerS==1)
-            x-=w;
-        while( ProcessCollision(SalahPics,IndexCollissionS,SalahCollision,xS,yS,wS,hS,
-                                Vs, IndexVs, TAB, x,y,w,h))
+        if(etatS!=Kick && etatS!=Punch && etatS!=Fireball && etatS != Freeze && etatS !=Jump  && etatS !=Wind && etatS !=Thunder &&etatS!=Hit&&etatS!=Defence&&etatS!=Up && etatS!=Crouch && etatS!=Fall)
         {
-            if (PlayerS==2)
-                xS+=0.05;
+
+            if(IsKeyPressed(PlayerS,KICK))
+            {
+                etatS=Kick;
+                IndexS=0;
+                IndexCollissionS=KickStartS;
+                CollisionStatS=1;
+
+            }
+            else if(IsKeyPressed(PlayerS,PUNCH))
+            {
+                etatS=Punch;
+                IndexS=0;
+                IndexCollissionS=PunchStartS;
+                CollisionStatS=1;
+
+            }
+            else if(IsKeyPressed(PlayerS,RIGHT) && xS<99.0)
+            {
+                etatS=Forward;
+                xS+=0.50;
+                IndexCollissionS=WalkStartS;
+            }
+            else if (IsKeyPressed(PlayerS,LEFT) && xS>1.0)
+            {
+                etatS=Backward;
+                xS-=0.50;
+                IndexCollissionS=WalkStartS;
+            }
+            else if (IsKeyPressed(PlayerS,UP))
+            {
+                IndexS=0;
+                iS=1;
+                etatS=Jump;
+                IndexCollissionS=JumpStartS;
+
+
+            }
+            else if (IsKeyPressed(PlayerS,DOWN))
+            {
+                etatS=Crouch;
+                IndexS=0;
+                IndexCollissionS=CrouchStartS;
+            }
+            else if (IsKeyPressed(PlayerS,FIREBALL)&& SuperPowerS==1/*&& FireS==1*/)
+            {
+                effS=0;
+
+                etatS=Fireball;
+                IndexS=0;
+                IndexCollissionS=FireballStartS;
+                SuperPowerS=0;
+                if (PlayerS==1)
+                {
+                    Combot1=0;
+                }
+                if (PlayerS==2)
+                {
+                    Combot2=0;
+                }
+            }
+            else if (IsKeyPressed(PlayerS,FREEZE)&& SuperPowerS==1 /*&& FreezeS==1*/)
+            {
+                effS=0;
+
+                etatS=Freeze;
+                IndexS=0;
+                IndexCollissionS=FreezeStartS;
+                SuperPowerS=0;
+                if (PlayerS==1)
+                {
+                    Combot1=0;
+                }
+                if (PlayerS==2)
+                {
+                    Combot2=0;
+                }
+            }
+            else if (IsKeyPressed(PlayerS,THUNDER)&& SuperPowerS==1/*&& ThunderS==1*/)
+            {
+                effS=0;
+                etatS=Thunder;
+                IndexS=0;
+                IndexCollissionS=ThunderStartS;
+                SuperPowerS=0;
+                if (PlayerS==1)
+                {
+                    Combot1=0;
+                }
+                if (PlayerS==2)
+                {
+                    Combot2=0;
+                }
+            }
+            else if (IsKeyPressed(PlayerS,WIND)&& SuperPowerS==1/*&& WindS==1*/)
+            {
+                effS=0;
+
+                etatS=Wind;
+                IndexS=0;
+                IndexCollissionS=WindStartS;
+                SuperPowerS=0;
+                if (PlayerS==1)
+                {
+                    Combot1=0;
+                }
+                if (PlayerS==2)
+                {
+                    Combot2=0;
+                }
+            }
+            else if (IsKeyPressed(PlayerS,DEFENCE))
+            {
+                etatS=Defence;
+                IndexS=0;
+                IndexCollissionS=DefenceStartS;
+            }
             else
-                xS-=0.05;
-        }
-        if(PlayerS==2)
-            xS+=wS;
-        if (PlayerS==1)
-            x+=w;
-
-        if(IsKeyPressed(PlayerS,KICK))
-        {
-            etatS=Kick;
-            IndexS=0;
-            IndexCollissionS=KickStartS;
-            CollisionStatS=1;
-
-        }
-        else if(IsKeyPressed(PlayerS,PUNCH))
-        {
-            etatS=Punch;
-            IndexS=0;
-            IndexCollissionS=PunchStartS;
-            CollisionStatS=1;
-
-        }
-        else if(IsKeyPressed(PlayerS,RIGHT) && xS<99.0)
-        {
-            etatS=Forward;
-            xS+=0.50;
-            IndexCollissionS=WalkStartS;
-        }
-        else if (IsKeyPressed(PlayerS,LEFT) && xS>1.0)
-        {
-            etatS=Backward;
-            xS-=0.50;
-            IndexCollissionS=WalkStartS;
-        }
-        else if (IsKeyPressed(PlayerS,UP))
-        {
-            IndexS=0;
-            iS=1;
-            etatS=Jump;
-            IndexCollissionS=JumpStartS;
-
-
-        }
-        else if (IsKeyPressed(PlayerS,DOWN))
-        {
-            etatS=Crouch;
-            IndexS=0;
-            IndexCollissionS=CrouchStartS;
-        }
-        else if (IsKeyPressed(PlayerS,FIREBALL)&& SuperPowerS==1/*&& FireS==1*/)
-        {
-            effS=0;
-
-            etatS=Fireball;
-            IndexS=0;
-            IndexCollissionS=FireballStartS;
-            SuperPowerS=0;
-            if (PlayerS==1)
             {
-                Combot1=0;
-            }
-            if (PlayerS==2)
-            {
-                Combot2=0;
+                etatS=Stable;
+                IndexCollissionS=StableStartS;
             }
         }
-        else if (IsKeyPressed(PlayerS,FREEZE)&& SuperPowerS==1 /*&& FreezeS==1*/)
-        {
-            effS=0;
 
-            etatS=Freeze;
-            IndexS=0;
-            IndexCollissionS=FreezeStartS;
-            SuperPowerS=0;
-            if (PlayerS==1)
-            {
-                Combot1=0;
-            }
-            if (PlayerS==2)
-            {
-                Combot2=0;
-            }
-        }
-        else if (IsKeyPressed(PlayerS,THUNDER)&& SuperPowerS==1/*&& ThunderS==1*/)
-        {
-            effS=0;
-            etatS=Thunder;
-            IndexS=0;
-            IndexCollissionS=ThunderStartS;
-            SuperPowerS=0;
-            if (PlayerS==1)
-            {
-                Combot1=0;
-            }
-            if (PlayerS==2)
-            {
-                Combot2=0;
-            }
-        }
-        else if (IsKeyPressed(PlayerS,WIND)&& SuperPowerS==1/*&& WindS==1*/)
-        {
-            effS=0;
-
-            etatS=Wind;
-            IndexS=0;
-            IndexCollissionS=WindStartS;
-            SuperPowerS=0;
-            if (PlayerS==1)
-            {
-                Combot1=0;
-            }
-            if (PlayerS==2)
-            {
-                Combot2=0;
-            }
-        }
-        else if (IsKeyPressed(PlayerS,DEFENCE))
-        {
-            etatS=Defence;
-            IndexS=0;
-            IndexCollissionS=DefenceStartS;
-        }
-        else
-        {
-            etatS=Stable;
-            IndexCollissionS=StableStartS;
-        }
     }
-
-
-
     switch(etatS)
     {
     case Stable:
         if(FrameCount%10==0)
         {
+
             if(IndexS==0)
                 iS=1;
             if(IndexS>=StableCountS-1)
@@ -741,7 +745,7 @@ if (etatVS==Kick)
                 etatS=Stable;
                 IndexS=0;
                 IndexCollissionS=StableStartS;
-        yS=55;
+                yS=55;
             }
             if (IndexS>=2)
                 jump_stat=0;

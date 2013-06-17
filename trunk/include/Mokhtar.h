@@ -66,6 +66,6 @@ int ThunderM;
 int WindM;
 int FreezeM;
 
-void Draw_Mokhtar();
+void Draw_Mokhtar(int CPU);
 void LoadMokhtar(int PlayerM);
 #endif // MOKHTAR_H_INCLUDED

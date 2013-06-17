@@ -23,6 +23,7 @@ void LoadHaitham(int player)
     }
 
     PlayerH=player;
+    IndexCollissionH=StableStartH;
     etatH=Stable;
     IndexH=0;
     yH=45;
@@ -50,10 +51,11 @@ int CollisionStatH=0;
 int SuperPowerH=0;
 int effH=0;
 
-void Draw_Haitham()
+void Draw_Haitham(int CPU)
 {
     int x,y,w,h,IndexVs,VsSuperPower;
-
+ EtatPlayer Def[]= {Defence,Crouch,Stable},Attack[]= {Punch,Kick},Spower[]= {Fireball,Freeze,Thunder,Wind},Mov[]= {Forward,Backward,Stable};
+    int def,att,spow,mov;
     flip vflip;
     Point ** TAB;
     IMAGE ** Vs;
@@ -153,10 +155,10 @@ void Draw_Haitham()
         if(ProcessCollision(HaithamPics,IndexCollissionH,HaithamCollision,xH,yH,wH,hH,
                             Vs,IndexVs,TAB,x,y,w,h) && (EtatVS==Punch || EtatVS==Kick))
         {
-           if (EtatVS==Punch)
-    ComboPunch=1;
-if (EtatVS==Kick)
-    Combokick=1;
+            if (EtatVS==Punch)
+                ComboPunch=1;
+            if (EtatVS==Kick)
+                Combokick=1;
             etatH=Hit;
             IndexH=0;
             IndexCollissionH=HitStartH;
@@ -166,24 +168,24 @@ if (EtatVS==Kick)
                 if (VsSuperPower==0 && Combot1<10)
                     Combot1++;
                 if (Player2Health<5)
-                   {
-                       etatH=Fall;
-IndexH=0;
-IndexCollissionH=FallStartH;
+                {
+                    etatH=Fall;
+                    IndexH=0;
+                    IndexCollissionH=FallStartH;
+                }
             }
-                   }
             if (PlayerH==1 )
             {
                 Player1Health-=2.5;
                 if (VsSuperPower==0 && Combot2<10)
                     Combot2++;
                 if (Player1Health<5)
-        {
-etatH=Fall;
-IndexH=0;
-IndexCollissionH=FallStartH;
-        }
-        }
+                {
+                    etatH=Fall;
+                    IndexH=0;
+                    IndexCollissionH=FallStartH;
+                }
+            }
         }
         if(PlayerH==2)
             xH+=wH;
@@ -198,151 +200,284 @@ IndexCollissionH=FallStartH;
         etatH=Fall;
         OnAttack=0;
         IndexH=0;
-IndexCollissionH=FallStartH;
+        IndexCollissionH=FallStartH;
     }
-    if(etatH!=Kick && etatH!=Punch && etatH!=Fireball && etatH != Freeze && etatH !=Jump  && etatH !=Wind && etatH !=Thunder &&etatH!=Fall&&etatH!=Hit&&etatH!=Defence&&etatH!=Up &&etatH!=Crouch)
+     while (xH>99.0)
+                xH--;
+            while (xH<1.0)
+                xH++;
+
+            if(PlayerH==2)
+                xH-=wH;
+            if (PlayerH==1)
+                x-=w;
+
+            while(ProcessCollision(HaithamPics,IndexCollissionH,HaithamCollision,xH,yH,wH,hH,
+                                   Vs,IndexVs,TAB,x,y,w,h) )
+            {
+                if (PlayerH==2 )
+                    xH+=0.05;
+                if (PlayerH==1 )
+                    xH-=0.05;
+            }
+            if(PlayerH==2 )
+                xH+=wH;
+            if (PlayerH==1)
+                x+=w;
+if(etatH!=Kick && etatH!=Punch && etatH!=Fireball && etatH != Freeze && etatH !=Jump  && etatH !=Wind && etatH !=Thunder &&etatH!=Fall&&etatH!=Hit&&etatH!=Defence&&etatH!=Up &&etatH!=Crouch)
+        {
+    if (CPU==0)
     {
-        while (xH>99.0)
-            xH--;
-        while (xH<1.0)
-            xH++;
 
-        if(PlayerH==2)
-            xH-=wH;
-        if (PlayerH==1)
-            x-=w;
 
-        while(ProcessCollision(HaithamPics,IndexCollissionH,HaithamCollision,xH,yH,wH,hH,
-                               Vs,IndexVs,TAB,x,y,w,h) )
-        {
-            if (PlayerH==2 )
-                xH+=0.05;
-            if (PlayerH==1 )
-                xH-=0.05;
-        }
-        if(PlayerH==2 )
-            xH+=wH;
-        if (PlayerH==1)
-            x+=w;
 
-        if(IsKeyPressed(PlayerH,KICK))
-        {
+            if(IsKeyPressed(PlayerH,KICK))
+            {
 
-            etatH=Kick;
-            IndexH=0;
-            IndexCollissionH=KickStartH;
-            CollisionStatH=1;
+                etatH=Kick;
+                IndexH=0;
+                IndexCollissionH=KickStartH;
+                CollisionStatH=1;
 
-        }
-        else if(IsKeyPressed(PlayerH,PUNCH))
-        {
-            etatH=Punch;
-            IndexH=0;
-            IndexCollissionH=PunchStartH;
-            CollisionStatH=1;
+            }
+            else if(IsKeyPressed(PlayerH,PUNCH))
+            {
+                etatH=Punch;
+                IndexH=0;
+                IndexCollissionH=PunchStartH;
+                CollisionStatH=1;
 
-        }
-        else if(IsKeyPressed(PlayerH,RIGHT) &&xH<99.0)
-        {
-            etatH=Forward;
-            xH+=0.50;
-            IndexCollissionH=WalkStartH;
+            }
+            else if(IsKeyPressed(PlayerH,RIGHT) &&xH<99.0)
+            {
+                etatH=Forward;
+                xH+=0.50;
+                IndexCollissionH=WalkStartH;
 
-        }
-        else if (IsKeyPressed(PlayerH,LEFT) && xH>1.0)
-        {
-            etatH=Backward;
-            xH-=0.50;
-            IndexCollissionH=WalkStartH;
-        }
-        else if (IsKeyPressed(PlayerH,UP))
-        {
-            IndexH=0;
-            iH=1;
-            etatH=Jump;
-            IndexCollissionH=JumpStartH;
-        }
-        else if (IsKeyPressed(PlayerH,DOWN))
-        {
-            etatH=Crouch;
-            IndexH=0;
-            IndexCollissionH=CrouchStartH;
-        }
-        else if (IsKeyPressed(PlayerH,FIREBALL)&& SuperPowerH==1 /*&& FireH==1*/)
-        {
-            effH=0;
-            etatH=Fireball;
-            IndexH=0;
-            IndexCollissionH=FireballStartH;
-            SuperPowerH=0;
-            if (PlayerH==1)
-            {
-                Combot1=0;
             }
-            if (PlayerH==2)
+            else if (IsKeyPressed(PlayerH,LEFT) && xH>1.0)
             {
-                Combot2=0;
+                etatH=Backward;
+                xH-=0.50;
+                IndexCollissionH=WalkStartH;
             }
-        }
-        else if (IsKeyPressed(PlayerH,FREEZE)&& SuperPowerH==1/* && FreezeH==1*/)
-        {
-            effH=0;
-            etatH=Freeze;
-            IndexH=0;
-            IndexCollissionH=FreezeStartH;
-            SuperPowerH=0;
-            if (PlayerH==1)
+            else if (IsKeyPressed(PlayerH,UP))
             {
-                Combot1=0;
+                IndexH=0;
+                iH=1;
+                etatH=Jump;
+                IndexCollissionH=JumpStartH;
             }
-            if (PlayerH==2)
+            else if (IsKeyPressed(PlayerH,DOWN))
             {
-                Combot2=0;
+                etatH=Crouch;
+                IndexH=0;
+                IndexCollissionH=CrouchStartH;
             }
-        }
-        else if (IsKeyPressed(PlayerH,THUNDER)&& SuperPowerH==1 /*&& ThunderH==1*/)
-        {
-            effH=0;
-            etatH=Thunder;
-            IndexH=0;
-            IndexCollissionH=ThunderStartH;
-            SuperPowerH=0;
-            if (PlayerH==1)
+            else if (IsKeyPressed(PlayerH,FIREBALL)&& SuperPowerH==1 /*&& FireH==1*/)
             {
-                Combot1=0;
+                effH=0;
+                etatH=Fireball;
+                IndexH=0;
+                IndexCollissionH=FireballStartH;
+                SuperPowerH=0;
+                if (PlayerH==1)
+                {
+                    Combot1=0;
+                }
+                if (PlayerH==2)
+                {
+                    Combot2=0;
+                }
             }
-            if (PlayerH==2)
+            else if (IsKeyPressed(PlayerH,FREEZE)&& SuperPowerH==1/* && FreezeH==1*/)
             {
-                Combot2=0;
+                effH=0;
+                etatH=Freeze;
+                IndexH=0;
+                IndexCollissionH=FreezeStartH;
+                SuperPowerH=0;
+                if (PlayerH==1)
+                {
+                    Combot1=0;
+                }
+                if (PlayerH==2)
+                {
+                    Combot2=0;
+                }
             }
-        }
-        else if (IsKeyPressed(PlayerH,WIND) && SuperPowerH==1 /*&& WindH==1*/)
-        {
-            effH=0;
-            etatH=Wind;
-            IndexH=0;
-            IndexCollissionH=WindStartH;
-            SuperPowerH=0;
-            if (PlayerH==1)
+            else if (IsKeyPressed(PlayerH,THUNDER)&& SuperPowerH==1 /*&& ThunderH==1*/)
             {
-                Combot1=0;
+                effH=0;
+                etatH=Thunder;
+                IndexH=0;
+                IndexCollissionH=ThunderStartH;
+                SuperPowerH=0;
+                if (PlayerH==1)
+                {
+                    Combot1=0;
+                }
+                if (PlayerH==2)
+                {
+                    Combot2=0;
+                }
             }
-            if (PlayerH==2)
+            else if (IsKeyPressed(PlayerH,WIND) && SuperPowerH==1 /*&& WindH==1*/)
             {
-                Combot2=0;
+                effH=0;
+                etatH=Wind;
+                IndexH=0;
+                IndexCollissionH=WindStartH;
+                SuperPowerH=0;
+                if (PlayerH==1)
+                {
+                    Combot1=0;
+                }
+                if (PlayerH==2)
+                {
+                    Combot2=0;
+                }
+            }
+            else if (IsKeyPressed(PlayerH,DEFENCE))
+            {
+                etatH=Defence;
+                IndexH=0;
+                IndexCollissionH=DefenceStartH;
+
+            }
+            else
+            {
+                etatH=Stable;
+                IndexCollissionH=StableStartH;
+
             }
         }
-        else if (IsKeyPressed(PlayerH,DEFENCE))
+     if (CPU==1)
         {
-            etatH=Defence;
-            IndexH=0;
-            IndexCollissionH=DefenceStartH;
+            switch (EtatVS)
+            {
+            case Forward:
+            case Backward:
+            case Fireball:
+            case Freeze :
+            case Thunder :
+            case Wind :
+                etatH=Stable;
+                IndexH=0;
+                IndexCollissionH=StableStartH;
+                break;
+            case Punch :
+            case Kick :
+                if (abs(x-xH)<5)
+                    def=Random(0,2);
+                etatH=Def[def];
+                switch (def)
+                {
+                case 0 :
+                    IndexH=0;
+                    IndexCollissionH=DefenceStartH;
+                    break;
+                case 1 :
+                    IndexH=0;
+                    IndexCollissionH=CrouchStartH;
+                    break;
+                case 2 :
+                    IndexH=0;
+                    IndexCollissionH=StableStartH;
+                    break;
+                }
 
-        }
-        else
-        {
-            etatH=Stable;
-            IndexCollissionH=StableStartH;
+                break;
+            case Stable :
+            case Crouch :
+
+                if (abs(x-xH)>10)
+                {
+                    mov=Random(0,2);
+                    etatH=Mov[mov];
+                    switch (mov)
+                    {
+                    case 0 :
+                        xH+=0.50;
+                        IndexCollissionH=WalkStartH;
+                        break;
+                    case 1 :
+                        xH-=0.50;
+                        IndexCollissionH=WalkStartH;
+                        break;
+                    case 2 :
+                        IndexH=0;
+                        IndexCollissionH=StableStartH;
+                        break;
+                    }
+                }
+                else
+                {
+                    if (SuperPowerH==0)
+                    {
+                        att=Random(0,1);
+                        etatH=Attack[att];
+                        switch (att)
+                        {
+                        case 0 :
+                            IndexH=0;
+                            IndexCollissionH=PunchStartH;
+                            CollisionStatH=1;
+                            break;
+                        case 1 :
+                            IndexH=0;
+                            IndexCollissionH=KickStartH;
+                            CollisionStatH=1;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        spow=Random(0,3);
+                        etatH=Spower[spow];
+                        switch (spow)
+                        {
+                        case 0 :
+                            effH=0;
+                            IndexH=0;
+                            IndexCollissionH=FireballStartH;
+                            SuperPowerH=0;
+                            Combot2=0;
+
+                            break;
+                        case 1 :
+                            effH=0;
+                            IndexH=0;
+                            IndexCollissionH=FreezeStartH;
+                            SuperPowerH=0;
+                            Combot2=0;
+                            break;
+                        case 2 :
+                            effH=0;
+                            IndexH=0;
+                            IndexCollissionH=ThunderStartH;
+                            SuperPowerH=0;
+                            Combot2=0;
+
+                            break;
+                        case 3 :
+                                                  effH=0;
+                            IndexH=0;
+                            IndexCollissionH=WindStartH;
+                            SuperPowerH=0;
+                            Combot2=0;
+
+                            break;
+                        }
+                    }
+                }
+                break;
+            default:
+                etatH=Stable;
+                IndexH=0;
+                IndexCollissionH=StableStartH;
+                break;
+            }
         }
     }
 
@@ -352,6 +487,7 @@ IndexCollissionH=FallStartH;
     {
         if(FrameCount%10==0)
         {
+
             if(IndexH==0)
                 iH=1;
             if(IndexH>=StableCountH-1)
@@ -409,8 +545,8 @@ IndexCollissionH=FallStartH;
             if(IndexH>=KickCountH)
             {
                 etatH=Stable;
-          IndexH=0;
-IndexCollissionH=StableStartH;
+                IndexH=0;
+                IndexCollissionH=StableStartH;
             }
         }
     }
@@ -429,8 +565,8 @@ IndexCollissionH=StableStartH;
             if(IndexH>=PunchCountH)
             {
                 etatH=Stable;
-          IndexH=0;
-IndexCollissionH=StableStartH;
+                IndexH=0;
+                IndexCollissionH=StableStartH;
             }
         }
     }
@@ -465,11 +601,12 @@ IndexCollissionH=StableStartH;
                 IndexCollissionH++;
             }
             if(IndexH>=FireballCountH-1 && effH>=50)
-            {                OnAttack=1;
+            {
+                OnAttack=1;
 
                 etatH=Stable;
-                          IndexH=0;
-IndexCollissionH=StableStartH;
+                IndexH=0;
+                IndexCollissionH=StableStartH;
                 if (PlayerH==1)
                 {
                     Player2Health-=20;
@@ -515,11 +652,12 @@ IndexCollissionH=StableStartH;
             }
 
             if(IndexH==ThunderCountH-1 && effH>=50)
-            {                OnAttack=1;
+            {
+                OnAttack=1;
 
                 etatH=Stable;
-                          IndexH=0;
-IndexCollissionH=StableStartH;
+                IndexH=0;
+                IndexCollissionH=StableStartH;
                 if (PlayerH==1)
                 {
                     Player2Health-=20;
@@ -566,11 +704,12 @@ IndexCollissionH=StableStartH;
             }
 
             if(IndexH>=WindCountH-1 && effH>=50)
-            {                OnAttack=1;
+            {
+                OnAttack=1;
 
                 etatH=Stable;
-                          IndexH=0;
-IndexCollissionH=StableStartH;
+                IndexH=0;
+                IndexCollissionH=StableStartH;
                 if (PlayerH==1)
                 {
                     Player2Health-=20;
@@ -615,11 +754,12 @@ IndexCollissionH=StableStartH;
                 IndexCollissionH++;
             }
             if(IndexH>=FreezeCountH-1 && FrameCount%120==0)
-            {                OnAttack=1;
+            {
+                OnAttack=1;
 
                 etatH=Stable;
-                          IndexH=0;
-IndexCollissionH=StableStartH;
+                IndexH=0;
+                IndexCollissionH=StableStartH;
                 if (PlayerH==1)
                 {
                     Player2Health-=20;
@@ -651,8 +791,8 @@ IndexCollissionH=StableStartH;
             if(IndexH==CrouchCountH)
             {
                 etatH=Stable;
-                          IndexH=0;
-IndexCollissionH=StableStartH;
+                IndexH=0;
+                IndexCollissionH=StableStartH;
             }
         }
     }
@@ -673,8 +813,8 @@ IndexCollissionH=StableStartH;
             if(IndexH>=UpCountH)
             {
                 etatH=Stable;
-                          IndexH=0;
-IndexCollissionH=StableStartH;
+                IndexH=0;
+                IndexCollissionH=StableStartH;
             }
         }
     }
@@ -712,8 +852,8 @@ IndexCollissionH=StableStartH;
             if(IndexH>=HitCountH)
             {
                 etatH=Stable;
-                          IndexH=0;
-IndexCollissionH=StableStartH;
+                IndexH=0;
+                IndexCollissionH=StableStartH;
             }
         }
     }
@@ -738,16 +878,18 @@ IndexCollissionH=StableStartH;
                 if (PlayerH==2 && Player2Health<5)
                     Player2Health=0;
                 if (PlayerH==1 && Player1Health>5)
-                    {etatH=Up;
+                {
+                    etatH=Up;
                     IndexH=0;
                     IndexCollissionH=StableStartH;
-                    }
+                }
                 if (PlayerH==2 && Player2Health>5)
-                    {etatH=Up;
+                {
+                    etatH=Up;
                     IndexH=0;
                     IndexCollissionH=StableStartH;
-                    }
-                    }
+                }
+            }
         }
 
     }
@@ -760,9 +902,9 @@ IndexCollissionH=StableStartH;
             if(IndexH>=JumpCountH-1)
             {
                 etatH=Stable;
-          IndexH=0;
-IndexCollissionH=StableStartH;
-yH=55;
+                IndexH=0;
+                IndexCollissionH=StableStartH;
+                yH=55;
             }
 
             if (IndexH>=2)
