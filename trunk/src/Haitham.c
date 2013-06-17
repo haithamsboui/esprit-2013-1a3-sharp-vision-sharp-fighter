@@ -54,7 +54,7 @@ int effH=0;
 void Draw_Haitham(int CPU)
 {
     int x,y,w,h,IndexVs,VsSuperPower;
- EtatPlayer Def[]= {Defence,Crouch,Stable},Attack[]= {Punch,Kick},Spower[]= {Fireball,Freeze,Thunder,Wind},Mov[]= {Forward,Backward,Stable};
+    EtatPlayer Def[]= {Defence,Crouch,Stable},Attack[]= {Punch,Kick,Stable},Spower[]= {Fireball,Freeze,Thunder,Wind},Mov[]= {Forward,Backward,Stable};
     int def,att,spow,mov;
     flip vflip;
     Point ** TAB;
@@ -202,32 +202,32 @@ void Draw_Haitham(int CPU)
         IndexH=0;
         IndexCollissionH=FallStartH;
     }
-     while (xH>99.0)
-                xH--;
-            while (xH<1.0)
-                xH++;
+    while (xH>99.0)
+        xH--;
+    while (xH<1.0)
+        xH++;
 
-            if(PlayerH==2)
-                xH-=wH;
-            if (PlayerH==1)
-                x-=w;
+    if(PlayerH==2)
+        xH-=wH;
+    if (PlayerH==1)
+        x-=w;
 
-            while(ProcessCollision(HaithamPics,IndexCollissionH,HaithamCollision,xH,yH,wH,hH,
-                                   Vs,IndexVs,TAB,x,y,w,h) )
-            {
-                if (PlayerH==2 )
-                    xH+=0.05;
-                if (PlayerH==1 )
-                    xH-=0.05;
-            }
-            if(PlayerH==2 )
-                xH+=wH;
-            if (PlayerH==1)
-                x+=w;
-if(etatH!=Kick && etatH!=Punch && etatH!=Fireball && etatH != Freeze && etatH !=Jump  && etatH !=Wind && etatH !=Thunder &&etatH!=Fall&&etatH!=Hit&&etatH!=Defence&&etatH!=Up &&etatH!=Crouch)
-        {
-    if (CPU==0)
+    while(ProcessCollision(HaithamPics,IndexCollissionH,HaithamCollision,xH,yH,wH,hH,
+                           Vs,IndexVs,TAB,x,y,w,h) )
     {
+        if (PlayerH==2 )
+            xH+=0.05;
+        if (PlayerH==1 )
+            xH-=0.05;
+    }
+    if(PlayerH==2 )
+        xH+=wH;
+    if (PlayerH==1)
+        x+=w;
+    if(etatH!=Kick && etatH!=Punch && etatH!=Fireball && etatH != Freeze && etatH !=Jump  && etatH !=Wind && etatH !=Thunder &&etatH!=Fall&&etatH!=Hit&&etatH!=Defence&&etatH!=Up &&etatH!=Crouch)
+    {
+        if (CPU==0)
+        {
 
 
 
@@ -352,12 +352,11 @@ if(etatH!=Kick && etatH!=Punch && etatH!=Fireball && etatH != Freeze && etatH !=
 
             }
         }
-     if (CPU==1)
+        if (CPU==1)
         {
             switch (EtatVS)
             {
-            case Forward:
-            case Backward:
+
             case Fireball:
             case Freeze :
             case Thunder :
@@ -368,76 +367,92 @@ if(etatH!=Kick && etatH!=Punch && etatH!=Fireball && etatH != Freeze && etatH !=
                 break;
             case Punch :
             case Kick :
-                if (abs(x-xH)<5)
+                if (-x+xH<5)
                     def=Random(0,2);
-                etatH=Def[def];
+
                 switch (def)
                 {
                 case 0 :
                     IndexH=0;
                     IndexCollissionH=DefenceStartH;
+                    etatH=Defence;
                     break;
-                case 1 :
-                    IndexH=0;
-                    IndexCollissionH=CrouchStartH;
-                    break;
+
                 case 2 :
+                    etatH=Stable;
                     IndexH=0;
                     IndexCollissionH=StableStartH;
                     break;
                 }
 
                 break;
+
             case Stable :
             case Crouch :
-
-                if (abs(x-xH)>10)
+            case Forward:
+            case Backward :
+                if(xH-x>20)
                 {
                     mov=Random(0,2);
-                    etatH=Mov[mov];
                     switch (mov)
                     {
                     case 0 :
-                        xH+=0.50;
-                        IndexCollissionH=WalkStartH;
+                        if (xH<99)
+                        {
+                            xH+=0.50;
+                            IndexCollissionH=WalkStartH;
+                            etatH=Forward;
+                        }
                         break;
                     case 1 :
-                        xH-=0.50;
-                        IndexCollissionH=WalkStartH;
+                        if (xH>=x)
+                        {
+                            etatH=Backward;
+                            xH-=0.50;
+                            IndexCollissionH=WalkStartH;
+                        }
                         break;
                     case 2 :
+                        etatH=Stable;
                         IndexH=0;
                         IndexCollissionH=StableStartH;
                         break;
                     }
                 }
-                else
+
+                if(xH-x<35)
                 {
                     if (SuperPowerH==0)
                     {
-                        att=Random(0,1);
-                        etatH=Attack[att];
+                        att=Random(0,2);
                         switch (att)
                         {
                         case 0 :
+                            etatH=Punch;
                             IndexH=0;
                             IndexCollissionH=PunchStartH;
                             CollisionStatH=1;
                             break;
                         case 1 :
+                            etatH=Kick;
                             IndexH=0;
                             IndexCollissionH=KickStartH;
                             CollisionStatH=1;
+                            break;
+                        case 2 :
+                            etatH=Stable;
+                            IndexH=0;
+                            IndexCollissionH=StableStartH;
                             break;
                         }
                     }
                     else
                     {
                         spow=Random(0,3);
-                        etatH=Spower[spow];
                         switch (spow)
                         {
                         case 0 :
+                            etatH=Fireball;
                             effH=0;
                             IndexH=0;
                             IndexCollissionH=FireballStartH;
@@ -446,6 +461,7 @@ if(etatH!=Kick && etatH!=Punch && etatH!=Fireball && etatH != Freeze && etatH !=
 
                             break;
                         case 1 :
+                            etatH=Freeze;
                             effH=0;
                             IndexH=0;
                             IndexCollissionH=FreezeStartH;
@@ -453,6 +469,7 @@ if(etatH!=Kick && etatH!=Punch && etatH!=Fireball && etatH != Freeze && etatH !=
                             Combot2=0;
                             break;
                         case 2 :
+                            etatH=Thunder;
                             effH=0;
                             IndexH=0;
                             IndexCollissionH=ThunderStartH;
@@ -461,7 +478,8 @@ if(etatH!=Kick && etatH!=Punch && etatH!=Fireball && etatH != Freeze && etatH !=
 
                             break;
                         case 3 :
-                                                  effH=0;
+                            etatH=Wind;
+                            effH=0;
                             IndexH=0;
                             IndexCollissionH=WindStartH;
                             SuperPowerH=0;

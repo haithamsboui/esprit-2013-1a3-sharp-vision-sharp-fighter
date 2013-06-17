@@ -134,10 +134,10 @@ int GameOver(int player)
         draw_image_ex(cadre,18+selection*50,40,15,30,NONE,100);
         next_frame();
     }
-    while(IsKeyPressed(1,ENTER))
-        rest(1);
+while(IsKeyPressed(1,ENTER))
+rest(1);
+	return !selection;
 
-    return !selection;
 }
 
 void Savegame ()
